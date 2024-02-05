@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,11 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.3",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "husky": "^9.0.10",
+    "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   }
 }
