@@ -19,11 +19,12 @@ jobs:
       - name: Install dependencies for my-app
         working-directory: my-app
         run: npm install
+    
+      - name: Lint my-app
+        working-directory: my-app
+        run: npm run build
 
       - name: Lint my-app
         working-directory: my-app
         run: npm run lint
 
-      - name: Lint my-app
-        working-directory: my-app
-        run: npm run build
