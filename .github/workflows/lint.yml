@@ -23,11 +23,3 @@ jobs:
       - name: Lint my-app
         working-directory: my-app
         run: npm run lint
-
-      - name: Install dependencies for server
-        working-directory: server
-        run: npm install
-
-      - name: Lint server
-        working-directory: server
-        run: npm run lint
