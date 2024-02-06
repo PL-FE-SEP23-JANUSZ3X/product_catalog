@@ -24,8 +24,8 @@ function App() {
           >
             TEST
           </Typography>
-          <Footer />
         </Container>
+        <Footer />
       </ThemeProvider>
     </>
   );
