@@ -1,8 +1,20 @@
-import React from 'react';
+import { Container, CssBaseline, ThemeProvider, Typography } from "@mui/material";
+import { useThemeContext } from './theme/ThemeContext';
+import DarkModeToggle from "./components/darkModeToggle/DarkModeToggle";
 
 function App() {
+  const { theme } = useThemeContext();
+
   return (
-    <h1>Hi</h1>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="md">
+          <DarkModeToggle />
+          <Typography variant="h1" color="text.primary" sx={{textAlign:"center"}}>TEST</Typography>
+        </Container>
+      </ThemeProvider>
+    </>
   );
 }
 
