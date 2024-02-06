@@ -23,3 +23,7 @@ jobs:
       - name: Lint my-app
         working-directory: my-app
         run: npm run lint
+
+      - name: Lint my-app
+        working-directory: my-app
+        run: npm run build
