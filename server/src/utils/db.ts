@@ -3,12 +3,14 @@ import Phone from '../model/phone.model';
 // import Product from '../model/product.model';
 import phoneData  from '../apiData/phones.json';
 
-//for test purposes, enter you database password
-const YOUR_PASSWORD = 'admin'
+import 'dotenv/config';
 
-const sequelize: Sequelize = new Sequelize('postgres', 'postgres', YOUR_PASSWORD, {
-    host: 'localhost',
-    dialect: 'postgres',
+const URI = process.env.INTERNAL_URI || 'postgres';
+
+const sequelize: Sequelize = new Sequelize(URI,{
+    dialectOptions: {
+      ssl:true,
+    },
     models: [Phone]
   });
 
@@ -28,7 +30,7 @@ async function connect(): Promise<void> {
 async function connection(): Promise<void> {
     try {
       await connect();
-      await sequelize.sync({ force: true });
+      await sequelize.sync();
       await addPhones()
     } catch (error: any) {
         throw new Error(error.message);
