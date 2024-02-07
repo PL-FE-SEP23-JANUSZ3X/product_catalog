@@ -4,12 +4,10 @@ import {
   Container,
   Link,
   Stack,
-  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import React from 'react';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 export const Footer: React.FC = () => {
   const theme = useTheme();
@@ -19,35 +17,66 @@ export const Footer: React.FC = () => {
     return window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const navLinkStyle = {
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    fontSize: '12px',
+    fontWeight: '800',
+    color: '#89939A',
+  };
+
   return (
     <Container
       sx={{
         width: '100%',
-        p: 2,
+        pt: 4,
+        pb: 4,
+        pl: 2,
+        pr: 2,
+        borderTop: '1px solid #89939A',
       }}
     >
       <Stack
         component="footer"
         direction={isMobile ? 'column' : 'row'}
-        // justifyContent="space-between"
-        // alignItems={isWideScreen ? 'space-between' : 'flex-start'}
-        spacing={2}
+        spacing={isMobile ? 4 : 0}
+        justifyContent={isMobile ? 'flex-start' : 'space-between'}
       >
         <Box component="img" src="images/logo.png" alt="gowmno" width="89px" />
 
         <Stack
           direction={isMobile ? 'column' : 'row'}
           spacing={1}
-          alignItems="flex-start"
+          alignItems={isMobile ? 'flex-start' : 'center'}
         >
-          <Link>Github</Link>
-          <Link>Contact</Link>
-          <Link>Rigths</Link>
+          <Link sx={navLinkStyle}>Github</Link>
+          <Link sx={navLinkStyle}>Contact</Link>
+          <Link sx={navLinkStyle}>Rigths</Link>
         </Stack>
 
-        <Button onClick={scrollToTop}>
-          Back to Top
-          <KeyboardArrowUpIcon sx={{ border: `1px solid ${'black'}` }} />
+        <Button
+          sx={{
+            height: '32px',
+            p: 0,
+            textTransform: 'none',
+            fontSize: '12px',
+            fontWeight: '600',
+            color: '#89939A',
+          }}
+          onClick={scrollToTop}
+        >
+          Back to top
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            width="32px"
+            height="32px"
+            border="1px solid lightgrey"
+            sx={{ marginLeft: 2 }}
+          >
+            <Box component="img" src="images/icons/arr-up.svg" alt="Arrow up" />
+          </Box>
         </Button>
       </Stack>
     </Container>
