@@ -5,6 +5,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useThemeContext } from './theme/ThemeContext';
+import Header from "./components/header/Header";
 import DarkModeToggle from './components/darkModeToggle/DarkModeToggle';
 import { Footer } from './components';
 
@@ -15,6 +16,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Header />
         <Container maxWidth="md">
           <DarkModeToggle />
           <Typography
