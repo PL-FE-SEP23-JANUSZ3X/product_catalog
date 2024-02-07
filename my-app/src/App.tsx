@@ -1,6 +1,12 @@
-import { Container, CssBaseline, ThemeProvider, Typography } from "@mui/material";
+import {
+  Container,
+  CssBaseline,
+  ThemeProvider,
+  Typography,
+} from '@mui/material';
 import { useThemeContext } from './theme/ThemeContext';
-import DarkModeToggle from "./components/darkModeToggle/DarkModeToggle";
+import DarkModeToggle from './components/darkModeToggle/DarkModeToggle';
+import { Footer } from './components';
 
 function App() {
   const { theme } = useThemeContext();
@@ -11,8 +17,15 @@ function App() {
         <CssBaseline />
         <Container maxWidth="md">
           <DarkModeToggle />
-          <Typography variant="h1" color="text.primary" sx={{textAlign:"center"}}>TEST</Typography>
+          <Typography
+            variant="h1"
+            color="text.primary"
+            sx={{ textAlign: 'center' }}
+          >
+            TEST
+          </Typography>
         </Container>
+        <Footer />
       </ThemeProvider>
     </>
   );
