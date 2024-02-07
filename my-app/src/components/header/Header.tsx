@@ -5,7 +5,6 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { useThemeContext } from '../../theme/ThemeContext';
 
 const Header = () => {
-  const isTablet = useMediaQuery('(max-width:1200px)');
   const isMobile = useMediaQuery('(max-width:600px)');
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
@@ -14,13 +13,9 @@ const Header = () => {
     <Box sx={{flexGrow: 1 }}>
         <AppBar position="static" sx={{ backgroundColor: white, boxShadow: 0, outline: 1, outlineColor: 'elements.main' }}>
           <Toolbar>
-            {isMobile && (
-              <img src='/images-header/Logo-mobile.png' alt="Nice Gadgets" />
-            )}
-          
+          <img src='/images-header/Logo.svg' alt="Nice Gadgets" />
             {!isMobile && (
               <>
-                <img src='/images-header/Logo.png' alt="Nice Gadgets" />
                 <Link 
                   variant='upper' 
                   color='primary.main' 
