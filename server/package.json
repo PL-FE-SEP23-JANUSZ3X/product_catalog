@@ -2,23 +2,33 @@
   "name": "ts-node-express",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "./src/main.ts",
   "scripts": {
-    "start": "node index.ts",
+    "start": "ts-node main.ts",
+    "dev": "nodemon main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "_moduleAliases": {
+    "@modules": "build/modules",
+    "@core": "build/core"
+  },
   "dependencies": {
     "dotenv": "^16.4.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "reflect-metadata": "^0.2.1",
+    "sequelize-typescript": "^2.1.6"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.11.16",
+    "@types/validator": "^13.11.9",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
