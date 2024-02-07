@@ -5,6 +5,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { useThemeContext } from '../../theme/ThemeContext';
 
 const Header = () => {
+  const isTablet = useMediaQuery('(max-width:1200px)');
   const isMobile = useMediaQuery('(max-width:600px)');
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
@@ -13,15 +14,26 @@ const Header = () => {
     <Box sx={{flexGrow: 1}}>
         <AppBar position="static" sx={{ backgroundColor: white }}>
           <Toolbar>
-            <img src='/images-header/Logo.png' alt="Nice Gadgets" />
+            {isMobile && (
+              <img src='/images-header/Logo-mobile.png' alt="Nice Gadgets" />
+            )}
+          
             {!isMobile && (
               <>
+                <img src='/images-header/Logo.png' alt="Nice Gadgets" />
                 <Link 
                   variant='upper' 
-                  color='secondary' 
+                  color='primary.main' 
                   component="div" 
                   underline="none" 
-                  sx={{ paddingLeft: 5, paddingRight: 5 }}>
+                  sx={{
+                    padding: 2.5,
+                    paddingLeft: 5,
+                    paddingRight: 5,
+                    '&:hover': {
+                      color: 'primary.main',
+                    },
+                  }}>
                 Home
                 </Link>
                 <Link 
@@ -29,7 +41,12 @@ const Header = () => {
                   color='secondary' 
                   component="div" 
                   underline="none" 
-                  sx={{ paddingRight: 5 }}>
+                  sx={{ 
+                    paddingRight: 5,
+                    '&:hover': {
+                      color: 'primary.main',
+                    }
+                  }}>
                 Phones
                 </Link>
                 <Link 
@@ -37,7 +54,12 @@ const Header = () => {
                   color='secondary' 
                   component="div" 
                   underline="none" 
-                  sx={{ paddingRight: 5 }}>
+                  sx={{ 
+                    paddingRight: 5,
+                    '&:hover': {
+                      color: 'primary.main',
+                    }
+                  }}>
                 Tablets
                 </Link>
                 <Link 
@@ -45,7 +67,12 @@ const Header = () => {
                   color='secondary' 
                   component="div" 
                   underline="none" 
-                  sx={{ paddingRight: 5 }}>
+                  sx={{ 
+                    paddingRight: 5,
+                    '&:hover': {
+                      color: 'primary.main',
+                    }
+                  }}>
                 Accesories
                 </Link>
               </>
@@ -71,7 +98,11 @@ const Header = () => {
             edge="end"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 0, color: 'black', padding: 2.5 }}
+            sx={{
+              mr: 0,
+              color: 'black',
+              padding: 2.5,
+            }}
             >
              <FavoriteBorderIcon/>
             </IconButton>
@@ -81,7 +112,12 @@ const Header = () => {
             edge="end"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 0, color: 'black', padding: 2.5, paddingRight: 0 }}
+            sx={{
+              mr: 0,
+              color: 'black',
+              padding: 2.5,
+              paddingRight: 0,
+            }}
             >
             <LocalMallOutlinedIcon/>
             </IconButton>
