@@ -5,7 +5,6 @@ import {
   IconButton,
   Divider,
   useMediaQuery,
-  Typography,
   Link,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -14,7 +13,6 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import { useThemeContext } from "../../theme/ThemeContext";
 
 const Header = () => {
-  const isTablet = useMediaQuery("(max-width:1200px)");
   const isMobile = useMediaQuery("(max-width:600px)");
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
