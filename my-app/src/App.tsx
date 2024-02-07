@@ -3,11 +3,11 @@ import {
   CssBaseline,
   ThemeProvider,
   Typography,
-} from '@mui/material';
-import { useThemeContext } from './theme/ThemeContext';
+} from "@mui/material";
+import { useThemeContext } from "./theme/ThemeContext";
 import Header from "./components/header/Header";
-import DarkModeToggle from './components/darkModeToggle/DarkModeToggle';
-import { Footer } from './components';
+import DarkModeToggle from "./components/darkModeToggle/DarkModeToggle";
+import { Footer } from "./components";
 
 function App() {
   const { theme } = useThemeContext();
@@ -22,7 +22,7 @@ function App() {
           <Typography
             variant="h1"
             color="text.primary"
-            sx={{ textAlign: 'center' }}
+            sx={{ textAlign: "center" }}
           >
             TEST
           </Typography>
