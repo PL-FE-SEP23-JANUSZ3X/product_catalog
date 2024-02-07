@@ -11,8 +11,8 @@ const Header = () => {
   const white = theme.palette.background.paper;
 
   return (
-    <Box sx={{flexGrow: 1}}>
-        <AppBar position="static" sx={{ backgroundColor: white }}>
+    <Box sx={{flexGrow: 1 }}>
+        <AppBar position="static" sx={{ backgroundColor: white, boxShadow: 0, outline: 1, outlineColor: 'elements.main' }}>
           <Toolbar>
             {isMobile && (
               <img src='/images-header/Logo-mobile.png' alt="Nice Gadgets" />
