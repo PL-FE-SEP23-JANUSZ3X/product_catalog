@@ -12,12 +12,10 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react"
-  ],
+  "plugins": ["@typescript-eslint", "react"],
   "rules": {
     "react/jsx-uses-react": "off",
+    "prettier/prettier": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/strict-boolean-expressions": [
       2,
