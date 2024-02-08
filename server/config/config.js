@@ -1,10 +1,10 @@
-import 'dotenv/config';
+require('dotenv').config()
 
-const { DB_PASSWORD, DB_HOST, DB_NAME, DB_USER, DB_PORT, DB_SERVER} = process.env;
+const { DB_PASSWORD, DB_HOST, DB_NAME, DB_USER, DB_PORT, DB_SERVER, EXTERNAL_URI } = process.env;
 const URI = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}.${DB_SERVER}/${DB_NAME}`;
 
 const settings = {
-  url: URI,
+  url: EXTERNAL_URI,
   dialect: 'postgres',
   dialectOptions: {
     ssl: {
@@ -20,4 +20,4 @@ const config = {
   production: { ...settings}
 };
 
-export default config;
+module.exports = config;
