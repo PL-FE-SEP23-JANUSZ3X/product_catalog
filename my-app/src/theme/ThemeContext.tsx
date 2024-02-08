@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createTheme, PaletteMode, Theme } from "@mui/material";
-import { createContext, FC, PropsWithChildren, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import customTheme from "./theme";
 
 type ThemeContextType = {
@@ -19,13 +26,9 @@ export const ThemeContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [mode, setMode] = useState<PaletteMode>("light");
 
   const toggleColorMode = () =>
-  setMode(prevMode => prevMode === "light" ? "dark" : "light");
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
 
-  const customisedTheme = useMemo(
-    () => createTheme(customTheme(mode)),
-    [mode]
-  );
-
+  const customisedTheme = useMemo(() => createTheme(customTheme(mode)), [mode]);
 
   const value = {
     theme: customisedTheme,
@@ -33,9 +36,7 @@ export const ThemeContextProvider: FC<PropsWithChildren> = ({ children }) => {
     toggleColorMode,
   };
   return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
