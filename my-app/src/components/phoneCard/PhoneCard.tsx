@@ -8,7 +8,7 @@ const breakpoints = createTheme({
     values: {
       xs: 0,
       sm: 320,
-      md: 640, 
+      md: 600, 
       lg: 1200, 
       xl: 1920,
     },
@@ -31,7 +31,7 @@ const PhoneCard = () => {
           p: 2,
           [breakpoints.breakpoints.up('md')]: {
             height: 506,
-            width: 229
+            width: 229,
           },
           [breakpoints.breakpoints.up('lg')]: {
             width: 272,
@@ -48,6 +48,10 @@ const PhoneCard = () => {
                   width: 165,
                   height: 196
                 },
+                [breakpoints.breakpoints.up('lg')]: {
+                  width: 196,
+                  height: 208
+                }
               }}
             />
             <Typography sx={{mt: 2.5, fontSize: 14}} >Apple iPhone 14 Pro 128GB Silver (MQ023)</Typography>
@@ -56,20 +60,24 @@ const PhoneCard = () => {
               <Box sx={{ width: 4 }} />
               <Typography variant='h6' sx={{ color: 'secondary.main', textDecoration: 'line-through'}}>$1199</Typography>
             </Box>
-            <Divider sx={{ my: 1, mb: 1.5 }} />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+            <Divider 
+              sx={{ my: 1, mb: 1.5,
+                [breakpoints.breakpoints.up('lg')]: {
+                  mb: 0,
+                },}} />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.5 }}>
               <Typography sx={{fontSize: 12, color: 'secondary.main', fontWeight: 'bold'}}>Screen</Typography>
               <Typography sx={{fontSize: 12, fontWeight: 'bold'}}>6.5” OLED</Typography>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.5 }}>
               <Typography sx={{fontSize: 12, color: 'secondary.main', fontWeight: 'bold'}}>Capacity</Typography>
               <Typography sx={{fontSize: 12, fontWeight: 'bold'}}>512 GB</Typography>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.5 }}>
               <Typography sx={{fontSize: 12, color: 'secondary.main', fontWeight: 'bold'}}>RAM</Typography>
               <Typography sx={{fontSize: 12, fontWeight: 'bold'}}>4 GB</Typography>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2, gap: 1}}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2}}>
               <Button variant="contained" sx={{
                 width: 176,
                 height: 40,
@@ -80,6 +88,9 @@ const PhoneCard = () => {
                 textTransform: 'capitalize',
                 [breakpoints.breakpoints.up('md')]: {
                   width: 117,
+                },
+                [breakpoints.breakpoints.up('lg')]: {
+                  width: 160,
                 },
                 }}>Add to Card</Button>
               <Button variant="outlined" sx={{minWidth: 40, height: 40, borderRadius: 0, p: 0, borderColor: 'icons.main'}}>
