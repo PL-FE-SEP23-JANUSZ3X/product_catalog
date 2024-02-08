@@ -137,10 +137,39 @@ export const customTheme = (mode: PaletteMode) => ({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        html: {
+          boxSizing: 'border-box',
+          margin: 0,
+          padding: 0,
+        },
         body: {
           transition: 'all 0.25s ease-in-out',
         }
       }
+    },
+    MuiScopedCssBaseline: {
+      styleOverrides: {
+        root: {
+          margin: '0',
+        },
+      },
+    },
+    MuiGridItem: {
+      styleOverrides: {
+        root: {
+          margin: '0',
+          padding: '0',
+        },
+      },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 320, // phone
+      sm: 640, // tablets
+      md: 1200, // small laptop
+      lg: 1440, // desktop
+      xl: 1440 // large screens
     }
   }
 });
