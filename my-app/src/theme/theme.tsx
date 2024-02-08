@@ -167,7 +167,6 @@ export const customTheme = (mode: PaletteMode) => ({
       xl: 1440 // large screens
     }
   }
-=
 });
 
 export default customTheme;
