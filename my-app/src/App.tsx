@@ -2,8 +2,6 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import {
   CssBaseline,
   ThemeProvider,
-  
-  Typography,
 } from '@mui/material';
 import { useThemeContext } from './theme/ThemeContext';
 import Layout from './components/layout/Layout';
@@ -17,8 +15,6 @@ import AccessoryPage from './components/pages/AccessoryPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import FavouritesPage from './components/pages/FavouritesPage';
 import CartPage from './components/pages/CartPage';
-import PhoneCard from "./components/phoneCard/PhoneCard";
-
 
 function App() {
   const { theme } = useThemeContext();
