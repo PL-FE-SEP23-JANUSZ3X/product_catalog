@@ -17,6 +17,19 @@ const getAll: ControllerAction = async(req, res) => {
     }
 }
 
-const phoneController = {getAll};
+const getOne: ControllerAction = async(req, res) => {
+    try {
+        const allPhones = await phoneService.getAllPhones()
+
+        const { id } = req.params
+
+        res.send(allPhones[+id])
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+const phoneController = {getAll, getOne};
 
 export default phoneController;
