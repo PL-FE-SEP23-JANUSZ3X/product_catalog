@@ -8,6 +8,7 @@ import { useThemeContext } from "./theme/ThemeContext";
 import Header from "./components/header/Header";
 import DarkModeToggle from "./components/darkModeToggle/DarkModeToggle";
 import { Footer } from "./components";
+import PhoneCard from "./components/phoneCard/PhoneCard";
 
 function App() {
   const { theme } = useThemeContext();
@@ -19,6 +20,7 @@ function App() {
         <Header />
         <Container maxWidth="md">
           <DarkModeToggle />
+          <PhoneCard />
           <Typography
             variant="h1"
             color="text.primary"
