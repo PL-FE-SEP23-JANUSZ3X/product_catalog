@@ -1,127 +1,220 @@
-import { AppBar, Box, Toolbar, IconButton, Divider, useMediaQuery, Typography, Link } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Link,
+  IconButton,
+  Divider,
+  useMediaQuery,
+  SxProps,
+  Typography,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { useThemeContext } from '../../theme/ThemeContext';
+import { NavLink, Navigate } from 'react-router-dom';
+
+export type CopyrightProps = {
+  sx: SxProps;
+};
+
+const navLinkStyle = {
+  textTransform: 'uppercase',
+  textDecoration: 'none',
+  '&:hover': {
+    color: 'primary.main',
+  },
+  '&:active': {
+    color: 'primary.main',
+    cursor:"pointer",
+    outline: "none",
+  },
+};
 
 const Header = () => {
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery('(max-width:640px)');
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
 
   return (
-    <Box sx={{flexGrow: 1 }}>
-        <AppBar position="static" sx={{ backgroundColor: white, boxShadow: 0, outline: 1, outlineColor: 'elements.main' }}>
-          <Toolbar>
-          <img src='/images-header/Logo.svg' alt="Nice Gadgets" />
-            {!isMobile && (
-              <>
-                <Link 
-                  variant='upper' 
-                  color='primary.main' 
-                  component="div" 
-                  underline="none" 
-                  sx={{
-                    padding: 2.5,
-                    paddingLeft: 5,
-                    paddingRight: 5,
-                    '&:hover': {
-                      color: 'primary.main',
-                    },
-                  }}>
-                Home
-                </Link>
-                <Link 
-                  variant='upper' 
-                  color='secondary' 
-                  component="div" 
-                  underline="none" 
-                  sx={{ 
-                    paddingRight: 5,
-                    '&:hover': {
-                      color: 'primary.main',
-                    }
-                  }}>
-                Phones
-                </Link>
-                <Link 
-                  variant='upper' 
-                  color='secondary' 
-                  component="div" 
-                  underline="none" 
-                  sx={{ 
-                    paddingRight: 5,
-                    '&:hover': {
-                      color: 'primary.main',
-                    }
-                  }}>
-                Tablets
-                </Link>
-                <Link 
-                  variant='upper' 
-                  color='secondary' 
-                  component="div" 
-                  underline="none" 
-                  sx={{ 
-                    paddingRight: 5,
-                    '&:hover': {
-                      color: 'primary.main',
-                    }
-                  }}>
-                Accesories
-                </Link>
-              </>
-            )}
-            
-            <Box sx={{ flexGrow: 1 }} />
-            <Divider orientation='vertical' flexItem/>
-            {isMobile ? (
-              <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 0, color: 'black', padding: 2, paddingRight: 0 }}
-            >
-             <MenuIcon />
-            </IconButton>
-            )
-          : (
-            <>
-            <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            aria-label="menu"
+      <AppBar
+        component="nav"
+        position="static"
+        sx={{
+          backgroundColor: white,
+          boxShadow: 0,
+          outline: 1,
+          outlineColor:'elements.main',
+          height: {xs: "48px", md: "64px"},
+          paddingLeft: {xs: 2, md: 3}
+        }}
+      >
+        <Toolbar disableGutters sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: {xs: "space-between", md: "flex-start"},
+            alignItems: "center",
+            minHeight: {xs: "48px", md: "64px"}
+          }}>
+          <Link 
+            component={NavLink}
+            to={"/"}
             sx={{
-              mr: 0,
-              color: 'black',
-              padding: 2.5,
-            }}
+              '&:active': {
+                cursor:"pointer",
+                outline: "none",
+              },
+              paddingRight: {xs: 4, md: 6}}}
             >
-             <FavoriteBorderIcon/>
-            </IconButton>
-            <Divider orientation='vertical' flexItem/>
-            <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            aria-label="menu"
-            sx={{
-              mr: 0,
-              color: 'black',
-              padding: 2.5,
-              paddingRight: 0,
-            }}
+              <Box
+              component="img"
+              src='/images-header/Logo.svg'
+              alt="Nice Gadgets"
+              sx={{width: {xs: "64px", md: "80px"}}}
+              />
+            </Link>
+          {!isMobile && (
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="center"
             >
-            <LocalMallOutlinedIcon/>
-            </IconButton>
-            </>
+              <Link 
+                component={NavLink}
+                to={"/"}
+                variant='upper' 
+                color='secondary'
+                pr={5}
+                sx={navLinkStyle}
+              >
+              Home
+              </Link>
+              <Link 
+                component={NavLink}
+                to={"/phones"}
+                variant='upper' 
+                color='secondary'
+                pr={5}
+                sx={navLinkStyle}>
+              Phones
+              </Link>
+              <Link 
+                component={NavLink}
+                to={"/tablets"}
+                variant='upper' 
+                color='secondary'
+                pr={5}
+                sx={navLinkStyle}>
+              Tablets
+              </Link>
+              <Link 
+                component={NavLink}
+                to={"/accessories"}
+                variant='upper' 
+                color='secondary'
+                pr={5}
+                sx={navLinkStyle}
+              >
+              Accesories
+              </Link>
+            </Box>
           )}
-            
-          </Toolbar>
-        </AppBar>
-      </Box>
+          {isMobile ? (
+            <Box display="flex" justifyContent="flex-end">
+              <Divider orientation='vertical' flexItem/>
+              <IconButton
+                size="large"
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                sx={{
+                  mr: 0,
+                  color: 'black',
+                  paddingRight: 2,
+                  paddingLeft: 2,
+                  '&:hover': {
+                    color: 'primary.main',
+                  },
+                  '&:active': {
+                    color: 'primary.main',
+                    cursor:"pointer",
+                    outline: "none",
+                  },
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+          )
+        : (
+          <>
+          <Box flexGrow="1"/>
+          <Box display="flex" flexDirection="row">
+          <Divider orientation='vertical' flexItem/>
+          <IconButton
+            component={NavLink}
+            to={"/favourites"}
+            disableRipple 
+            edge="end"
+            color="inherit"
+            aria-label="menu"
+            sx={{
+              mr: 0,
+              color: 'black',
+              padding: {
+                xs: 2,
+                md: 3,
+              },
+              '&:hover': {
+                color: 'primary.main',
+              },
+              '&:active': {
+                color: 'primary.main',
+                cursor:"pointer",
+                outline: "none",
+              },
+            }}
+            >
+              <FavoriteBorderIcon sx={{fontSize: '16px'}}/>
+            </IconButton>
+            <Divider orientation='vertical' flexItem/>
+          <IconButton
+            component={NavLink} 
+            to={"/cart"}
+            disableRipple 
+            edge="end"
+            color="inherit"
+            aria-label="menu"
+            sx={{
+              boxSizing: "border-box",
+              fontSize: "16px",
+              mr: 0,
+              color: 'black',
+              padding: {
+                xs: 2,
+                md: 3,
+              },
+              paddingRight: 0,
+              '&:hover': {
+                color: 'primary.main',
+              },
+              '&:active': {
+                color: 'primary.main',
+                cursor:"pointer",
+                outline: "none",
+              },
+            }}
+          >
+            <LocalMallOutlinedIcon sx={{fontSize: '16px'}}/>
+          </IconButton>
+          </Box>
+          </>
+        )}
+          
+        </Toolbar>
+      </AppBar>
   )
 };
 
