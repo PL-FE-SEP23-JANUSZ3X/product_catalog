@@ -7,13 +7,12 @@ import {
   Divider,
   useMediaQuery,
   SxProps,
-  Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { useThemeContext } from '../../theme/ThemeContext';
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export type CopyrightProps = {
   sx: SxProps;
