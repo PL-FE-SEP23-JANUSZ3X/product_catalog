@@ -2,6 +2,8 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import {
   CssBaseline,
   ThemeProvider,
+  
+  Typography,
 } from '@mui/material';
 import { useThemeContext } from './theme/ThemeContext';
 import Layout from './components/layout/Layout';
@@ -15,6 +17,8 @@ import AccessoryPage from './components/pages/AccessoryPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import FavouritesPage from './components/pages/FavouritesPage';
 import CartPage from './components/pages/CartPage';
+import PhoneCard from "./components/phoneCard/PhoneCard";
+
 
 function App() {
   const { theme } = useThemeContext();
@@ -22,36 +26,36 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-      <HashRouter>
-      <CssBaseline />
-        <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="home" element={<Navigate to="/" />} />
+        <HashRouter>
+        <CssBaseline />
+          <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="home" element={<Navigate to="/" />} />
 
-              <Route path="phones">
-                <Route index element={<PhonesPage />} />
-                <Route path=":phoneId" element={<PhonePage />} />
+                <Route path="phones">
+                  <Route index element={<PhonesPage />} />
+                  <Route path=":phoneId" element={<PhonePage />} />
+                </Route>
+
+                <Route path="tablets">
+                  <Route index element={<TabletsPage />} />
+                  <Route path=":tabletId" element={<TabletPage />} />
+                </Route>
+
+                <Route path="accessories">
+                  <Route index element={<AccesoriesPage />} />
+                  <Route path=":accessoryId" element={<AccessoryPage />} />
+                </Route>
+
+                <Route path="favourites" element={<FavouritesPage />} />
+
+                <Route path="cart" element={<CartPage />} />
+
+                <Route path="*" element={<NotFoundPage />} />
               </Route>
-
-              <Route path="tablets">
-                <Route index element={<TabletsPage />} />
-                <Route path=":tabletId" element={<TabletPage />} />
-              </Route>
-
-              <Route path="accessories">
-                <Route index element={<AccesoriesPage />} />
-                <Route path=":accessoryId" element={<AccessoryPage />} />
-              </Route>
-
-              <Route path="favourites" element={<FavouritesPage />} />
-
-              <Route path="cart" element={<CartPage />} />
-
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-      </HashRouter>
+            </Routes>
+        </HashRouter>
       </ThemeProvider>
     </>
   );
