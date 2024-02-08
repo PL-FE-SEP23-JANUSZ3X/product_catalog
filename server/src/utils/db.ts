@@ -1,19 +1,23 @@
 import { Sequelize } from 'sequelize-typescript';
 import Phone from '../model/phone.model';
-// import Product from '../model/product.model';
-import phoneData  from '../apiData/phones.json';
+import Product from '../model/product.model';
+import phoneData from '../apiData/phones.json';
+import productData from '../apiData/products.json';
 
-//for test purposes, enter you database password
-const YOUR_PASSWORD = 'admin'
+import 'dotenv/config';
 
-const sequelize: Sequelize = new Sequelize('postgres', 'postgres', YOUR_PASSWORD, {
-    host: 'localhost',
-    dialect: 'postgres',
-    models: [Phone]
+const URI = process.env.EXTERNAL_URI || 'postgres';
+
+const sequelize: Sequelize = new Sequelize(URI,{
+    dialectOptions: {
+      ssl:true,
+    },
+    models: [Phone, Product]
   });
 
-async function addPhones() {
-    return Phone.bulkCreate(phoneData);
+async function addData() {
+    Phone.bulkCreate(phoneData);
+    Product.bulkCreate(productData);
 }
 
 async function connect(): Promise<void> {
@@ -28,8 +32,8 @@ async function connect(): Promise<void> {
 async function connection(): Promise<void> {
     try {
       await connect();
-      await sequelize.sync({ force: true });
-      await addPhones()
+      await sequelize.sync({force: true});
+      await addData()
     } catch (error: any) {
         throw new Error(error.message);
     }
