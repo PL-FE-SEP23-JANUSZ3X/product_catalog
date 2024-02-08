@@ -81,6 +81,8 @@ declare module "@mui/material/styles" {
       upper?: React.CSSProperties;
     }
 
+   type EmptyObject = { [key: string]: any };
+  
     export type OverridesStyleRules<
       ClassKey extends string = string,
       ComponentName = keyof ComponentsPropsList,
@@ -95,7 +97,7 @@ declare module "@mui/material/styles" {
               Record<string, unknown> & {
                 ownerState: ComponentsPropsList[ComponentName] & Record<string, unknown>;
               }
-          : {}) & {
+          : EmptyObject) & {
           theme: Theme;
         } & Record<string, unknown>
       >
