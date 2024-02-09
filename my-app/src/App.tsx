@@ -17,7 +17,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{ minHeight: '100vh'}}>
           <DarkModeToggle />
           <Typography
             variant="h1"
