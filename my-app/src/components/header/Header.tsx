@@ -11,8 +11,11 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useThemeContext } from '../../theme/ThemeContext';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import BurgerMenu from '../burgerMenu/BurgerMenu';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -35,6 +38,9 @@ const Header = () => {
   const isMobile = useMediaQuery('(max-width:640px)');
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
+  const [isOpen, setIsOpen] = useState(false);
+  
+  const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
 
   return (
       <AppBar
@@ -128,6 +134,7 @@ const Header = () => {
                 edge="end"
                 color="inherit"
                 aria-label="menu"
+                onClick={toggleDrawer(isOpen)}
                 sx={{
                   mr: 0,
                   color: 'black',
@@ -143,7 +150,9 @@ const Header = () => {
                   },
                 }}
               >
-                <MenuIcon />
+                {isOpen 
+                ? <CloseRoundedIcon />
+                : <MenuIcon />}
               </IconButton>
             </Box>
           )
@@ -211,7 +220,9 @@ const Header = () => {
           </Box>
           </>
         )}
-          
+          {isMobile && (
+            <BurgerMenu isOpen={isOpen}/>
+          )}
         </Toolbar>
       </AppBar>
   )
