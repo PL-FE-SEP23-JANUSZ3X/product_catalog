@@ -30,7 +30,7 @@ type Props = {
   phone: Phone;
 };
 
-const PhoneCard: FC<Props> = () => {
+const PhoneCard: FC<Props> = ({ phone }) => {
   const { theme } = useThemeContext();
 
   return (
@@ -71,22 +71,20 @@ const PhoneCard: FC<Props> = () => {
                 },
               }}
             />
-            <Typography sx={{ mt: 2.5, fontSize: 14 }}>
-              Apple iPhone 14 Pro 128GB Silver (MQ023)
-            </Typography>
+            <Typography sx={{ mt: 2.5, fontSize: 14 }}>{phone.name}</Typography>
             <Box sx={{ display: 'flex', mt: 1 }}>
               <Typography
                 variant="h6"
                 sx={{ color: 'primary.main', fontWeight: 'bold' }}
               >
-                $849
+                {`$${phone.priceDiscount}`}
               </Typography>
               <Box sx={{ width: 4 }} />
               <Typography
                 variant="h6"
                 sx={{ color: 'secondary.main', textDecoration: 'line-through' }}
               >
-                $1199
+                {`$${phone.priceRegular}`}
               </Typography>
             </Box>
             <Divider
@@ -111,7 +109,7 @@ const PhoneCard: FC<Props> = () => {
                 Screen
               </Typography>
               <Typography sx={{ fontSize: 12, fontWeight: 'bold' }}>
-                6.5” OLED
+                {phone.screen}
               </Typography>
             </Box>
             <Box
@@ -127,7 +125,7 @@ const PhoneCard: FC<Props> = () => {
                 Capacity
               </Typography>
               <Typography sx={{ fontSize: 12, fontWeight: 'bold' }}>
-                512 GB
+                {phone.capacity}
               </Typography>
             </Box>
             <Box
@@ -143,7 +141,7 @@ const PhoneCard: FC<Props> = () => {
                 RAM
               </Typography>
               <Typography sx={{ fontSize: 12, fontWeight: 'bold' }}>
-                4 GB
+                {phone.ram}
               </Typography>
             </Box>
             <Box
