@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { FC, Key, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PhoneCard from '../phoneCard/PhoneCard';
 import { Phone } from '../../types';
 import { getPhones } from '../../utils/fetchHelper';
