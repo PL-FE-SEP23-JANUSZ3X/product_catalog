@@ -32,8 +32,8 @@ async function connect(): Promise<void> {
 async function connection(): Promise<void> {
     try {
       await connect();
-      await sequelize.sync({force: true});
-      await addData()
+      await sequelize.sync();
+      // await addData()
     } catch (error: any) {
         throw new Error(error.message);
     }
