@@ -7,21 +7,11 @@ const DarkModeToggle = () => {
   const { mode, toggleColorMode } = useThemeContext();
 
   return (
-    <Box
-      sx={{
-        mt: "40px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "text.primary",
-        borderColor: "text.primary",
-      }}
-    >
-      {mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
-        {mode === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
+      <IconButton onClick={toggleColorMode} color="inherit" sx={{p: 0}}>
+        {mode === "dark"
+          ? <DarkModeIcon sx={{fontSize: '16px'}} />
+          : <LightModeIcon sx={{fontSize: '16px'}} />}
       </IconButton>
-    </Box>
   );
 };
 
