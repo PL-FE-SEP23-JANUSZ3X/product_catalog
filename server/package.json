@@ -2,6 +2,7 @@
   "name": "ts-node-express",
   "version": "1.0.0",
   "description": "",
+  "type": "commonjs",
   "main": "./src/main.ts",
   "scripts": {
     "start": "ts-node main.ts",

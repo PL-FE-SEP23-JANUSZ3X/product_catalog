@@ -13,7 +13,7 @@
     "**/*.ts/*.json",
     "src/**/*.ts"
 , "main.ts"    
-  ],
+, "imagesHandler.js"  ],
   "exclude": [
     "node_modules"
   ]
