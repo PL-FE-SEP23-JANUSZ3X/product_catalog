@@ -1,34 +1,8 @@
 import { Typography } from '@mui/material';
 import axios from 'axios';
 import { FC, Key, useEffect, useState } from 'react';
-
-type DescriptionItem = {
-  text: string[];
-  title: string;
-};
-
-type Phone = {
-  camera: string;
-  capacity: string;
-  capacityAvailable: '{64GB,128GB,256GB}';
-  cell: string[];
-  color: string;
-  colorsAvailable: string[];
-  createdAt: string;
-  description: DescriptionItem[];
-  id: string;
-  images: string[];
-  name: string;
-  namespaceId: string;
-  priceDiscount: number;
-  priceRegular: number;
-  processor: string;
-  ram: string;
-  resolution: string;
-  screen: string;
-  updatedAt: string;
-  zoom: string;
-};
+import PhoneCard from '../phoneCard/PhoneCard';
+import { Phone } from '../../types';
 
 const PhonesPage: FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
@@ -52,7 +26,7 @@ const PhonesPage: FC = () => {
         PhonesPage
       </Typography>
       {phones.length > 0 &&
-        phones.map((phone) => <p key={phone.id}>{phone.name}</p>)}
+        phones.map((phone) => <PhoneCard key={phone.id} phone={phone} />)}
     </>
   );
 };
