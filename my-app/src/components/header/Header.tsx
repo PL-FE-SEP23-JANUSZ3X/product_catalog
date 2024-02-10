@@ -11,8 +11,11 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useThemeContext } from '../../theme/ThemeContext';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 
 export type CopyrightProps = {
@@ -55,6 +58,9 @@ const Header = () => {
   const isMobile = useMediaQuery('(max-width:640px)');
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
+  const [isOpen, setIsOpen] = useState(false);
+  
+  const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
 
   return (
       <AppBar
@@ -160,9 +166,12 @@ const Header = () => {
                 edge="end"
                 color="inherit"
                 aria-label="menu"
-                sx={iconLinkStyle}
+                onClick={toggleDrawer(isOpen)}
+               sx={iconLinkStyle}
               >
-                <MenuIcon sx={{fontSize: '16px'}} />
+                {isOpen 
+                ? <CloseRoundedIcon />
+                : <MenuIcon sx={{fontSize: '16px'}} />}
               </IconButton>
             </Box>
           )
@@ -209,7 +218,9 @@ const Header = () => {
           </Box>
           </>
         )}
-          
+          {isMobile && (
+            <BurgerMenu isOpen={isOpen}/>
+          )}
         </Toolbar>
       </AppBar>
   )
