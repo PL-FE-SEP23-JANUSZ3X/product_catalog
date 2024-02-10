@@ -1,10 +1,7 @@
 enum SortType {
-  NEWEST = 'newest',
-  OLDEST = 'oldest',
+  DATE_RANGE = 'dateRange',
   ALPHABETIC = 'alphabetic',
-  ALPHABETIC_REVERSE = 'alphabeticReverse',
-  LOWEST_PRICE = 'lowestPrice',
-  HIGHEST_PRICE = 'highestPrice'
+  PRICE = 'price',
 }
 
 export default SortType;
