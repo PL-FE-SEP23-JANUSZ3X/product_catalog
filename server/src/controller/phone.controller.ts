@@ -1,14 +1,6 @@
 import phoneService from '../service/phone.service';
+import SortType from '../types/sortType';
 import { ControllerAction } from '../utils/types';
-
-enum SortType {
-    NEWEST = 'newest',
-    OLDEST = 'oldest',
-    ALPHABETIC = 'alphabetic',
-    ALPHABETIC_REVERSE = 'alphabeticReverse',
-    LOWEST_PRICE = 'lowestPrice',
-    HIGHEST_PRICE = 'highestPrice'
-}
 
 const getAll: ControllerAction = async(req, res) => {
     try {
