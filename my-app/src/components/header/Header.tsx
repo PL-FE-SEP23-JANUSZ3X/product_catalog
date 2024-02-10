@@ -16,6 +16,7 @@ import { useThemeContext } from '../../theme/ThemeContext';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
+import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -33,6 +34,25 @@ const navLinkStyle = {
     outline: "none",
   },
 };
+
+const iconLinkStyle = {
+  boxSizing: "border-box",
+  mr: 0,
+  color: 'black',
+  padding: {
+    xs: 2,
+    md: 3,
+  },
+  paddingRight: 0,
+  '&:hover': {
+    color: 'primary.main',
+  },
+  '&:active': {
+    color: 'primary.main',
+    cursor:"pointer",
+    outline: "none",
+  },
+}
 
 const Header = () => {
   const isMobile = useMediaQuery('(max-width:640px)');
@@ -130,29 +150,28 @@ const Header = () => {
             <Box display="flex" justifyContent="flex-end">
               <Divider orientation='vertical' flexItem/>
               <IconButton
+                component={NavLink} 
+                to={"/cart"}
+                disableRipple 
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                sx={iconLinkStyle}
+              >
+                <DarkModeToggle />
+              </IconButton>
+              <Divider orientation='vertical' flexItem/>
+              <IconButton
                 size="large"
                 edge="end"
                 color="inherit"
                 aria-label="menu"
                 onClick={toggleDrawer(isOpen)}
-                sx={{
-                  mr: 0,
-                  color: 'black',
-                  paddingRight: 2,
-                  paddingLeft: 2,
-                  '&:hover': {
-                    color: 'primary.main',
-                  },
-                  '&:active': {
-                    color: 'primary.main',
-                    cursor:"pointer",
-                    outline: "none",
-                  },
-                }}
+               sx={iconLinkStyle}
               >
                 {isOpen 
                 ? <CloseRoundedIcon />
-                : <MenuIcon />}
+                : <MenuIcon sx={{fontSize: '16px'}} />}
               </IconButton>
             </Box>
           )
@@ -162,28 +181,25 @@ const Header = () => {
           <Box display="flex" flexDirection="row">
           <Divider orientation='vertical' flexItem/>
           <IconButton
+            component={NavLink} 
+            to={"/cart"}
+            disableRipple 
+            edge="end"
+            color="inherit"
+            aria-label="menu"
+            sx={iconLinkStyle}
+          >
+            <DarkModeToggle />
+          </IconButton>
+          <Divider orientation='vertical' flexItem/>
+          <IconButton
             component={NavLink}
             to={"/favourites"}
             disableRipple 
             edge="end"
             color="inherit"
             aria-label="menu"
-            sx={{
-              mr: 0,
-              color: 'black',
-              padding: {
-                xs: 2,
-                md: 3,
-              },
-              '&:hover': {
-                color: 'primary.main',
-              },
-              '&:active': {
-                color: 'primary.main',
-                cursor:"pointer",
-                outline: "none",
-              },
-            }}
+            sx={iconLinkStyle}
             >
               <FavoriteBorderIcon sx={{fontSize: '16px'}}/>
             </IconButton>
@@ -195,25 +211,7 @@ const Header = () => {
             edge="end"
             color="inherit"
             aria-label="menu"
-            sx={{
-              boxSizing: "border-box",
-              fontSize: "16px",
-              mr: 0,
-              color: 'black',
-              padding: {
-                xs: 2,
-                md: 3,
-              },
-              paddingRight: 0,
-              '&:hover': {
-                color: 'primary.main',
-              },
-              '&:active': {
-                color: 'primary.main',
-                cursor:"pointer",
-                outline: "none",
-              },
-            }}
+            sx={iconLinkStyle}
           >
             <LocalMallOutlinedIcon sx={{fontSize: '16px'}}/>
           </IconButton>

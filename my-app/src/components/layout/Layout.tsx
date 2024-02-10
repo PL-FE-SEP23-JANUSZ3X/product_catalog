@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
-import { Box, Container,ScopedCssBaseline } from '@mui/material';
+import { Container } from '@mui/material';
 import Header from '../header/Header';
 import { Footer } from '../footer';
 
@@ -17,14 +16,8 @@ const Layout = () => {
         },
         backgroundColor: "red",
       }}>
-        <ScopedCssBaseline>
-        
-        <DarkModeToggle />
-        <Box>
-          <Outlet />
-        </Box>
-      <Footer />
-      </ScopedCssBaseline>
+        <Outlet />
+        <Footer />
       </Container>
     </>
   );
