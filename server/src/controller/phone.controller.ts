@@ -35,7 +35,7 @@ const getSortedPhones: ControllerAction = async(req, res) => {
     try {
         const allPhones = await phoneService.getAllPhones();
 
-        const { sortType, start, limit} = req.params
+        const { sortType, start, limit, order } = req.params
         const { startIndex, limitIndex } = { startIndex: +start, limitIndex: +limit };
 
         let sortedPhones = []
@@ -48,35 +48,15 @@ const getSortedPhones: ControllerAction = async(req, res) => {
                     }
                     return 0;
                 })
-            case SortType.ALPHABETIC_REVERSE:
-                sortedPhones = allPhones.sort((a, b) => {
-                    if (a.name && b.name) {
-                        return b.name.localeCompare(a.name)
-                    }
-                    return 0;
-                })
-            case SortType.NEWEST:
-                sortedPhones = allPhones.reverse()
-                break;
-            case SortType.OLDEST:
+            case SortType.DATE_RANGE:
                 sortedPhones = allPhones
                 break;
-            case SortType.LOWEST_PRICE: 
+            case SortType.PRICE: 
                 sortedPhones = allPhones.sort((a, b) => {
                     const priceA = a.priceDiscount ?? a.priceRegular;
                     const priceB = b.priceDiscount ?? b.priceRegular;
                     if (priceA && priceB) {
-                        return priceB - priceA;
-                    }
-                    return 0;
-                })
-                break;
-            case SortType.HIGHEST_PRICE: 
-                sortedPhones = allPhones.sort((a, b) => {
-                    const priceA = a.priceDiscount ?? a.priceRegular;
-                    const priceB = b.priceDiscount ?? b.priceRegular;
-                    if (priceA && priceB) {
-                        return priceB - priceA;
+                        return priceA - priceB;
                     }
                     return 0;
                 })
@@ -84,6 +64,10 @@ const getSortedPhones: ControllerAction = async(req, res) => {
             default:
                 sortedPhones = allPhones;
                 break;
+        }
+        
+        if (order === 'desc') {
+            sortedPhones = sortedPhones.reverse()
         }
 
         res.json(sortedPhones.slice(startIndex, limitIndex))
