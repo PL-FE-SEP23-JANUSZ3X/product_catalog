@@ -150,8 +150,6 @@ const Header = () => {
             <Box display="flex" justifyContent="flex-end">
               <Divider orientation='vertical' flexItem/>
               <IconButton
-                component={NavLink} 
-                to={"/cart"}
                 disableRipple 
                 edge="end"
                 color="inherit"
@@ -181,8 +179,6 @@ const Header = () => {
           <Box display="flex" flexDirection="row">
           <Divider orientation='vertical' flexItem/>
           <IconButton
-            component={NavLink} 
-            to={"/cart"}
             disableRipple 
             edge="end"
             color="inherit"
