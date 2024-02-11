@@ -3,18 +3,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
-  const [selectedIcon, setSelectedIcon] = useState<string | null>('');
   const goodsTypes = [
     {name: 'Phones', link: './phones'},
     {name: 'Tablets', link: './tablets'},
     {name: 'Accesories', link: './accessories'}
   ];
-
-  const handleIconClick = (name: string | null) => () => setSelectedIcon(name);
 
   useEffect(() => {
     console.log("BurgerMenu rerendered");
