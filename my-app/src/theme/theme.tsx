@@ -129,6 +129,13 @@ export const customTheme = (mode: PaletteMode) => ({
       lineHeight: "11px",
       textTransform: "uppercase" as const,
     },
+    link: {
+      fontSize: '12px',
+      fontWeight: '800',
+      lineHeight: '11px',
+      letterSpacing: '0.04em',
+      textTransform: "uppercase" as const,
+    },
   },
   components: {
     MuiCssBaseline: {

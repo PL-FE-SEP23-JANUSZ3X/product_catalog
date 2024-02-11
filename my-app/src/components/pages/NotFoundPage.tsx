@@ -9,11 +9,6 @@ const NotFoundPage = () => {
     '&:hover': {
       color: 'primary.main',
     },
-    '&:active': {
-      color: 'primary.main',
-      cursor:"pointer",
-      outline: "none",
-    },
   };
 
   return (

@@ -1,4 +1,3 @@
-import { useThemeContext } from "../../theme/ThemeContext";
 import { Box } from "@mui/material";
 
 const Eyes = () => {
@@ -54,15 +53,14 @@ const Eyes = () => {
 
   return (
     <Box sx={wrapperStyle}>  
-        <Box sx={eyesStyle}>
-          <Box sx={eye}>
-              <Box sx={pupil}></Box>
-          </Box>
-          <Box sx={eye}>
-              <Box sx={pupil}></Box>
-          </Box>
+      <Box sx={eyesStyle}>
+        <Box sx={eye}>
+          <Box sx={pupil}></Box>
         </Box>
-
+        <Box sx={eye}>
+          <Box sx={pupil}></Box>
+        </Box>
+      </Box>
     </Box>
   );
 };
