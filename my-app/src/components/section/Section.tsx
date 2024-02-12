@@ -8,23 +8,25 @@ type SectionType = {
 const Section = ({ children }: SectionType) => {
   const { theme } = useThemeContext();
 
+  const containerStyle = {
+    px: 2,
+    my: 7,
+    [theme.breakpoints.up("sm")]: {
+      px: 3,
+      my: 8,
+    },
+    [theme.breakpoints.up("md")]: {
+      px: 4,
+      my: 10,
+    },
+    [theme.breakpoints.up("lg")]: {
+      px: 19,
+    },
+  }
+
   return (
     <Container
-      sx={{
-        px: 2,
-        my: 7,
-        [theme.breakpoints.up("sm")]: {
-          px: 3,
-          my: 8,
-        },
-        [theme.breakpoints.up("md")]: {
-          px: 4,
-          my: 10,
-        },
-        [theme.breakpoints.up("lg")]: {
-          px: 19,
-        },
-      }}
+      sx={containerStyle}
     >
       { children }
     </Container>
