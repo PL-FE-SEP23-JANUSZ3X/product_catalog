@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import PhoneCard from '../phoneCard/PhoneCard';
 import { Phone } from '../../types';
 import { getPhones } from '../../utils/fetchHelper';
+import { ErrorMessage } from '../../types/ErrorMessages';
 
 const PhonesPage: FC = () => {
   const [phones, setPhones] = useState<Phone[]>([]);
@@ -16,12 +17,8 @@ const PhonesPage: FC = () => {
         const phones = await getPhones();
         setPhones(phones);
       } catch (err) {
-        if (err instanceof Error) {
-          setErrorMessage(err.message);
-          return;
-        }
-
-        console.error('An unknown error occurred', err);
+        setErrorMessage(ErrorMessage.LOAD);
+        console.error(err);
       } finally {
         setIsLoading(false);
       }
