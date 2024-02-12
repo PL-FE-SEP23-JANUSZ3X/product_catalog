@@ -34,6 +34,7 @@ export const Footer: React.FC = () => {
         pl: 2,
         pr: 2,
         borderTop: "1px solid #89939A",
+        height: {xs: '257px', sm: '96px'}
       }}
     >
       <Stack
@@ -42,7 +43,12 @@ export const Footer: React.FC = () => {
         spacing={isMobile ? 4 : 0}
         justifyContent={isMobile ? "flex-start" : "space-between"}
       >
-        <Box component="img" src="images/logo.png" alt="gowmno" width="89px" />
+        <Box
+          component="img"
+          src={theme.palette.mode === 'light' ? '/images-header/Logo-light.svg' : '/images-header/Logo-dark.svg'}
+          alt="Image of logo"
+          width="89px"
+        />
 
         <Stack
           direction={isMobile ? "column" : "row"}
@@ -60,23 +66,18 @@ export const Footer: React.FC = () => {
             p: 0,
             textTransform: "none",
             fontSize: "12px",
-            fontWeight: "600",
-            color: "#89939A",
+            fontWeight: theme.palette.mode === 'light' ? "600" : "700",
+            color: "secondary.main",
           }}
           onClick={scrollToTop}
         >
           Back to top
           <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            width="32px"
-            height="32px"
-            border="1px solid lightgrey"
-            sx={{ marginLeft: 2 }}
-          >
-            <Box component="img" src="images/icons/arr-up.svg" alt="Arrow up" />
-          </Box>
+              component="img"
+              pl={2}
+              src={theme.palette.mode === 'light' ? 'images/footer-arrow-light.svg' : 'images/footer-arrow-dark.svg'}
+              alt="Arrow up"
+            />
         </Button>
       </Stack>
     </Container>
