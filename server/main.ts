@@ -16,7 +16,7 @@ app.use(cors());
 app.use('/phones', phoneRouter);
 app.use('/products', productRouter);
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   // eslint-disable-next-line no-console
   console.log('Server is running on localhost:3000');
 });
