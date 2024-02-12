@@ -1,8 +1,11 @@
 import { Typography } from "@mui/material";
+import Section from "../section/Section";
 
 const FavouritesPage = () => {
   return (
-    <Typography variant="h1" color="text.primary" mb="32px" >FavouritesPage</Typography>
+    <Section>
+      <Typography variant="h1" color="text.primary" mb="32px" >Favourites</Typography>
+    </Section>
   );
 };
 

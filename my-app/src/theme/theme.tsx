@@ -110,6 +110,8 @@ export const customTheme = (mode: PaletteMode) => ({
       fontWeight: 600,
       fontSize: "14px",
       lineHeight: "21px",
+      textTransform: "uppercase" as const,
+      textDecoration: 'none',
     },
     body1: {
       fontWeight: 500,
@@ -121,11 +123,17 @@ export const customTheme = (mode: PaletteMode) => ({
       fontSize: "12px",
       lineHeight: "16px",
     },
-    //this is the custom prop I want to add
     upper: {
       fontWeight: 700,
       fontSize: "12px",
       lineHeight: "11px",
+      textTransform: "uppercase" as const,
+    },
+    link: {
+      fontSize: '12px',
+      fontWeight: '800',
+      lineHeight: '11px',
+      letterSpacing: '0.04em',
       textTransform: "uppercase" as const,
     },
   },
@@ -139,13 +147,19 @@ export const customTheme = (mode: PaletteMode) => ({
         },
         body: {
           transition: 'all 0.25s ease-in-out',
-        }
+        },
+        root: {
+          boxSizing: 'border-box',
+          margin: 0,
+          padding: 0,
+        },
       }
     },
     MuiScopedCssBaseline: {
       styleOverrides: {
         root: {
           margin: '0',
+          padding: 0,
         },
       },
     },
@@ -154,6 +168,18 @@ export const customTheme = (mode: PaletteMode) => ({
         root: {
           margin: '0',
           padding: '0',
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          margin: '0',
+          padding: '0',
+          "& .MuiTypography-root": {
+            margin: '0',
+            padding: '0',
+          },
         },
       },
     },
