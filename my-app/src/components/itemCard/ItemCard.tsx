@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Typography } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Phone from './PhoneCard.types';
+import Item from './ItemCard.types';
 
 const breakpoints = createTheme({
   breakpoints: {
@@ -15,9 +15,8 @@ const breakpoints = createTheme({
   },
 });
 
-const PhoneCard = ( phone: Phone ) => {
-  const { images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = phone.phone
-  console.log(screen)
+const ItemCard = ( item: Item ) => {
+  const { images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item.item
   return (
     <Grid>
       <Card sx={{ 
@@ -85,4 +84,4 @@ const PhoneCard = ( phone: Phone ) => {
   )
 }
 
-export default PhoneCard;
+export default ItemCard;
