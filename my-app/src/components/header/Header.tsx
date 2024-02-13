@@ -131,6 +131,7 @@ const Header = () => {
               <NavLink to='/' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -142,6 +143,7 @@ const Header = () => {
               <NavLink to='/phones' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -153,6 +155,7 @@ const Header = () => {
               <NavLink to='/tablets' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -164,6 +167,7 @@ const Header = () => {
               <NavLink to='/accessories' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -178,6 +182,7 @@ const Header = () => {
             <Box display="flex" justifyContent="flex-end">
               <Divider orientation='vertical' flexItem/>
               <IconButton
+                component='div'
                 disableRipple 
                 edge="end"
                 aria-label="menu"
@@ -187,6 +192,7 @@ const Header = () => {
               </IconButton>
               <Divider orientation='vertical' flexItem/>
               <IconButton
+                component='div'
                 size="large"
                 edge="end"
                 aria-label="menu"

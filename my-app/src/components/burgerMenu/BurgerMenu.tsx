@@ -84,6 +84,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
             <NavLink to='/' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     width="fit-content"         
                     borderBottom="2px solid"
@@ -100,6 +101,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
               <NavLink key={good.name} to={good.link} end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     width="fit-content"         
                     borderBottom="2px solid"
@@ -120,6 +122,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
             <NavLink to='/favourites' end style={{textDecoration:'none', flexGrow: 1}}> 
               {({ isActive }) => ( 
                 <IconButton 
+                  component='div'
                   disableRipple
                   edge="end"
                   aria-label="menu"
@@ -138,6 +141,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
             <NavLink to='/cart' end style={{textDecoration:'none', flexGrow: 1}}> 
               {({ isActive }) => ( 
                 <IconButton 
+                  component='div'
                   disableRipple
                   edge="end"
                   aria-label="menu"
