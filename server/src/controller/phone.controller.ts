@@ -35,7 +35,7 @@ const getSortedPhones: ControllerAction = async(req, res) => {
     try {
         const allPhones = await phoneService.getAllPhones();
 
-        const { sortType, start, limit, order } = req.params
+        const { sortType, start, limit } = req.params
         const { startIndex, limitIndex } = { startIndex: +start, limitIndex: +limit };
 
         let sortedPhones = []
@@ -48,10 +48,22 @@ const getSortedPhones: ControllerAction = async(req, res) => {
                     }
                     return 0;
                 })
-            case SortType.DATE_RANGE:
-                sortedPhones = allPhones
                 break;
-            case SortType.PRICE: 
+            case SortType.NEWEST:
+                sortedPhones = allPhones.slice(0, limitIndex); 
+                break;
+            case SortType.OLDEST:
+                sortedPhones = allPhones.slice(startIndex); 
+                break;
+            case SortType.ALPHABETIC_REVERSE:
+                sortedPhones = allPhones.sort((a, b) => {
+                    if (a.name && b.name) {
+                        return b.name.localeCompare(a.name);
+                    }
+                    return 0;
+                });
+                break;
+            case SortType.CHEAPEST:
                 sortedPhones = allPhones.sort((a, b) => {
                     const priceA = a.priceDiscount ?? a.priceRegular;
                     const priceB = b.priceDiscount ?? b.priceRegular;
@@ -59,15 +71,21 @@ const getSortedPhones: ControllerAction = async(req, res) => {
                         return priceA - priceB;
                     }
                     return 0;
-                })
+                });
+                break;
+            case SortType.EXPENSIVE:
+                sortedPhones = allPhones.sort((a, b) => {
+                    const priceA = a.priceDiscount ?? a.priceRegular;
+                    const priceB = b.priceDiscount ?? b.priceRegular;
+                    if (priceA && priceB) {
+                        return priceB - priceA;
+                    }
+                    return 0;
+                });
                 break;
             default:
                 sortedPhones = allPhones;
                 break;
-        }
-        
-        if (order === 'desc') {
-            sortedPhones = sortedPhones.reverse()
         }
 
         res.json(sortedPhones.slice(startIndex, limitIndex))
@@ -75,8 +93,7 @@ const getSortedPhones: ControllerAction = async(req, res) => {
         console.log(error);
         res.status(500).send('Internal Server Error');
     }
-}
-
+};
 const phoneController = {getAll, getOne, getSortedPhones};
 
 export default phoneController;
