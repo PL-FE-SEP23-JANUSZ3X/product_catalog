@@ -7,7 +7,7 @@ const DarkModeToggle = () => {
   const { mode, toggleColorMode } = useThemeContext();
 
   return (
-      <IconButton onClick={toggleColorMode} color="inherit" sx={{p: 0}}>
+      <IconButton component="div" onClick={toggleColorMode} sx={{p: 0, color: "primary.main"}}>
         {mode === "dark"
           ? <DarkModeIcon sx={{fontSize: '16px'}} />
           : <LightModeIcon sx={{fontSize: '16px'}} />}

@@ -1,19 +1,6 @@
-import { createTheme } from '@mui/material/styles';
 import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Typography } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Item from './ItemCard.types';
-
-const breakpoints = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 320,
-      md: 600, 
-      lg: 1200, 
-      xl: 1920,
-    },
-  },
-});
 
 const ItemCard = ( item: Item ) => {
   const { images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item.item
@@ -45,10 +32,7 @@ const ItemCard = ( item: Item ) => {
               <Typography variant='h6' sx={{ color: 'secondary.main', textDecoration: 'line-through'}}>{priceDiscount}</Typography>
             </Box>
             <Divider 
-              sx={{ my: 1, mb: 1.5,
-                [breakpoints.breakpoints.up('lg')]: {
-                  mb: 0,
-                },}} /> 
+              sx={{ my: 1, mb: 1.5}} /> 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: {xs: 0.5, md: 0.5, lg: 2} }}>
               <Typography sx={{fontSize: 12, color: 'secondary.main', fontWeight: 'bold'}}>Screen</Typography>
               <Typography sx={{fontSize: 12, fontWeight: 'bold'}}>{screen}</Typography>

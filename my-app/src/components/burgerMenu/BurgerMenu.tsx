@@ -1,13 +1,17 @@
 import { Box, Divider, IconButton, Link, Stack } from "@mui/material";
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
-import { useEffect, useState } from "react";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
-  const [selectedIcon, setSelectedIcon] = useState<string | null>('');
-  const goodsTypes = ['Phones', 'Tablets', 'Accesories'];
-
-  const handleIconClick = (icon: string | null) => () => setSelectedIcon(icon);
+  const goodsTypes = [
+    {name: 'Phones', link: './phones'},
+    {name: 'Tablets', link: './tablets'},
+    {name: 'Accesories', link: './accessories'}
+  ];
 
   useEffect(() => {
     console.log("BurgerMenu rerendered");
@@ -15,10 +19,10 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
 
   const burgerBoxStyle = {
     position: 'fixed',
-    top: 57,
+    top: 49,
     right: 0,
     left: 0,
-    backgroundColor: 'white.main',
+    backgroundColor: 'background.default',
     display: 'flex',
     flexDirection: "column",
     justifyContent: "space-between",
@@ -28,72 +32,127 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
     transition: 'transform 0.3s ease-in-out',
   };
 
-  const iconButtonStyle = {
-    flexGrow: 1,
+  const iconLinkStyle = {
+    width: '100%',
     p: 2.3,
     borderRadius: 0,
-    borderBottom: 4,
+    borderBottomWidth: '4px',
+    borderBottomColor: 'transparent',
+    borderBottomStyle: 'solid',
+    outline: "none",
+    color: "primary.main",
   }
+  
+  const iconLinkActiveStyle = {
+    width: '100%',
+    p: 2.3,
+    borderRadius: 0,
+    borderBottomWidth: '4px',
+    borderBottomColor: 'primary.main',
+    borderBottomStyle: 'solid',
+    boxSizing: "border-box",
+    color: "primary.main",
+    cursor:"pointer",
+    outline: "none",
+  }
+
+  const navLinkStyle = {
+    textDecoration: 'none',
+    color: 'secondary.main',
+    borderBottom: '2px solid transparent',
+    outline: "none",
+    '&:hover': {
+      color: 'primary.main',
+    },
+  };
+  
+  const navLinkActiveStyle = {
+    textDecoration: 'none',
+    color: 'primary.main',
+    borderBottom: '2px solid primary.main',
+    cursor:"pointer",
+    outline: "none",
+    paddingBottom: '5px'
+  };
 
   return (
       <>
-          <Box sx={burgerBoxStyle}>
+        <Box sx={burgerBoxStyle}>
 
-            <Stack spacing={3} padding={4} height='100%' alignItems="center"
-            onClick={handleIconClick('')}>
+          <Stack spacing={3} padding={4} height='100%' alignItems="center">
 
-              <Link
-                padding="5px 0"              
-                width="fit-content"
-                borderBottom="2px solid"
-                borderColor={selectedIcon === '' ? "primary" : "white.main"}
-                variant="upper"
-                color={selectedIcon === '' ? "primary" : "secondary"}
-                textAlign="center"
-                underline="none"
-              >
-                Home
-              </Link>
+            <NavLink to='/' end style={{textDecoration:'none'}}> 
+                {({ isActive }) => ( 
+                  <Link 
+                    variant='link'
+                    width="fit-content"         
+                    borderBottom="2px solid"
+                    textAlign="center"
+                    underline="none"
+                    sx={isActive ? navLinkActiveStyle : navLinkStyle}
+                  >
+                    Home
+                  </Link>
+                )}
+              </NavLink>
 
-              {goodsTypes.map((good) => (
-                <Link 
-                  padding="5px 0"
-                  variant="upper"
-                  color="secondary"
-                  textAlign="center"
-                  underline="none"
+            {goodsTypes.map((good) => (
+              <NavLink key={good.name} to={good.link} end style={{textDecoration:'none'}}> 
+                {({ isActive }) => ( 
+                  <Link 
+                    variant='link'
+                    width="fit-content"         
+                    borderBottom="2px solid"
+                    textAlign="center"
+                    underline="none"
+                    sx={isActive ? navLinkActiveStyle : navLinkStyle}
+                  >
+                    {good.name}
+                  </Link>
+                )}
+              </NavLink>
+            ))}
+
+          </Stack>
+
+          <Box display="flex" sx={{ outline: 1, outlineColor: "elements.main", mb: 7 }}>
+  
+            <NavLink to='/favourites' end style={{textDecoration:'none', flexGrow: 1}}> 
+              {({ isActive }) => ( 
+                <IconButton 
+                  disableRipple
+                  edge="end"
+                  aria-label="menu"
+                  sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
                 >
-                  {good}
-                </Link>
-              ))}
+                  {isActive 
+                    ? <FavoriteIcon />
+                    : <FavoriteBorderIcon />
+                  }
+                </IconButton>
+              )}
+            </NavLink>
 
-            </Stack>
+            <Divider orientation="vertical" flexItem sx={{ color: "elements.main" }} />
 
-            <Box display="flex" sx={{ outline: 1, outlineColor: "elements.main", mb: 7 }}>
-              
-              <IconButton 
-                sx={{
-                ...iconButtonStyle,
-                borderColor: selectedIcon === 'heart' ? "primary" : "white.main" }}
-                onClick={handleIconClick('heart')} 
-                color="primary"
-              >
-                <FavoriteBorderRoundedIcon />
-              </IconButton>
-
-              <Divider orientation="vertical" flexItem sx={{ color: "elements.main" }} />
-              
-              <IconButton sx={{
-                ...iconButtonStyle,
-                borderColor: selectedIcon === 'bag' ? "primary" : "white.main" }} 
-                onClick={handleIconClick('bag')}
-                color="primary">
-                <LocalMallOutlinedIcon />
-              </IconButton>
-
-            </Box>
-            
+            <NavLink to='/cart' end style={{textDecoration:'none', flexGrow: 1}}> 
+              {({ isActive }) => ( 
+                <IconButton 
+                  disableRipple
+                  edge="end"
+                  aria-label="menu"
+                  sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
+                >
+                  {isActive 
+                    ? <LocalMallIcon />
+                    : <LocalMallOutlinedIcon />
+                  }
+                </IconButton>
+              )}
+            </NavLink>
           </Box>
+          
+        </Box>
     </>
   )
 }
