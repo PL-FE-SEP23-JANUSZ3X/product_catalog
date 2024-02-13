@@ -5,8 +5,11 @@ import phoneRouter from './src/router/phone.router';
 import productRouter from './src/router/products.router';
 import cors from 'cors';
 
+import 'dotenv/config';
+
 const app: Express = express();
 
+const PORT = process.env.PORT || 4000;
 connection();
 
 app.use(errorHandler);
@@ -16,7 +19,7 @@ app.use(cors());
 app.use('/phones', phoneRouter);
 app.use('/products', productRouter);
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log('Server is running on localhost:3000');
 });

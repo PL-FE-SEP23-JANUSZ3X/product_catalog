@@ -1,0 +1,22 @@
+.image-gallery-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  padding: 0.75rem 0;
+}
+
+.image-gallery-thumbnail-image {
+  padding: 5%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+
+.image-gallery-thumbnail {
+  border: 1px solid #e2e6e9;
+}
+
+.image-gallery-thumbnail.active {
+  border: 1px solid #313237;
+}
