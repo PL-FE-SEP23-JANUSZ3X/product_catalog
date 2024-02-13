@@ -1,10 +1,9 @@
 import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Typography } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Phone from './PhoneCard.types';
+import Item from './ItemCard.types';
 
-const PhoneCard = ( phone: Phone ) => {
-  const { images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = phone.phone
-  console.log(screen)
+const ItemCard = ( item: Item ) => {
+  const { images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item.item
   return (
     <Grid>
       <Card sx={{ 
@@ -33,7 +32,7 @@ const PhoneCard = ( phone: Phone ) => {
               <Typography variant='h6' sx={{ color: 'secondary.main', textDecoration: 'line-through'}}>{priceDiscount}</Typography>
             </Box>
             <Divider 
-              sx={{ my: 1, mb: 1.5 }} /> 
+              sx={{ my: 1, mb: 1.5}} /> 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: {xs: 0.5, md: 0.5, lg: 2} }}>
               <Typography sx={{fontSize: 12, color: 'secondary.main', fontWeight: 'bold'}}>Screen</Typography>
               <Typography sx={{fontSize: 12, fontWeight: 'bold'}}>{screen}</Typography>
@@ -69,4 +68,4 @@ const PhoneCard = ( phone: Phone ) => {
   )
 }
 
-export default PhoneCard;
+export default ItemCard;
