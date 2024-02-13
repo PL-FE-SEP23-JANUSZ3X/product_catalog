@@ -6,6 +6,7 @@
   "main": "./src/main.ts",
   "scripts": {
     "start": "ts-node main.ts",
+    "build": "node build/main.ts",
     "dev": "nodemon main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .ts"
