@@ -1,5 +1,15 @@
 import { PaletteMode } from "@mui/material";
 
+const colors = {
+  greenSelected: '#27AE60',
+  whiteSelected: '#F1F2F9',
+  bgLight: '#313237',
+  bgDark: '#905BFF',
+  whiteDefault: '#fff',
+  bgSelectedDark: '#323542',
+  borderSelected: '#E2E6E9',
+  hoverDark: '#A378FF',
+}
 export const customTheme = (mode: PaletteMode) => ({
   palette: {
     mode,
@@ -76,7 +86,7 @@ export const customTheme = (mode: PaletteMode) => ({
           },
           background: {
             default: "#0F1121",
-            paper: "#0F1121",
+            paper: "#161827",
           },
           text: {
             primary: "#F1F2F9",
@@ -183,7 +193,130 @@ export const customTheme = (mode: PaletteMode) => ({
         },
       },
     },
+    mode,
+    ...(mode === "light"
+    ? {
+      MuiButton: {
+        variants: [
+          {
+            props: {
+              variant: 'primary' as const
+            },
+            style: {
+              width: '100%',
+              heigth: '40px',
+              py: '10px',
+              borderRadius: '0',
+              color: colors.whiteDefault,
+              backgroundColor: colors.bgLight,
+              cursor: 'pointer',
+              textTransform: "none" as const,
+              fontSize: '14px' as const,
+              fontWeight: '700' as const,
+              lineHeight: '21px' as const,
+              textAlign: 'center' as const,
+              "&:hover": {
+                color: colors.whiteDefault,
+                backgroundColor: colors.bgLight,
+                boxShadow: '0px 3px 13px 0px #17203166',
+              },
+              "&:active": {
+                color: colors.greenSelected,
+                backgroundColor: colors.whiteDefault,
+                outline: 'solid',
+                outlineWidth: '1px',
+                outlineColor: colors.borderSelected,
+                boxShadow:'none',
+              },
+            },
+          },
+          {
+            props: { variant: 'selected' as const},
+            style: {
+              width: '100%',
+              borderRadius: '0',
+              color: colors.greenSelected,
+              outline: 'solid',
+              outlineWidth: '1px',
+              outlineColor: colors.borderSelected,
+              cursor: 'pointer',
+              textTransform: "none" as const,
+              fontSize: '14px' as const,
+              fontWeight: '700' as const,
+              lineHeight: '21px' as const,
+              textAlign: 'center' as const,
+              "&:hover": {
+                color: colors.whiteDefault,
+                backgroundColor: colors.bgLight,
+                boxShadow: '0px 3px 13px 0px #17203166',
+              },
+              "&:active": {
+                color: colors.whiteDefault,
+                backgroundColor: colors.bgLight,
+              },
+            },
+          },
+        ],
+      },
+    }
+    : {
+      MuiButton: {
+        variants: [
+          {
+            props: {
+              variant: 'primary' as const
+            },
+            style: {
+              width: '100%',
+              heigth: '40px',
+              py: '10px',
+              borderRadius: '0',
+              color: colors.whiteSelected,
+              backgroundColor: colors.bgDark,
+              cursor: 'pointer',
+              textTransform: "none" as const,
+              fontSize: '14px' as const,
+              fontWeight: '700' as const,
+              lineHeight: '21px' as const,
+              textAlign: 'center' as const,
+              "&:hover": {
+                color: colors.whiteSelected,
+                backgroundColor: colors.hoverDark,
+              },
+              "&:active": {
+                color: colors.whiteSelected,
+                backgroundColor: colors.bgSelectedDark,
+              },
+            },
+          },
+          {
+            props: { variant: 'selected' as const},
+            style: {
+              width: '100%',
+              borderRadius: '0',
+              color: colors.whiteSelected,
+              backgroundColor: colors.bgSelectedDark,
+              cursor: 'pointer',
+              textTransform: "none" as const,
+              fontSize: '14px' as const,
+              fontWeight: '700' as const,
+              lineHeight: '21px' as const,
+              textAlign: 'center' as const,
+              "&:hover": {
+                color: colors.whiteSelected,
+                backgroundColor: colors.hoverDark,
+              },
+              "&:active": {
+                color: colors.whiteSelected,
+                backgroundColor: colors.bgDark,
+              },
+            },
+          },
+        ],
+      },
+    })
   },
+
   breakpoints: {
     values: {
       xs: 320, // phone

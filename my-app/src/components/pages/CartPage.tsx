@@ -1,16 +1,22 @@
-import { Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Section from "../section/Section";
-import { Box, Stack } from "@mui/system";
 import { useThemeContext } from "../../theme/ThemeContext";
-import { Button } from "@mui/base";
+import CartItem from "../cartItem/CartItem";
 
 const CartPage = () => {
   const { theme } = useThemeContext();
 
-  const cartContainerStyle = {
+  const containerStyle = {
     display: "flex",
-    flexDirection: "column",
-
+    flexDirection: {xs: "column", md: "row"},
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     [theme.breakpoints.up("sm")]: {
       
     },
@@ -22,39 +28,46 @@ const CartPage = () => {
     },
   }
 
-  const cartTotalStyle = {
-    width: "288px",
-    borderColor: 'secondary.main',
-    borderWidth: '2px',
-    borderStyle: 'solid',
-    [theme.breakpoints.up("sm")]: {
-      width: "592px"
-    },
-    [theme.breakpoints.up("md")]: {
-      width: "368px",
-      marginLeft: "12px"
-    }
+  const totalStyle = {
+    backgroundColor: 'background.paper',
+    width: {xs: "288px", sm: "592px"},
+    height: {xs: "190px", sm: "206px"},
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 0,
+    boxShadow: 0,
+    outline: 1,
+    outlineColor: 'elements.main',
+    p: "24px",
+    marginTop: '32px',
   }
 
   return (
     <Section >
       <Box>
-      <img src='images/icons/arr-up.svg' />
-          <Typography mb="2" variant="caption" sx={{ color: 'secondary.main' }}>
+        <>
+          <Box component='img' mr={0.5}
+            src={theme.palette.mode === 'light'
+              ? 'images/icons/arr-left-light.svg' 
+              : 'images/icons/arr-left-dark.svg'}
+          />
+          <Typography variant="body2" sx={{ color: 'secondary.main', display: 'inline-block', fontWeight: '700' }}>
             Back
           </Typography>
-        <Typography mb="4" variant="h1">Cart</Typography>
-        <Box sx={cartContainerStyle}>
-            <Stack mt="32px" flexDirection="column" spacing="2">
-              <Box width="752px" height="128px" sx={
-                { borderColor: 'secondary.main',
-                borderWidth: '2px',
-                borderStyle: 'solid',}}>1</Box>
+        </>
+        <Typography variant="h1" mb="4" sx={{ mt: {xs: 3, sm: 2}}} >Cart</Typography>
+        <Box sx={containerStyle}>
+            <Stack my="32px" flexDirection="column" spacing="16px" sx={{mr: {md: '32px'}}} >
+              <CartItem />
+              <CartItem />
             </Stack>
-            <Stack sx={cartTotalStyle} flexDirection="column" alignItems="center">
-              <Typography>$2657</Typography>
-              <Typography>Total for 3 items</Typography>
-              <Button>Checkout</Button>
+            <Stack sx={totalStyle} flexDirection="column" alignItems="center">
+              <Typography variant="h2">$2657</Typography>
+              <Typography variant="body1" sx={{ mb: {xs: 2, md: 3}}}>Total for 3 items</Typography>
+              <Divider flexItem sx={{ color: "elements.main", mb: {xs: 2, md: 3} }} />
+              <Button variant={'primary'} sx={{height: '48px'}}>Checkout</Button>
             </Stack>
         </Box>
       </Box>
