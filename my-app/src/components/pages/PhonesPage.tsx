@@ -41,8 +41,8 @@ const PhonesPage = () => {
       const getPhones = async () => {
         try {
           setLoader(true)
-          const response = await fetch(`http://localhost:4000/phones/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}-asc`);
-          const responsePhones = await fetch(`http://localhost:4000/phones`)
+          const response = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}-asc`);
+          const responsePhones = await fetch(`https://phone-catalog-f9j4.onrender.com/phones`)
           const phonesData = await responsePhones.json()
           setPhonesCount(phonesData.length)
           if (!response.ok) {
@@ -87,49 +87,40 @@ const PhonesPage = () => {
             <Typography variant="caption" sx={{ color: 'secondary.main' }}>
               SortBy
             </Typography>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Age"
-                value={sortType}
-                onChange={(event) => handleChange(event, 'sort')}
-                sx={{mt: 1}}
-              >
-                <MenuItem value={'newest'}>
-                  Newest
-                </MenuItem>
-                <MenuItem value={'oldest'}>
-                  Oldest
-                </MenuItem>
-                <MenuItem value={'alphabeticaz'}>
-                  Alphabetic (a-z)
-                </MenuItem>
-                <MenuItem value={'alphabeticza'}>
-                  Alphabetic (z-a)
-                </MenuItem>
-                <MenuItem value={'cheapest'}>
-                  Cheapest
-                </MenuItem>
-                <MenuItem value={'price'}>
-                  Expensive
-                </MenuItem>
-              </Select>
+            <Select
+              native
+              value={sortType}
+              onChange={(event) => handleChange(event, 'sort')}
+              inputProps={{
+                id: 'demo-simple-select-native',
+              }}
+              sx={{ mt: 1 }}
+            >
+              <option value={'newest'}>Newest</option>
+              <option value={'oldest'}>Oldest</option>
+              <option value={'alphabeticaz'}>Alphabetic (a-z)</option>
+              <option value={'alphabeticza'}>Alphabetic (z-a)</option>
+              <option value={'cheapest'}>Cheapest</option>
+              <option value={'expensive'}>Expensive</option>
+            </Select>
           </Box>
           <Box sx={{ display: 'grid', width: 128}}>
             <Typography variant="caption" sx={{ color: 'secondary.main' }}>
               Items on page
             </Typography>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              native
               label="Age"
-              sx={{mt: 1}}
               value={itemsPerPage}
               onChange={(event) => handleChange(event, 'items')}
-              >
-              <MenuItem value={16}>16</MenuItem>
-              <MenuItem value={32}>32</MenuItem>
-              <MenuItem value={64}>64</MenuItem>
+              inputProps={{
+                id: 'demo-simple-select-native',
+              }}
+              sx={{ mt: 1 }}
+            >
+              <option value={16}>16</option>
+              <option value={32}>32</option>
+              <option value={64}>64</option>
             </Select>
           </Box>
         </Box>
