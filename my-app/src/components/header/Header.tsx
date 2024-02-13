@@ -34,6 +34,7 @@ const navLinkStyle = {
   '&:hover': {
     color: 'primary.main',
   },
+  py: {sm: '17px', md: '20px'}
 };
 
 const navLinkActiveStyle = {
@@ -44,7 +45,7 @@ const navLinkActiveStyle = {
   borderBottomStyle: 'solid',
   cursor:"pointer",
   outline: "none",
-  paddingBottom: '14px'
+  py: {sm: '17px', md: '26px'}
 };
 
 const iconLinkStyle = {

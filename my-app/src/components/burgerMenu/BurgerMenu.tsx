@@ -59,8 +59,11 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
   const navLinkStyle = {
     textDecoration: 'none',
     color: 'secondary.main',
-    borderBottom: '2px solid transparent',
+    borderBottomWidth: '2px',
+    borderBottomColor: 'transparent',
+    borderBottomStyle: 'solid',
     outline: "none",
+    paddingBottom: '5px',
     '&:hover': {
       color: 'primary.main',
     },
@@ -69,7 +72,9 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
   const navLinkActiveStyle = {
     textDecoration: 'none',
     color: 'primary.main',
-    borderBottom: '2px solid primary.main',
+    borderBottomWidth: '2px',
+    borderBottomColor: 'primary.main',
+    borderBottomStyle: 'solid',
     cursor:"pointer",
     outline: "none",
     paddingBottom: '5px'
@@ -86,8 +91,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                   <Link 
                     component='div'
                     variant='link'
-                    width="fit-content"         
-                    borderBottom="2px solid"
+                    width="fit-content"
                     textAlign="center"
                     underline="none"
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -103,8 +107,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                   <Link 
                     component='div'
                     variant='link'
-                    width="fit-content"         
-                    borderBottom="2px solid"
+                    width="fit-content"
                     textAlign="center"
                     underline="none"
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
