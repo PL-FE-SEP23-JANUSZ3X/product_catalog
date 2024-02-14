@@ -34,6 +34,7 @@ const navLinkStyle = {
   '&:hover': {
     color: 'primary.main',
   },
+  py: {sm: '17px', md: '20px'}
 };
 
 const navLinkActiveStyle = {
@@ -44,7 +45,7 @@ const navLinkActiveStyle = {
   borderBottomStyle: 'solid',
   cursor:"pointer",
   outline: "none",
-  paddingBottom: '14px'
+  py: {sm: '17px', md: '26px'}
 };
 
 const iconLinkStyle = {
@@ -131,6 +132,7 @@ const Header = () => {
               <NavLink to='/' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -142,6 +144,7 @@ const Header = () => {
               <NavLink to='/phones' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -153,6 +156,7 @@ const Header = () => {
               <NavLink to='/tablets' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -164,6 +168,7 @@ const Header = () => {
               <NavLink to='/accessories' end style={{textDecoration:'none'}}> 
                 {({ isActive }) => ( 
                   <Link 
+                    component='div'
                     variant='link'
                     mr={5}
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
@@ -178,6 +183,7 @@ const Header = () => {
             <Box display="flex" justifyContent="flex-end">
               <Divider orientation='vertical' flexItem/>
               <IconButton
+                component='div'
                 disableRipple 
                 edge="end"
                 aria-label="menu"
@@ -187,6 +193,7 @@ const Header = () => {
               </IconButton>
               <Divider orientation='vertical' flexItem/>
               <IconButton
+                component='div'
                 size="large"
                 edge="end"
                 aria-label="menu"

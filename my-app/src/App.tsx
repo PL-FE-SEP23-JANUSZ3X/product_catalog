@@ -12,6 +12,7 @@ import AccessoryPage from './components/pages/AccessoryPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import FavouritesPage from './components/pages/FavouritesPage';
 import CartPage from './components/pages/CartPage';
+import './style.css';
 
 function App() {
   const { theme } = useThemeContext();
