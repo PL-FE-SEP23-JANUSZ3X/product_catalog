@@ -95,7 +95,7 @@ export const customTheme = (mode: PaletteMode) => ({
         }),
   },
   typography: {
-    fontFamily: ["Montserrat", "Helvetica", "Arial", "sans-serif"].join(","),
+    fontFamily: ["Mont", "sans-serif"].join(","),
     h1: {
       fontWeight: 800,
       fontSize: "48px",
