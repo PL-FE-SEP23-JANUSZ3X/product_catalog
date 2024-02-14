@@ -9,14 +9,36 @@ import ImageGallery from 'react-image-gallery';
 import { useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePageStyle.css';
+import { useEffect, useState } from 'react';
+import { getPhone } from '../../../utils/fetchHelper';
+import { Phone } from '../../../types';
 
 export const PhonePage = () => {
+  const [phoneData, setPhoneData] = useState<Phone | null>(null);
+  const [error, setError] = useState(null);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // getting phoneId from url
   const { phoneId } = useParams();
-  console.log(phoneId);
+
+  useEffect(() => {
+    const fetchPhoneData = async () => {
+      if (typeof phoneId === 'string') {
+        try {
+          const data = await getPhone(phoneId);
+          setPhoneData(data);
+        } catch (error) {
+          console.error('Failed to fetch phone data:', error);
+        }
+      } else {
+        console.error('phoneId is undefined');
+      }
+    };
+
+    fetchPhoneData();
+  }, [phoneId]);
 
   // images placeholders
   const images = [
@@ -46,11 +68,18 @@ export const PhonePage = () => {
     },
   ];
 
+  console.log(phoneData);
+
   return (
     <Container>
       <Typography variant="h1" color="text.primary" mb="32px">
-        One Phone Page
+        phoneData:
       </Typography>
+
+      <Typography>Name: {phoneData?.name}</Typography>
+      <Typography>Color: {phoneData?.color}</Typography>
+      <Typography>Capacity: {phoneData?.capacity}</Typography>
+
       <Box>
         <ImageGallery
           items={images}
