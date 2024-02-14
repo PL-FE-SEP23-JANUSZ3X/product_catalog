@@ -8,6 +8,7 @@ phoneRouter.get(
   '/pagination/:sortType-:start-:limit-:order',
   phoneController.getSortedPhones,
 );
+phoneRouter.get('/:id', phoneController.getOne);
 phoneRouter.get('/:phoneId', phoneController.getById);
 
 export default phoneRouter;
