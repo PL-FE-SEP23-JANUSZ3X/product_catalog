@@ -18,19 +18,6 @@ const getAll: ControllerAction = async (req, res) => {
   }
 };
 
-const getOne: ControllerAction = async (req, res) => {
-  try {
-    const allPhones = await phoneService.getAllPhones();
-
-    const { id } = req.params;
-
-    res.send(allPhones[+id]);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('Internal Server Error');
-  }
-};
-
 const getById: ControllerAction = async (req, res) => {
   try {
     const allPhones = await phoneService.getAllPhones();
@@ -112,6 +99,6 @@ const getSortedPhones: ControllerAction = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-const phoneController = { getAll, getOne, getSortedPhones, getById };
+const phoneController = { getAll, getSortedPhones, getById };
 
 export default phoneController;
