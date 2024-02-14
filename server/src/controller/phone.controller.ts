@@ -20,11 +20,13 @@ const getAll: ControllerAction = async (req, res) => {
 
 const getById: ControllerAction = async (req, res) => {
   try {
-    const allPhones = await phoneService.getAllPhones();
-
     const { phoneId } = req.params;
+    const phone = await phoneService.getPhoneById(phoneId);
 
-    const phone = allPhones.find((phone) => phone.id === phoneId);
+    if (!phone) {
+      res.status(404).send('Not Found: The specified entity does not exist');
+      return;
+    }
 
     res.send(phone);
   } catch (error) {
