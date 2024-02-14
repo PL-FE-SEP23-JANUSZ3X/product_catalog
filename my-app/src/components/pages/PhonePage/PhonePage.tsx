@@ -12,10 +12,12 @@ import './PhonePageStyle.css';
 import { useEffect, useState } from 'react';
 import { getPhone } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
+import { ErrorMessage } from '../../../types/ErrorMessages';
 
 export const PhonePage = () => {
   const [phoneData, setPhoneData] = useState<Phone | null>(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -26,11 +28,15 @@ export const PhonePage = () => {
   useEffect(() => {
     const fetchPhoneData = async () => {
       if (typeof phoneId === 'string') {
+        setError(null);
+        setIsLoading(true);
         try {
           const data = await getPhone(phoneId);
           setPhoneData(data);
         } catch (error) {
-          console.error('Failed to fetch phone data:', error);
+          setError(ErrorMessage.LOAD);
+        } finally {
+          setIsLoading(false);
         }
       } else {
         console.error('phoneId is undefined');
@@ -68,10 +74,18 @@ export const PhonePage = () => {
     },
   ];
 
-  console.log(phoneData);
+  if (error !== null) {
+    return (
+      <>
+        <Typography>{error}</Typography>
+      </>
+    );
+  }
 
   return (
     <Container>
+      {isLoading && <h2>Loading...</h2>}
+
       <Typography variant="h1" color="text.primary" mb="32px">
         phoneData:
       </Typography>
