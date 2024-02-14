@@ -1,8 +1,7 @@
 import axios from 'axios';
-// import 'dotenv/config';
+import 'dotenv/config';
 
-// const BASE_URL = process.env.API;
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = process.env.API;
 
 export const getPhones = async () => {
   const response = await axios.get(`${BASE_URL}/phones`);
