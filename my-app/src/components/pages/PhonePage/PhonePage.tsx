@@ -6,12 +6,17 @@ import {
   useTheme,
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
+import { useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePageStyle.css';
 
 export const PhonePage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // getting phoneId from url
+  const { phoneId } = useParams();
+  console.log(phoneId);
 
   // images placeholders
   const images = [
