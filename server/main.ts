@@ -21,5 +21,5 @@ app.use('/products', productRouter);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('Server is running on localhost:3000');
+  console.log(`Server is running on localhost:${PORT}`);
 });
