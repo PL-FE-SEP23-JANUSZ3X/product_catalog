@@ -1,5 +1,4 @@
 import { Container, SxProps, Typography, useMediaQuery } from "@mui/material";
-import '../../App.css'
 import Slider from '../slider/Slider'
 
 export type CopyrightProps = {
