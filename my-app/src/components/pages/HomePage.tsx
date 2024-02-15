@@ -25,7 +25,7 @@ const HomePage = () => {
   const images = isMobile ? MOBILE_BANNER_IMAGES : BANNER_IMAGES;
 
   return (
-    <Container sx={{padding: 0}}>
+    <Container sx={{padding: 0, width: { xs: '320px', sm: '635px', md: '1200px'} }}>
       <Typography variant="h1" sx={
         {
           my: { xs: '32px', md: '52px' },
