@@ -40,7 +40,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.JSON
+        type: Sequelize.ARRAY()
       },
       screen: {
         type: Sequelize.STRING
