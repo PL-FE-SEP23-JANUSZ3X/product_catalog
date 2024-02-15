@@ -1,9 +1,13 @@
 import Phone from '../model/phone.model';
 
-const getAllPhones= async() => {
-    return Phone.findAll();
+const getAllPhones = async () => {
+  return Phone.findAll();
 };
 
-const phoneService = {getAllPhones};
+const getPhoneById = async (phoneId: string) => {
+  return Phone.findByPk(phoneId);
+};
+
+const phoneService = { getAllPhones, getPhoneById };
 
 export default phoneService;

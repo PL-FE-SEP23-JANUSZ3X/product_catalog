@@ -6,12 +6,45 @@ import {
   useTheme,
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
+import { useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePageStyle.css';
+import { useEffect, useState } from 'react';
+import { getPhone } from '../../../utils/fetchHelper';
+import { Phone } from '../../../types';
+import { ErrorMessage } from '../../../types/ErrorMessages';
 
 export const PhonePage = () => {
+  const [phoneData, setPhoneData] = useState<Phone | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // getting phoneId from url
+  const { phoneId } = useParams();
+
+  useEffect(() => {
+    const fetchPhoneData = async () => {
+      if (typeof phoneId === 'string') {
+        setError(null);
+        setIsLoading(true);
+        try {
+          const data = await getPhone(phoneId);
+          setPhoneData(data);
+        } catch (error) {
+          setError(ErrorMessage.LOAD);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        console.error('phoneId is undefined');
+      }
+    };
+
+    fetchPhoneData();
+  }, [phoneId]);
 
   // images placeholders
   const images = [
@@ -41,11 +74,26 @@ export const PhonePage = () => {
     },
   ];
 
+  if (error !== null) {
+    return (
+      <>
+        <Typography>{error}</Typography>
+      </>
+    );
+  }
+
   return (
     <Container>
+      {isLoading && <h2>Loading...</h2>}
+
       <Typography variant="h1" color="text.primary" mb="32px">
-        One Phone Page
+        phoneData:
       </Typography>
+
+      <Typography>Name: {phoneData?.name}</Typography>
+      <Typography>Color: {phoneData?.color}</Typography>
+      <Typography>Capacity: {phoneData?.capacity}</Typography>
+
       <Box>
         <ImageGallery
           items={images}
