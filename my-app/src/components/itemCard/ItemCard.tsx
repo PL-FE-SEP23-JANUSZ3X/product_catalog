@@ -10,8 +10,8 @@ const ItemCard = ( item: Item ) => {
     addToOrder,
   } = useOrderContext()
 
-  const handleAddToOrder = (id: string) => () => addToOrder(id);
-  
+  const handleAddToOrder = (id: string, priceRegular: number) => () => addToOrder(id, priceRegular);
+
   return (
     <Grid>
       <Card sx={{ 
@@ -66,7 +66,7 @@ const ItemCard = ( item: Item ) => {
                   fontWeight: 500,
                   textTransform: 'capitalize',
                 }}
-                onClick={handleAddToOrder(id)}
+                onClick={handleAddToOrder(id, priceRegular)}
               >
                 Add to Card
               </Button>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import 'dotenv/config';
 
-const BASE_URL = process.env.API;
+const BASE_URL = process.env.REACT_APP_API;
 
 export const getPhones = async () => {
   const response = await axios.get(`${BASE_URL}/phones`);
@@ -9,6 +9,6 @@ export const getPhones = async () => {
 };
 
 export const getPhone = async (phoneId: string) => {
-  const response = await axios.get(`${BASE_URL}/phones/${phoneId}`);
+  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/phones/${phoneId}`);
   return response.data;
 };

@@ -1,4 +1,4 @@
-import { FC, ReactNode, createContext, useContext } from "react";
+import { FC, ReactNode, createContext, useContext, useEffect, useState } from "react";
 import useLocalStorage from "../utils/useLocalStorage";
 import { useSnackContext } from "./useSnackContext";
 import { OrderProductType } from "../types/OrderProductType";
@@ -9,7 +9,8 @@ type Props = {
 
 type OrderProviderType = {
   order: OrderProductType[];
-  addToOrder: (id: string) => void;
+  total: number;
+  addToOrder: (id: string, price: number) => void;
   removeFromOrder: (id: string) => void;
   increaseCount: (id: string) => void;
   decreaseCount: (id: string) => void;
@@ -17,6 +18,7 @@ type OrderProviderType = {
 
 const OrderContext = createContext<OrderProviderType>({
   order: [],
+  total: 0,
   addToOrder: () => [],
   removeFromOrder: () => [],
   increaseCount: () => [],
@@ -25,19 +27,29 @@ const OrderContext = createContext<OrderProviderType>({
 
 export const OrderProvider: FC<Props> = ({ children }: Props) => {
   const [order, setOrder] = useLocalStorage('order', []);
+  const [total, setTotal] = useState<number>(0)
 
   const { setSnack } = useSnackContext();
 
-  const addToOrder = (id: string) => {
+  useEffect(() => {
+    let result = 0;
+    order.forEach((product: OrderProductType) => {
+      result += product.price * product.count;
+    });
+    setTotal(result);
+  }, [order])
+
+  const addToOrder = (id: string, price: number) => {
+    console.log(id, price)
     const found:OrderProductType = order.find((product: OrderProductType) => {
       return product.id === id;
     });
-    if (typeof found !== undefined) {
+    if (found !== undefined) {
       // const newCount = found.count + orderItem.count;
       const newCount = found.count + 1;
       setOrder(
         order.map((product: OrderProductType) =>
-        product.id !== id ? product : { ...product, count: newCount }
+        product.id !== id ? product : { ...product, count: newCount, price }
         )
       );
       setSnack({
@@ -53,6 +65,7 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
           id,
           // count: orderItem.count,
           count: 1,
+          price,
         },
       ]);
       setSnack({
@@ -114,6 +127,7 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
 
   const value = {
     order,
+    total,
     addToOrder,
     removeFromOrder,
     increaseCount,

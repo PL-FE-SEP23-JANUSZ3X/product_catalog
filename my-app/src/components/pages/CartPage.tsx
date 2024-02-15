@@ -10,43 +10,32 @@ import { useThemeContext } from "../../theme/ThemeContext";
 import { useOrderContext } from "../../context/useOrderContext";
 import CartItem from "../cartItem/CartItem";
 
+const containerStyle = {
+  display: "flex",
+  flexDirection: {xs: "column", md: "row"},
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+}
+
+const totalStyle = {
+  backgroundColor: 'background.paper',
+  width: {xs: "288px", sm: "592px"},
+  height: {xs: "190px", sm: "206px"},
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  borderRadius: 0,
+  boxShadow: 0,
+  outline: 1,
+  outlineColor: 'elements.main',
+  p: "24px",
+  marginTop: '32px',
+}
+
 const CartPage = () => {
   const { theme } = useThemeContext();
-  const {
-    order
-  } = useOrderContext()
-
-  const containerStyle = {
-    display: "flex",
-    flexDirection: {xs: "column", md: "row"},
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    [theme.breakpoints.up("sm")]: {
-      
-    },
-    [theme.breakpoints.up("md")]: {
-      flexDirection: "row",
-    },
-    [theme.breakpoints.up("lg")]: {
-
-    },
-  }
-
-  const totalStyle = {
-    backgroundColor: 'background.paper',
-    width: {xs: "288px", sm: "592px"},
-    height: {xs: "190px", sm: "206px"},
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: 0,
-    boxShadow: 0,
-    outline: 1,
-    outlineColor: 'elements.main',
-    p: "24px",
-    marginTop: '32px',
-  }
+  const { order, total} = useOrderContext()
 
   return (
     <Section >
@@ -68,12 +57,19 @@ const CartPage = () => {
             <Box sx={containerStyle}>
               <Stack my="32px" flexDirection="column" spacing="16px" sx={{mr: {md: '32px'}}} >
                 {order.length > 0 && order.map((product) => (
-                  <CartItem key={product.id} orderProductId={product.id} orderCount={product.count} />
+                  <CartItem
+                    key={product.id}
+                    orderProductId={product.id}
+                    orderCount={product.count}
+                    orderPrice={+product.price}
+                  />
                 ))}
               </Stack>
               <Stack sx={totalStyle} flexDirection="column" alignItems="center">
-                <Typography variant="h2">$2657</Typography>
-                <Typography variant="body1" sx={{ mb: {xs: 2, md: 3}}}>Total for 3 items</Typography>
+                <Typography variant="h2">{total}</Typography>
+                <Typography variant="body1" sx={{ mb: {xs: 2, md: 3}}}>
+                    {`Total for ${order.length} items`}
+                </Typography>
                 <Divider flexItem sx={{ color: "elements.main", mb: {xs: 2, md: 3} }} />
                 <Button variant={'primary'} sx={{height: '48px'}}>Checkout</Button>
               </Stack>

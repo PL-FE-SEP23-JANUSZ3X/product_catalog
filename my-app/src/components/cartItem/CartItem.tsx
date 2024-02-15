@@ -9,7 +9,7 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useOrderContext } from "../../context/useOrderContext";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Product } from "../../types/Product";
 import { ErrorMessage } from "../../types/ErrorMessages";
 import { getPhone } from "../../utils/fetchHelper";
@@ -58,19 +58,18 @@ const iconButtonStyle = {
   outlineColor: 'icons.main',
   borderRadius: 0,
   border: 0,
-}
-
-const disablediconButtonStyle = {
-  color: 'elements.main',
-  outlineColor: 'elements.main',
+  '&:hover': {
+    outlineColor: 'primary.main',
+  }
 }
 
 type Props = {
   orderProductId: string,
-  orderCount: number
+  orderCount: number,
+  orderPrice: number,
 }
 
-const CartItem = ({ orderProductId, orderCount }: Props) => {
+const CartItem = ({ orderProductId, orderCount, orderPrice }: Props) => {
   const {
     removeFromOrder,
     increaseCount,
@@ -104,7 +103,15 @@ const CartItem = ({ orderProductId, orderCount }: Props) => {
 
   const handleRemove = (id: string) => () => removeFromOrder(id);
   const handleIncr = (id: string) => () => increaseCount(id);
-  const handleDecr = (id: string) => () => decreaseCount(id);
+  const handleDecr = (id: string) => () => {
+    if (orderCount === 1) {
+      removeFromOrder(id);
+    }
+
+    decreaseCount(id);
+  }
+
+  const totalPrice = useMemo(() => orderCount * orderPrice, [orderCount, orderPrice]);
 
   if (error !== null) {
     return (
@@ -115,7 +122,13 @@ const CartItem = ({ orderProductId, orderCount }: Props) => {
   }
 
   if (isLoading) {
-    return <Skeleton variant="rounded" width={210} height={60} />
+    return (
+      <Skeleton
+        variant="rounded"
+        sx={{width: {xs: "288px", sm: "592px", md: "752px"},
+          height: {xs: "160px", sm: "128px"}}}
+      />
+    )
   }
 
   return (
@@ -136,11 +149,12 @@ const CartItem = ({ orderProductId, orderCount }: Props) => {
             
             <CardMedia
               component="img"
-              sx={{
-                width: 66,
-                height: 66,
-              }}
               image={product.images[0]}
+              style={{
+                objectFit:'contain',
+                height: "66px",
+                width: "66px"
+              }}
             />
             <Box
               sx={{
@@ -166,7 +180,8 @@ const CartItem = ({ orderProductId, orderCount }: Props) => {
             sx={countContainerStyle}
           >
             <IconButton
-              sx={[iconButtonStyle, disablediconButtonStyle]}
+              sx={iconButtonStyle}
+              disabled={orderCount === 0}
               onClick={handleDecr(product.id)}
             >
               <RemoveIcon />
@@ -198,7 +213,7 @@ const CartItem = ({ orderProductId, orderCount }: Props) => {
                 color: 'primary.main',
             }}
             >
-              {product.priceRegular}
+              {totalPrice}
             </Typography>
           </Box>
         </Box>

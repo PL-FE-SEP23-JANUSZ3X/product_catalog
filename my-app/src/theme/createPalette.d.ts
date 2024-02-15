@@ -52,6 +52,8 @@ declare module "@mui/material/styles" {
     divider: TypeDivider;
     action: TypeAction;
     background: TypeBackground;
+    badge: PaletteColor;
+    badgeBorder: PaletteColor;
   }
   
   export interface PaletteOptions {
