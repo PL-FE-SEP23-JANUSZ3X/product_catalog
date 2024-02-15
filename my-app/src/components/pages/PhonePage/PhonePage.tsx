@@ -49,7 +49,6 @@ export const PhonePage = () => {
 
     fetchPhoneData();
   }, [phoneId]);
-  // images placeholders
   const images = [
     {
       original:
