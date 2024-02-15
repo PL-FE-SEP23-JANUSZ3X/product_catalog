@@ -1,6 +1,6 @@
 import { Container, SxProps, Typography, useMediaQuery } from "@mui/material";
-import '../../App.css'
 import Slider from '../slider/Slider'
+import { useThemeContext } from "../../theme/ThemeContext";
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -19,8 +19,9 @@ const MOBILE_BANNER_IMAGES = [
 ]
 
 const HomePage = () => {
+  const { theme } = useThemeContext();
 
-  const isMobile = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const images = isMobile ? MOBILE_BANNER_IMAGES : BANNER_IMAGES;
 

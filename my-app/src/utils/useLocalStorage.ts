@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { OrderProductType } from "../types/OrderProductType";
 
-export const useLocalStorage = (key:string, defaultValue:string) => {
+
+export const useLocalStorage = (key: string, defaultValue: OrderProductType[]) => {
   const [value, setValue] = useState(() => {
     const saved = localStorage.getItem(key);
     if (saved !== null) {

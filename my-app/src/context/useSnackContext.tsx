@@ -28,7 +28,7 @@ export const SnackbarProvider = ({ children }: Props) => {
     autoHideDuration: 0,
   });
 
-  const handleClose = (event: any, reason: string) => {
+  const handleClose = (event: Event | React.SyntheticEvent<Event>, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
