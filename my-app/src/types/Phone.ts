@@ -6,7 +6,7 @@ type DescriptionItem = {
 export type Phone = {
   camera: string;
   capacity: string;
-  capacityAvailable: '{64GB,128GB,256GB}';
+  capacityAvailable: string[];
   cell: string[];
   color: string;
   colorsAvailable: string[];
