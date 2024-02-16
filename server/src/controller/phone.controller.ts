@@ -107,6 +107,19 @@ const getSortedPhones: ControllerAction = async (req, res) => {
           return 0;
         });
         break;
+      case SortType.HOTPRICES:
+        sortedPhones = allPhones.sort((a, b) => {
+          let discountA = 0;
+          let discountB = 0;
+          if (a.priceDiscount && a.priceRegular) {
+            discountA = +a.priceRegular - +a.priceDiscount;
+          }
+          if (b.priceDiscount && b.priceRegular) {
+            discountB = +b.priceRegular - +b.priceDiscount;
+          }
+          return discountB - discountA;
+        });
+        break;
       default:
         sortedPhones = allPhones;
         break;
