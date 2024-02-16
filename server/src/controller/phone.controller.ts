@@ -40,7 +40,7 @@ const getRecommended: ControllerAction = async (req, res) => {
     const { phoneId } = req.params;
     const recommended = await phoneService.getRecommendedById(phoneId);
 
-    if (!recommended) {
+    if (!recommended.length) {
       res.status(404).send('Not Found: The specified entity does not exist');
       return;
     }
