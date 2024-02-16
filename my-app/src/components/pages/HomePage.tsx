@@ -23,7 +23,6 @@ const HomePage = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-
   const images = isMobile ? MOBILE_BANNER_IMAGES : BANNER_IMAGES;
 
   return (
