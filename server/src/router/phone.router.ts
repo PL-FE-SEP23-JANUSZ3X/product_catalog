@@ -9,5 +9,6 @@ phoneRouter.get(
   phoneController.getSortedPhones,
 );
 phoneRouter.get('/:phoneId', phoneController.getById);
+phoneRouter.get('/:phoneId/recommended', phoneController.getRecommended);
 
 export default phoneRouter;
