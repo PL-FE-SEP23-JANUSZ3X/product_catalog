@@ -83,7 +83,7 @@ declare module "@mui/material/styles" {
       upper?: React.CSSProperties;
     }
 
-   type EmptyObject = { [key: string]: any };
+   type EmptyObject = { [key: string] };
   
     export type OverridesStyleRules<
       ClassKey extends string = string,
