@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING(1024)
       },
       images: {
-        type: Sequelize.STRING(1024)
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       description: {
         type: Sequelize.JSON

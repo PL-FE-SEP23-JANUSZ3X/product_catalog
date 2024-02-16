@@ -78,6 +78,9 @@ type Props = {
           
         </Box>
           </Box>
+          <Typography sx={{color:"secondary.main", visibility:{xs:"visible", md:"hidden"}}}>
+                ID: 802390
+          </Typography>
         </Box>
   
        
@@ -92,20 +95,22 @@ type Props = {
 
         <Box sx={{ display: "flex", gap: "10px" }}>
         {phoneData?.capacityAvailable.map((capacity) => (
-          <Button
-            variant="contained"
-            sx={{
-              minWidth: "auto",
-              height: 32,
-              boxShadow: 0,
-              borderRadius: 0,
-              fontSize: 14,
-              fontWeight: 500,
-              p: 1,
-            }}
-          >
-            {capacity}
-          </Button>
+          <Link to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}>
+            <Button
+              variant="contained"
+              sx={{
+                minWidth: "auto",
+                height: 32,
+                boxShadow: 0,
+                borderRadius: 0,
+                fontSize: 14,
+                fontWeight: 500,
+                p: 1,
+              }}
+            >
+              {capacity}
+            </Button>
+          </Link>
          ))}
         </Box>
 
