@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  Button,
   Typography,
   useMediaQuery,
   useTheme,
@@ -16,7 +15,7 @@ import { getPhone } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
 import { ErrorMessage } from '../../../types/ErrorMessages';
 import Section from '../../section/Section';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ProductVariantsActions from '../../productVariantsActions/ProductVariantsActions';
 
 export const PhonePage = () => {
 
@@ -43,7 +42,7 @@ export const PhonePage = () => {
           setIsLoading(false);
         }
       } else {
-        console.error('phoneId is undefined');
+        console.error('Id is undefined');
       }
     };
 
@@ -52,27 +51,33 @@ export const PhonePage = () => {
   const images = [
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/00.webp',
+        `${phoneData?.images[0]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/00.webp',
+        `${phoneData?.images[0]}`,
     },
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/02.webp',
+        `${phoneData?.images[1]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/02.webp',
+        `${phoneData?.images[1]}`,
     },
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/03.webp',
+        `${phoneData?.images[2]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/03.webp',
+        `${phoneData?.images[2]}`,
     },
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/04.webp',
+        `${phoneData?.images[3]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/04.webp',
+        `${phoneData?.images[3]}`,
+    },
+    {
+      original:
+        `${phoneData?.images[4]}`,
+      thumbnail:
+        `${phoneData?.images[4]}`,
     },
   ];
 
@@ -89,13 +94,12 @@ export const PhonePage = () => {
     <Section>
       <Container>
         {isLoading && <h2>Loading...</h2>}
-        <Typography>Name: {phoneData?.name}</Typography>
-        <img src='/images/icons/arr-right.svg' />
+        <img src='/images/icons/arr-left-light.svg' />
         <Typography mb="2" variant="caption" sx={{ color: 'secondary.main', mt:{xs:"24px", md:"40px"}}}>
             Back
         </Typography>
         <Typography variant="h2" color="text.primary">
-          Apple iPhone 11 Pro Max 64GB Gold (iMT9G2FS/A)
+          {phoneData?.name}
         </Typography>
         <Box sx={{
           display:"flex",
@@ -121,57 +125,8 @@ export const PhonePage = () => {
               width:{xs:"288px", md:"320px"},
               display:"flex",
               justifyContent:"space-between"}}>
-              <Typography>
-                Available colors
-              </Typography>
-              <Divider/>
             </Box>
-            <Box>
-              <Typography>
-                  Select capacity
-              </Typography>
-            </Box>
-            <Divider/>
-            <Box>
-              <Typography>
-                $799 1199
-              </Typography>
-            </Box>
-            <Box>
-              <Button variant="contained" sx={{
-                width: {xs: "176px", md: "117px", lg: "160px"},
-                height: 40,
-                boxShadow: 0,
-                borderRadius: 0,
-                fontSize: 14,
-                fontWeight: 500,
-                textTransform: 'capitalize',
-                }}
-              >
-                Add to Card
-              </Button>
-              <Button variant="outlined" sx={{minWidth: 40, height: 40, borderRadius: 0, p: 0, borderColor: 'icons.main'}}>
-                <FavoriteBorderIcon sx={{width: 20, height: 20, color: 'primary.main'}} />
-              </Button>
-            </Box>
-            <Box sx={{width:"320px"}}>
-              <Box>
-                <Typography>Screen</Typography>
-                <Typography>6.5” OLED</Typography>
-              </Box>
-              <Box>
-                <Typography>Resolution</Typography>
-                <Typography>2688x1242</Typography>
-              </Box>
-              <Box>
-                <Typography>Processor</Typography>
-                <Typography>Apple A12 Bionic</Typography>
-              </Box>
-              <Box>
-                <Typography>RAM</Typography>
-                <Typography>3 GB</Typography>
-              </Box>
-            </Box>
+            <ProductVariantsActions phoneData={phoneData}/>
           </Box>
           <Typography>
                 ID: 802390

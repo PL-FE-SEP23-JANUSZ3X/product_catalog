@@ -19,6 +19,7 @@ const MOBILE_BANNER_IMAGES = [
 
 const HomePage = () => {
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isMobile = useMediaQuery((theme: any)  => theme.breakpoints.down('sm'));
 
   const images = isMobile ? MOBILE_BANNER_IMAGES : BANNER_IMAGES;

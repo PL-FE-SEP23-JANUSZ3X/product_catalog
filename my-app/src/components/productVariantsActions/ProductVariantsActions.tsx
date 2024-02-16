@@ -9,24 +9,14 @@ import {
 import CircleIcon from "@mui/icons-material/Circle";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from "react-router-dom";
+import { FC } from "react";
+import { Phone } from '../../types/Phone';
 
-const item = {
-  "id": "apple-iphone-11-128gb-black",
-  "namespaceId": "apple-iphone-11",
-  "name": "Apple iPhone 11 128GB Black",
-  "capacityAvailable": ["64GB", "128GB", "256GB"],
-  "capacity": "128GB",
-  "priceRegular": 1100,
-  "priceDiscount": 1050,
-  "colorsAvailable": ["black", "green", "yellow", "white", "purple", "red"],
-  "color": "black",
-  "screen": "6.1' IPS",
-  "resolution": "1792x828",
-  "processor": "Apple A13 Bionic",
-  "ram": "4GB",
+type Props = {
+  phoneData: Phone | null
 }
 
-  const ProductVariantsActions = () => {
+  const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
     return (
       <Box
         sx={{
@@ -61,8 +51,8 @@ const item = {
               justifyContent: "space-between",
             }}
         >
-          {item?.colorsAvailable.map((color) => (
-          <Link to={`/phones/${item?.namespaceId}-${item?.capacity}-${color}`}>
+          {phoneData?.colorsAvailable.map((color) => (
+          <Link to={`/phones/${phoneData?.namespaceId}-${phoneData?.capacity.toLowerCase()}-${color}`}>
             <IconButton
             sx={{
               color: color,
@@ -88,8 +78,6 @@ const item = {
           
         </Box>
           </Box>
-          
-          <Typography variant="body2" sx={{ fontWeight: 700, color: "icons.main" }}>ID: 802390</Typography>
         </Box>
   
        
@@ -103,7 +91,7 @@ const item = {
          
 
         <Box sx={{ display: "flex", gap: "10px" }}>
-        {item?.capacityAvailable.map((capacity) => (
+        {phoneData?.capacityAvailable.map((capacity) => (
           <Button
             variant="contained"
             sx={{
@@ -132,7 +120,7 @@ const item = {
             color: "primary.main",
             letterSpacing: "-1%",
             }}>
-            ${item.priceDiscount}
+            ${phoneData?.priceDiscount}
         </Typography>
         <Typography sx={{
             fontWeight: 500,
@@ -142,7 +130,7 @@ const item = {
             textDecoration: "line-through",
             alignSelf: "center",
         }}>
-            ${item.priceRegular}
+            ${phoneData?.priceRegular}
         </Typography>
         </Box>
         
@@ -191,7 +179,7 @@ const item = {
           }}>Screen</Typography> 
           <Typography variant="body2" sx={{
             color: "primary.main",
-          }}>{item?.screen}</Typography>  
+          }}>{phoneData?.screen}</Typography>  
         </Box>
         <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
           <Typography variant="body2" sx={{
@@ -199,7 +187,7 @@ const item = {
           }}>Resolution</Typography> 
           <Typography variant="body2" sx={{
             color: "primary.main",
-          }}>{item?.resolution}</Typography>  
+          }}>{phoneData?.resolution}</Typography>  
         </Box>
         <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
           <Typography variant="body2" sx={{
@@ -207,7 +195,7 @@ const item = {
           }}>Processor</Typography> 
           <Typography variant="body2" sx={{
             color: "primary.main",
-          }}>{item?.processor}</Typography>  
+          }}>{phoneData?.processor}</Typography>  
         </Box>
         <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
           <Typography variant="body2" sx={{
@@ -215,7 +203,7 @@ const item = {
           }}>RAM</Typography> 
           <Typography variant="body2" sx={{
             color: "primary.main",
-          }}>{item?.ram}</Typography>  
+          }}>{phoneData?.ram}</Typography>  
         </Box>
         </Box>
         

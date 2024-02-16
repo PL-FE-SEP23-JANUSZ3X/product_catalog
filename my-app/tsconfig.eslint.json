@@ -4,5 +4,12 @@
       // 👇️ add all the directories and files
       // that you want to lint here
       "src",
+    ],
+    "ignorePatterns": [
+      "src/*/.test.ts",
+      "src/frontend/generated/",
+      "build/static/js/.js",
+      "build/env.js/.js",
+      "public/env.js/.js"
     ]
   }

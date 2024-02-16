@@ -10,61 +10,58 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       namespaceId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       capacityAvailable: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING(1024))
       },
       capacity: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       priceRegular: {
-        type: Sequelize.NUMBER
+        type: Sequelize.DECIMAL
       },
       priceDiscount: {
-        type: Sequelize.NUMBER
+        type: Sequelize.DECIMAL
       },
       colorsAvailable: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.ARRAY(Sequelize.STRING(1024))
       },
       color: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       images: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       description: {
-        type: Sequelize.ARRAY()
+        type: Sequelize.JSON
       },
       screen: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       processor: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       resolution: {
-        type: Sequelize.STRING
-      },
-      processor: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       ram: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       camera: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       zoom: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       cell: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.ARRAY(Sequelize.STRING(1024))
       },
       createdAt: {
         allowNull: false,
