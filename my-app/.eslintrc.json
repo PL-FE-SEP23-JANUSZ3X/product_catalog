@@ -1,5 +1,9 @@
 {
   "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -34,7 +38,6 @@
     "src/**/*.test.ts",
     "src/frontend/generated/*",
     "build/static/js/*.js",
-    "build/env.js/*",
-    "public/env.js/*"
+    ".eslintrc.cjs"
   ]
 }
