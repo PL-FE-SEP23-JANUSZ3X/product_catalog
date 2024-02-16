@@ -1,93 +1,154 @@
-import { useThemeContext } from "../../theme/ThemeContext";
-import { ThemeProvider } from "@mui/material/styles";
 import {
   Box,
   CardMedia,
   IconButton,
+  Skeleton,
   Typography,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useOrderContext } from "../../context/useOrderContext";
+import { useEffect, useMemo, useState } from "react";
+import { Product } from "../../types/Product";
+import { ErrorMessage } from "../../types/ErrorMessages";
+import { getPhone } from "../../utils/fetchHelper";
 
-const CartItem = () => {
-  const { theme } = useThemeContext();
+const containerStyle = {
+  backgroundColor: 'background.paper',
+  width: {xs: "288px", sm: "592px", md: "752px"},
+  height: {xs: "160px", sm: "128px"},
+  display: "flex",
+  flexDirection: {xs: "column", sm: "row"},
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  borderRadius: 0,
+  boxShadow: 0,
+  outline: 1,
+  outlineColor: 'elements.main',
+  p: {xs: "16px", sm: "24px"},
+}
 
-  const containerStyle = {
-    backgroundColor: 'background.paper',
-    width: {xs: "288px", sm: "592px", md: "752px"},
-    height: {xs: "160px", sm: "128px"},
-    display: "flex",
-    flexDirection: {xs: "column", sm: "row"},
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: 0,
-    boxShadow: 0,
-    outline: 1,
-    outlineColor: 'elements.main',
-    p: {xs: "16px", sm: "24px"},
+const descriptionStyle = {
+  width: {xs: "256px", sm: "308px", md: "466px"},
+  height: 80,
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  borderRadius: 0,
+  boxShadow: 0,
+}
+
+const countContainerStyle = {
+  width: {xs: "256px", sm: "210px"},
+  height: 32,
+  display: "flex",
+  flexDirection: "row",
+  alignItems: 'center',
+  borderRadius: 0,
+  boxShadow: 0,
+}
+
+const iconButtonStyle = {
+  width: 32,
+  height: 32,
+  color: 'primary.main',
+  outline: 1,
+  outlineColor: 'icons.main',
+  borderRadius: 0,
+  border: 0,
+  '&:hover': {
+    outlineColor: 'primary.main',
+  }
+}
+
+type Props = {
+  orderProductId: string,
+  orderCount: number,
+  orderPrice: number,
+}
+
+const CartItem = ({ orderProductId, orderCount, orderPrice }: Props) => {
+  const {
+    removeFromOrder,
+    increaseCount,
+    decreaseCount,
+  } = useOrderContext()
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPhoneData = async () => {
+      if (typeof orderProductId === 'string') {
+        setError(null);
+        setIsLoading(true);
+        try {
+          const data = await getPhone(orderProductId);
+          setProduct(data);
+        } catch (error) {
+          setError(ErrorMessage.LOAD);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        console.error('phoneId is undefined');
+      }
+    };
+
+    fetchPhoneData();
+  }, [orderProductId]);
+
+  const handleRemove = (id: string) => () => removeFromOrder(id);
+  const handleIncr = (id: string) => () => increaseCount(id);
+  const handleDecr = (id: string) => () => decreaseCount(id);
+
+  const totalPrice = useMemo(() => orderCount * orderPrice, [orderCount, orderPrice]);
+
+  if (error !== null) {
+    return (
+      <>
+        <Typography>{error}</Typography>
+      </>
+    );
   }
 
-  const descriptionStyle = {
-    width: {xs: "256px", sm: "308px", md: "466px"},
-    height: 80,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderRadius: 0,
-    boxShadow: 0,
-  }
-
-  const countContainerStyle = {
-    width: {xs: "256px", sm: "210px"},
-    height: 32,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: 'center',
-    borderRadius: 0,
-    boxShadow: 0,
-  }
-
-  const iconButtonStyle = {
-    width: 32,
-    height: 32,
-    color: 'primary.main',
-    outline: 1,
-    outlineColor: 'icons.main',
-    borderRadius: 0,
-    border: 0,
-  }
-
-  const disablediconButtonStyle = {
-    color: 'elements.main',
-    outlineColor: 'elements.main',
+  if (isLoading) {
+    return (
+      <Skeleton
+        variant="rounded"
+        sx={{width: {xs: "288px", sm: "592px", md: "752px"},
+          height: {xs: "160px", sm: "128px"}}}
+      />
+    )
   }
 
   return (
-    <ThemeProvider theme={theme}>
-        <Box
-          sx={containerStyle}
-        >
-          <Box
-            sx={descriptionStyle}
-          >
-            <IconButton 
-                sx={{ 
-                width: 16, 
-                height: 16,
-                color: 'icons.main'
-                }}>
+    <>
+      {product && (
+        <Box sx={containerStyle}>
+          <Box sx={descriptionStyle}>
+            <IconButton
+              sx={{ 
+              width: 16, 
+              height: 16,
+              color: 'icons.main'
+              }}
+              onClick={handleRemove(product.id)}
+            >
               <CloseRoundedIcon sx={{ fontSize: 18}} />
             </IconButton>
             
             <CardMedia
               component="img"
-              sx={{
-                width: 66,
-                height: 66,
+              image={product.images[0]}
+              style={{
+                objectFit:'contain',
+                height: "66px",
+                width: "66px"
               }}
-              image={"/phone.svg"}
             />
             <Box
               sx={{
@@ -112,7 +173,11 @@ const CartItem = () => {
           <Box
             sx={countContainerStyle}
           >
-            <IconButton sx={[iconButtonStyle, disablediconButtonStyle]}>
+            <IconButton
+              sx={iconButtonStyle}
+              disabled={orderCount === 1}
+              onClick={handleDecr(product.id)}
+            >
               <RemoveIcon />
             </IconButton>
             <Typography
@@ -125,9 +190,12 @@ const CartItem = () => {
                 color: 'primary.main',
               }}
             >
-              1
+              {orderCount}
             </Typography>
-            <IconButton sx={iconButtonStyle}>
+            <IconButton
+              sx={iconButtonStyle}
+              onClick={handleIncr(product.id)}
+            >
               <AddIcon />
             </IconButton>
             <Box sx={{ flexGrow: 1}}/>
@@ -137,16 +205,15 @@ const CartItem = () => {
                 fontWeight: 800, 
                 fontSize: 22, 
                 color: 'primary.main',
-                
             }}
             >
-              $999
+              {totalPrice}
             </Typography>
           </Box>
         </Box>
-      
-    </ThemeProvider>
-  );
+      )}
+    </>
+  )
 };
 
 export default CartItem;
