@@ -52,6 +52,8 @@ declare module "@mui/material/styles" {
     divider: TypeDivider;
     action: TypeAction;
     background: TypeBackground;
+    badge: PaletteColor;
+    badgeBorder: PaletteColor;
   }
   
   export interface PaletteOptions {
@@ -81,7 +83,7 @@ declare module "@mui/material/styles" {
       upper?: React.CSSProperties;
     }
 
-   type EmptyObject = { [key: string]: any };
+   type EmptyObject = { [key: string] };
   
     export type OverridesStyleRules<
       ClassKey extends string = string,

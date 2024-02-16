@@ -1,10 +1,75 @@
-import { Box, Divider, IconButton, Link, Stack } from "@mui/material";
+import { Badge, Box, Divider, IconButton, Link, Stack } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useOrderContext } from "../../context/useOrderContext";
+
+const iconLinkStyle = {
+  width: '100%',
+  p: 2.3,
+  borderRadius: 0,
+  borderBottomWidth: '4px',
+  borderBottomColor: 'transparent',
+  borderBottomStyle: 'solid',
+  outline: "none",
+  color: "primary.main",
+}
+
+const iconLinkActiveStyle = {
+  width: '100%',
+  p: 2.3,
+  borderRadius: 0,
+  borderBottomWidth: '4px',
+  borderBottomColor: 'primary.main',
+  borderBottomStyle: 'solid',
+  boxSizing: "border-box",
+  color: "primary.main",
+  cursor:"pointer",
+  outline: "none",
+}
+
+const navLinkStyle = {
+  textDecoration: 'none',
+  color: 'secondary.main',
+  borderBottomWidth: '2px',
+  borderBottomColor: 'transparent',
+  borderBottomStyle: 'solid',
+  outline: "none",
+  paddingBottom: '5px',
+  '&:hover': {
+    color: 'primary.main',
+  },
+};
+
+const navLinkActiveStyle = {
+  textDecoration: 'none',
+  color: 'primary.main',
+  borderBottomWidth: '2px',
+  borderBottomColor: 'primary.main',
+  borderBottomStyle: 'solid',
+  cursor:"pointer",
+  outline: "none",
+  paddingBottom: '5px'
+};
+
+const badgeStyle = {
+  "& .MuiBadge-badge": {
+    width: '14px',
+    heigth: '14px',
+    fontSize: '10px',
+    fontWeight: '600',
+    borderSize: '1px',
+    borderColor: 'badgeBorder.main',
+    borderStyle: 'solid',
+    color: 'badge.main',
+    backgroundColor: 'red.main',
+    top: {xs: '4px', md: '26px' },
+    right: {xs: '2px', md: '22px'},
+  }
+}
 
 const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
   const goodsTypes = [
@@ -12,10 +77,6 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
     {name: 'Tablets', link: './tablets'},
     {name: 'Accesories', link: './accessories'}
   ];
-
-  useEffect(() => {
-    console.log("BurgerMenu rerendered");
-  }, [isOpen]);
 
   const burgerBoxStyle = {
     position: 'fixed',
@@ -32,53 +93,11 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
     transition: 'transform 0.3s ease-in-out',
   };
 
-  const iconLinkStyle = {
-    width: '100%',
-    p: 2.3,
-    borderRadius: 0,
-    borderBottomWidth: '4px',
-    borderBottomColor: 'transparent',
-    borderBottomStyle: 'solid',
-    outline: "none",
-    color: "primary.main",
-  }
-  
-  const iconLinkActiveStyle = {
-    width: '100%',
-    p: 2.3,
-    borderRadius: 0,
-    borderBottomWidth: '4px',
-    borderBottomColor: 'primary.main',
-    borderBottomStyle: 'solid',
-    boxSizing: "border-box",
-    color: "primary.main",
-    cursor:"pointer",
-    outline: "none",
-  }
+  const { order } = useOrderContext()
 
-  const navLinkStyle = {
-    textDecoration: 'none',
-    color: 'secondary.main',
-    borderBottomWidth: '2px',
-    borderBottomColor: 'transparent',
-    borderBottomStyle: 'solid',
-    outline: "none",
-    paddingBottom: '5px',
-    '&:hover': {
-      color: 'primary.main',
-    },
-  };
-  
-  const navLinkActiveStyle = {
-    textDecoration: 'none',
-    color: 'primary.main',
-    borderBottomWidth: '2px',
-    borderBottomColor: 'primary.main',
-    borderBottomStyle: 'solid',
-    cursor:"pointer",
-    outline: "none",
-    paddingBottom: '5px'
-  };
+  useEffect(() => {
+    console.log("BurgerMenu rerendered");
+  }, [isOpen]);
 
   return (
       <>
@@ -144,16 +163,26 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
             <NavLink to='/cart' end style={{textDecoration:'none', flexGrow: 1}}> 
               {({ isActive }) => ( 
                 <IconButton 
-                  component='div'
-                  disableRipple
-                  edge="end"
-                  aria-label="menu"
-                  sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
-                >
-                  {isActive 
-                    ? <LocalMallIcon />
-                    : <LocalMallOutlinedIcon />
-                  }
+                    component='div'
+                    disableRipple
+                    edge="end"
+                    aria-label="menu"
+                    sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
+                  >
+                  <Badge
+                    overlap="circular"
+                    badgeContent={order.length}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    sx={badgeStyle}
+                  >
+                    {isActive 
+                      ? <LocalMallIcon />
+                      : <LocalMallOutlinedIcon />
+                    }
+                  </Badge>
                 </IconButton>
               )}
             </NavLink>
