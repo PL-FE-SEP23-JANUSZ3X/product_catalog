@@ -35,5 +35,5 @@
     "src/frontend/generated/*",
     "build/static/js/*.js",
     ".eslintrc.cjs"
-  ]
+  , "build/env.js", ".eslintrc.cjs"]
 }

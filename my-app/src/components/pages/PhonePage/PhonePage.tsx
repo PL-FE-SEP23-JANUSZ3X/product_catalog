@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  Button,
   Typography,
   useMediaQuery,
   useTheme,
@@ -16,7 +15,7 @@ import { getPhone } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
 import { ErrorMessage } from '../../../types/ErrorMessages';
 import Section from '../../section/Section';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ProductVariantsActions from '../../productVariantsActions/ProductVariantsActions';
 
 export const PhonePage = () => {
 
@@ -43,7 +42,7 @@ export const PhonePage = () => {
           setIsLoading(false);
         }
       } else {
-        console.error('phoneId is undefined');
+        console.error('Id is undefined');
       }
     };
 
@@ -52,27 +51,33 @@ export const PhonePage = () => {
   const images = [
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/00.webp',
+        `${phoneData?.images[0]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/00.webp',
+        `${phoneData?.images[0]}`,
     },
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/02.webp',
+        `${phoneData?.images[1]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/02.webp',
+        `${phoneData?.images[1]}`,
     },
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/03.webp',
+        `${phoneData?.images[2]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/03.webp',
+        `${phoneData?.images[2]}`,
     },
     {
       original:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/04.webp',
+        `${phoneData?.images[3]}`,
       thumbnail:
-        'https://storage.googleapis.com/image-storage-mate/img/phones/apple-iphone-11/black/04.webp',
+        `${phoneData?.images[3]}`,
+    },
+    {
+      original:
+        `${phoneData?.images[4]}`,
+      thumbnail:
+        `${phoneData?.images[4]}`,
     },
   ];
 
@@ -83,29 +88,28 @@ export const PhonePage = () => {
         </>
       );
     }
-  
   return (
 
     <Section>
       <Container>
-        {isLoading && <h2>Loading...</h2>}
-        <Typography>Name: {phoneData?.name}</Typography>
-        <img src='/images/icons/arr-right.svg' />
-        <Typography mb="2" variant="caption" sx={{ color: 'secondary.main', mt:{xs:"24px", md:"40px"}}}>
+        <img src='/images/icons/arr-left-light.svg' />
+        <Typography mb="16px" variant="caption" sx={{ color: 'secondary.main', mt:{xs:"24px", sm:"40px"}}}>
             Back
         </Typography>
-        <Typography variant="h2" color="text.primary">
-          Apple iPhone 11 Pro Max 64GB Gold (iMT9G2FS/A)
+        <Typography variant="h2" color="text.primary" sx={{width:{xs:"288px", sm:"592px", md:"1136px"}}}>
+          {phoneData?.name} (iMT9G2FS/A)
         </Typography>
-        <Box sx={{
-          display:"flex",
-          flexDirection:{xs: "column", md: "row"},
-          mt:{xs:"32px", md:"40px"},
-          justifyContent:"space-between",
-          mb:"80px"}}>
         <Box sx={{ 
-          width:{xs:"288px", md:"560px"},
-          height:{xs:"288px", md:"464px"}
+          width:{md:"592"},
+          display:"flex",
+          flexDirection:{xs: "column", sm: "row"},
+          mt:{xs:"32px", sm:"40px"},
+          mb:"80px",
+          justifyContent:{xs:"flex-start", sm:"space-between"}
+          }}>
+        <Box sx={{
+          width:{xs:"288px", sm:"338px", md:"560px"},
+          height:{xs:"353px",  sm:"288px", md:"464px"},
         }}>
             <ImageGallery
               items={images}
@@ -116,127 +120,75 @@ export const PhonePage = () => {
               showFullscreenButton={false}
             />
         </Box>
-          <Box>
-            <Box sx={{
-              width:{xs:"288px", md:"320px"},
-              display:"flex",
-              justifyContent:"space-between"}}>
-              <Typography>
-                Available colors
-              </Typography>
-              <Divider/>
-            </Box>
-            <Box>
-              <Typography>
-                  Select capacity
-              </Typography>
-            </Box>
-            <Divider/>
-            <Box>
-              <Typography>
-                $799 1199
-              </Typography>
-            </Box>
-            <Box>
-              <Button variant="contained" sx={{
-                width: {xs: "176px", md: "117px", lg: "160px"},
-                height: 40,
-                boxShadow: 0,
-                borderRadius: 0,
-                fontSize: 14,
-                fontWeight: 500,
-                textTransform: 'capitalize',
-                }}
-              >
-                Add to Card
-              </Button>
-              <Button variant="outlined" sx={{minWidth: 40, height: 40, borderRadius: 0, p: 0, borderColor: 'icons.main'}}>
-                <FavoriteBorderIcon sx={{width: 20, height: 20, color: 'primary.main'}} />
-              </Button>
-            </Box>
-            <Box sx={{width:"320px"}}>
-              <Box>
-                <Typography>Screen</Typography>
-                <Typography>6.5” OLED</Typography>
-              </Box>
-              <Box>
-                <Typography>Resolution</Typography>
-                <Typography>2688x1242</Typography>
-              </Box>
-              <Box>
-                <Typography>Processor</Typography>
-                <Typography>Apple A12 Bionic</Typography>
-              </Box>
-              <Box>
-                <Typography>RAM</Typography>
-                <Typography>3 GB</Typography>
-              </Box>
-            </Box>
+          <Box sx={{mt:{xs:"40px", sm:"0px"}}}>
+            <ProductVariantsActions phoneData={phoneData}/>
           </Box>
-          <Typography>
+          <Typography variant="body2"sx={{fontWeight: 700, color: "icons.main", display:{xs:"none", md:"block"}}}>
                 ID: 802390
           </Typography>
         </Box>
         <Box sx={{
           display:"flex",
-           flexDirection:{xs:"column", md:"row"},
-            justifyContent:"space-between",
-             mb:"80px",
-             gap:"64px"}}>
-          <Box sx={{width:"559px"}}>
-           <Typography variant='h2'>About</Typography>
-           <Divider/>
+          flexDirection:{xs:"column", md:"row"},
+          justifyContent:"space-between",
+          mb:"80px",
+          gap:"64px"}}>
+          <Box sx={{width:{xs:"287px", sm:"559px"}}}>
+           <Typography variant='h3' sx={{mb:"16px"}}>About</Typography>
+           <Divider sx={{mb:"32px"}}/>
            <Box>
-              <Typography variant='h3'>And then there was Pro</Typography>
-              <Typography >A transformative triple‑camera system that adds tons of capability without complexity.
-
-An unprecedented leap in battery life. And a mind‑blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.</Typography>
-              <Typography variant='h3'>Camera</Typography>
-              <Typography>Meet the first triple‑camera system to combine cutting‑edge technology with the legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful images in drastically lower light. Shoot the highest‑quality video in a smartphone — then edit with the same tools you love for photos. You’ve never shot with anything like it.</Typography>
-              <Typography variant='h3'>Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.</Typography>
-              <Typography>iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion. Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.</Typography>
+              <Typography variant='h4' sx={{mb:"16px"}}>{phoneData?.description[0].title}</Typography>
+              <Typography variant="body1" sx={{mb:"16px", color:"secondary.main"}} >{phoneData?.description[0].text[0]}</Typography>
+              <Typography variant="body1" sx={{mb:"32px", color:"secondary.main"}}>{phoneData?.description[0].text[1]}</Typography>
+              <Typography variant='h4' sx={{mb:"16px"}}>{phoneData?.description[1].title}</Typography>
+              <Typography variant="body1" sx={{mb:"32px", color:"secondary.main"}}>{phoneData?.description[1].text}</Typography>
+              <Typography variant='h4' sx={{mb:"16px"}}>{phoneData?.description[2].title}</Typography>
+              <Typography variant="body1"sx={{mb:"32px", color:"secondary.main"}}>{phoneData?.description[2].text}</Typography>
            </Box>
           </Box>
-          <Box sx={{width:"512px"}}>
-            <Typography variant='h2'>Tech Specs</Typography>
-            <Divider/>
+          <Box sx={{width:{xs:"287px", sm:"559px"}}}>
+            <Typography variant='h2' sx={{mb:"16px"}}>Tech Specs</Typography>
+            <Divider sx={{mb:"25px"}}/>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>Screen</Typography>
-              <Typography>6.5” OLED</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Screen</Typography>
+              <Typography variant="body1">{phoneData?.screen}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>Resolution</Typography>
-              <Typography>2688x1242</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Resolution</Typography>
+              <Typography variant="body1">{phoneData?.resolution}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>Processor</Typography>
-              <Typography>Apple A12 Bionic</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Processor</Typography>
+              <Typography variant="body1">{phoneData?.processor}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>RAM</Typography>
-              <Typography>3 GB</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>RAM</Typography>
+              <Typography variant="body1">{phoneData?.ram}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>Built in memory</Typography>
-              <Typography>64 GB</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Built in memory</Typography>
+              <Typography variant="body1">{phoneData?.capacity}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>Camera</Typography>
-              <Typography>12 Mp + 12 Mp + 12 Mp (Triple)</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Camera</Typography>
+              <Typography variant="body1">{phoneData?.camera}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>Zoom</Typography>
-              <Typography>Optical, 2x</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Zoom</Typography>
+              <Typography variant="body1">{phoneData?.zoom}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography>Cell</Typography>
-              <Typography>GSM, LTE, UMTS</Typography>
+              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Cell</Typography>
+              <Box sx={{display:"flex", gap:"5px"}}>
+                {phoneData?.cell.map((item) => (
+                  <Typography variant="body1" sx={{p:"0px", m:"0px"}}>{item}</Typography>
+                ))}
+              </Box>
             </Box>
           </Box>
         </Box>
         <Box sx={{
-          width:{xs:"744px", md:"1136px"},
-          height:"571px",
+          width:{xs:"288px", sm:"591px", md:"1136px"},
           mb:"81px",
           borderColor: 'secondary.main',
           borderWidth: '2px',

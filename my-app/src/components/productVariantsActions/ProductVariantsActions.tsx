@@ -9,22 +9,12 @@ import {
 import CircleIcon from "@mui/icons-material/Circle";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Link } from "react-router-dom";
+import { FC } from "react";
+import { Phone } from '../../types/Phone';
 import './ProductVariantsActionsStyle.css';
 
-const item = {
-"id": "apple-iphone-11-128gb-black",
-"namespaceId": "apple-iphone-11",
-"name": "Apple iPhone 11 128GB Black",
-"capacityAvailable": ["64GB", "128GB", "256GB"],
-"capacity": "128GB",
-"priceRegular": 1100,
-"priceDiscount": 1050,
-"colorsAvailable": ["black", "green", "yellow", "white", "purple", "red"],
-"color": "black",
-"screen": "6.1' IPS",
-"resolution": "1792x828",
-"processor": "Apple A13 Bionic",
-"ram": "4GB",
+type Props = {
+  phoneData: Phone | null
 }
 
 const productColors: { [key: string]: string } = {
@@ -48,7 +38,7 @@ const productColors: { [key: string]: string } = {
   sierrablue: "#69abce",
 }
 
-const ProductVariantsActions = () => {
+const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
   return (
     <Box
       className="product-variants-actions"
@@ -65,9 +55,9 @@ const ProductVariantsActions = () => {
             Available colors
           </Typography>
           <Box className="available-colors_icons-container">
-            {item?.colorsAvailable.map((color) => (
+            {phoneData?.colorsAvailable.map((color) => (
               <Link
-                to={`/phones/${item?.namespaceId}-${item?.capacity}-${color}`}
+                to={`/phones/${phoneData?.namespaceId}-${phoneData?.capacity.toLowerCase()}-${color}`}
               >
                 <IconButton
                   className="available-colors_icon-button"
@@ -90,7 +80,7 @@ const ProductVariantsActions = () => {
 
         <Typography
           variant="body2"
-          sx={{ fontWeight: 700, color: "icons.main" }}
+          sx={{ fontWeight: 700, color: "icons.main", visibility:{xs:"visible", md:"hidden"}}}
         >
           ID: 802390
         </Typography>
@@ -98,21 +88,32 @@ const ProductVariantsActions = () => {
 
       <Divider orientation="horizontal" flexItem />
 
-      <Typography variant="body2" sx={{ color: "secondary.main" }}>
-        Select capacity
-      </Typography>
+        <Typography variant="body2" sx={{
+            color: "secondary.main",
+          }}>Select capacity</Typography>
+        
+         
 
-      <Box className="available-capacity">
-        {item?.capacityAvailable.map((capacity) => (
-          <Button
-            className="available-capacity_button"
-            variant={capacity === item.capacity ? "contained" : "outlined"}
-            sx={{ minWidth: "auto", boxShadow: 0, borderRadius: 0, p: 1 }}
-          >
-            {capacity}
-          </Button>
-        ))}
-      </Box>
+        <Box sx={{ display: "flex", gap: "10px" }}>
+        {phoneData?.capacityAvailable.map((capacity) => (
+          <Link to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}>
+            <Button
+              variant="contained"
+              sx={{
+                minWidth: "auto",
+                height: 32,
+                boxShadow: 0,
+                borderRadius: 0,
+                fontSize: 14,
+                fontWeight: 500,
+                p: 1,
+              }}
+            >
+              {capacity}
+            </Button>
+          </Link>
+         ))}
+        </Box>
 
       <Divider orientation="horizontal" flexItem />
 
@@ -121,13 +122,13 @@ const ProductVariantsActions = () => {
           variant="h2"
           sx={{ color: "primary.main", letterSpacing: "-1%" }}
         >
-          ${item.priceDiscount}
+          ${phoneData?.priceDiscount}
         </Typography>
         <Typography
           className="prices_regular-price"
           sx={{ fontSize: "22px", color: "secondary.main" }}
         >
-          ${item.priceRegular}
+          ${phoneData?.priceRegular}
         </Typography>
       </Box>
 
@@ -167,7 +168,7 @@ const ProductVariantsActions = () => {
             Screen
           </Typography>
           <Typography variant="body2" sx={{ color: "primary.main" }}>
-            {item?.screen}
+            {phoneData?.screen}
           </Typography>
         </Box>
 
@@ -176,7 +177,7 @@ const ProductVariantsActions = () => {
             Resolution
           </Typography>
           <Typography variant="body2" sx={{ color: "primary.main" }}>
-            {item?.resolution}
+            {phoneData?.resolution}
           </Typography>
         </Box>
         <Box className="product-info_row">
@@ -184,7 +185,7 @@ const ProductVariantsActions = () => {
             Processor
           </Typography>
           <Typography variant="body2" sx={{ color: "primary.main" }}>
-            {item?.processor}
+            {phoneData?.processor}
           </Typography>
         </Box>
         <Box className="product-info_row">
@@ -192,7 +193,7 @@ const ProductVariantsActions = () => {
             RAM
           </Typography>
           <Typography variant="body2" sx={{ color: "primary.main" }}>
-            {item?.ram}
+            {phoneData?.ram}
           </Typography>
         </Box>
       </Box>
