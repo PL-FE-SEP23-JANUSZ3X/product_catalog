@@ -22,5 +22,11 @@
   },
   "include": [
     "src"
+  ],
+  "ignorePatterns": [
+    "src/**/*.test.ts",
+    "src/frontend/generated/*",
+    "build/static/js/*.js",
+    ".eslintrc.cjs"
   ]
 }
