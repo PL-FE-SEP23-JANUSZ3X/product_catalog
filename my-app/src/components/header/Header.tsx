@@ -7,6 +7,7 @@ import {
   Divider,
   useMediaQuery,
   SxProps,
+  Badge,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -19,6 +20,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
+import { useOrderContext } from '../../context/useOrderContext';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -73,12 +75,30 @@ const iconLinkActiveStyle = {
   outline: "none",
 }
 
+const badgeStyle = {
+  "& .MuiBadge-badge": {
+    width: '14px',
+    heigth: '14px',
+    fontSize: '10px',
+    fontWeight: '600',
+    borderSize: '1px',
+    borderColor: 'badgeBorder.main',
+    borderStyle: 'solid',
+    color: 'badge.main',
+    backgroundColor: 'red.main',
+    top: {xs: '18px', md: '26px' },
+    right: {xs: '14px', md: '22px'},
+  }
+}
+
 const Header = () => {
   const isMobile = useMediaQuery('(max-width:640px)');
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
   const [isOpen, setIsOpen] = useState(false);
   
+  const { order } = useOrderContext()
+
   const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
   
   return (
@@ -238,17 +258,27 @@ const Header = () => {
                 <Divider orientation='vertical' flexItem/>
                 <NavLink to='/cart' end style={{textDecoration:'none'}}> 
                   {({ isActive }) => ( 
+                    <Badge
+                      overlap="circular"
+                      badgeContent={order.length}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      sx={badgeStyle}
+                    >
                     <IconButton 
                       disableRipple
                       edge="end"
                       aria-label="menu"
                       sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
                     >
-                      {isActive 
-                        ? <LocalMallIcon sx={{fontSize: '16px'}} />
-                        : <LocalMallOutlinedIcon sx={{fontSize: '16px'}} />
-                      }
+                        {isActive 
+                          ? <LocalMallIcon sx={{fontSize: '16px'}} />
+                          : <LocalMallOutlinedIcon sx={{fontSize: '16px'}} />
+                        }
                     </IconButton>
+                      </Badge>
                   )}
                 </NavLink>
               </Box>

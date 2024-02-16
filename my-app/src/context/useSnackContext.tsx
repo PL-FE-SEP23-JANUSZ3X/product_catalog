@@ -28,7 +28,7 @@ export const SnackbarProvider = ({ children }: Props) => {
     autoHideDuration: 0,
   });
 
-  const handleClose = (event: any, reason: string) => {
+  const handleClose = (event: Event | React.SyntheticEvent<Event>, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -47,7 +47,7 @@ export const SnackbarProvider = ({ children }: Props) => {
         open={snack.open}
         autoHideDuration={snack.autoHideDuration}
         onClose={handleClose}
-        sx={{ margin: '24px' }}
+        sx={{ top: {xs: '48px', md: '64px'} }}
       >
         <Alert severity={snack.severity}>{snack.message}</Alert>
       </Snackbar>
