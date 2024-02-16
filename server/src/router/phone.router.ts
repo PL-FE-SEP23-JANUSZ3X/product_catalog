@@ -5,7 +5,7 @@ const phoneRouter = express.Router();
 
 phoneRouter.get('/', phoneController.getAll);
 phoneRouter.get(
-  '/pagination/:sortType-:start-:limit-:order',
+  '/pagination/:sortType-:start-:limit',
   phoneController.getSortedPhones,
 );
 phoneRouter.get('/:phoneId', phoneController.getById);
