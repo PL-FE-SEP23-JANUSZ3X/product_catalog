@@ -8,7 +8,6 @@ export const useLocalStorage = (key: string, defaultValue: OrderProductType[]) =
     try {
       const value = localStorage.getItem(key)
       if (value) {
-        console.log(value)
         return JSON.parse(value)
       } else {
           localStorage.setItem(key, JSON.stringify(defaultValue));

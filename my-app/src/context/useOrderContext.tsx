@@ -40,7 +40,6 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
   }, [order])
 
   const addToOrder = (id: string, price: number) => {
-    console.log(id, price)
     const found:OrderProductType = order.find((product: OrderProductType) => {
       return product.id === id;
     });

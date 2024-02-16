@@ -30,5 +30,11 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*", "build/static/js/*.js"]
+  "ignorePatterns": [
+    "src/**/*.test.ts",
+    "src/frontend/generated/*",
+    "build/static/js/*.js",
+    "build/env.js/*.js",
+    "public/env.js/*.js"
+  ]
 }
