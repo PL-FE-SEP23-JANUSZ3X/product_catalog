@@ -26,7 +26,6 @@ const HomePage = () => {
   const [newModels, setNewModels] = useState<Item[]>([]);
   const { theme } = useThemeContext();
 
-
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const images = isMobile ? MOBILE_BANNER_IMAGES : BANNER_IMAGES;
 
