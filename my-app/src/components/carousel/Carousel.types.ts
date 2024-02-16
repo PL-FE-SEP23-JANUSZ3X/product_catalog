@@ -1,8 +1,9 @@
+import { MouseEventHandler } from 'react';
 import Item from '../itemCard/ItemCard.types'
 
 export type ArrowProps = {
   className: string;
-  onClick: void;
+  onClick: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 export type CarouselProps = {
