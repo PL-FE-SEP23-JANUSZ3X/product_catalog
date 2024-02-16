@@ -103,13 +103,7 @@ const CartItem = ({ orderProductId, orderCount, orderPrice }: Props) => {
 
   const handleRemove = (id: string) => () => removeFromOrder(id);
   const handleIncr = (id: string) => () => increaseCount(id);
-  const handleDecr = (id: string) => () => {
-    if (orderCount === 1) {
-      removeFromOrder(id);
-    }
-
-    decreaseCount(id);
-  }
+  const handleDecr = (id: string) => () => decreaseCount(id);
 
   const totalPrice = useMemo(() => orderCount * orderPrice, [orderCount, orderPrice]);
 
@@ -181,7 +175,7 @@ const CartItem = ({ orderProductId, orderCount, orderPrice }: Props) => {
           >
             <IconButton
               sx={iconButtonStyle}
-              disabled={orderCount === 0}
+              disabled={orderCount === 1}
               onClick={handleDecr(product.id)}
             >
               <RemoveIcon />

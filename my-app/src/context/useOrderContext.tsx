@@ -45,7 +45,6 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
       return product.id === id;
     });
     if (found !== undefined) {
-      // const newCount = found.count + orderItem.count;
       const newCount = found.count + 1;
       setOrder(
         order.map((product: OrderProductType) =>
@@ -54,7 +53,7 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
       );
       setSnack({
         message: 'You added the same product',
-        severity: 'warning',
+        severity: 'success',
         open: true,
         autoHideDuration: 2000,
       });
@@ -63,7 +62,6 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
         ...order,
         {
           id,
-          // count: orderItem.count,
           count: 1,
           price,
         },
@@ -99,8 +97,8 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
       );
     });
     setSnack({
-      message: 'You added product',
-      severity: 'warning',
+      message: 'You added one more product',
+      severity: 'success',
       open: true,
       autoHideDuration: 2000,
     });

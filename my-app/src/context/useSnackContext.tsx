@@ -47,7 +47,7 @@ export const SnackbarProvider = ({ children }: Props) => {
         open={snack.open}
         autoHideDuration={snack.autoHideDuration}
         onClose={handleClose}
-        sx={{ margin: '24px' }}
+        sx={{ top: {xs: '48px', md: '64px'} }}
       >
         <Alert severity={snack.severity}>{snack.message}</Alert>
       </Snackbar>

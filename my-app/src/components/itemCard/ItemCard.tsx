@@ -26,7 +26,7 @@ const ItemCard = ( item: Item ) => {
           <CardContent>
             <CardMedia 
               component='img'
-              src={`https://storage.googleapis.com/image-storage-mate/${images[0]}`}
+              src={images[0]}
               sx={{
                 objectFit: 'contain',
                 width: {xs: "223px", md: "165px", lg: "196px"},
