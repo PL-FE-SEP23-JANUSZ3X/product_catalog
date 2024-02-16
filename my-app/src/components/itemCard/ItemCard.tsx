@@ -12,6 +12,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Item from './ItemCard.types';
 import { useOrderContext } from '../../context/useOrderContext';
 import { Link as RouterLink } from 'react-router-dom';
+import React, { MouseEvent } from 'react';
 
 const ItemCard = (item: Item) => {
   const {
@@ -27,8 +28,18 @@ const ItemCard = (item: Item) => {
 
   const { addToOrder } = useOrderContext();
 
-  const handleAddToOrder = (id: string, priceRegular: number) => () =>
-    addToOrder(id, priceRegular);
+  const handleAddToOrder =
+    (id: string, priceRegular: number) => (event: React.MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      addToOrder(id, priceRegular);
+    };
+
+  const handleAddToFavorites = (id: string) => (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(`add ${id} to favorites`);
+  };
 
   return (
     <RouterLink to={`/phones/${id}`}>
@@ -138,7 +149,7 @@ const ItemCard = (item: Item) => {
                   fontWeight: 500,
                   textTransform: 'capitalize',
                 }}
-                onClick={handleAddToOrder(id, priceRegular)}
+                onClick={(event) => handleAddToOrder(id, priceRegular)(event)}
               >
                 Add to Card
               </Button>
@@ -154,6 +165,7 @@ const ItemCard = (item: Item) => {
               >
                 <FavoriteBorderIcon
                   sx={{ width: 20, height: 20, color: 'primary.main' }}
+                  onClick={(event) => handleAddToFavorites(id)(event)}
                 />
               </Button>
             </Box>
