@@ -1,9 +1,17 @@
 import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, Typography } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Item from './ItemCard.types';
+import { useOrderContext } from "../../context/useOrderContext";
 
 const ItemCard = ( item: Item ) => {
-  const { images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item.item
+  const { id, images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item.item
+  
+  const {
+    addToOrder,
+  } = useOrderContext()
+
+  const handleAddToOrder = (id: string, priceRegular: number) => () => addToOrder(id, priceRegular);
+
   return (
     <Grid>
       <Card sx={{ 
@@ -18,7 +26,7 @@ const ItemCard = ( item: Item ) => {
           <CardContent>
             <CardMedia 
               component='img'
-              src={`https://storage.googleapis.com/image-storage-mate/${images[0]}`}
+              src={images[0]}
               sx={{
                 objectFit: 'contain',
                 width: {xs: "223px", md: "165px", lg: "196px"},
@@ -46,15 +54,19 @@ const ItemCard = ( item: Item ) => {
               <Typography sx={{fontSize: 12, fontWeight: 'bold'}}>{ram}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2}}>
-              <Button variant="contained" sx={{
-                width: {xs: "176px", md: "117px", lg: "160px"},
-                height: 40,
-                boxShadow: 0,
-                borderRadius: 0,
-                fontSize: 14,
-                fontWeight: 500,
-                textTransform: 'capitalize',
+              <Button
+                component='button'
+                variant="contained"
+                sx={{
+                  width: {xs: "176px", md: "117px", lg: "160px"},
+                  height: 40,
+                  boxShadow: 0,
+                  borderRadius: 0,
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textTransform: 'capitalize',
                 }}
+                onClick={handleAddToOrder(id, priceRegular)}
               >
                 Add to Card
               </Button>

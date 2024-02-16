@@ -54,6 +54,12 @@ export const customTheme = (mode: PaletteMode) => ({
           success: {
             main: "#27AE60",
           },
+          badge: {
+            main: "#fff"
+          },
+          badgeBorder: {
+            main: "#fff"
+          }
         }
       : {
           // palette values for dark mode
@@ -92,6 +98,12 @@ export const customTheme = (mode: PaletteMode) => ({
             primary: "#F1F2F9",
             secondary: "#75767F",
           },
+          badge: {
+            main: "#fff"
+          },
+          badgeBorder: {
+            main: "#323542"
+          }
         }),
   },
   typography: {
