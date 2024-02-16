@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import React, { useRef } from "react";
 import Slider from "react-slick";
 import { ArrowProps, CarouselProps } from "./Carousel.types";
-import { Typography, useMediaQuery } from "@mui/material";
+import { Theme, Typography, useMediaQuery } from "@mui/material";
 import './Carousel.styles.css'
 import ItemCard from "../itemCard/ItemCard";
 
@@ -34,11 +34,11 @@ function SamplePrevArrow(props: ArrowProps) {
 }
 
 const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
-  const sliderRef = useRef<any>(null);
+  const sliderRef = useRef<Slider>(null);
   const carouselWidth = '212px'
 
-  const isTablet = useMediaQuery((theme: any)  => theme.breakpoints.down('md'));
-  const isMobile = useMediaQuery((theme: any)  => theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery((theme: Theme)  => theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme)  => theme.breakpoints.down('sm'));
 
   let slidesToShow = 4;
 

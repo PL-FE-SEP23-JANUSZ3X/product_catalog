@@ -1,8 +1,8 @@
 import Item from '../itemCard/ItemCard.types'
 
 export type ArrowProps = {
-  className: any;
-  onClick: any;
+  className: string;
+  onClick: void;
 }
 
 export type CarouselProps = {
