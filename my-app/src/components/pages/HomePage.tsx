@@ -1,5 +1,10 @@
 import { Container, SxProps, Typography, useMediaQuery } from "@mui/material";
 import Slider from '../slider/Slider'
+import Section from "../section/Section";
+import Carousel from "../carousel/Carousel";
+import { useEffect, useState } from "react";
+import Item from "../itemCard/ItemCard.types";
+import { useThemeContext } from "../../theme/ThemeContext";
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -18,22 +23,45 @@ const MOBILE_BANNER_IMAGES = [
 ]
 
 const HomePage = () => {
+  const [newModels, setNewModels] = useState<Item[]>([]);
+  const { theme } = useThemeContext();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const isMobile = useMediaQuery((theme: any)  => theme.breakpoints.down('sm'));
-
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const images = isMobile ? MOBILE_BANNER_IMAGES : BANNER_IMAGES;
 
+  const newModelScectionTitle = 'Brand new models'
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/newest-0-20-asc`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const phonesData = await response.json();
+        setNewModels(phonesData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [])
+
   return (
-    <Container sx={{padding: 0, width: { xs: '320px', sm: '635px', md: '1200px'} }}>
-      <Typography variant="h1" sx={
-        {
+    <>
+      <Container sx={{ padding: 0, width: { xs: '320px', sm: '635px', md: '1200px' } }}>
+        <Typography variant="h1" sx={{
           my: { xs: '32px', md: '52px' },
           fontSize: 32,
           lineHeight: '41px',
         }}>Welcome to Nice Gadgets store!</Typography>
-      <Slider images={images} />
-    </ Container>
+        <Slider images={images} />
+      </Container>
+      <Section>
+        <Carousel title={newModelScectionTitle} products={newModels} />
+      </Section>
+    </>
   );
 };
 

@@ -123,7 +123,7 @@ export const PhonePage = () => {
           <Box sx={{mt:{xs:"40px", sm:"0px"}}}>
             <ProductVariantsActions phoneData={phoneData}/>
           </Box>
-          <Typography sx={{color:"secondary.main", display:{xs:"none", md:"block"}}}>
+          <Typography variant="body2"sx={{fontWeight: 700, color: "icons.main", display:{xs:"none", md:"block"}}}>
                 ID: 802390
           </Typography>
         </Box>

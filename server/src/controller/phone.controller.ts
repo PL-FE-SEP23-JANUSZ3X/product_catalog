@@ -35,6 +35,23 @@ const getById: ControllerAction = async (req, res) => {
   }
 };
 
+const getRecommended: ControllerAction = async (req, res) => {
+  try {
+    const { phoneId } = req.params;
+    const recommended = await phoneService.getRecommendedById(phoneId);
+
+    if (!recommended.length) {
+      res.status(404).send('Not Found: The specified entity does not exist');
+      return;
+    }
+
+    res.send(recommended);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 const getSortedPhones: ControllerAction = async (req, res) => {
   try {
     const allPhones = await phoneService.getAllPhones();
@@ -90,6 +107,19 @@ const getSortedPhones: ControllerAction = async (req, res) => {
           return 0;
         });
         break;
+      case SortType.HOTPRICES:
+        sortedPhones = allPhones.sort((a, b) => {
+          let discountA = 0;
+          let discountB = 0;
+          if (a.priceDiscount && a.priceRegular) {
+            discountA = +a.priceRegular - +a.priceDiscount;
+          }
+          if (b.priceDiscount && b.priceRegular) {
+            discountB = +b.priceRegular - +b.priceDiscount;
+          }
+          return discountB - discountA;
+        });
+        break;
       default:
         sortedPhones = allPhones;
         break;
@@ -101,6 +131,6 @@ const getSortedPhones: ControllerAction = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-const phoneController = { getAll, getSortedPhones, getById };
+const phoneController = { getAll, getSortedPhones, getById, getRecommended };
 
 export default phoneController;

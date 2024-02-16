@@ -30,5 +30,10 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["src/**/*.test.ts", "src/frontend/generated/*", "build/static/js/*.js", "build/env.js", ".eslintrc.cjs"]
+  "ignorePatterns": [
+    "src/**/*.test.ts",
+    "src/frontend/generated/*",
+    "build/static/js/*.js",
+    ".eslintrc.cjs"
+  , "build/env.js", ".eslintrc.cjs"]
 }
