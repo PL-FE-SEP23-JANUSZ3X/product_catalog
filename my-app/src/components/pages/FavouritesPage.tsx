@@ -54,16 +54,6 @@ const FavouritesPage = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-      <Skeleton
-        variant="rounded"
-        sx={{width: {xs: "288px", sm: "592px", md: "752px"},
-          height: {xs: "160px", sm: "128px"}}}
-      />
-    )
-  }
-
   return (
     <Section >
       <Box>
@@ -90,18 +80,27 @@ const FavouritesPage = () => {
         </Typography>
         {favorites.length === 0
           ? <Typography variant="h4" mb="4" sx={{ mt: {xs: 3, sm: 2}}} >Your favorites are empty</Typography>
-          : (
+          : ( 
             <Stack sx={boxStyle}>
-              {favoriteProducts.length > 0 && favoriteProducts.map((product) => (
-                <ItemCard
-                  key={product.id}
-                  item={product}
-                />
+              {favoriteProducts.map((product) => (
+                isLoading
+                  ? (
+                    <Skeleton
+                      variant="rounded"
+                      sx={{ width: {xs: '288px', md: '272px'},
+                        height: {xs: '440px', md: '506px'}}}
+                    />
+                  )
+                  : (
+                    <ItemCard
+                      key={product.id}
+                      item={product}
+                    />
+                  )
               ))}
             </Stack>
           )
         }
-        
       </Box>
     </Section>
   );
