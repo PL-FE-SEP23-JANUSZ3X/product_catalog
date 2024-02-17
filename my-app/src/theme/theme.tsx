@@ -5,10 +5,17 @@ const colors = {
   whiteSelected: '#F1F2F9',
   bgLight: '#313237',
   bgDark: '#905BFF',
+  bgMiddleDark: '#4A4D58',
   whiteDefault: '#fff',
   bgSelectedDark: '#323542',
   borderSelected: '#E2E6E9',
   hoverDark: '#A378FF',
+  iconsBorderDefaultLight: '#B4BDC3',
+  iconsBorderHoverLight: '#313237',
+  iconsBorderSelectedLight: '#E2E6E9',
+  iconsBorderDefaultDark: '#B4BDC3',
+  iconsBorderHoverDark: '#313237',
+  iconsBorderSelectedDark: '#3B3E4A',
 }
 export const customTheme = (mode: PaletteMode) => ({
   palette: {
@@ -232,7 +239,7 @@ export const customTheme = (mode: PaletteMode) => ({
         variants: [
           {
             props: {
-              variant: 'primary' as const
+              variant: 'buttonDefault' as const
             },
             style: {
               width: '100%',
@@ -252,18 +259,10 @@ export const customTheme = (mode: PaletteMode) => ({
                 backgroundColor: colors.bgLight,
                 boxShadow: '0px 3px 13px 0px #17203166',
               },
-              "&:active": {
-                color: colors.greenSelected,
-                backgroundColor: colors.whiteDefault,
-                outline: 'solid',
-                outlineWidth: '1px',
-                outlineColor: colors.borderSelected,
-                boxShadow:'none',
-              },
             },
           },
           {
-            props: { variant: 'selected' as const},
+            props: { variant: 'buttonSelected' as const},
             style: {
               width: '100%',
               borderRadius: '0',
@@ -278,13 +277,40 @@ export const customTheme = (mode: PaletteMode) => ({
               lineHeight: '21px' as const,
               textAlign: 'center' as const,
               "&:hover": {
-                color: colors.whiteDefault,
-                backgroundColor: colors.bgLight,
-                boxShadow: '0px 3px 13px 0px #17203166',
+                outlineColor: colors.iconsBorderHoverLight,
               },
-              "&:active": {
-                color: colors.whiteDefault,
-                backgroundColor: colors.bgLight,
+            },
+          },
+          {
+            props: {
+              variant: 'favoritesButtonDefault' as const
+            },
+            style: {
+              minWidth: '40px',
+              width: '40px',
+              outline: 'solid',
+              outlineWidth: '1px',
+              borderRadius: '0',
+              outlineColor: colors.iconsBorderDefaultLight,
+              "&:hover": {
+                outlineColor: colors.iconsBorderHoverLight,
+              },
+            },
+          },
+          {
+            props: {
+              variant: 'favoritesButtonSelected' as const
+            },
+            style: {
+              minWidth: '40px',
+              width: '40px',
+              padding: 0,
+              borderRadius: '0',
+              outline: 'solid',
+              outlineWidth: '1px',
+              outlineColor: colors.iconsBorderSelectedLight,
+              "&:hover": {
+                outlineColor: colors.iconsBorderHoverLight,
               },
             },
           },
@@ -296,7 +322,7 @@ export const customTheme = (mode: PaletteMode) => ({
         variants: [
           {
             props: {
-              variant: 'primary' as const
+              variant: 'buttonDefault' as const
             },
             style: {
               width: '100%',
@@ -312,17 +338,12 @@ export const customTheme = (mode: PaletteMode) => ({
               lineHeight: '21px' as const,
               textAlign: 'center' as const,
               "&:hover": {
-                color: colors.whiteSelected,
                 backgroundColor: colors.hoverDark,
-              },
-              "&:active": {
-                color: colors.whiteSelected,
-                backgroundColor: colors.bgSelectedDark,
               },
             },
           },
           {
-            props: { variant: 'selected' as const},
+            props: { variant: 'buttonSelected' as const},
             style: {
               width: '100%',
               borderRadius: '0',
@@ -335,12 +356,43 @@ export const customTheme = (mode: PaletteMode) => ({
               lineHeight: '21px' as const,
               textAlign: 'center' as const,
               "&:hover": {
-                color: colors.whiteSelected,
                 backgroundColor: colors.hoverDark,
               },
-              "&:active": {
-                color: colors.whiteSelected,
-                backgroundColor: colors.bgDark,
+            },
+
+          },
+          {
+            props: {
+              variant: 'favoritesButtonDefault' as const
+            },
+            style: {
+              minWidth: '40px',
+              width: '40px',
+              padding: 0,
+              borderRadius: '0',
+              outline: 'none',
+              backgroundColor: colors.bgSelectedDark,
+              "&:hover": {
+                backgroundColor: colors.bgMiddleDark,
+              },
+            },
+          },
+          {
+            props: {
+              variant: 'favoritesButtonSelected' as const
+            },
+            style: {
+              minWidth: '40px',
+              width: '40px',
+              padding: 0,
+              borderRadius: '0',
+              outline: 'solid',
+              outlineWidth: '1px',
+              outlineColor: colors.iconsBorderSelectedDark,
+              backgroundColor: 'transparent',
+              "&:hover": {
+                outline: 'none',
+                backgroundColor: colors.bgMiddleDark,
               },
             },
           },

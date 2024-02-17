@@ -1,13 +1,15 @@
 import React from 'react';
 import { Grid, Card, CardContent, CardMedia, Typography, Button, Box, Divider } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Item from './ItemCard.types';
-import { useOrderContext } from '../../context/useOrderContext';
-import { Link as RouterLink } from 'react-router-dom';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const ItemCard = ({ item, carouselWidth }: { item: Item, carouselWidth?: string }) => {
+import { Link as RouterLink } from 'react-router-dom';
+import { useInteractionsContext } from '../../context/useInteractionsContext';
+import { Product } from '../../types/Product';
+
+const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: string }) => {
   const { id, images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item;
-  const { addToOrder } = useOrderContext();
+  const { order, addToOrder,  favorites, toggleFavorites } = useInteractionsContext();
 
   const handleAddToOrder = (id: string, priceRegular: number) => (event: React.MouseEvent) => {
     event.preventDefault();
@@ -15,11 +17,11 @@ const ItemCard = ({ item, carouselWidth }: { item: Item, carouselWidth?: string 
     addToOrder(id, priceRegular);
   };
 
-  const handleAddToFavorites = (id: string) => (event: React.MouseEvent) => {
+  const handleToggleToFavorites = (id: string) => (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log(`add ${id} to favorites`);
-  };
+    toggleFavorites(id);
+  }
 
   const cardStyle = {
     width: typeof carouselWidth === 'string' ? carouselWidth : { xs: "288px", sm: "229px", md: "272px" },
@@ -30,6 +32,9 @@ const ItemCard = ({ item, carouselWidth }: { item: Item, carouselWidth?: string 
     boxShadow: 0,
     p: 2,
   };
+
+  const isFavorites = favorites.find(product => product.id === id)
+  const isSelected = order.find(product => product.id === id)
 
   return (
     <RouterLink to={`/phones/${id}`} style={{ textDecoration: 'none' }}>
@@ -67,23 +72,30 @@ const ItemCard = ({ item, carouselWidth }: { item: Item, carouselWidth?: string 
               <Typography sx={{ fontSize: 12, fontWeight: 'bold' }}>{ram !== undefined ? ram : ''}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-              <Button variant="contained" sx={{
-                width: typeof carouselWidth === 'string' ? "400px" : { xs: "176px", sm: "117px", md: "160px" },
-                height: 40,
-                boxShadow: 0,
-                borderRadius: 0,
-                fontSize: 12,
-                fontWeight: 500,
-                textTransform: 'capitalize',
-              }}
-                onClick={(event) => handleAddToOrder(id, priceRegular)(event)}
+              <Button
+                variant={isSelected ? 'buttonSelected' : 'buttonDefault'}
+                sx={{
+                  width: typeof carouselWidth === 'string' ? "400px" : { xs: "176px", sm: "117px", md: "160px" },
+                  height: 40,
+                  boxShadow: 0,
+                  borderRadius: 0,
+                  fontSize: 12,
+                  fontWeight: 500,
+                  textTransform: 'capitalize',
+                }}
+                onClick={handleAddToOrder(id, priceRegular)}
               >
                 Add to Cart
               </Button>
-              <Button variant="outlined" sx={{ minWidth: 40, height: 40, borderRadius: 0, p: 0, borderColor: 'icons.main' }}
-                onClick={(event) => handleAddToFavorites(id)(event)}
+              <Button
+                component='button'
+                variant={isFavorites ? 'favoritesButtonSelected' : 'favoritesButtonDefault'}
+                onClick={handleToggleToFavorites(id)}
               >
-                <FavoriteBorderIcon sx={{ width: 20, height: 20, color: 'primary.main' }} />
+                {isFavorites
+                  ? <FavoriteIcon sx={{ width: 16, height: 16, color: 'red.main' }} />
+                  : <FavoriteBorderIcon sx={{ width: 16, height: 16, color: 'primary.main' }} />
+                }
               </Button>
             </Box>
           </CardContent>

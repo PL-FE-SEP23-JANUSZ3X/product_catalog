@@ -8,7 +8,7 @@ import {
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useOrderContext } from "../../context/useOrderContext";
+import { useInteractionsContext } from "../../context/useInteractionsContext";
 import { useEffect, useMemo, useState } from "react";
 import { Product } from "../../types/Product";
 import { ErrorMessage } from "../../types/ErrorMessages";
@@ -74,7 +74,7 @@ const CartItem = ({ orderProductId, orderCount, orderPrice }: Props) => {
     removeFromOrder,
     increaseCount,
     decreaseCount,
-  } = useOrderContext()
+  } = useInteractionsContext()
 
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);

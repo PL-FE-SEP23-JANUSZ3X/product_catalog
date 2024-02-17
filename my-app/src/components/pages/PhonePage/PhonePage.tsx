@@ -4,7 +4,8 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-  Divider
+  Divider,
+  Skeleton
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
 import { useParams } from 'react-router-dom';
@@ -48,6 +49,7 @@ export const PhonePage = () => {
 
     fetchPhoneData();
   }, [phoneId]);
+
   const images = [
     {
       original:
@@ -81,15 +83,25 @@ export const PhonePage = () => {
     },
   ];
 
-    if (error !== null) {
-      return (
-        <>
-          <Typography>{error}</Typography>
-        </>
-      );
-    }
-  return (
+  if (error !== null) {
+    return (
+      <>
+        <Typography>{error}</Typography>
+      </>
+    );
+  }
 
+  if (isLoading) {
+    return (
+      <Skeleton
+        variant="rounded"
+        sx={{width: {xs: "288px", sm: "592px", md: "752px"},
+          height: {xs: "160px", sm: "128px"}}}
+      />
+    )
+  }
+
+  return (
     <Section>
       <Container>
         <img src='/images/icons/arr-left-light.svg' />

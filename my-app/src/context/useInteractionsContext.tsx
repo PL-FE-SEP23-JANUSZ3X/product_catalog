@@ -2,32 +2,40 @@ import { FC, ReactNode, createContext, useContext, useEffect, useState } from "r
 import useLocalStorage from "../utils/useLocalStorage";
 import { useSnackContext } from "./useSnackContext";
 import { OrderProductType } from "../types/OrderProductType";
+import { FavoriteType } from "../types/FavoriteType";
 
 type Props = {
   children: ReactNode;
 };
 
-type OrderProviderType = {
+type InteractionsProviderType = {
   order: OrderProductType[];
   total: number;
   addToOrder: (id: string, price: number) => void;
   removeFromOrder: (id: string) => void;
   increaseCount: (id: string) => void;
   decreaseCount: (id: string) => void;
+
+  favorites: FavoriteType[];
+  toggleFavorites: (id: string) => void;
 };
 
-const OrderContext = createContext<OrderProviderType>({
+const InteractionsContext = createContext<InteractionsProviderType>({
   order: [],
   total: 0,
   addToOrder: () => [],
   removeFromOrder: () => [],
   increaseCount: () => [],
   decreaseCount: () => [],
+
+  favorites: [],
+  toggleFavorites: () => [],
 })
 
-export const OrderProvider: FC<Props> = ({ children }: Props) => {
+export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
   const [order, setOrder] = useLocalStorage('order', []);
   const [total, setTotal] = useState<number>(0)
+  const [favorites, setFavorites] = useLocalStorage('favorites', []);
 
   const { setSnack } = useSnackContext();
 
@@ -122,6 +130,32 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
     });
   };
 
+  const toggleFavorites = (id: string) => {
+    const found:FavoriteType = favorites.find((product: FavoriteType) => {
+      return product.id === id;
+    });
+
+    if (found !== undefined) {
+      setFavorites((prevState: FavoriteType[]) => prevState.filter((item) => item.id !== id));
+
+      setSnack({
+        message: "You don't like this product anymore",
+        severity: 'success',
+        open: true,
+        autoHideDuration: 2000,
+      });
+    } else {
+      setFavorites([
+        ...favorites, { id },
+      ]);
+      setSnack({
+        message: 'You have added a new product to your favorites',
+        severity: 'success',
+        open: true,
+        autoHideDuration: 2000,
+      });
+    };
+  };
   const value = {
     order,
     total,
@@ -129,13 +163,16 @@ export const OrderProvider: FC<Props> = ({ children }: Props) => {
     removeFromOrder,
     increaseCount,
     decreaseCount,
+
+    favorites,
+    toggleFavorites,
   }
 
   return (
-    <OrderContext.Provider value={value}>
+    <InteractionsContext.Provider value={value}>
       {children}
-    </OrderContext.Provider>
+    </InteractionsContext.Provider>
   );
 }
 
-export const useOrderContext = () => useContext(OrderContext)
+export const useInteractionsContext = () => useContext(InteractionsContext)

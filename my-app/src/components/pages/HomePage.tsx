@@ -3,8 +3,8 @@ import Slider from '../slider/Slider'
 import Section from "../section/Section";
 import Carousel from "../carousel/Carousel";
 import { useEffect, useState } from "react";
-import Item from "../itemCard/ItemCard.types";
 import { useThemeContext } from "../../theme/ThemeContext";
+import { Product } from "../../types/Product";
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -23,7 +23,7 @@ const MOBILE_BANNER_IMAGES = [
 ]
 
 const HomePage = () => {
-  const [newModels, setNewModels] = useState<Item[]>([]);
+  const [newModels, setNewModels] = useState<Product[]>([]);
   const { theme } = useThemeContext();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
