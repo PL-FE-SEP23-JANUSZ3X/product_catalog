@@ -4,6 +4,17 @@ import { useEffect, useState } from "react";
 import ItemCard from "../itemCard/ItemCard";
 import TechnologyProps from "./Technology.types";
 import { Product } from "../../types/Product";
+import Section from "../section/Section";
+
+const boxStyle = {
+  display: 'grid',
+  justifyContent: 'center',
+  gridTemplateColumns: {xs: 'repeat(1, 288px)', sm: 'repeat(2, 288px)', md: 'repeat(4, 272px)'},
+  gridAutoRows: 'auto',
+  gap: '40px 16px',
+  marginTop: '24px'
+}
+
 
 const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -83,8 +94,8 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   
 
   return (
-    <Box sx={{ paddingY: 3, paddingX: 2, display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{width: 1200}} >
+    <Section>
+      <Box>
         <Box sx={{ display: 'flex', alginItems: 'center', gap: 1.5 }}>
           <img src='/images/icons/home.svg' />
           <img src='/images/icons/arr-rigth.svg' />
@@ -143,8 +154,7 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
         <Grid
           container
           justifyContent="space-between"
-          // spacing={2}
-          sx={{width: '100%', mt: 3, grid: 3}}
+          sx={boxStyle}
         >
           {loader
             ? skeletonItems
@@ -165,7 +175,7 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
           />
         </Box>
       </Box>
-    </Box>
+    </Section>
   );
 };
 
