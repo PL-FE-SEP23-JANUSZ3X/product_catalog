@@ -24,7 +24,7 @@ const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: stri
   }
 
   const cardStyle = {
-    width: typeof carouselWidth === 'string' ? carouselWidth : { xs: "288px", sm: "229px", md: "272px" },
+    width: typeof carouselWidth === 'string' ? carouselWidth : { xs: "288px", sm: "288px", md: "272px" },
     height: { xs: "442px", sm: "506px" },
     border: 1,
     borderRadius: 0,
@@ -75,7 +75,7 @@ const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: stri
               <Button
                 variant={isSelected ? 'buttonSelected' : 'buttonDefault'}
                 sx={{
-                  width: typeof carouselWidth === 'string' ? "400px" : { xs: "176px", sm: "117px", md: "160px" },
+                  width: typeof carouselWidth === 'string' ? "400px" : { xs: "176px", sm: "176px", md: "160px" },
                   height: 40,
                   boxShadow: 0,
                   borderRadius: 0,

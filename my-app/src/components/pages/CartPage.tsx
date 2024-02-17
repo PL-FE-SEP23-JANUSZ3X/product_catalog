@@ -46,7 +46,7 @@ const CartPage = () => {
               ? 'images/icons/arr-left-light.svg' 
               : 'images/icons/arr-left-dark.svg'}
           />
-          <Typography variant="body2" sx={{ color: 'secondary.main', display: 'inline-block', fontWeight: '700' }}>
+          <Typography variant="body1" sx={{ color: 'secondary.main', display: 'inline-block', fontWeight: '600' }}>
             Back
           </Typography>
         </>
