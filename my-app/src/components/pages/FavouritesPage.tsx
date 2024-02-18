@@ -79,7 +79,7 @@ const FavouritesPage = () => {
               {isLoading
                 ? (
                   <>
-                    { Array.from({ length: favourites.length }, (_, index) => (
+                    { Array.from({ length: favourites.length }, () => (
                       <Skeleton variant="rounded" width={272} height={506} />
                     ))
                     }
