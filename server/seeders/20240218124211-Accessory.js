@@ -1,11 +1,11 @@
 'use strict';
 
-const tabletData = require('../src/apiData/tablets.json');
+const accessoryData = require('../src/apiData/accessories.json');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const transformedtabletData = tabletData.map(tablet => ({
+    const transformedAccessoryData = accessoryData.map(tablet => ({
       ...tablet,
       capacityAvailable: tablet.capacityAvailable,
       colorsAvailable: tablet.colorsAvailable,
@@ -16,11 +16,11 @@ module.exports = {
       updatedAt: new Date()
     }));
 
-    await queryInterface.bulkInsert('Tablets', transformedtabletData, {});
+    await queryInterface.bulkInsert('Accessories', transformedAccessoryData, {});
   },
 
   async down (queryInterface, Sequelize) {
 
-    await queryInterface.bulkDelete('Tablets', null, {});
+    await queryInterface.bulkDelete('Accessories', null, {});
   }
 };

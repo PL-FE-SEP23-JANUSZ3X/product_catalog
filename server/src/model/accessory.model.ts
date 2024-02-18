@@ -1,8 +1,9 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript'
+import { sequelize } from '../utils/db'
 
 @Table({
-  tableName: 'Accessory',
-  modelName: 'Accessories',
+  tableName: 'Accessories',
+  modelName: 'Accessory',
 })
 export class Accessory extends Model {
   @Column({
@@ -62,6 +63,5 @@ export class Accessory extends Model {
   @Column(DataType.ARRAY(DataType.STRING))
   cell?: string[];
 }
-
 
 export default Accessory;
