@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid, Card, CardContent, CardMedia, Typography, Button, Box, Divider } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
 import { Link as RouterLink } from 'react-router-dom';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
 import { Product } from '../../types/Product';

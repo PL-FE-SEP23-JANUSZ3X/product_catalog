@@ -5,7 +5,6 @@ import ItemCard from "../itemCard/ItemCard";
 import TechnologyProps from "./Technology.types";
 import { Product } from "../../types/Product";
 import Section from "../section/Section";
-import { useThemeContext } from "../../theme/ThemeContext";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
 
 const boxStyle = {
@@ -17,15 +16,12 @@ const boxStyle = {
   marginTop: '24px'
 }
 
-
 const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [paginationCount, setPaginationCount] = useState<number>(0)
   const [technology, setTechnology] = useState<Product[]>([])
   const [technologyCount, setTechnologyCount] = useState<number>(0)
   const [loader, setLoader] = useState<boolean>(false)
-
-  const { theme } = useThemeContext();
 
   const sortType = searchParams.get('sort') ?? 'newest';
   const itemsPerPage = searchParams.get('items') ?? '16'; 
