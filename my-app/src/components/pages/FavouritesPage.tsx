@@ -53,6 +53,14 @@ const FavouritesPage = () => {
     );
   }
 
+  if (error !== null) {
+    return (
+      <>
+        <Typography>{error}</Typography>
+      </>
+    );
+  }
+
   return (
     <Section >
       <Box>
@@ -68,22 +76,26 @@ const FavouritesPage = () => {
           ? <Typography variant="h4" mb="4" sx={{ mt: {xs: 3, sm: 2}}} >Your favourites are empty</Typography>
           : ( 
             <Stack sx={boxStyle}>
-              {favouriteProducts.map((product) => (
-                isLoading
-                  ? (
-                    <Skeleton
-                      variant="rounded"
-                      sx={{ width: {xs: '288px', md: '272px'},
-                        height: {xs: '440px', md: '506px'}}}
-                    />
-                  )
-                  : (
+              {isLoading
+                ? (
+                  <>
+                    { Array.from({ length: favourites.length }, (_, index) => (
+                      <Skeleton variant="rounded" width={272} height={506} />
+                    ))
+                    }
+                  </>
+                )
+                : (
+                  <>
+                    {favouriteProducts.map((product) => (
                     <ItemCard
                       key={product.id}
                       item={product}
                     />
-                  )
-              ))}
+                  ))}
+                  </>
+                )}
+              
             </Stack>
           )
         }
