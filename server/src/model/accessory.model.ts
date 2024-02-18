@@ -1,5 +1,4 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript'
-import { sequelize } from '../utils/db'
 
 @Table({
   tableName: 'Accessories',

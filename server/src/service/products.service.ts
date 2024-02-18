@@ -6,16 +6,13 @@ const getAllProducts= async() => {
 };
 
 const getByCategory= async(categoryType: string) => {
-    const filter = {}
-
     return Product.findAll({where: {category : categoryType}});
 };
 
-const getOneProduct= async(id: string) => {
-
+const getProductByID= async(id: string) => {
     return Product.findByPk(id);
 };
 
-const productService = {getAllProducts, getOneProduct, getByCategory};
+const productService = {getAllProducts, getProductByID, getByCategory};
 
 export default productService;

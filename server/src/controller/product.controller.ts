@@ -36,18 +36,18 @@ const getByCategory: ControllerAction = async(req, res) => {
     }
 }
 
-const getOne: ControllerAction = async(req, res) => {
+const getById: ControllerAction = async(req, res) => {
     const { id } = req.params
     try {
-        const allProducts = await productService.getOneProduct(id);
+        const oneProduct = await productService.getProductByID(id);
 
-        res.send(allProducts)
+        res.send(oneProduct)
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
     }
 }
 
-const productController = {getAll, getOne, getByCategory};
+const productController = {getAll, getById, getByCategory};
 
 export default productController;
