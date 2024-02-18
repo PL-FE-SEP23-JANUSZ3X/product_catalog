@@ -25,22 +25,30 @@ const MOBILE_BANNER_IMAGES = [
 
 const HomePage = () => {
   const [newModels, setNewModels] = useState<Product[]>([]);
+  const [hotPrices, setHotPrices] = useState<Product[]>([]);
   const { theme } = useThemeContext();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const images = isMobile ? MOBILE_BANNER_IMAGES : BANNER_IMAGES;
 
-  const newModelSectionTitle = 'Brand new models'
+  const newModelSectionTitle = 'Brand new models';
+  const hotPricesSectionTitle = 'Hot prices';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/newest-0-20-asc`);
-        if (!response.ok) {
+        const responseNewModel = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/newest-0-20`);
+        const responseHotPrices = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/hotprices-0-20`);
+
+        if (!responseHotPrices.ok && !responseNewModel.ok) {
           throw new Error('Network response was not ok');
         }
-        const phonesData = await response.json();
-        setNewModels(phonesData);
+    
+        const phonesNewModel = await responseNewModel.json();
+        const phonesHotPrices = await responseHotPrices.json();
+      
+        setNewModels(phonesNewModel);
+        setHotPrices(phonesHotPrices)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
