@@ -131,6 +131,9 @@ const HomePage = () => {
           </Box>
         </Box>
       </Section>
+      <Section>
+        <Carousel title={hotPricesSectionTitle} products={hotPrices} />
+      </Section>
     </>
   );
 };
