@@ -67,9 +67,11 @@ const HomePage = () => {
         }}>Welcome to Nice Gadgets store!</Typography>
         <Slider images={images} />
       </Container>
+
       <Section>
         <Carousel title={newModelSectionTitle} products={newModels} />
       </Section>
+
       <Section>
         <Box>
           <Typography variant="h2" sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '24px'}}>Shop by category</Typography>
@@ -131,6 +133,7 @@ const HomePage = () => {
           </Box>
         </Box>
       </Section>
+  
       <Section>
         <Carousel title={hotPricesSectionTitle} products={hotPrices} />
       </Section>
