@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Product } from "../../types/Product";
 import { ErrorMessage } from "../../types/ErrorMessages";
 import { getPhone } from "../../utils/fetchHelper";
+import ProductCartProps from './ProductCart.types'
 
 const containerStyle = {
   backgroundColor: 'background.paper',
@@ -63,13 +64,7 @@ const iconButtonStyle = {
   }
 }
 
-type Props = {
-  orderProductId: string,
-  orderCount: number,
-  orderPrice: number,
-}
-
-const CartItem = ({ orderProductId, orderCount, orderPrice }: Props) => {
+const ProductCart: React.FC<ProductCartProps> = ({ orderProductId, orderCount, orderPrice }) => {
   const {
     removeFromOrder,
     increaseCount,
@@ -216,4 +211,4 @@ const CartItem = ({ orderProductId, orderCount, orderPrice }: Props) => {
   )
 };
 
-export default CartItem;
+export default ProductCart;
