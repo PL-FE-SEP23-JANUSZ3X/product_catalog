@@ -5,7 +5,6 @@ import ItemCard from "../itemCard/ItemCard";
 import TechnologyProps from "./Technology.types";
 import { Product } from "../../types/Product";
 import Section from "../section/Section";
-import { useThemeContext } from "../../theme/ThemeContext";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
 
 const boxStyle = {
@@ -16,7 +15,6 @@ const boxStyle = {
   gap: '40px 16px',
   marginTop: '24px'
 }
-
 
 const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   const [searchParams, setSearchParams] = useSearchParams()
