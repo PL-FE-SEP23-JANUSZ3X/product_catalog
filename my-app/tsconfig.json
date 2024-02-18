@@ -23,6 +23,10 @@
   "include": [
     "src",
   ],
+  "exclude": [
+    "**/node_modules",
+    "**/jsx-runtime.d.ts"
+  ],
   "ignorePatterns": [
     "src/*/.test.ts",
     "src/frontend/generated/",
