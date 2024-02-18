@@ -5,10 +5,11 @@ import {
   useMediaQuery,
   useTheme,
   Divider,
-  Skeleton
+  Skeleton,
+  Link
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePageStyle.css';
 import { useEffect, useState } from 'react';
@@ -17,6 +18,8 @@ import { Phone } from '../../../types';
 import { ErrorMessage } from '../../../types/ErrorMessages';
 import Section from '../../section/Section';
 import ProductVariantsActions from '../../productVariantsActions/ProductVariantsActions';
+import CustomBreadcrumbs from '../../navigation/CustomBreadcrumbs';
+import { colors } from '../../../theme/colors';
 
 export const PhonePage = () => {
 
@@ -101,13 +104,40 @@ export const PhonePage = () => {
     )
   }
 
+  const navlinkStyle = {
+    ml: 1,
+    textDecoration: 'none', 
+    fontSize: '12px',
+    fontWeight: '600',
+    lineHeight: '15px',
+    color: theme.palette.mode === 'light' ? colors.breadcrumbsLight : colors.breadcrumbsDark,
+    ':hover': {
+      color: theme.palette.mode === 'light' ? colors.breadcrumbsHoverLight : colors.breadcrumbsHoverDark,
+    },
+  }
+
+
   return (
     <Section>
       <Container>
-        <img src='/images/icons/arr-left-light.svg' />
-        <Typography mb="16px" variant="caption" sx={{ color: 'secondary.main', mt:{xs:"24px", sm:"40px"}}}>
-            Back
-        </Typography>
+        <CustomBreadcrumbs parrentLink='phones' currentPage='Favourites'/>
+        <Box mb={2}>
+          <Box component='img' height={10}
+            src={theme.palette.mode === 'light'
+              ? '/images/icons/arr-left-light.svg'
+              : '/images/icons/arr-left-dark.svg'
+            }
+          />
+          <NavLink to={`/phones`} end style={{textDecoration:'none', display: 'inline-block'}}> 
+            <Link 
+              component='div'
+              variant='body2'
+              sx={navlinkStyle}
+            >
+              Back
+            </Link>
+          </NavLink>
+        </Box>
         <Typography variant="h2" color="text.primary" sx={{width:{xs:"288px", sm:"592px", md:"1136px"}}}>
           {phoneData?.name} (iMT9G2FS/A)
         </Typography>

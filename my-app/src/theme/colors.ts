@@ -14,4 +14,8 @@ export const colors = {
     iconsBorderDefaultDark: '#B4BDC3',
     iconsBorderHoverDark: '#313237',
     iconsBorderSelectedDark: '#3B3E4A',
+    breadcrumbsLight: '#89939A',
+    breadcrumbsDark: '#F1F2F9',
+    breadcrumbsHoverLight: '#313237',
+    breadcrumbsHoverDark: '#905BFF',
   }

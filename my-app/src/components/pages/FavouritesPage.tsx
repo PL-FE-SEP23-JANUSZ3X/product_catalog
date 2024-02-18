@@ -1,11 +1,11 @@
 import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import Section from "../section/Section";
 import { useInteractionsContext } from "../../context/useInteractionsContext";
-import { useThemeContext } from "../../theme/ThemeContext";
 import ItemCard from "../itemCard/ItemCard";
 import { useEffect, useState } from "react";
 import { getPhones } from "../../utils/fetchHelper";
 import { Product } from "../../types/Product";
+import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
 
 const boxStyle = {
   display: 'grid',
@@ -19,7 +19,6 @@ const FavouritesPage = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { theme } = useThemeContext();
 
   const { favourites } = useInteractionsContext()
 
@@ -57,21 +56,8 @@ const FavouritesPage = () => {
   return (
     <Section >
       <Box>
-        <Box sx={{ display: 'flex', alignItems:'flex-start'}}>
-          <Box component='img' mr={0.5}
-            src={theme.palette.mode === 'light'
-              ? 'images/icons/home.svg' 
-              : 'images/icons/home-dark.svg'
-            }
-          />
-          <Typography
-            variant="body1"
-            sx={{ color: 'secondary.main', display: 'inline-block', fontWeight: '600' }}
-          >
-            Back
-          </Typography>
-        </Box>
-        <Typography variant="h1" sx={{ mt: {xs: 3, sm: 2}, mb: 1}} >Favourites</Typography>
+        <CustomBreadcrumbs currentPage='Favourites'/>
+        <Typography variant="h1" sx={{ mb: 1}} >Favourites</Typography>
         <Typography
           variant="body1"
           sx={{ mb: 5, color: 'secondary.main'}}

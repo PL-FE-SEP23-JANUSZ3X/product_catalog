@@ -5,6 +5,8 @@ import ItemCard from "../itemCard/ItemCard";
 import TechnologyProps from "./Technology.types";
 import { Product } from "../../types/Product";
 import Section from "../section/Section";
+import { useThemeContext } from "../../theme/ThemeContext";
+import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
 
 const boxStyle = {
   display: 'grid',
@@ -22,6 +24,8 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   const [technology, setTechnology] = useState<Product[]>([])
   const [technologyCount, setTechnologyCount] = useState<number>(0)
   const [loader, setLoader] = useState<boolean>(false)
+
+  const { theme } = useThemeContext();
 
   const sortType = searchParams.get('sort') ?? 'newest';
   const itemsPerPage = searchParams.get('items') ?? '16'; 
@@ -96,13 +100,7 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   return (
     <Section>
       <Box>
-        <Box sx={{ display: 'flex', alginItems: 'center', gap: 1.5 }}>
-          <img src='/images/icons/home.svg' />
-          <img src='/images/icons/arr-rigth.svg' />
-          <Typography variant="caption" sx={{ color: 'secondary.main' }}>
-            {headline}
-          </Typography>
-        </Box>
+        <CustomBreadcrumbs currentPage={headline}/>
         <Typography variant="h2" gutterBottom sx={{mt: 2}}>
           {title}
         </Typography>
