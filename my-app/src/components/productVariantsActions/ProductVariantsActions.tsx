@@ -8,10 +8,12 @@ import {
 } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from "react-router-dom";
 import { FC } from "react";
 import { Phone } from '../../types/Phone';
 import './ProductVariantsActionsStyle.css';
+import { useInteractionsContext } from '../../context/useInteractionsContext';
 
 type Props = {
   phoneData: Phone | null
@@ -39,6 +41,24 @@ const productColors: { [key: string]: string } = {
 }
 
 const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
+  const { order, addToOrder,  favourites, toggleFavourites } = useInteractionsContext();
+
+  const handleAddToOrder = (id: string | undefined, priceRegular: number | undefined) => () => {
+    if (id !== undefined && priceRegular !== undefined) {
+      addToOrder(id, priceRegular);
+    }
+  };
+
+  const handleAddToFavourites = (id: string | undefined) => () => {
+    if (id !== null && id !== undefined) {
+      toggleFavourites(id);
+    }
+  }
+
+  const isFavourites = favourites.find(product => product.id === phoneData?.id)
+  const isSelected = order.find(product => product.id === phoneData?.id)
+
+
   return (
     <Box
       className="product-variants-actions"
@@ -57,6 +77,7 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
           <Box className="available-colors_icons-container">
             {phoneData?.colorsAvailable.map((color) => (
               <Link
+                key={color}
                 to={`/phones/${phoneData?.namespaceId}-${phoneData?.capacity.toLowerCase()}-${color}`}
               >
                 <IconButton
@@ -92,11 +113,9 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
             color: "secondary.main",
           }}>Select capacity</Typography>
         
-         
-
         <Box sx={{ display: "flex", gap: "10px" }}>
         {phoneData?.capacityAvailable.map((capacity) => (
-          <Link to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}>
+          <Link key={capacity} to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}>
             <Button
               variant="contained"
               sx={{
@@ -132,33 +151,22 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
         </Typography>
       </Box>
 
-      <Stack spacing={3} direction="row">
+      <Stack spacing={1} direction="row">
         <Button
-          className="buttons_add-button"
-          variant="contained"
-          sx={{
-            boxShadow: 0,
-            borderRadius: 0,
-            fontWeight: 500,
-            textTransform: "none",
-            p: 1.5,
-          }}
+          variant={ isSelected ? 'buttonSelected' : 'buttonDefault'}
+          onClick={handleAddToOrder(phoneData?.id, phoneData?.priceRegular)}
         >
           Add to card
         </Button>
         <Button
-          variant="outlined"
-          sx={{
-            minWidth: 48,
-            height: 48,
-            borderRadius: 0,
-            p: 0,
-            borderColor: "icons.main",
-          }}
+          variant={ isFavourites ? 'favouritesButtonSelected' : 'favouritesButtonDefault'}
+          sx={{ minWidth: 48, height: 48 }}
+          onClick={handleAddToFavourites(phoneData?.id)}
         >
-          <FavoriteBorderIcon
-            sx={{ width: 20, height: 20, color: "primary.main" }}
-          />
+          {isFavourites
+            ? <FavoriteIcon sx={{ width: 20, height: 20, color: 'red.main' }} />
+            : <FavoriteBorderIcon sx={{ width: 20, height: 20, color: 'primary.main' }} />
+          }
         </Button>
       </Stack>
 

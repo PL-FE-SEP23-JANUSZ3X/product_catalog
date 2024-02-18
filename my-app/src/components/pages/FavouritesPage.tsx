@@ -1,10 +1,93 @@
-import { Typography } from "@mui/material";
+import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import Section from "../section/Section";
+import { useInteractionsContext } from "../../context/useInteractionsContext";
+import ItemCard from "../itemCard/ItemCard";
+import { useEffect, useState } from "react";
+import { getPhones } from "../../utils/fetchHelper";
+import { Product } from "../../types/Product";
+import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
+
+const boxStyle = {
+  display: 'grid',
+  justifyContent: 'center',
+  gridTemplateColumns: {xs: 'repeat(1, 288px)', sm: 'repeat(2, 288px)', md: 'repeat(4, 272px)'},
+  gridAutoRows: 'auto',
+  gap: '40px 16px',
+}
 
 const FavouritesPage = () => {
+  const [products, setProducts] = useState<Product[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const { favourites } = useInteractionsContext()
+
+  const favouriteProducts = products.filter((el) => {
+    return favourites.some((f) => {
+      return f.id === el.id 
+    });
+  });
+
+  useEffect(() => {
+    const fetchPhoneData = async () => {
+      setError(null);
+      setIsLoading(true);
+      try {
+        const data = await getPhones();
+        setProducts(data);
+      } catch (error) {
+        setError('ErrorMessage');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPhoneData();
+  }, []);
+
+  if (error !== null) {
+    return (
+      <>
+        <Typography>{error}</Typography>
+      </>
+    );
+  }
+
   return (
-    <Section>
-      <Typography variant="h1" color="text.primary" mb="32px" >Favourites</Typography>
+    <Section >
+      <Box>
+        <CustomBreadcrumbs currentPage='Favourites'/>
+        <Typography variant="h1" sx={{ mb: 1}} >Favourites</Typography>
+        <Typography
+          variant="body1"
+          sx={{ mb: 5, color: 'secondary.main'}}
+        >
+          {`${favourites.length} items`}
+        </Typography>
+        {favourites.length === 0
+          ? <Typography variant="h4" mb="4" sx={{ mt: {xs: 3, sm: 2}}} >Your favourites are empty</Typography>
+          : ( 
+            <Stack sx={boxStyle}>
+              {favouriteProducts.map((product) => (
+                isLoading
+                  ? (
+                    <Skeleton
+                      variant="rounded"
+                      sx={{ width: {xs: '288px', md: '272px'},
+                        height: {xs: '440px', md: '506px'}}}
+                    />
+                  )
+                  : (
+                    <ItemCard
+                      key={product.id}
+                      item={product}
+                    />
+                  )
+              ))}
+            </Stack>
+          )
+        }
+      </Box>
     </Section>
   );
 };

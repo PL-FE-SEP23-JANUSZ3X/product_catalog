@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import Item from '../itemCard/ItemCard.types'
+import { Product } from '../../types/Product';
 
 export type ArrowProps = {
   className: string;
@@ -8,5 +8,5 @@ export type ArrowProps = {
 
 export type CarouselProps = {
   title: string
-  products: Item[]
+  products: Product[]
 }

@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Section from "../section/Section";
 import { useThemeContext } from "../../theme/ThemeContext";
-import { useOrderContext } from "../../context/useOrderContext";
+import { useInteractionsContext } from "../../context/useInteractionsContext";
 import CartItem from "../cartItem/CartItem";
 
 const containerStyle = {
@@ -35,7 +35,7 @@ const totalStyle = {
 
 const CartPage = () => {
   const { theme } = useThemeContext();
-  const { order, total} = useOrderContext()
+  const { order, total} = useInteractionsContext()
 
   return (
     <Section >
@@ -46,7 +46,7 @@ const CartPage = () => {
               ? 'images/icons/arr-left-light.svg' 
               : 'images/icons/arr-left-dark.svg'}
           />
-          <Typography variant="body2" sx={{ color: 'secondary.main', display: 'inline-block', fontWeight: '700' }}>
+          <Typography variant="body1" sx={{ color: 'secondary.main', display: 'inline-block', fontWeight: '600' }}>
             Back
           </Typography>
         </>
@@ -71,7 +71,7 @@ const CartPage = () => {
                     {`Total for ${order.length} items`}
                 </Typography>
                 <Divider flexItem sx={{ color: "elements.main", mb: {xs: 2, md: 3} }} />
-                <Button variant={'primary'} sx={{height: '48px'}}>Checkout</Button>
+                <Button variant={'buttonDefault'} sx={{height: '48px'}}>Checkout</Button>
               </Stack>
             </Box>
           )

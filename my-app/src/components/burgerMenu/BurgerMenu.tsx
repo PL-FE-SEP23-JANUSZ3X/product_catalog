@@ -5,7 +5,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useOrderContext } from "../../context/useOrderContext";
+import { useInteractionsContext } from "../../context/useInteractionsContext";
 
 const iconLinkStyle = {
   width: '100%',
@@ -93,7 +93,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
     transition: 'transform 0.3s ease-in-out',
   };
 
-  const { order } = useOrderContext()
+  const { order, favourites } = useInteractionsContext()
 
   useEffect(() => {
     console.log("BurgerMenu rerendered");
@@ -150,10 +150,20 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                   aria-label="menu"
                   sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
                 >
-                  {isActive 
-                    ? <FavoriteIcon />
-                    : <FavoriteBorderIcon />
-                  }
+                  <Badge
+                    overlap="circular"
+                    badgeContent={favourites.length}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    sx={badgeStyle}
+                  >
+                    {isActive 
+                      ? <FavoriteIcon />
+                      : <FavoriteBorderIcon />
+                    }
+                  </Badge>
                 </IconButton>
               )}
             </NavLink>
