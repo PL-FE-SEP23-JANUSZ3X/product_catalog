@@ -1,4 +1,6 @@
 import productService from '../service/products.service';
+
+
 import { ControllerAction } from '../utils/types';
 
 const getAll: ControllerAction = async(req, res) => {
@@ -17,19 +19,35 @@ const getAll: ControllerAction = async(req, res) => {
     }
 }
 
-const getOne: ControllerAction = async(req, res) => {
+const getByCategory: ControllerAction = async(req, res) => {
+    const { productCategory } = req.params
     try {
-        const allPhones = await productService.getAllProducts()
+        const allProducts = await productService.getByCategory(productCategory);
 
-        const { id } = req.params
+        if (!allProducts) {
+            res.status(404).send('Not Found: The specified entity does not exist');
 
-        res.send(allPhones[+id])
+            return;
+        }
+        res.send(allProducts);
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
     }
 }
 
-const productController = {getAll, getOne};
+const getOne: ControllerAction = async(req, res) => {
+    const { id } = req.params
+    try {
+        const allProducts = await productService.getOneProduct(id);
+
+        res.send(allProducts)
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+const productController = {getAll, getOne, getByCategory};
 
 export default productController;
