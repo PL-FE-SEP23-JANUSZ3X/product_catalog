@@ -53,9 +53,9 @@ const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: stri
             />
             <Typography sx={{ mt: 2.5, fontSize: 14 }}>{name}</Typography>
             <Box sx={{ display: 'flex', mt: 1 }}>
-              <Typography variant='h6' sx={{ color: 'primary.main', fontWeight: 'bold' }}>{`${priceRegular !== undefined ? priceRegular : ''}$`}</Typography>
+              <Typography variant='h6' sx={{ color: 'primary.main', fontWeight: 'bold' }}>{`${priceDiscount !== undefined ? priceDiscount : ''}$`}</Typography>
               <Box sx={{ width: 4 }} />
-              <Typography variant='h6' sx={{ color: 'secondary.main', textDecoration: 'line-through' }}>{`${priceDiscount !== undefined ? priceDiscount : ''}$`}</Typography>
+              <Typography variant='h6' sx={{ color: 'secondary.main', textDecoration: 'line-through' }}>{`${priceRegular !== undefined ? priceRegular : ''}$`}</Typography>
             </Box>
             <Divider sx={{ my: 1, mb: 1.5 }} />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: { xs: 0.5, sm: 0.5, md: 2 } }}>
