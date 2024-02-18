@@ -1,4 +1,4 @@
-import { Box, CardMedia, Container, Link, SxProps, Typography, useMediaQuery } from "@mui/material";
+import { Box, CardMedia, Container, SxProps, Typography, useMediaQuery } from "@mui/material";
 import Slider from '../slider/Slider'
 import Section from "../section/Section";
 import Carousel from "../carousel/Carousel";
