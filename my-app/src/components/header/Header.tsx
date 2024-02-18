@@ -97,7 +97,7 @@ const Header = () => {
   const white = theme.palette.background.paper;
   const [isOpen, setIsOpen] = useState(false);
   
-  const { order, favorites } = useInteractionsContext()
+  const { order, favourites } = useInteractionsContext()
 
   const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
   
@@ -244,7 +244,7 @@ const Header = () => {
                   {({ isActive }) => ( 
                     <Badge
                       overlap="circular"
-                      badgeContent={favorites.length}
+                      badgeContent={favourites.length}
                       anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'right',

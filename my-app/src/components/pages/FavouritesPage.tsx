@@ -21,10 +21,10 @@ const FavouritesPage = () => {
   const [error, setError] = useState<string | null>(null);
   const { theme } = useThemeContext();
 
-  const { favorites } = useInteractionsContext()
+  const { favourites } = useInteractionsContext()
 
-  const favoriteProducts = products.filter((el) => {
-    return favorites.some((f) => {
+  const favouriteProducts = products.filter((el) => {
+    return favourites.some((f) => {
       return f.id === el.id 
     });
   });
@@ -76,13 +76,13 @@ const FavouritesPage = () => {
           variant="body1"
           sx={{ mb: 5, color: 'secondary.main'}}
         >
-          {`${favorites.length} items`}
+          {`${favourites.length} items`}
         </Typography>
-        {favorites.length === 0
-          ? <Typography variant="h4" mb="4" sx={{ mt: {xs: 3, sm: 2}}} >Your favorites are empty</Typography>
+        {favourites.length === 0
+          ? <Typography variant="h4" mb="4" sx={{ mt: {xs: 3, sm: 2}}} >Your favourites are empty</Typography>
           : ( 
             <Stack sx={boxStyle}>
-              {favoriteProducts.map((product) => (
+              {favouriteProducts.map((product) => (
                 isLoading
                   ? (
                     <Skeleton

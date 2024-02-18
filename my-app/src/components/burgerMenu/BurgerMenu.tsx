@@ -93,7 +93,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
     transition: 'transform 0.3s ease-in-out',
   };
 
-  const { order, favorites } = useInteractionsContext()
+  const { order, favourites } = useInteractionsContext()
 
   useEffect(() => {
     console.log("BurgerMenu rerendered");
@@ -152,7 +152,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                 >
                   <Badge
                     overlap="circular"
-                    badgeContent={favorites.length}
+                    badgeContent={favourites.length}
                     anchorOrigin={{
                       vertical: 'top',
                       horizontal: 'right',

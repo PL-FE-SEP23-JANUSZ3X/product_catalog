@@ -2,7 +2,7 @@ import { FC, ReactNode, createContext, useContext, useEffect, useState } from "r
 import useLocalStorage from "../utils/useLocalStorage";
 import { useSnackContext } from "./useSnackContext";
 import { OrderProductType } from "../types/OrderProductType";
-import { FavoriteType } from "../types/FavoriteType";
+import { FavouriteType } from "../types/FavouriteType";
 
 type Props = {
   children: ReactNode;
@@ -16,8 +16,8 @@ type InteractionsProviderType = {
   increaseCount: (id: string) => void;
   decreaseCount: (id: string) => void;
 
-  favorites: FavoriteType[];
-  toggleFavorites: (id: string) => void;
+  favourites: FavouriteType[];
+  toggleFavourites: (id: string) => void;
 };
 
 const InteractionsContext = createContext<InteractionsProviderType>({
@@ -28,14 +28,14 @@ const InteractionsContext = createContext<InteractionsProviderType>({
   increaseCount: () => [],
   decreaseCount: () => [],
 
-  favorites: [],
-  toggleFavorites: () => [],
+  favourites: [],
+  toggleFavourites: () => [],
 })
 
 export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
   const [order, setOrder] = useLocalStorage('order', []);
   const [total, setTotal] = useState<number>(0)
-  const [favorites, setFavorites] = useLocalStorage('favorites', []);
+  const [favourites, setFavourites] = useLocalStorage('favourites', []);
 
   const { setSnack } = useSnackContext();
 
@@ -130,13 +130,13 @@ export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
     });
   };
 
-  const toggleFavorites = (id: string) => {
-    const found:FavoriteType = favorites.find((product: FavoriteType) => {
+  const toggleFavourites = (id: string) => {
+    const found:FavouriteType = favourites.find((product: FavouriteType) => {
       return product.id === id;
     });
 
     if (found !== undefined) {
-      setFavorites((prevState: FavoriteType[]) => prevState.filter((item) => item.id !== id));
+      setFavourites((prevState: FavouriteType[]) => prevState.filter((item) => item.id !== id));
 
       setSnack({
         message: "You don't like this product anymore",
@@ -145,11 +145,11 @@ export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
         autoHideDuration: 2000,
       });
     } else {
-      setFavorites([
-        ...favorites, { id },
+      setFavourites([
+        ...favourites, { id },
       ]);
       setSnack({
-        message: 'You have added a new product to your favorites',
+        message: 'You have added a new product to your favourites',
         severity: 'success',
         open: true,
         autoHideDuration: 2000,
@@ -164,8 +164,8 @@ export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
     increaseCount,
     decreaseCount,
 
-    favorites,
-    toggleFavorites,
+    favourites: favourites,
+    toggleFavourites,
   }
 
   return (

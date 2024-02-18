@@ -41,7 +41,7 @@ const productColors: { [key: string]: string } = {
 }
 
 const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
-  const { order, addToOrder,  favorites, toggleFavorites } = useInteractionsContext();
+  const { order, addToOrder,  favourites, toggleFavourites } = useInteractionsContext();
 
   const handleAddToOrder = (id: string | undefined, priceRegular: number | undefined) => () => {
     if (id !== undefined && priceRegular !== undefined) {
@@ -49,13 +49,13 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
     }
   };
 
-  const handleAddToFavorites = (id: string | undefined) => () => {
+  const handleAddToFavourites = (id: string | undefined) => () => {
     if (id !== null && id !== undefined) {
-      toggleFavorites(id);
+      toggleFavourites(id);
     }
   }
 
-  const isFavorites = favorites.find(product => product.id === phoneData?.id)
+  const isFavourites = favourites.find(product => product.id === phoneData?.id)
   const isSelected = order.find(product => product.id === phoneData?.id)
 
 
@@ -159,11 +159,11 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
           Add to card
         </Button>
         <Button
-          variant={ isFavorites ? 'favoritesButtonSelected' : 'favoritesButtonDefault'}
+          variant={ isFavourites ? 'favouritesButtonSelected' : 'favouritesButtonDefault'}
           sx={{ minWidth: 48, height: 48 }}
-          onClick={handleAddToFavorites(phoneData?.id)}
+          onClick={handleAddToFavourites(phoneData?.id)}
         >
-          {isFavorites
+          {isFavourites
             ? <FavoriteIcon sx={{ width: 20, height: 20, color: 'red.main' }} />
             : <FavoriteBorderIcon sx={{ width: 20, height: 20, color: 'primary.main' }} />
           }

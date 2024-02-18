@@ -133,8 +133,8 @@ declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
     buttonDefault: true;
     buttonSelected: true;
-    favoritesButtonDefault: true;
-    favoritesButtonSelected: true
+    favouritesButtonDefault: true;
+    favouritesButtonSelected: true
   }
 }
 

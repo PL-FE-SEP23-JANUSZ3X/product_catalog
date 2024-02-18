@@ -48,7 +48,7 @@ export const CustomMuiButtonsLigth = {
       },
       {
         props: {
-          variant: 'favoritesButtonDefault' as const
+          variant: 'favouritesButtonDefault' as const
         },
         style: {
           minWidth: '40px',
@@ -64,7 +64,7 @@ export const CustomMuiButtonsLigth = {
       },
       {
         props: {
-          variant: 'favoritesButtonSelected' as const
+          variant: 'favouritesButtonSelected' as const
         },
         style: {
           minWidth: '40px',
@@ -127,7 +127,7 @@ export const CustomMuiButtonsDark = {
       },
       {
         props: {
-          variant: 'favoritesButtonDefault' as const
+          variant: 'favouritesButtonDefault' as const
         },
         style: {
           minWidth: '40px',
@@ -143,7 +143,7 @@ export const CustomMuiButtonsDark = {
       },
       {
         props: {
-          variant: 'favoritesButtonSelected' as const
+          variant: 'favouritesButtonSelected' as const
         },
         style: {
           minWidth: '40px',

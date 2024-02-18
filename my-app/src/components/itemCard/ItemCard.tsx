@@ -9,7 +9,7 @@ import { Product } from '../../types/Product';
 
 const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: string }) => {
   const { id, images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item;
-  const { order, addToOrder,  favorites, toggleFavorites } = useInteractionsContext();
+  const { order, addToOrder,  favourites, toggleFavourites } = useInteractionsContext();
 
   const handleAddToOrder = (id: string, priceRegular: number) => (event: React.MouseEvent) => {
     event.preventDefault();
@@ -17,10 +17,10 @@ const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: stri
     addToOrder(id, priceRegular);
   };
 
-  const handleToggleToFavorites = (id: string) => (event: React.MouseEvent) => {
+  const handleToggleToFavourites = (id: string) => (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    toggleFavorites(id);
+    toggleFavourites(id);
   }
 
   const cardStyle = {
@@ -33,7 +33,7 @@ const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: stri
     p: 2,
   };
 
-  const isFavorites = favorites.find(product => product.id === id)
+  const isFavourites = favourites.find(product => product.id === id)
   const isSelected = order.find(product => product.id === id)
 
   return (
@@ -89,10 +89,10 @@ const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: stri
               </Button>
               <Button
                 component='button'
-                variant={isFavorites ? 'favoritesButtonSelected' : 'favoritesButtonDefault'}
-                onClick={handleToggleToFavorites(id)}
+                variant={isFavourites ? 'favouritesButtonSelected' : 'favouritesButtonDefault'}
+                onClick={handleToggleToFavourites(id)}
               >
-                {isFavorites
+                {isFavourites
                   ? <FavoriteIcon sx={{ width: 16, height: 16, color: 'red.main' }} />
                   : <FavoriteBorderIcon sx={{ width: 16, height: 16, color: 'primary.main' }} />
                 }
