@@ -37,18 +37,18 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseNewModel = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/newest-0-20`);
         const responseHotPrices = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/hotprices-0-20`);
+        const responseNewModel = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/newest-0-20`);
 
         if (!responseHotPrices.ok && !responseNewModel.ok) {
           throw new Error('Network response was not ok');
         }
     
-        const phonesNewModel = await responseNewModel.json();
         const phonesHotPrices = await responseHotPrices.json();
+        const phonesNewModel = await responseNewModel.json();
       
-        setNewModels(phonesNewModel);
         setHotPrices(phonesHotPrices)
+        setNewModels(phonesNewModel);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -67,9 +67,11 @@ const HomePage = () => {
         }}>Welcome to Nice Gadgets store!</Typography>
         <Slider images={images} />
       </Container>
+
       <Section>
         <Carousel title={newModelSectionTitle} products={newModels} />
       </Section>
+
       <Section>
         <Box>
           <Typography variant="h2" sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '24px'}}>Shop by category</Typography>
@@ -131,6 +133,7 @@ const HomePage = () => {
           </Box>
         </Box>
       </Section>
+  
       <Section>
         <Carousel title={hotPricesSectionTitle} products={hotPrices} />
       </Section>
