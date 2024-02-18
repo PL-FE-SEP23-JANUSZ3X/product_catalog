@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
 import Phone from '../model/phone.model';
 import Product from '../model/product.model';
-import phoneData from '../apiData/phones.json';
-import productData from '../apiData/products.json';
+import Accessory from '../model/product.model';
+import Tablets from '../model/product.model';
 
 import 'dotenv/config';
 
@@ -12,13 +12,8 @@ const sequelize: Sequelize = new Sequelize(URI,{
     dialectOptions: {
       ssl:true,
     },
-    models: [Phone, Product]
+    models: [Phone, Product, Accessory, Tablets]
   });
-
-async function addData() {
-    Phone.bulkCreate(phoneData);
-    Product.bulkCreate(productData);
-}
 
 async function connect(): Promise<void> {
     try {
@@ -33,7 +28,6 @@ async function connection(): Promise<void> {
     try {
       await connect();
       await sequelize.sync();
-      // await addData()
     } catch (error: any) {
         throw new Error(error.message);
     }

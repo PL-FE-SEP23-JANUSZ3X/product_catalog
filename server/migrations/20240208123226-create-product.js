@@ -9,9 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.NUMBER
-      },
       category: {
         type: Sequelize.STRING
       },
@@ -22,10 +19,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       fullPrice: {
-        type: Sequelize.NUMBER
+        type: Sequelize.DECIMAL
       },
       price: {
-        type: Sequelize.NUMBER
+        type: Sequelize.DECIMAL
       },
       screen: {
         type: Sequelize.STRING
@@ -40,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       year: {
-        type: Sequelize.NUMBER
+        type: Sequelize.DECIMAL
       },
       image: {
         type: Sequelize.STRING

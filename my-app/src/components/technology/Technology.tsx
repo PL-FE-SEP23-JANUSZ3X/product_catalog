@@ -3,13 +3,29 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ItemCard from "../itemCard/ItemCard";
 import TechnologyProps from "./Technology.types";
+import { Product } from "../../types/Product";
+import Section from "../section/Section";
+import { useThemeContext } from "../../theme/ThemeContext";
+import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
+
+const boxStyle = {
+  display: 'grid',
+  justifyContent: 'center',
+  gridTemplateColumns: {xs: 'repeat(1, 288px)', sm: 'repeat(2, 288px)', md: 'repeat(4, 272px)'},
+  gridAutoRows: 'auto',
+  gap: '40px 16px',
+  marginTop: '24px'
+}
+
 
 const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [paginationCount, setPaginationCount] = useState<number>(0)
-  const [technology, setTechnology] = useState([])
+  const [technology, setTechnology] = useState<Product[]>([])
   const [technologyCount, setTechnologyCount] = useState<number>(0)
   const [loader, setLoader] = useState<boolean>(false)
+
+  const { theme } = useThemeContext();
 
   const sortType = searchParams.get('sort') ?? 'newest';
   const itemsPerPage = searchParams.get('items') ?? '16'; 
@@ -20,15 +36,15 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   let PaginationApi = '';
 
   if (headline === 'Phones') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/phones/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}-asc`
+    PaginationApi = `https://phone-catalog-f9j4.onrender.com/phones/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
   }
 
   if (headline === 'Accessories') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/accesories/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}-asc`
+    PaginationApi = `https://phone-catalog-f9j4.onrender.com/accesories/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
   }
 
   if (headline === 'Tablets') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/tablets/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}-asc`
+    PaginationApi = `https://phone-catalog-f9j4.onrender.com/tablets/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
   }
 
   useEffect(() => {
@@ -82,15 +98,9 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   
 
   return (
-    <Box sx={{ paddingY: 3, paddingX: 2, display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{width: 1200}} >
-        <Box sx={{ display: 'flex', alginItems: 'center', gap: 1.5 }}>
-          <img src='/images/icons/home.svg' />
-          <img src='/images/icons/arr-rigth.svg' />
-          <Typography variant="caption" sx={{ color: 'secondary.main' }}>
-            {headline}
-          </Typography>
-        </Box>
+    <Section>
+      <Box>
+        <CustomBreadcrumbs currentPage={headline}/>
         <Typography variant="h2" gutterBottom sx={{mt: 2}}>
           {title}
         </Typography>
@@ -139,14 +149,19 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
             </Select>
           </Box>
         </Box>
-        <Grid container justifyContent="space-between" spacing={2} sx={{width: '100%', mt: 3, grid: 3}}>
-          {loader ?
-            skeletonItems :
-            technology.map(tech => (
-            <Grid item spacing={2} sx={{gap: 5}}>
-              <ItemCard item={tech} />  
-            </Grid>
-          ))}
+        <Grid
+          container
+          justifyContent="space-between"
+          sx={boxStyle}
+        >
+          {loader
+            ? skeletonItems
+            : technology.map(tech => (
+              <Grid item spacing={2} sx={{gap: 5}} key={tech.id}>
+                <ItemCard item={tech} />  
+              </Grid>
+            ))
+          }
         </Grid>
         <Box sx={{display: 'flex', justifyContent:"center", mt:5 }}>
           <Pagination
@@ -158,7 +173,7 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
           />
         </Box>
       </Box>
-    </Box>
+    </Section>
   );
 };
 

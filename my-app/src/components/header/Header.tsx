@@ -20,7 +20,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
-import { useOrderContext } from '../../context/useOrderContext';
+import { useInteractionsContext } from '../../context/useInteractionsContext';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -97,7 +97,7 @@ const Header = () => {
   const white = theme.palette.background.paper;
   const [isOpen, setIsOpen] = useState(false);
   
-  const { order } = useOrderContext()
+  const { order, favourites } = useInteractionsContext()
 
   const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
   
@@ -242,17 +242,27 @@ const Header = () => {
                 <Divider orientation='vertical' flexItem/>
                 <NavLink to='/favourites' end style={{textDecoration:'none'}}> 
                   {({ isActive }) => ( 
-                    <IconButton 
-                      disableRipple
-                      edge="end"
-                      aria-label="menu"
-                      sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
+                    <Badge
+                      overlap="circular"
+                      badgeContent={favourites.length}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      sx={badgeStyle}
                     >
-                      {isActive 
-                        ? <FavoriteIcon sx={{fontSize: '16px'}} />
-                        : <FavoriteBorderIcon sx={{fontSize: '16px'}} />
-                      }
-                    </IconButton>
+                      <IconButton 
+                        disableRipple
+                        edge="end"
+                        aria-label="menu"
+                        sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
+                      >
+                        {isActive 
+                          ? <FavoriteIcon sx={{fontSize: '16px'}} />
+                          : <FavoriteBorderIcon sx={{fontSize: '16px'}} />
+                        }
+                      </IconButton>
+                    </Badge>
                   )}
                 </NavLink>
                 <Divider orientation='vertical' flexItem/>
@@ -267,18 +277,18 @@ const Header = () => {
                       }}
                       sx={badgeStyle}
                     >
-                    <IconButton 
-                      disableRipple
-                      edge="end"
-                      aria-label="menu"
-                      sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
-                    >
+                      <IconButton 
+                        disableRipple
+                        edge="end"
+                        aria-label="menu"
+                        sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
+                      >
                         {isActive 
                           ? <LocalMallIcon sx={{fontSize: '16px'}} />
                           : <LocalMallOutlinedIcon sx={{fontSize: '16px'}} />
                         }
-                    </IconButton>
-                      </Badge>
+                      </IconButton>
+                    </Badge>
                   )}
                 </NavLink>
               </Box>
