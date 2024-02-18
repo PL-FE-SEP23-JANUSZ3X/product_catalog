@@ -1,7 +1,7 @@
 import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import Section from "../section/Section";
 import { useInteractionsContext } from "../../context/useInteractionsContext";
-import ItemCard from "../itemCard/ItemCard";
+import ItemCard from "../productCard/productCard";
 import { useEffect, useState } from "react";
 import { getPhones } from "../../utils/fetchHelper";
 import { Product } from "../../types/Product";

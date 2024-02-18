@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { ArrowProps, CarouselProps } from "./Carousel.types";
 import { Theme, Typography, useMediaQuery } from "@mui/material";
 import './Carousel.styles.css'
-import ItemCard from "../itemCard/ItemCard";
+import ItemCard from "../productCard/productCard";
 
 function SampleNextArrow(props: ArrowProps) {
   const { className, onClick } = props;

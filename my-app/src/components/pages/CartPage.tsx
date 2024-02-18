@@ -8,7 +8,7 @@ import {
 import Section from "../section/Section";
 import { useThemeContext } from "../../theme/ThemeContext";
 import { useInteractionsContext } from "../../context/useInteractionsContext";
-import CartItem from "../cartItem/CartItem";
+import ProductCart from "../productCart/ProductCart";
 
 const containerStyle = {
   display: "flex",
@@ -57,7 +57,7 @@ const CartPage = () => {
             <Box sx={containerStyle}>
               <Stack my="32px" flexDirection="column" spacing="16px" sx={{mr: {md: '32px'}}} >
                 {order.length > 0 && order.map((product) => (
-                  <CartItem
+                  <ProductCart
                     key={product.id}
                     orderProductId={product.id}
                     orderCount={product.count}

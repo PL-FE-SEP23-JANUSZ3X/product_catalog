@@ -1,7 +1,7 @@
 import { Box, Typography, Select, Grid, SelectChangeEvent, Pagination, Skeleton } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ItemCard from "../itemCard/ItemCard";
+import ItemCard from "../productCard/productCard";
 import CatalogProps from "./Catalog.types";
 import { Product } from "../../types/Product";
 import Section from "../section/Section";

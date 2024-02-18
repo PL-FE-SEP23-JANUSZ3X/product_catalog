@@ -11,7 +11,7 @@ import {
 import ImageGallery from 'react-image-gallery';
 import { NavLink, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import './PhonePageStyle.css';
+import './PhonePage.style.css';
 import { useEffect, useState } from 'react';
 import { getPhone } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
