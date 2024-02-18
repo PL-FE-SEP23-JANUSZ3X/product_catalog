@@ -241,7 +241,6 @@ export const PhonePage = () => {
         </Box>
       </Container>
     </Section>
-
   );
 };
 
