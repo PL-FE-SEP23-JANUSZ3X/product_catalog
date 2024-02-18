@@ -25,8 +25,6 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   const [technologyCount, setTechnologyCount] = useState<number>(0)
   const [loader, setLoader] = useState<boolean>(false)
 
-  const { theme } = useThemeContext();
-
   const sortType = searchParams.get('sort') ?? 'newest';
   const itemsPerPage = searchParams.get('items') ?? '16'; 
   const page = searchParams.get('page') ?? '1';
