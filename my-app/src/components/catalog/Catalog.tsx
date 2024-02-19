@@ -159,14 +159,43 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
             ))
           }
         </Grid>
-        <Box sx={{display: 'flex', justifyContent:"center", mt:5 }}>
-          <Pagination
-            count={paginationCount}
-            variant="outlined"
-            shape="rounded"
-            page={+page}
-            onChange={handleChangePage} 
-          />
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
+        <Pagination
+          count={paginationCount}
+          variant="outlined"
+          shape="rounded"
+          page={+page}
+          onChange={handleChangePage}
+          sx={{
+            borderRadius: 0,
+            '& .MuiPaginationItem-root': {
+              borderRadius: 0,
+              borderColor: 'elements.main',
+            },
+            '& .MuiPaginationItem-root:hover': {
+              borderRadius: 0,
+              borderColor: 'primary.main',
+              backgroundColor: 'white.main'
+            },
+            '& .Mui-selected::before': {
+              content: '""',
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              borderRadius: 'inherit',
+            },
+            '& .Mui-selected': {
+              borderColor: 'primary.main',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+            '& .css-1bpc6t0-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected': {
+              backgroundColor: 'primary.main',
+              color: 'white.main'
+            }
+          }}
+        />
         </Box>
       </Box>
     </Section>
