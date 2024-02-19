@@ -30,7 +30,7 @@ export const PhonePage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { phoneId } = useParams();
+  const { phoneId } = useParams<Record<string, string>>();
 
   useEffect(() => {
     const fetchPhoneData = async () => {
@@ -96,7 +96,7 @@ export const PhonePage = () => {
 
   if (isLoading) {
     return (
-      <Skeleton
+      <Skeleton 
         variant="rounded"
         sx={{width: {xs: "288px", sm: "592px", md: "752px"},
           height: {xs: "160px", sm: "128px"}}}
@@ -128,7 +128,7 @@ export const PhonePage = () => {
               : '/images/icons/arr-left-dark.svg'
             }
           />
-          <NavLink to={`/phones`} end style={{textDecoration:'none', display: 'inline-block'}}> 
+          <NavLink to={`/phones`} style={{textDecoration:'none', display: 'inline-block'}}> 
             <Link 
               component='div'
               variant='body2'
