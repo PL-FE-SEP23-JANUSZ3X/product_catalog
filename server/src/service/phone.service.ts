@@ -1,5 +1,6 @@
 import Phone from '../model/phone.model';
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
+import SortType from '../types/sortType';
 
 const getAllPhones = async () => {
   return Phone.findAll();
@@ -51,6 +52,6 @@ const getRecommendedById = async (phoneId: string) => {
   return recommended;
 };
 
-const phoneService = { getAllPhones, getPhoneById, getRecommendedById };
+const phoneService = { getAllPhones, getPhoneById, getRecommendedById};
 
 export default phoneService;
