@@ -125,7 +125,7 @@ export const PhonePage = () => {
         <CustomBreadcrumbs parrentLink="phones" currentPage="Favourites" />
 
         {/* BACK BUTTON */}
-        <Box mb={2}>
+        <Box>
           <Box
             component="img"
             height={10}
@@ -157,15 +157,12 @@ export const PhonePage = () => {
             border: '1px solid green',
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
-            mt: { xs: '32px', sm: '40px' },
-            mb: '80px',
             justifyContent: { xs: 'flex-start', sm: 'space-between' },
           }}
         >
           {/* IMAGE GALLERY */}
           <Box>
             <ImageGallery
-              additionalClass="gowno"
               items={images}
               thumbnailPosition={isMobile ? 'bottom' : 'left'}
               showPlayButton={false}
@@ -176,7 +173,7 @@ export const PhonePage = () => {
           </Box>
 
           {/* SPECS */}
-          <Box sx={{ mt: { xs: '40px', sm: '0px' } }}>
+          <Box>
             <ProductVariantsActions phoneData={phoneData} />
           </Box>
         </Box>
@@ -188,48 +185,32 @@ export const PhonePage = () => {
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             justifyContent: 'space-between',
-            mb: '80px',
-            gap: '64px',
           }}
         >
           {/* ABOUT */}
           <Box>
-            <Typography variant="h3" sx={{ mb: '16px' }}>
-              About
-            </Typography>
+            <Typography variant="h3">About</Typography>
             <Divider sx={{ mb: '32px' }} />
             <Box>
-              <Typography variant="h4" sx={{ mb: '16px' }}>
+              <Typography variant="h4">
                 {phoneData?.description[0].title}
               </Typography>
-              <Typography
-                variant="body1"
-                sx={{ mb: '16px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 {phoneData?.description[0].text[0]}
               </Typography>
-              <Typography
-                variant="body1"
-                sx={{ mb: '32px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 {phoneData?.description[0].text[1]}
               </Typography>
-              <Typography variant="h4" sx={{ mb: '16px' }}>
+              <Typography variant="h4">
                 {phoneData?.description[1].title}
               </Typography>
-              <Typography
-                variant="body1"
-                sx={{ mb: '32px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 {phoneData?.description[1].text}
               </Typography>
-              <Typography variant="h4" sx={{ mb: '16px' }}>
+              <Typography variant="h4">
                 {phoneData?.description[2].title}
               </Typography>
-              <Typography
-                variant="body1"
-                sx={{ mb: '32px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 {phoneData?.description[2].text}
               </Typography>
             </Box>
@@ -237,86 +218,58 @@ export const PhonePage = () => {
 
           {/* TECH SPECS */}
           <Box>
-            <Typography variant="h2" sx={{ mb: '16px' }}>
-              Tech Specs
-            </Typography>
-            <Divider sx={{ mb: '25px' }} />
+            <Typography variant="h2">Tech Specs</Typography>
+            <Divider />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 Screen
               </Typography>
               <Typography variant="body1">{phoneData?.screen}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 Resolution
               </Typography>
               <Typography variant="body1">{phoneData?.resolution}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 Processor
               </Typography>
               <Typography variant="body1">{phoneData?.processor}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 RAM
               </Typography>
               <Typography variant="body1">{phoneData?.ram}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 Built in memory
               </Typography>
               <Typography variant="body1">{phoneData?.capacity}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 Camera
               </Typography>
               <Typography variant="body1">{phoneData?.camera}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 Zoom
               </Typography>
               <Typography variant="body1">{phoneData?.zoom}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography
-                variant="body1"
-                sx={{ mb: '8px', color: 'secondary.main' }}
-              >
+              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                 Cell
               </Typography>
               <Box sx={{ display: 'flex', gap: '5px' }}>
-                {phoneData?.cell.map((item) => (
-                  <Typography variant="body1" sx={{ p: '0px', m: '0px' }}>
-                    {item}
-                  </Typography>
-                ))}
+                <Typography variant="body1">
+                  {phoneData?.cell.join(', ')}
+                </Typography>
               </Box>
             </Box>
           </Box>
