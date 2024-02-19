@@ -1,4 +1,4 @@
-import Technology from "../technology/Technology";
+import Technology from "../catalog/Catalog";
 
 const PhonesPage = () => {
   const headline = 'Phones';

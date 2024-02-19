@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
 import { Product } from '../../types/Product';
 
-const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: string }) => {
+const ProductCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: string }) => {
   const { id, images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item;
   const { order, addToOrder,  favourites, toggleFavourites } = useInteractionsContext();
 
@@ -104,5 +104,5 @@ const ItemCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: stri
   );
 };
 
-export default ItemCard;
+export default ProductCard;
 

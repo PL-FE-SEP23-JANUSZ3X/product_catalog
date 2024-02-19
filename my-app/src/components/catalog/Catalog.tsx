@@ -1,8 +1,8 @@
 import { Box, Typography, Select, Grid, SelectChangeEvent, Pagination, Skeleton } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ItemCard from "../itemCard/ItemCard";
-import TechnologyProps from "./Technology.types";
+import ItemCard from "../productCard/productCard";
+import CatalogProps from "./Catalog.types";
 import { Product } from "../../types/Product";
 import Section from "../section/Section";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
@@ -16,7 +16,7 @@ const boxStyle = {
   marginTop: '24px'
 }
 
-const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
+const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [paginationCount, setPaginationCount] = useState<number>(0)
   const [technology, setTechnology] = useState<Product[]>([])
@@ -173,4 +173,4 @@ const Technology: React.FC<TechnologyProps> = ({ headline, title }) => {
   );
 };
 
-export default Technology;
+export default Catalog;
