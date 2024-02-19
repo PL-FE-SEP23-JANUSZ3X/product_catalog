@@ -3,6 +3,8 @@ import { connection } from './src/utils/db';
 import errorHandler from './src/utils/errorHandler';
 import phoneRouter from './src/router/phone.router';
 import productRouter from './src/router/products.router';
+import accessoryRouter from './src/router/accessory.router';
+import tabletRouter from './src/router/tablet.router';
 import cors from 'cors';
 
 import 'dotenv/config';
@@ -16,6 +18,8 @@ app.use(errorHandler);
 app.use(express.json());
 app.use(cors());
 
+app.use('/tablets', tabletRouter);
+app.use('/accessories', accessoryRouter);
 app.use('/phones', phoneRouter);
 app.use('/products', productRouter);
 

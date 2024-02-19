@@ -1,7 +1,7 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript'
 
 @Table({
-  tableName: 'Tablet',
+  tableName: 'Tablets',
   modelName: 'Tablet',
 })
 export class Tablet extends Model {
@@ -17,7 +17,7 @@ export class Tablet extends Model {
   @Column(DataType.STRING)
   name?: string
 
-  @Column(DataType.STRING)
+  @Column(DataType.ARRAY(DataType.STRING))
   capacityAvailable?: string[]
 
   @Column(DataType.STRING)
@@ -62,6 +62,5 @@ export class Tablet extends Model {
   @Column(DataType.ARRAY(DataType.STRING))
   cell?: string[];
 }
-
 
 export default Tablet;

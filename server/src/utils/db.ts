@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
 import Phone from '../model/phone.model';
 import Product from '../model/product.model';
-import Accessory from '../model/product.model';
-import Tablets from '../model/product.model';
+import Accessory from '../model/accessory.model';
+import Tablets from '../model/tablet.model';
 
 import 'dotenv/config';
 

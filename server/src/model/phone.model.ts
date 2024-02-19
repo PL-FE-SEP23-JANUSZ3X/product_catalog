@@ -4,7 +4,7 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript'
   tableName: 'Phones',
   modelName: 'Phone',
 })
-export class Phone extends Model {
+class Phone extends Model {
   @Column({
     primaryKey: true,
     type: DataType.STRING,
@@ -17,7 +17,7 @@ export class Phone extends Model {
   @Column(DataType.STRING)
   name?: string
 
-  @Column(DataType.STRING)
+  @Column(DataType.ARRAY(DataType.STRING))
   capacityAvailable?: string[]
 
   @Column(DataType.STRING)
