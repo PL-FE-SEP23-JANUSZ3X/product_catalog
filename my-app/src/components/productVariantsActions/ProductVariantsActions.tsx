@@ -5,71 +5,71 @@ import {
   IconButton,
   Stack,
   Typography,
-} from "@mui/material";
-import CircleIcon from "@mui/icons-material/Circle";
+} from '@mui/material';
+import CircleIcon from '@mui/icons-material/Circle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Link } from "react-router-dom";
-import { FC } from "react";
+import { Link } from 'react-router-dom';
+import { FC } from 'react';
 import { Phone } from '../../types/Phone';
 import './ProductVariantsActionsStyle.css';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
 
 type Props = {
-  phoneData: Phone | null
-}
+  phoneData: Phone | null;
+};
 
 const productColors: { [key: string]: string } = {
-  black: "#000",
-  green: "#008000",
-  yellow: "#ffff00",
-  white: "#fff",
-  purple: "#800080",
-  red: "#ff0000",
-  spacegray: "#4B4B4C",
-  midnightgreen: "#073812",
-  gold: "#e1c564",
-  silver: "#bcc6cc",
-  rosegold: "#ecc5c0",
-  coral: "#ff7a6c",
-  midnight: "#000e34",
-  spaceblack: "#505150",
-  blue: "#0000ff",
-  pink: "#ffc0cb",
-  graphite: "#4f555b",
-  sierrablue: "#69abce",
-}
+  black: '#000',
+  green: '#008000',
+  yellow: '#ffff00',
+  white: '#fff',
+  purple: '#800080',
+  red: '#ff0000',
+  spacegray: '#4B4B4C',
+  midnightgreen: '#073812',
+  gold: '#e1c564',
+  silver: '#bcc6cc',
+  rosegold: '#ecc5c0',
+  coral: '#ff7a6c',
+  midnight: '#000e34',
+  spaceblack: '#505150',
+  blue: '#0000ff',
+  pink: '#ffc0cb',
+  graphite: '#4f555b',
+  sierrablue: '#69abce',
+};
 
 const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
-  const { order, addToOrder,  favourites, toggleFavourites } = useInteractionsContext();
+  const { order, addToOrder, favourites, toggleFavourites } =
+    useInteractionsContext();
 
-  const handleAddToOrder = (id: string | undefined, priceRegular: number | undefined) => () => {
-    if (id !== undefined && priceRegular !== undefined) {
-      addToOrder(id, priceRegular);
-    }
-  };
+  const handleAddToOrder =
+    (id: string | undefined, priceRegular: number | undefined) => () => {
+      if (id !== undefined && priceRegular !== undefined) {
+        addToOrder(id, priceRegular);
+      }
+    };
 
   const handleAddToFavourites = (id: string | undefined) => () => {
     if (id !== null && id !== undefined) {
       toggleFavourites(id);
     }
-  }
+  };
 
-  const isFavourites = favourites.find(product => product.id === phoneData?.id)
-  const isSelected = order.find(product => product.id === phoneData?.id)
-
+  const isFavourites = favourites.find(
+    (product) => product.id === phoneData?.id,
+  );
+  const isSelected = order.find((product) => product.id === phoneData?.id);
 
   return (
-    <Box
-      className="product-variants-actions"
-      sx={{ width: { xs: "288px", sm: "237px", md: "320px" } }}
-    >
+    <Box className="product-variants-actions">
       <Box className="product-variants-actions_container-1">
         <Box className="available-colors">
           <Typography
             variant="body2"
             sx={{
-              color: "secondary.main",
+              color: 'secondary.main',
             }}
           >
             Available colors
@@ -86,12 +86,12 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
                     color: productColors[color],
                     p: 0,
                     pr: 1,
-                    outlineColor: "icons.main",
+                    outlineColor: 'icons.main',
                   }}
                 >
                   <CircleIcon
                     className="available-colors_circle-icon"
-                    sx={{ fontSize: 32, borderColor: "icons.main" }}
+                    sx={{ fontSize: 32, borderColor: 'icons.main' }}
                   />
                 </IconButton>
               </Link>
@@ -101,7 +101,11 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
 
         <Typography
           variant="body2"
-          sx={{ fontWeight: 700, color: "icons.main", visibility:{xs:"visible", md:"hidden"}}}
+          sx={{
+            fontWeight: 700,
+            color: 'icons.main',
+            visibility: { xs: 'visible', md: 'hidden' },
+          }}
         >
           ID: 802390
         </Typography>
@@ -109,17 +113,25 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
 
       <Divider orientation="horizontal" flexItem />
 
-        <Typography variant="body2" sx={{
-            color: "secondary.main",
-          }}>Select capacity</Typography>
-        
-        <Box sx={{ display: "flex", gap: "10px" }}>
+      <Typography
+        variant="body2"
+        sx={{
+          color: 'secondary.main',
+        }}
+      >
+        Select capacity
+      </Typography>
+
+      <Box sx={{ display: 'flex', gap: '10px' }}>
         {phoneData?.capacityAvailable.map((capacity) => (
-          <Link key={capacity} to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}>
+          <Link
+            key={capacity}
+            to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}
+          >
             <Button
               variant="contained"
               sx={{
-                minWidth: "auto",
+                minWidth: 'auto',
                 height: 32,
                 boxShadow: 0,
                 borderRadius: 0,
@@ -131,21 +143,21 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
               {capacity}
             </Button>
           </Link>
-         ))}
-        </Box>
+        ))}
+      </Box>
 
       <Divider orientation="horizontal" flexItem />
 
       <Box className="prices">
         <Typography
           variant="h2"
-          sx={{ color: "primary.main", letterSpacing: "-1%" }}
+          sx={{ color: 'primary.main', letterSpacing: '-1%' }}
         >
           ${phoneData?.priceDiscount}
         </Typography>
         <Typography
           className="prices_regular-price"
-          sx={{ fontSize: "22px", color: "secondary.main" }}
+          sx={{ fontSize: '22px', color: 'secondary.main' }}
         >
           ${phoneData?.priceRegular}
         </Typography>
@@ -153,54 +165,61 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
 
       <Stack spacing={1} direction="row">
         <Button
-          variant={ isSelected ? 'buttonSelected' : 'buttonDefault'}
+          variant={isSelected ? 'buttonSelected' : 'buttonDefault'}
           onClick={handleAddToOrder(phoneData?.id, phoneData?.priceRegular)}
         >
           Add to card
         </Button>
         <Button
-          variant={ isFavourites ? 'favouritesButtonSelected' : 'favouritesButtonDefault'}
+          variant={
+            isFavourites
+              ? 'favouritesButtonSelected'
+              : 'favouritesButtonDefault'
+          }
           sx={{ minWidth: 48, height: 48 }}
           onClick={handleAddToFavourites(phoneData?.id)}
         >
-          {isFavourites
-            ? <FavoriteIcon sx={{ width: 20, height: 20, color: 'red.main' }} />
-            : <FavoriteBorderIcon sx={{ width: 20, height: 20, color: 'primary.main' }} />
-          }
+          {isFavourites ? (
+            <FavoriteIcon sx={{ width: 20, height: 20, color: 'red.main' }} />
+          ) : (
+            <FavoriteBorderIcon
+              sx={{ width: 20, height: 20, color: 'primary.main' }}
+            />
+          )}
         </Button>
       </Stack>
 
       <Box className="product-info">
         <Box className="product-info_row">
-          <Typography variant="body2" sx={{ color: "secondary.main" }}>
+          <Typography variant="body2" sx={{ color: 'secondary.main' }}>
             Screen
           </Typography>
-          <Typography variant="body2" sx={{ color: "primary.main" }}>
+          <Typography variant="body2" sx={{ color: 'primary.main' }}>
             {phoneData?.screen}
           </Typography>
         </Box>
 
         <Box className="product-info_row">
-          <Typography variant="body2" sx={{ color: "secondary.main" }}>
+          <Typography variant="body2" sx={{ color: 'secondary.main' }}>
             Resolution
           </Typography>
-          <Typography variant="body2" sx={{ color: "primary.main" }}>
+          <Typography variant="body2" sx={{ color: 'primary.main' }}>
             {phoneData?.resolution}
           </Typography>
         </Box>
         <Box className="product-info_row">
-          <Typography variant="body2" sx={{ color: "secondary.main" }}>
+          <Typography variant="body2" sx={{ color: 'secondary.main' }}>
             Processor
           </Typography>
-          <Typography variant="body2" sx={{ color: "primary.main" }}>
+          <Typography variant="body2" sx={{ color: 'primary.main' }}>
             {phoneData?.processor}
           </Typography>
         </Box>
         <Box className="product-info_row">
-          <Typography variant="body2" sx={{ color: "secondary.main" }}>
+          <Typography variant="body2" sx={{ color: 'secondary.main' }}>
             RAM
           </Typography>
-          <Typography variant="body2" sx={{ color: "primary.main" }}>
+          <Typography variant="body2" sx={{ color: 'primary.main' }}>
             {phoneData?.ram}
           </Typography>
         </Box>

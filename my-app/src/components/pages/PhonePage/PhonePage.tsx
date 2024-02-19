@@ -6,7 +6,7 @@ import {
   useTheme,
   Divider,
   Skeleton,
-  Link
+  Link,
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
 import { NavLink, useParams } from 'react-router-dom';
@@ -25,7 +25,6 @@ import { Product } from '../../../types/Product';
 
 export const PhonePage = () => {
   const [recommendedModels, setRecommendedModels] = useState<Product[]>([]);
-
   const [phoneData, setPhoneData] = useState<Phone | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,7 +43,7 @@ export const PhonePage = () => {
           const data = await getPhone(phoneId);
           const recommendedData = await getRecommended(phoneId);
           setPhoneData(data);
-          setRecommendedModels(recommendedData)
+          setRecommendedModels(recommendedData);
         } catch (error) {
           setError(ErrorMessage.LOAD);
         } finally {
@@ -60,34 +59,24 @@ export const PhonePage = () => {
 
   const images = [
     {
-      original:
-        `${phoneData?.images[0]}`,
-      thumbnail:
-        `${phoneData?.images[0]}`,
+      original: `${phoneData?.images[0]}`,
+      thumbnail: `${phoneData?.images[0]}`,
     },
     {
-      original:
-        `${phoneData?.images[1]}`,
-      thumbnail:
-        `${phoneData?.images[1]}`,
+      original: `${phoneData?.images[1]}`,
+      thumbnail: `${phoneData?.images[1]}`,
     },
     {
-      original:
-        `${phoneData?.images[2]}`,
-      thumbnail:
-        `${phoneData?.images[2]}`,
+      original: `${phoneData?.images[2]}`,
+      thumbnail: `${phoneData?.images[2]}`,
     },
     {
-      original:
-        `${phoneData?.images[3]}`,
-      thumbnail:
-        `${phoneData?.images[3]}`,
+      original: `${phoneData?.images[3]}`,
+      thumbnail: `${phoneData?.images[3]}`,
     },
     {
-      original:
-        `${phoneData?.images[4]}`,
-      thumbnail:
-        `${phoneData?.images[4]}`,
+      original: `${phoneData?.images[4]}`,
+      thumbnail: `${phoneData?.images[4]}`,
     },
   ];
 
@@ -103,62 +92,80 @@ export const PhonePage = () => {
     return (
       <Skeleton
         variant="rounded"
-        sx={{width: {xs: "288px", sm: "592px", md: "752px"},
-          height: {xs: "160px", sm: "128px"}}}
+        sx={{
+          width: { xs: '288px', sm: '592px', md: '752px' },
+          height: { xs: '160px', sm: '128px' },
+        }}
       />
-    )
+    );
   }
 
   const navlinkStyle = {
     ml: 1,
-    textDecoration: 'none', 
+    textDecoration: 'none',
     fontSize: '12px',
     fontWeight: '600',
     lineHeight: '15px',
-    color: theme.palette.mode === 'light' ? colors.breadcrumbsLight : colors.breadcrumbsDark,
+    color:
+      theme.palette.mode === 'light'
+        ? colors.breadcrumbsLight
+        : colors.breadcrumbsDark,
     ':hover': {
-      color: theme.palette.mode === 'light' ? colors.breadcrumbsHoverLight : colors.breadcrumbsHoverDark,
+      color:
+        theme.palette.mode === 'light'
+          ? colors.breadcrumbsHoverLight
+          : colors.breadcrumbsHoverDark,
     },
-  }
-
+  };
 
   return (
     <Section>
-      <Container>
-        <CustomBreadcrumbs parrentLink='phones' currentPage='Favourites'/>
+      <Container sx={{ border: '1px solid red' }}>
+        {/* BREADCRUMBS */}
+        <CustomBreadcrumbs parrentLink="phones" currentPage="Favourites" />
+
+        {/* BACK BUTTON */}
         <Box mb={2}>
-          <Box component='img' height={10}
-            src={theme.palette.mode === 'light'
-              ? '/images/icons/arr-left-light.svg'
-              : '/images/icons/arr-left-dark.svg'
+          <Box
+            component="img"
+            height={10}
+            src={
+              theme.palette.mode === 'light'
+                ? '/images/icons/arr-left-light.svg'
+                : '/images/icons/arr-left-dark.svg'
             }
           />
-          <NavLink to={`/phones`} end style={{textDecoration:'none', display: 'inline-block'}}> 
-            <Link 
-              component='div'
-              variant='body2'
-              sx={navlinkStyle}
-            >
+          <NavLink
+            to={`/phones`}
+            end
+            style={{ textDecoration: 'none', display: 'inline-block' }}
+          >
+            <Link component="div" variant="body2" sx={navlinkStyle}>
               Back
             </Link>
           </NavLink>
         </Box>
-        <Typography variant="h2" color="text.primary" sx={{width:{xs:"288px", sm:"592px", md:"1136px"}}}>
+
+        {/* PRODUCT NAME */}
+        <Typography variant="h2" color="text.primary">
           {phoneData?.name} (iMT9G2FS/A)
         </Typography>
-        <Box sx={{ 
-          width:{md:"592"},
-          display:"flex",
-          flexDirection:{xs: "column", sm: "row"},
-          mt:{xs:"32px", sm:"40px"},
-          mb:"80px",
-          justifyContent:{xs:"flex-start", sm:"space-between"}
-          }}>
-        <Box sx={{
-          width:{xs:"288px", sm:"338px", md:"560px"},
-          height:{xs:"353px",  sm:"288px", md:"464px"},
-        }}>
+
+        {/* IMAGE GALLERY & SPECS CONTAINER */}
+        <Box
+          sx={{
+            border: '1px solid green',
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            mt: { xs: '32px', sm: '40px' },
+            mb: '80px',
+            justifyContent: { xs: 'flex-start', sm: 'space-between' },
+          }}
+        >
+          {/* IMAGE GALLERY */}
+          <Box>
             <ImageGallery
+              additionalClass="gowno"
               items={images}
               thumbnailPosition={isMobile ? 'bottom' : 'left'}
               showPlayButton={false}
@@ -166,74 +173,155 @@ export const PhonePage = () => {
               showNav={false}
               showFullscreenButton={false}
             />
-        </Box>
-          <Box sx={{mt:{xs:"40px", sm:"0px"}}}>
-            <ProductVariantsActions phoneData={phoneData}/>
           </Box>
-          <Typography variant="body2"sx={{fontWeight: 700, color: "icons.main", display:{xs:"none", md:"block"}}}>
-                ID: 802390
-          </Typography>
-        </Box>
-        <Box sx={{
-          display:"flex",
-          flexDirection:{xs:"column", md:"row"},
-          justifyContent:"space-between",
-          mb:"80px",
-          gap:"64px"}}>
-          <Box sx={{width:{xs:"287px", sm:"559px"}}}>
-           <Typography variant='h3' sx={{mb:"16px"}}>About</Typography>
-           <Divider sx={{mb:"32px"}}/>
-           <Box>
-              <Typography variant='h4' sx={{mb:"16px"}}>{phoneData?.description[0].title}</Typography>
-              <Typography variant="body1" sx={{mb:"16px", color:"secondary.main"}} >{phoneData?.description[0].text[0]}</Typography>
-              <Typography variant="body1" sx={{mb:"32px", color:"secondary.main"}}>{phoneData?.description[0].text[1]}</Typography>
-              <Typography variant='h4' sx={{mb:"16px"}}>{phoneData?.description[1].title}</Typography>
-              <Typography variant="body1" sx={{mb:"32px", color:"secondary.main"}}>{phoneData?.description[1].text}</Typography>
-              <Typography variant='h4' sx={{mb:"16px"}}>{phoneData?.description[2].title}</Typography>
-              <Typography variant="body1"sx={{mb:"32px", color:"secondary.main"}}>{phoneData?.description[2].text}</Typography>
-           </Box>
+
+          {/* SPECS */}
+          <Box sx={{ mt: { xs: '40px', sm: '0px' } }}>
+            <ProductVariantsActions phoneData={phoneData} />
           </Box>
-          <Box sx={{width:{xs:"287px", sm:"559px"}}}>
-            <Typography variant='h2' sx={{mb:"16px"}}>Tech Specs</Typography>
-            <Divider sx={{mb:"25px"}}/>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Screen</Typography>
+        </Box>
+
+        {/* ABOUT & TECH SPECS CONTAINER*/}
+        <Box
+          sx={{
+            border: '1px solid blue',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'space-between',
+            mb: '80px',
+            gap: '64px',
+          }}
+        >
+          {/* ABOUT */}
+          <Box>
+            <Typography variant="h3" sx={{ mb: '16px' }}>
+              About
+            </Typography>
+            <Divider sx={{ mb: '32px' }} />
+            <Box>
+              <Typography variant="h4" sx={{ mb: '16px' }}>
+                {phoneData?.description[0].title}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ mb: '16px', color: 'secondary.main' }}
+              >
+                {phoneData?.description[0].text[0]}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ mb: '32px', color: 'secondary.main' }}
+              >
+                {phoneData?.description[0].text[1]}
+              </Typography>
+              <Typography variant="h4" sx={{ mb: '16px' }}>
+                {phoneData?.description[1].title}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ mb: '32px', color: 'secondary.main' }}
+              >
+                {phoneData?.description[1].text}
+              </Typography>
+              <Typography variant="h4" sx={{ mb: '16px' }}>
+                {phoneData?.description[2].title}
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ mb: '32px', color: 'secondary.main' }}
+              >
+                {phoneData?.description[2].text}
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* TECH SPECS */}
+          <Box>
+            <Typography variant="h2" sx={{ mb: '16px' }}>
+              Tech Specs
+            </Typography>
+            <Divider sx={{ mb: '25px' }} />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                Screen
+              </Typography>
               <Typography variant="body1">{phoneData?.screen}</Typography>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Resolution</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                Resolution
+              </Typography>
               <Typography variant="body1">{phoneData?.resolution}</Typography>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Processor</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                Processor
+              </Typography>
               <Typography variant="body1">{phoneData?.processor}</Typography>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>RAM</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                RAM
+              </Typography>
               <Typography variant="body1">{phoneData?.ram}</Typography>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Built in memory</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                Built in memory
+              </Typography>
               <Typography variant="body1">{phoneData?.capacity}</Typography>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Camera</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                Camera
+              </Typography>
               <Typography variant="body1">{phoneData?.camera}</Typography>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Zoom</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                Zoom
+              </Typography>
               <Typography variant="body1">{phoneData?.zoom}</Typography>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"space-between"}}>
-              <Typography variant="body1" sx={{mb:"8px", color:"secondary.main"}}>Cell</Typography>
-              <Box sx={{display:"flex", gap:"5px"}}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography
+                variant="body1"
+                sx={{ mb: '8px', color: 'secondary.main' }}
+              >
+                Cell
+              </Typography>
+              <Box sx={{ display: 'flex', gap: '5px' }}>
                 {phoneData?.cell.map((item) => (
-                  <Typography variant="body1" sx={{p:"0px", m:"0px"}}>{item}</Typography>
+                  <Typography variant="body1" sx={{ p: '0px', m: '0px' }}>
+                    {item}
+                  </Typography>
                 ))}
               </Box>
             </Box>
           </Box>
         </Box>
+
         <Box>
           <Carousel title={'You may also like'} products={recommendedModels} />
         </Box>
@@ -243,4 +331,3 @@ export const PhonePage = () => {
 };
 
 export default PhonePage;
-
