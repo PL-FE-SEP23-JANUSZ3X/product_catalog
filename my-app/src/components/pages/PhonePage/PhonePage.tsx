@@ -32,7 +32,7 @@ export const PhonePage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { phoneId } = useParams();
+  const { phoneId } = useParams<Record<string, string>>();
 
   useEffect(() => {
     const fetchPhoneData = async () => {
@@ -74,7 +74,7 @@ export const PhonePage = () => {
 
   if (isLoading) {
     return (
-      <Skeleton
+      <Skeleton 
         variant="rounded"
         sx={{
           width: { xs: '288px', sm: '592px', md: '752px' },

@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { ArrowProps, CarouselProps } from "./Carousel.types";
 import { Theme, Typography, useMediaQuery } from "@mui/material";
 import './Carousel.styles.css'
-import ItemCard from "../productCard/productCard";
+import ProductCard from "../productCard/productCard";
 
 function SampleNextArrow(props: ArrowProps) {
   const { className, onClick } = props;
@@ -35,7 +35,8 @@ function SamplePrevArrow(props: ArrowProps) {
 
 const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const sliderRef = useRef<Slider>(null);
-  const carouselWidth = '212px'
+  const mobileWidth = '212px'
+  const tabletWidth = '237px'
 
   const isTablet = useMediaQuery((theme: Theme)  => theme.breakpoints.down('md'));
   const isMobile = useMediaQuery((theme: Theme)  => theme.breakpoints.down('sm'));
@@ -77,7 +78,10 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
         <Slider ref={sliderRef} {...settings} >
           {products.map(product => (
             <div className={isMobile ? 'mobile' : isTablet ? 'tablet' : ''}>
-              {isMobile ? <ItemCard item={product} carouselWidth={carouselWidth} /> : <ItemCard item={product} />}
+              {isMobile ? <ProductCard item={product} carouselWidth={mobileWidth} />
+                : isTablet ? <ProductCard item={product} carouselWidth={tabletWidth} /> 
+                : <ProductCard item={product} />
+              }
             </div>
           ))}
         </Slider>
