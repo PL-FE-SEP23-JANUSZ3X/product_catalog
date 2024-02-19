@@ -13,15 +13,18 @@ import { NavLink, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePage.style.css';
 import { useEffect, useState } from 'react';
-import { getPhone } from '../../../utils/fetchHelper';
+import { getPhone, getRecommended } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
 import { ErrorMessage } from '../../../types/ErrorMessages';
 import Section from '../../section/Section';
 import ProductVariantsActions from '../../productVariantsActions/ProductVariantsActions';
 import CustomBreadcrumbs from '../../navigation/CustomBreadcrumbs';
 import { colors } from '../../../theme/colors';
+import Carousel from '../../carousel/Carousel';
+import { Product } from '../../../types/Product';
 
 export const PhonePage = () => {
+  const [recommendedModels, setRecommendedModels] = useState<Product[]>([]);
 
   const [phoneData, setPhoneData] = useState<Phone | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +42,9 @@ export const PhonePage = () => {
         setIsLoading(true);
         try {
           const data = await getPhone(phoneId);
+          const recommendedData = await getRecommended(phoneId);
           setPhoneData(data);
+          setRecommendedModels(recommendedData)
         } catch (error) {
           setError(ErrorMessage.LOAD);
         } finally {
@@ -229,15 +234,8 @@ export const PhonePage = () => {
             </Box>
           </Box>
         </Box>
-        <Box sx={{
-          width:{xs:"288px", sm:"591px", md:"1136px"},
-          mb:"81px",
-          borderColor: 'secondary.main',
-          borderWidth: '2px',
-          borderStyle: 'solid',
-          boxSizing: "border-box"}}>
-          <Typography variant='h2'>You may also like</Typography>
-          <Box>Phonecard</Box>
+        <Box>
+          <Carousel title={'You may also like'} products={recommendedModels} />
         </Box>
       </Container>
     </Section>
