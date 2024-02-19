@@ -17,7 +17,7 @@ export class Tablet extends Model {
   @Column(DataType.STRING)
   name?: string
 
-  @Column(DataType.STRING)
+  @Column(DataType.ARRAY(DataType.STRING))
   capacityAvailable?: string[]
 
   @Column(DataType.STRING)
