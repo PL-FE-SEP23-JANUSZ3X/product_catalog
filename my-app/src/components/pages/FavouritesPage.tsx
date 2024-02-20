@@ -79,10 +79,10 @@ const FavouritesPage = () => {
                 : (
                   <>
                     {favouriteProducts.map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                    />
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                      />
                   ))}
                   </>
                 )
