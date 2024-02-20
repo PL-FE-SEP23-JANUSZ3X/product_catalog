@@ -28,7 +28,8 @@ const getByCategory: ControllerAction = async(req, res) => {
 
             return;
         }
-        res.send(allProducts);
+        const allProductsLength = allProducts.length
+        res.send([allProductsLength]);
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
