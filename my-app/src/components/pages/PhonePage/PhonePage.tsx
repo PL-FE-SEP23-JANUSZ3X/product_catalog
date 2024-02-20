@@ -263,14 +263,15 @@ export const PhonePage = () => {
               <Typography variant="body1">{phoneData?.zoom}</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
+              <Typography
+                variant="body1"
+                sx={{ mr: '12px', color: 'secondary.main' }}
+              >
                 Cell
               </Typography>
-              <Box sx={{ display: 'flex', gap: '5px' }}>
-                <Typography variant="body1">
-                  {phoneData?.cell.join(', ')}
-                </Typography>
-              </Box>
+              <Typography variant="body1" sx={{ textAlign: 'right' }}>
+                {phoneData?.cell.join(', ')}
+              </Typography>
             </Box>
           </Box>
         </Box>
