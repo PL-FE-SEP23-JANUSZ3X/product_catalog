@@ -7,22 +7,20 @@ import { useInteractionsContext } from '../../context/useInteractionsContext';
 import { Product } from '../../types/Product';
 
 const ProductCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: string }) => {
-  const { id, images, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item;
+  const { itemId, image, name, priceRegular, priceDiscount, screen, capacityAvailable, ram } = item;
   const { order, addToOrder,  favourites, toggleFavourites } = useInteractionsContext();
 
-  const handleAddToOrder = (id: string, priceRegular: number) => (event: React.MouseEvent) => {
+  const handleAddToOrder = (itemId: string, priceRegular: number) => (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    addToOrder(id, priceRegular);
+    addToOrder(itemId, priceRegular);
   };
 
-  const handleToggleToFavourites = (id: string) => (event: React.MouseEvent) => {
+  const handleToggleToFavourites = (itemId: string) => (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    toggleFavourites(id);
+    toggleFavourites(itemId);
   }
-
-  console.log(carouselWidth)
 
   const cardStyle = {
     width: typeof carouselWidth === 'string' ? '218px' : { xs: "288px", sm: "288px", md: "272px" },
@@ -34,23 +32,24 @@ const ProductCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: s
     p: 2,
   };
 
-  const isFavourites = favourites.find(product => product.id === id)
-  const isSelected = order.find(product => product.id === id)
+  const isFavourites = favourites.find(product => product.id === itemId)
+  const isSelected = order.find(product => product.id === itemId)
 
+  const isCarouselWidth = typeof carouselWidth === 'string' && carouselWidth !== null && carouselWidth !== undefined;
   return (
-    <RouterLink to={`/phones/${id}`} style={{ textDecoration: 'none' }}>
+    <RouterLink to={`/phones/${itemId}`} style={{ textDecoration: 'none' }}>
       <Grid item>
         <Card sx={cardStyle}>
           <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
             <CardMedia
               component="img"
-              src={images[0]}
+              src={image}
               sx={{
                 objectFit: 'contain',
-                width: typeof carouselWidth === 'string' ? '173px' : '100%',
+                width: isCarouselWidth ? '173px' : '100%',
                 display: 'flex',
                 justifyContent: 'center',
-                height: typeof carouselWidth === 'string' ? '25%' : '35%',
+                height: isCarouselWidth ? '25%' : '35%',
               }}
             />
             <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '70%'}}>
@@ -77,7 +76,7 @@ const ProductCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: s
                 <Button
                   variant={isSelected ? 'buttonSelected' : 'buttonDefault'}
                   sx={{
-                    width: carouselWidth ? '70%' : '75%',
+                    width: isCarouselWidth ? '70%' : '75%',
                     height: 40,
                     boxShadow: 0,
                     borderRadius: 0,
@@ -85,14 +84,14 @@ const ProductCard = ({ item, carouselWidth }: { item: Product, carouselWidth?: s
                     fontWeight: 500,
                     textTransform: 'capitalize',
                   }}
-                  onClick={handleAddToOrder(id, priceRegular)}
+                  onClick={handleAddToOrder(itemId, priceRegular)}
                 >
                   Add to Cart
                 </Button>
                 <Button
                   component='button'
                   variant={isFavourites ? 'favouritesButtonSelected' : 'favouritesButtonDefault'}
-                  onClick={handleToggleToFavourites(id)}
+                  onClick={handleToggleToFavourites(itemId)}
                 >
                   {isFavourites
                     ? <FavoriteIcon sx={{ width: 16, height: 16, color: 'red.main' }} />

@@ -10,10 +10,10 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useInteractionsContext } from "../../context/useInteractionsContext";
 import { useEffect, useMemo, useState } from "react";
-import { Product } from "../../types/Product";
 import { ErrorMessage } from "../../types/ErrorMessages";
 import { getPhone } from "../../utils/fetchHelper";
 import ProductCartProps from './ProductCart.types'
+import { ProductCartType } from "../../types/ProductCartType";
 
 const containerStyle = {
   backgroundColor: 'background.paper',
@@ -71,7 +71,7 @@ const ProductCart: React.FC<ProductCartProps> = ({ orderProductId, orderCount, o
     decreaseCount,
   } = useInteractionsContext()
 
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<ProductCartType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
