@@ -90,7 +90,11 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
               ID: 802390
             </Typography>
           </Box>
-          <Box className="available-colors_icons-container">
+          <Box
+            className="available-colors_icons-container"
+            flexWrap="wrap"
+            gap="6px"
+          >
             {phoneData?.colorsAvailable.map((color) => (
               <Link
                 key={color}
@@ -101,7 +105,6 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
                   sx={{
                     color: productColors[color],
                     p: 0,
-                    pr: 1,
                     outlineColor: 'icons.main',
                   }}
                 >

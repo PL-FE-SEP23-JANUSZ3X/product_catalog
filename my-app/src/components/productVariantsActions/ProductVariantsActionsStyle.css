@@ -1,18 +1,13 @@
 .product-variants-actions {
-  height: 435px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .product-variants-actions_container-1 {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .available-colors {
-  height: 55px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,7 +16,7 @@
 .available-colors_icons-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .available-colors_icon-button {
@@ -36,7 +31,7 @@
 
 .available-capacity {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .available-capacity_button {
@@ -48,7 +43,7 @@
 .prices {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 12px;
 }
 
 .prices_regular-price {
@@ -59,7 +54,6 @@
 }
 
 .buttons_add-button {
-  width: 321px;
   height: 48px;
   font-size: 14px;
 }
