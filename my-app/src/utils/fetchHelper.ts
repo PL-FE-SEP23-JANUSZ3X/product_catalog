@@ -22,6 +22,16 @@ export const getRecommended = async (productId: string) => {
   return response.data;
 };
 
+export const getSortedProducts = async (
+  category: string,
+  sortType: string,
+  start: number,
+  limit: number,
+) => {
+  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/sort/${category}-${sortType}-${start}-${limit}`)
+  return response.data
+}
+
 // accessoryRouter.get('/', accessoryController.getAll);
 // accessoryRouter.get('/:accessoryId', accessoryController.getById);
 // accessoryRouter.get('/:accessoryId/recommended', accessoryController.getRecommended);
@@ -30,6 +40,11 @@ export const getAccessories = async () => {
   const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/accessories/`);
   return response.data;
 };
+
+export const getCategory = async (category: string) => {
+  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/category/${category}`);
+  return response.data;
+}
 
 export const getAccessory = async (accessoryId: string) => {
   const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/accessories/${accessoryId}`);
