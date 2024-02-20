@@ -65,15 +65,31 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
   return (
     <Box className="product-variants-actions">
       <Box className="product-variants-actions_container-1">
-        <Box className="available-colors">
-          <Typography
-            variant="body2"
-            sx={{
-              color: 'secondary.main',
-            }}
+        <Box className="available-colors" width="100%">
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
           >
-            Available colors
-          </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'secondary.main',
+              }}
+            >
+              Available colors
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                fontWeight: 700,
+                color: 'icons.main',
+                visibility: { xs: 'visible', md: 'hidden' },
+              }}
+            >
+              ID: 802390
+            </Typography>
+          </Box>
           <Box className="available-colors_icons-container">
             {phoneData?.colorsAvailable.map((color) => (
               <Link
@@ -98,17 +114,6 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
             ))}
           </Box>
         </Box>
-
-        <Typography
-          variant="body2"
-          sx={{
-            fontWeight: 700,
-            color: 'icons.main',
-            visibility: { xs: 'visible', md: 'hidden' },
-          }}
-        >
-          ID: 802390
-        </Typography>
       </Box>
 
       <Divider orientation="horizontal" flexItem />
