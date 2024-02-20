@@ -39,7 +39,7 @@ const sortProducts = async (categoryType: string, sortType: string, startIndex: 
             break;
         case SortType.HOTPRICES:
             const items = await Product.findAll();
-            return items.sort((a, b) => (a.fullPrice - a.price) - (b.fullPrice - b.price));
+            return items.sort((a, b) => (b.fullPrice - b.price) - (a.fullPrice - a.price));
         default:
             orderOptions  = [['id', 'ASC']];
     }
