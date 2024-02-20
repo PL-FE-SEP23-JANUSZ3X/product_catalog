@@ -147,7 +147,7 @@ export const PhonePage = () => {
         </Box>
 
         {/* PRODUCT NAME */}
-        <Typography variant="h2" color="text.primary">
+        <Typography variant="h3" color="text.primary">
           {phoneData?.name} (iMT9G2FS/A)
         </Typography>
 
@@ -192,7 +192,7 @@ export const PhonePage = () => {
           {/* ABOUT */}
           <Box sx={{ flex: '0 1 60%' }}>
             <Typography variant="h3">About</Typography>
-            <Divider sx={{ mb: '32px' }} />
+            <Divider />
             <Box>
               <Typography variant="h4">
                 {phoneData?.description[0].title}
@@ -220,7 +220,7 @@ export const PhonePage = () => {
 
           {/* TECH SPECS */}
           <Box sx={{ flex: '0 1 40%' }}>
-            <Typography variant="h2">Tech Specs</Typography>
+            <Typography variant="h3">Tech Specs</Typography>
             <Divider />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography variant="body1" sx={{ color: 'secondary.main' }}>
