@@ -20,7 +20,7 @@ const getAll: ControllerAction = async(req, res) => {
 const getByQuery: ControllerAction = async(req, res) => {
     const { query } = req.params
     try {
-        const allProducts = await productService.getProductsByQuerry(querry);
+        const allProducts = await productService.getProductsByQuery(query);
 
         if (!allProducts) {
             res.status(404).send('Not Found: The specified entity does not exist');
