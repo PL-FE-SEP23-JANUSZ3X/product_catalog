@@ -1,10 +1,26 @@
 import productService from '../service/products.service';
-import SortType from '../types/sortType';
 import { ControllerAction } from '../utils/types';
 
 const getAll: ControllerAction = async(req, res) => {
     try {
         const allProducts = await productService.getAllProducts();
+
+        if (!allProducts) {
+            res.status(404).send('Not Found: The specified entity does not exist');
+
+            return;
+        }
+        res.send(allProducts);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+const getByQuerry: ControllerAction = async(req, res) => {
+    const { querry } = req.params
+    try {
+        const allProducts = await productService.getProductsByQuerry(querry);
 
         if (!allProducts) {
             res.status(404).send('Not Found: The specified entity does not exist');
@@ -63,6 +79,6 @@ const getSortedProducts: ControllerAction= async (req, res) => {
     }
 };
 
-const productController = {getAll, getById, getByCategory, getSortedProducts};
+const productController = {getAll, getById, getByCategory, getSortedProducts, getByQuerry};
 
 export default productController;
