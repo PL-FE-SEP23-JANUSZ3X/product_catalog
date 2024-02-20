@@ -41,8 +41,6 @@ const totalStyle = {
   marginTop: '32px',
 }
 
-const getKey = () => Date.now();
-
 const CartPage = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false);
