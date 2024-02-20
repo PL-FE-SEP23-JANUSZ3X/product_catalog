@@ -6,6 +6,7 @@ import './Slider.styles.css';
 
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 import SliderProps from './Slider.types';
+import { genRandomKey } from '../../utils/getRandomKey';
 
 const Slider: React.FC<SliderProps> = ({ images }) => {
   return (
@@ -19,7 +20,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
         className="mySwiper"
       >
         {images.map(image => (
-          <SwiperSlide><img src={image} alt={image} /></SwiperSlide>
+          <SwiperSlide key={genRandomKey()}><img src={image} alt={image} /></SwiperSlide>
         ))}
       </Swiper>
   );

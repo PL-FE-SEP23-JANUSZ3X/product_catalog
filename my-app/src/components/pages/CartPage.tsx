@@ -16,6 +16,7 @@ import { getProducts } from "../../utils/fetchHelper";
 import { ProductCartType } from "../../types/ProductCartType";
 import { NavLink, useNavigate } from "react-router-dom";
 import { colors } from "../../theme/colors";
+import { genRandomKey } from "../../utils/getRandomKey";
 
 const containerStyle = {
   display: "flex",
@@ -39,6 +40,8 @@ const totalStyle = {
   p: "24px",
   marginTop: '32px',
 }
+
+const getKey = () => Date.now();
 
 const CartPage = () => {
   const [products, setProducts] = useState<Product[]>([])
@@ -134,6 +137,7 @@ const CartPage = () => {
                   <>
                     { Array.from({ length: order.length }, () => (
                       <Skeleton
+                        key={genRandomKey()}
                         variant="rounded"
                         sx={{width: {xs: "288px", sm: "592px", md: "752px"},
                           height: {xs: "160px", sm: "128px"}}}

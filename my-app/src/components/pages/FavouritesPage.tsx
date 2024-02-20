@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../../utils/fetchHelper";
 import { Product } from "../../types/Product";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
+import { genRandomKey } from "../../utils/getRandomKey";
 
 const boxStyle = {
   display: 'grid',
@@ -71,7 +72,7 @@ const FavouritesPage = () => {
                 ? (
                   <>
                     { Array.from({ length: favourites.length }, () => (
-                      <Skeleton variant="rounded" width={272} height={506} />
+                      <Skeleton key={genRandomKey()} variant="rounded" width={272} height={506} />
                     ))
                     }
                   </>
