@@ -29,7 +29,7 @@ function App() {
 
               <Route path="phones">
                 <Route index element={<PhonesPage />} />
-                <Route path=":phoneId" element={<PhonePage />} />
+                <Route path=":itemId" element={<PhonePage />} />
               </Route>
 
               <Route path="tablets">
