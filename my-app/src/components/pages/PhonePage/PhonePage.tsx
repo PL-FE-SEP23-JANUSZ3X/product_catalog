@@ -33,6 +33,7 @@ export const PhonePage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { itemId } = useParams<Record<string, string>>();
+  console.log(itemId)
 
   useEffect(() => {
     const fetchPhoneData = async () => {

@@ -81,7 +81,7 @@ const FavouritesPage = () => {
                     {favouriteProducts.map((product) => (
                     <ProductCard
                       key={product.id}
-                      item={product}
+                      product={product}
                     />
                   ))}
                   </>

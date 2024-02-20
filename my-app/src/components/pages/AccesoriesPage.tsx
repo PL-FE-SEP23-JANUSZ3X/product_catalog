@@ -1,12 +1,11 @@
-import { Typography } from "@mui/material";
-import Section from "../section/Section";
+import Technology from "../catalog/Catalog";
 
 const AccesoriesPage = () => {
+  const headline = 'Accessories';
+  const title = 'Accessories';
 
   return (
-    <Section>
-      <Typography variant="h1" color="text.primary" mb="32px" >Accessories</Typography>
-    </Section>
+    <Technology headline={headline} title={title} />  
   );
 };
 
