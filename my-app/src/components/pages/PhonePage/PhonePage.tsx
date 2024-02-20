@@ -158,10 +158,11 @@ export const PhonePage = () => {
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
             justifyContent: { xs: 'flex-start', sm: 'space-between' },
+            gap: { sm: '12px', md: '64px' },
           }}
         >
           {/* IMAGE GALLERY */}
-          <Box>
+          <Box sx={{ flex: '0 1 60%' }}>
             <ImageGallery
               items={images}
               thumbnailPosition={isMobile ? 'bottom' : 'left'}
@@ -173,7 +174,7 @@ export const PhonePage = () => {
           </Box>
 
           {/* SPECS */}
-          <Box>
+          <Box sx={{ flex: '0 1 40%' }}>
             <ProductVariantsActions phoneData={phoneData} />
           </Box>
         </Box>
@@ -185,10 +186,11 @@ export const PhonePage = () => {
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             justifyContent: 'space-between',
+            gap: { sm: '12px', md: '64px' },
           }}
         >
           {/* ABOUT */}
-          <Box>
+          <Box sx={{ flex: '0 1 60%' }}>
             <Typography variant="h3">About</Typography>
             <Divider sx={{ mb: '32px' }} />
             <Box>
@@ -217,7 +219,7 @@ export const PhonePage = () => {
           </Box>
 
           {/* TECH SPECS */}
-          <Box>
+          <Box sx={{ flex: '0 1 40%' }}>
             <Typography variant="h2">Tech Specs</Typography>
             <Divider />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
