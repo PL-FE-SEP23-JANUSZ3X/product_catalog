@@ -78,9 +78,9 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
         <Slider ref={sliderRef} {...settings} >
           {products.map(product => (
             <div className={isMobile ? 'mobile' : isTablet ? 'tablet' : ''}>
-              {isMobile ? <ProductCard item={product} carouselWidth={mobileWidth} />
-                : isTablet ? <ProductCard item={product} carouselWidth={tabletWidth} /> 
-                : <ProductCard item={product} />
+              {isMobile ? <ProductCard product={product} carouselWidth={mobileWidth} />
+                : isTablet ? <ProductCard product={product} carouselWidth={tabletWidth} /> 
+                : <ProductCard product={product} />
               }
             </div>
           ))}
