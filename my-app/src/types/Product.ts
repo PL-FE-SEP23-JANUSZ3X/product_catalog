@@ -4,10 +4,7 @@ type DescriptionItem = {
 };
 
 export type Product = {
-  camera: string;
   capacity: string;
-  capacityAvailable: '{64GB,128GB,256GB}';
-  cell: string[];
   color: string;
   colorsAvailable: string[];
   createdAt: string;
@@ -17,12 +14,8 @@ export type Product = {
   image: string;
   name: string;
   namespaceId: string;
-  priceDiscount: number;
-  priceRegular: number;
-  processor: string;
+  price: number;
+  fullPrice: number;
   ram: string;
-  resolution: string;
   screen: string;
-  updatedAt: string;
-  zoom: string;
 };
