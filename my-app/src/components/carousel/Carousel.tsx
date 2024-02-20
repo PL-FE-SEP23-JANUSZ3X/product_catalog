@@ -6,6 +6,7 @@ import { ArrowProps, CarouselProps } from "./Carousel.types";
 import { Theme, Typography, useMediaQuery } from "@mui/material";
 import './Carousel.styles.css'
 import ProductCard from "../productCard/productCard";
+import SkeletonLoader from "../skeletonLoader/SkeletonLoader";
 
 function SampleNextArrow(props: ArrowProps) {
   const { className, onClick } = props;
@@ -75,16 +76,20 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
           <SampleNextArrow onClick={goToNextSlide} className={'arrow'} />
         </div>
       </div>
-        <Slider ref={sliderRef} {...settings} >
-          {products.map(product => (
-            <div className={isMobile ? 'mobile' : isTablet ? 'tablet' : ''}>
-              {isMobile ? <ProductCard product={product} carouselWidth={mobileWidth} />
-                : isTablet ? <ProductCard product={product} carouselWidth={tabletWidth} /> 
-                : <ProductCard product={product} />
-              }
-            </div>
-          ))}
-        </Slider>
+        {products.length ? (
+          <Slider ref={sliderRef} {...settings} >
+            {products.map(product => (
+              <div className={isMobile ? 'mobile' : isTablet ? 'tablet' : ''}>
+                {isMobile ? <ProductCard product={product} carouselWidth={mobileWidth} />
+                  : isTablet ? <ProductCard product={product} carouselWidth={tabletWidth} /> 
+                  : <ProductCard product={product} />
+                }
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <SkeletonLoader /> 
+        )}
     </div>
   );
 }

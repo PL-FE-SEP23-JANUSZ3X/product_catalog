@@ -8,6 +8,7 @@ import Section from "../section/Section";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
 import { useThemeContext } from "../../theme/ThemeContext";
 import { getCategory, getSortedProducts } from "../../utils/fetchHelper";
+import SkeletonLoader from "../skeletonLoader/SkeletonLoader";
 
 const boxStyle = {
   display: 'grid',
@@ -34,7 +35,6 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   const numberOfSkeletons = 4
 
   const startIndex = (+page - 1) * +itemsPerPage;
-  const limitIndex = +itemsPerPage * +page;
 
   useEffect(() => {
     const getproducts = async () => {
@@ -190,13 +190,13 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
           sx={boxStyle}
         >
           {loader
-            ? skeletonItems
-            : products.map(product => (
-              <Grid item spacing={2} sx={{gap: 5}} key={product.id}>
-                <ProductCard product={product} />  
-              </Grid>
-            ))
-          }
+    ? <SkeletonLoader /> // Użycie komponentu SkeletonLoader zamiast skeletonItems
+    : products.map(product => (
+      <Grid item spacing={2} sx={{gap: 5}} key={product.id}>
+        <ProductCard product={product} />  
+      </Grid>
+    ))
+  }
         </Grid>
         <Box sx={{display: 'flex', justifyContent:"center", mt:5 }}>
           <Pagination
