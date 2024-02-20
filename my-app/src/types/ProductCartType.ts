@@ -3,7 +3,7 @@ type DescriptionItem = {
   title: string;
 };
 
-export type Product = {
+export type ProductCartType = {
   camera: string;
   capacity: string;
   capacityAvailable: '{64GB,128GB,256GB}';
@@ -14,7 +14,7 @@ export type Product = {
   description: DescriptionItem[];
   id: string;
   itemId: string;
-  image: string;
+  images: string[];
   name: string;
   namespaceId: string;
   priceDiscount: number;

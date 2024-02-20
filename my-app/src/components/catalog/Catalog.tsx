@@ -1,11 +1,12 @@
 import { Box, Typography, Select, Grid, SelectChangeEvent, Pagination, Skeleton } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ItemCard from "../productCard/productCard";
+import ProductCard from "../productCard/productCard";
 import CatalogProps from "./Catalog.types";
 import { Product } from "../../types/Product";
 import Section from "../section/Section";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
+import { useThemeContext } from "../../theme/ThemeContext";
 
 const boxStyle = {
   display: 'grid',
@@ -22,6 +23,7 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   const [technology, setTechnology] = useState<Product[]>([])
   const [technologyCount, setTechnologyCount] = useState<number>(0)
   const [loader, setLoader] = useState<boolean>(false)
+  const { theme } = useThemeContext();
 
   const sortType = searchParams.get('sort') ?? 'newest';
   const itemsPerPage = searchParams.get('items') ?? '16'; 
@@ -29,18 +31,23 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
 
   const numberOfSkeletons = 4
 
+  const BASE_URL = 'https://phone-catalog-f9j4.onrender.com/products/';
+
   let PaginationApi = '';
+  //https://phone-catalog-f9j4.onrender.com/products/sort/category(phones, tablets, accessories)-sortType(newest, hotprices, expensive)-0(start)-20(limit)
 
   if (headline === 'Phones') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/phones/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
+    PaginationApi = `${BASE_URL}sort/phones-${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
   }
 
   if (headline === 'Accessories') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/accesories/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
+    //nie wymieniione
+    PaginationApi = `${BASE_URL}/accesories/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
   }
 
   if (headline === 'Tablets') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/tablets/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
+    //nie wymieniione
+    PaginationApi = `${BASE_URL}tablets/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
   }
 
   useEffect(() => {
@@ -48,7 +55,7 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
       try {
         setLoader(true)
         const response = await fetch(PaginationApi);
-        const responsePhones = await fetch(`https://phone-catalog-f9j4.onrender.com/phones`)
+        const responsePhones = await fetch(`https://phone-catalog-f9j4.onrender.com/products/`)
         const phonesData = await responsePhones.json()
         setTechnologyCount(phonesData.length)
         if (!response.ok) {
@@ -91,7 +98,59 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
     console.log(technologyCount, +itemsPerPage)
     setPaginationCount(Math.ceil(technologyCount / +itemsPerPage))
   }, [technologyCount, itemsPerPage])
-  
+
+  const paginationStyle = {
+    '& .MuiPaginationItem-page': {
+      backgroundColor: 'background.paper',
+      '&:hover': {
+        backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'elements.main',
+      }
+    },
+    '& .MuiPaginationItem-rounded': {
+      borderRadius: 0,
+      borderColor: theme.palette.mode === 'light' ? 'elements.main' : 'transparent',
+      '&:hover': {
+        borderColor: theme.palette.mode === 'light' ? 'primary.main' : 'transparent',
+      }
+    },
+    '& .MuiPaginationItem-root.Mui-selected': {
+      color: 'white.main',
+      backgroundColor: 'accent.main',
+      '&:hover': {
+        color: 'primary.main',
+        borderColor: theme.palette.mode === 'light' ? 'primary.main' : 'transparent',
+        backgroundColor: theme.palette.mode === 'light' ? 'background.paper' : 'elements.main',
+      }
+    },
+    '& .Mui-selected::before': {
+      content: '""',
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'primary.main',
+      borderRadius: 'inherit',
+      zIndex: -1,
+      color: 'white'
+    },
+
+    '& .MuiPaginationItem-previousNext': {
+      backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'badgeBorder.main',
+      '&:hover': {
+        backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'icons.main',
+      }
+    },
+    '& .MuiPagination-root .Mui-disabled': {
+      borderColor: 'elements.main',
+      opacity: 1,
+      '& .MuiPaginationItem-icon': {
+        color: 'icons.main',
+      }
+    },
+
+    '& .MuiPaginationItem-icon': {
+      color: 'primary.main'
+    }
+  }
 
   return (
     <Section>
@@ -154,19 +213,20 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
             ? skeletonItems
             : technology.map(tech => (
               <Grid item spacing={2} sx={{gap: 5}} key={tech.id}>
-                <ItemCard item={tech} />  
+                <ProductCard item={tech} />  
               </Grid>
             ))
           }
         </Grid>
         <Box sx={{display: 'flex', justifyContent:"center", mt:5 }}>
           <Pagination
-            count={paginationCount}
-            variant="outlined"
-            shape="rounded"
-            page={+page}
-            onChange={handleChangePage} 
-          />
+          count={paginationCount}
+          page={+page}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChangePage}
+          sx={paginationStyle}
+        />
         </Box>
       </Box>
     </Section>

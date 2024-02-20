@@ -1,8 +1,11 @@
 import { Typography } from "@mui/material";
+import Section from "../section/Section";
 
 const TabletsPage = () => {
   return (
-    <Typography variant="h1" color="text.primary" mb="32px" >TabletsPage</Typography>
+    <Section>
+      <Typography variant="h1" color="text.primary" mb="32px" >TabletsPage</Typography>
+    </Section>
   );
 };
 
