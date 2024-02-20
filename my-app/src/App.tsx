@@ -4,7 +4,7 @@ import { useThemeContext } from './theme/ThemeContext';
 import Layout from './components/layout/Layout';
 import HomePage from './components/pages/HomePage';
 import PhonesPage from './components/pages/PhonesPage';
-import { PhonePage } from './components/pages/PhonePage';
+import { PhonePage } from './components/pages/phonePage';
 import TabletsPage from './components/pages/TabletsPage';
 import TabletPage from './components/pages/TabletPage';
 import AccesoriesPage from './components/pages/AccesoriesPage';
