@@ -11,8 +11,8 @@ const getByCategory= async(categoryType: string) => {
     return Product.findAll({where: {category : categoryType}});
 };
 
-const getProductByID= async(id: string) => {
-    return Product.findByPk(id);
+const getProductByID= async(itemId: string) => {
+    return Product.findAll({where : {itemId}});
 };
 
 const sortProducts = async (categoryType: string, sortType: string, startIndex: number, limitIndex: number) => {

@@ -19,10 +19,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       fullPrice: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.INTEGER
       },
       price: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.INTEGER
       },
       screen: {
         type: Sequelize.STRING

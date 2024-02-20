@@ -4,7 +4,6 @@ import { useThemeContext } from './theme/ThemeContext';
 import Layout from './components/layout/Layout';
 import HomePage from './components/pages/HomePage';
 import PhonesPage from './components/pages/PhonesPage';
-import { PhonePage } from './components/pages/phonePage';
 import TabletsPage from './components/pages/TabletsPage';
 import TabletPage from './components/pages/TabletPage';
 import AccesoriesPage from './components/pages/AccesoriesPage';
@@ -13,6 +12,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import FavouritesPage from './components/pages/FavouritesPage';
 import CartPage from './components/pages/CartPage';
 import './style.css';
+import { PhonePage } from './components/pages/PhonePage';
 
 function App() {
   const { theme } = useThemeContext();
