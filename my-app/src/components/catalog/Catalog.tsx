@@ -7,6 +7,7 @@ import { Product } from "../../types/Product";
 import Section from "../section/Section";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
 import { useThemeContext } from "../../theme/ThemeContext";
+import { getCategory, getSortedProducts } from "../../utils/fetchHelper";
 
 const boxStyle = {
   display: 'grid',
@@ -20,10 +21,11 @@ const boxStyle = {
 const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [paginationCount, setPaginationCount] = useState<number>(0)
-  const [technology, setTechnology] = useState<Product[]>([])
-  const [technologyCount, setTechnologyCount] = useState<number>(0)
+  const [products, setProducts] = useState<Product[]>([])
+  const [productsCount, setProductsCount] = useState<number>(0)
   const [loader, setLoader] = useState<boolean>(false)
   const { theme } = useThemeContext();
+  const category = headline.toLowerCase()
 
   const sortType = searchParams.get('sort') ?? 'newest';
   const itemsPerPage = searchParams.get('items') ?? '16'; 
@@ -31,38 +33,17 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
 
   const numberOfSkeletons = 4
 
-  const BASE_URL = 'https://phone-catalog-f9j4.onrender.com/products/';
-
-  let PaginationApi = '';
-  //https://phone-catalog-f9j4.onrender.com/products/sort/category(phones, tablets, accessories)-sortType(newest, hotprices, expensive)-0(start)-20(limit)
-
-  if (headline === 'Phones') {
-    PaginationApi = `${BASE_URL}sort/phones-${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
-  }
-
-  if (headline === 'Accessories') {
-    //nie wymieniione
-    PaginationApi = `${BASE_URL}/accesories/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
-  }
-
-  if (headline === 'Tablets') {
-    //nie wymieniione
-    PaginationApi = `${BASE_URL}tablets/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
-  }
+  const startIndex = (+page - 1) * +itemsPerPage;
+  const limitIndex = +itemsPerPage * +page;
 
   useEffect(() => {
-    const getTechnology = async () => {
+    const getproducts = async () => {
       try {
         setLoader(true)
-        const response = await fetch(PaginationApi);
-        const responsePhones = await fetch(`https://phone-catalog-f9j4.onrender.com/products/`)
-        const phonesData = await responsePhones.json()
-        setTechnologyCount(phonesData.length)
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setTechnology(data)
+        const response = await getSortedProducts(category, sortType, +startIndex, +itemsPerPage)
+        const responseLength = await getCategory(category)
+        setProductsCount(responseLength)
+        setProducts(response)
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -70,7 +51,7 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
       }
     }
 
-  getTechnology();
+  getproducts();
 }, [searchParams]);
 
   const skeletonItems = Array.from({ length: numberOfSkeletons }, (_, index) => (
@@ -95,9 +76,8 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   };
 
   useEffect(() => {
-    console.log(technologyCount, +itemsPerPage)
-    setPaginationCount(Math.ceil(technologyCount / +itemsPerPage))
-  }, [technologyCount, itemsPerPage])
+    setPaginationCount(Math.ceil(productsCount / +itemsPerPage))
+  }, [productsCount, itemsPerPage])
 
   const paginationStyle = {
     '& .MuiPaginationItem-page': {
@@ -160,7 +140,7 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
           {title}
         </Typography>
         <Typography variant="caption" gutterBottom sx={{mt: 1, color: 'secondary.main'}}>
-          {technologyCount} models
+          {productsCount} models
         </Typography>
         <Box sx={{ display: 'flex', mt: 4, gap: 3}}>
           <Box sx={{ display: 'grid', width: 128}}>
@@ -211,9 +191,9 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
         >
           {loader
             ? skeletonItems
-            : technology.map(tech => (
-              <Grid item spacing={2} sx={{gap: 5}} key={tech.id}>
-                <ProductCard item={tech} />  
+            : products.map(product => (
+              <Grid item spacing={2} sx={{gap: 5}} key={product.id}>
+                <ProductCard product={product} />  
               </Grid>
             ))
           }
