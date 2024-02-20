@@ -17,8 +17,8 @@ const getAll: ControllerAction = async(req, res) => {
     }
 }
 
-const getByQuerry: ControllerAction = async(req, res) => {
-    const { querry } = req.params
+const getByQuery: ControllerAction = async(req, res) => {
+    const { query } = req.params
     try {
         const allProducts = await productService.getProductsByQuerry(querry);
 
@@ -79,6 +79,6 @@ const getSortedProducts: ControllerAction= async (req, res) => {
     }
 };
 
-const productController = {getAll, getById, getByCategory, getSortedProducts, getByQuerry};
+const productController = {getAll, getById, getByCategory, getSortedProducts, getByQuery};
 
 export default productController;
