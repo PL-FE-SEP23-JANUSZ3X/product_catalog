@@ -15,8 +15,8 @@ const getProductByID= async(itemId: string) => {
     return Product.findAll({where : {itemId}});
 };
 
-const getProductsByQuerry= async(querry: string) => {
-    return Product.findAll({where : {name : {[Op.like]: `%${querry}%`}}});
+const getProductsByQuery= async(query: string) => {
+    return Product.findAll({where : {name : {[Op.like]: `%${query}%`}}});
 };
 
 const sortProducts = async (categoryType: string, sortType: string, startIndex: number, limitIndex: number) => {
@@ -51,6 +51,6 @@ const sortProducts = async (categoryType: string, sortType: string, startIndex: 
     return await Product.findAll({where: {category : categoryType},  offset: startIndex, limit: limitIndex, order: orderOptions});
 };
 
-const productService = {getAllProducts, getProductByID, getByCategory, sortProducts, getProductsByQuerry};
+const productService = {getAllProducts, getProductByID, getByCategory, sortProducts, getProductsByQuery};
 
 export default productService;
