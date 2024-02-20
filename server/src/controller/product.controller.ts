@@ -36,9 +36,9 @@ const getByCategory: ControllerAction = async(req, res) => {
 }
 
 const getById: ControllerAction = async(req, res) => {
-    const { id } = req.params
+    const { itemId } = req.params
     try {
-        const oneProduct = await productService.getProductByID(id);
+        const oneProduct = await productService.getProductByID(itemId);
 
         res.send(oneProduct)
     } catch (error) {
