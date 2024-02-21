@@ -5,6 +5,7 @@ import { ThemeContextProvider } from "./theme/ThemeContext";
 import { SnackbarProvider } from "./context/useSnackContext";
 import { InteractionsProvider } from "./context/useInteractionsContext";
 import env from "react-dotenv";
+import { ClerkProvider } from "@clerk/clerk-react";
 
 const PUBLISHABLE_KEY = env.REACT_APP_VITE_CLERK_PUBLISHABLE_KEY
  
@@ -17,12 +18,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ThemeContextProvider>
-      <SnackbarProvider>
-        <InteractionsProvider>
-          <App />
-        </InteractionsProvider>
-      </SnackbarProvider>
-    </ThemeContextProvider>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <ThemeContextProvider>
+        <SnackbarProvider>
+          <InteractionsProvider>
+            <App />
+          </InteractionsProvider>
+        </SnackbarProvider>
+      </ThemeContextProvider>
+    </ClerkProvider>
   </React.StrictMode>,
 );

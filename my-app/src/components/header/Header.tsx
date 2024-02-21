@@ -23,6 +23,7 @@ import React, { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
+import { SignInButton, SignOutButton, UserButton, useUser } from '@clerk/clerk-react';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -120,7 +121,8 @@ const Header = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   
   const { order, favourites } = useInteractionsContext()
-
+  const { isSignedIn, user, isLoaded} = useUser();
+  
   const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
   
   return (
@@ -313,6 +315,16 @@ const Header = (props: any) => {
                     </Badge>
                   )}
                 </NavLink>
+                <Divider orientation='vertical' flexItem/>
+                {(isSignedIn === false) ? (
+                  <SignInButton></SignInButton>
+                ) : (
+                  <>
+                    <div>Hello {user?.username}!</div>
+                    <UserButton/>
+                  </>
+                )}
+                <Divider orientation='vertical' flexItem/>
               </Box>
             </>
           )}
