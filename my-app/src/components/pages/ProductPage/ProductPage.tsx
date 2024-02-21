@@ -106,7 +106,7 @@ export const ProductPage = () => {
         <Skeleton
           variant="rounded"
           sx={{
-            width: { xs: '70%', sm: '70%', md: '70%' },
+            width: { xs: '95%', sm: '90%', md: '85%', lg: '80%' },
             my: { xs: '72px', sm: '92px' },
             height: { xs: '100vh', sm: '100vh' },
           }}
