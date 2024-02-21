@@ -2,7 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useRef } from "react";
 import Slider from "react-slick";
-import { ArrowProps, CarouselProps } from "./Carousel.types";
+import { CarouselProps } from "./Carousel.types";
 import { Theme, Typography, useMediaQuery } from "@mui/material";
 import './Carousel.styles.css'
 import ProductCard from "../productCard/productCard";
