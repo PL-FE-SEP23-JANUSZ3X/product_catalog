@@ -8,32 +8,7 @@ import './Carousel.styles.css'
 import ProductCard from "../productCard/productCard";
 import SkeletonLoader from "../skeletonLoader/SkeletonLoader";
 import { genRandomKey } from "../../utils/getRandomKey";
-
-function SampleNextArrow(props: ArrowProps) {
-  const { className, onClick } = props;
-
-  return (
-    <div
-      className={className}
-      onClick={onClick} 
-    >
-      <img src="/images/icons/arr-right-active.svg" alt="arr-right" />
-    </div>
-  );
-}
-
-function SamplePrevArrow(props: ArrowProps) {
-  const { className, onClick } = props;
-
-  return (
-    <div
-      className={className}
-      onClick={onClick} 
-    >
-      <img src="/images/icons/arr-left-active.svg" alt="arr-left" />
-    </div>
-  );
-}
+import { LeftIconButton, RightIconButton } from "../customIconButtons";
 
 const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const sliderRef = useRef<Slider>(null);
@@ -70,6 +45,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
     slidesToShow,
     slidesToScroll: 1,
     centerMode: false,
+    arrows: false,
   };
 
   const goToNextSlide = () => {
@@ -85,8 +61,8 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
       <div className="slider-headliner container__slider">
         <Typography variant="h2" sx={{fontSize: { xs: '24px', sm: '32px' }}}>{title}</Typography>
         <div className="arrows-container">
-          <SamplePrevArrow onClick={goToPrevSlide} className={'arrow'} />
-          <SampleNextArrow onClick={goToNextSlide} className={'arrow'} />
+          <LeftIconButton goToPrevSlide={goToPrevSlide} />
+          <RightIconButton goToNextSlide={goToNextSlide} />
         </div>
       </div>
         {products.length !== 0 ? (
