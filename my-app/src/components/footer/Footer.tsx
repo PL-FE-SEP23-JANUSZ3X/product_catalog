@@ -1,13 +1,12 @@
+import React from 'react';
 import {
   Box,
   Button,
-  Container,
   Link,
   Stack,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import React from 'react';
 
 export const Footer: React.FC = () => {
   const theme = useTheme();
@@ -18,15 +17,33 @@ export const Footer: React.FC = () => {
   };
 
   const navLinkStyle = {
-    textTransform: 'uppercase',
     textDecoration: 'none',
-    fontSize: '12px',
     fontWeight: '800',
-    color: '#89939A',
+    color: 'secondary.main',
+    '&:hover': {
+      color: 'primary.main',
+    },
   };
 
+  const iconButtonStyle = {
+    "&.MuiIconButton-root": {
+      width: 32,
+      height: 32,
+      color: theme.palette.mode === 'light' ? 'primary.main' : 'white.main',
+      backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'badgeBorder.main',
+      outline: 1,
+      outlineColor: theme.palette.mode === 'light' ? 'icons.main' : 'transparent',
+      borderRadius: 0,
+      border: 0,
+      '&:hover': {
+        outlineColor: theme.palette.mode === 'light' ? 'primary.main' : 'transparent',
+        backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'icons.main',
+      },
+    },
+  }
+
   return (
-    <Container
+    <Box
       sx={{
         width: '100%',
         pt: 4,
@@ -56,12 +73,12 @@ export const Footer: React.FC = () => {
 
         <Stack
           direction={isMobile ? 'column' : 'row'}
-          spacing={1}
+          spacing={2}
           alignItems={isMobile ? 'flex-start' : 'center'}
         >
-          <Link sx={navLinkStyle}>Github</Link>
-          <Link sx={navLinkStyle}>Contact</Link>
-          <Link sx={navLinkStyle}>Rights</Link>
+          <Link variant='upper' sx={navLinkStyle}>Github</Link>
+          <Link variant='upper' sx={navLinkStyle}>Contact</Link>
+          <Link variant='upper' sx={navLinkStyle}>Rights</Link>
         </Stack>
 
         <Button
@@ -72,6 +89,10 @@ export const Footer: React.FC = () => {
             fontSize: '12px',
             fontWeight: theme.palette.mode === 'light' ? '600' : '700',
             color: 'secondary.main',
+            '&:hover': {
+              color: 'primary.main',
+              backgroundColor: 'transparent',
+            },
           }}
           onClick={scrollToTop}
         >
@@ -88,6 +109,6 @@ export const Footer: React.FC = () => {
           />
         </Button>
       </Stack>
-    </Container>
+    </Box>
   );
 };
