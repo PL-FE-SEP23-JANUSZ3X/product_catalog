@@ -5,6 +5,7 @@ import phoneRouter from './src/router/phone.router';
 import productRouter from './src/router/products.router';
 import accessoryRouter from './src/router/accessory.router';
 import tabletRouter from './src/router/tablet.router';
+import orderRouter from './src/router/order.router';
 import cors from 'cors';
 
 import 'dotenv/config';
@@ -22,6 +23,7 @@ app.use('/tablets', tabletRouter);
 app.use('/accessories', accessoryRouter);
 app.use('/phones', phoneRouter);
 app.use('/products', productRouter);
+app.use('/orders', orderRouter);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

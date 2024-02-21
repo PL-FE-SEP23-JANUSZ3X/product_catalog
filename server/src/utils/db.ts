@@ -3,6 +3,7 @@ import Phone from '../model/phone.model';
 import Product from '../model/product.model';
 import Accessory from '../model/accessory.model';
 import Tablets from '../model/tablet.model';
+import Order from '../model/order.model';
 
 import 'dotenv/config';
 
@@ -12,7 +13,7 @@ const sequelize: Sequelize = new Sequelize(URI,{
     dialectOptions: {
       ssl:true,
     },
-    models: [Phone, Product, Accessory, Tablets]
+    models: [Phone, Product, Accessory, Tablets, Order]
   });
 
 async function connect(): Promise<void> {
