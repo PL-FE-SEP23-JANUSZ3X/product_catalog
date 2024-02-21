@@ -5,6 +5,7 @@ type DescriptionItem = {
 
 export type Product = {
   capacity: string;
+  category: string;
   color: string;
   colorsAvailable: string[];
   createdAt: string;

@@ -9,7 +9,7 @@ import {
   Link,
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePage.style.css';
 import { useEffect, useState } from 'react';
@@ -33,7 +33,11 @@ export const PhonePage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { itemId } = useParams<Record<string, string>>();
-  console.log(itemId)
+  const category = useLocation()
+    .pathname.split('/')
+    .filter((element) => element)[0];
+
+  console.log('kategoria', category);
 
   useEffect(() => {
     const fetchPhoneData = async () => {
@@ -75,7 +79,7 @@ export const PhonePage = () => {
 
   if (isLoading) {
     return (
-      <Skeleton 
+      <Skeleton
         variant="rounded"
         sx={{
           width: { xs: '288px', sm: '592px', md: '752px' },
@@ -106,7 +110,6 @@ export const PhonePage = () => {
   return (
     <Section>
       <Container>
-
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs parrentLink="phones" currentPage="Favourites" />
 
@@ -125,15 +128,15 @@ export const PhonePage = () => {
             to={`/phones`}
             end
             style={{ textDecoration: 'none', display: 'inline-block' }}
-            onClick={() => {navigate(-1)}}
+            onClick={() => {
+              navigate(-1);
+            }}
           >
-            <Link
-              component="div" variant="body2" sx={navlinkStyle}>
+            <Link component="div" variant="body2" sx={navlinkStyle}>
               Back
             </Link>
           </NavLink>
         </Box>
-
 
         {/* PRODUCT NAME */}
         <Typography
@@ -303,5 +306,3 @@ export const PhonePage = () => {
     </Section>
   );
 };
-
-export default PhonePage;
