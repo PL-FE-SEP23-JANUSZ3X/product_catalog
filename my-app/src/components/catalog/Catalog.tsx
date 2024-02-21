@@ -32,8 +32,6 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   const itemsPerPage = searchParams.get('items') ?? '16'; 
   const page = searchParams.get('page') ?? '1';
 
-  const numberOfSkeletons = 4
-
   const startIndex = (+page - 1) * +itemsPerPage;
 
   const skeletonWidth = {
@@ -65,12 +63,6 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
 
   getproducts();
 }, [searchParams]);
-
-  const skeletonItems = Array.from({ length: numberOfSkeletons }, (_, index) => (
-    <Grid key={index} item spacing={2} sx={{ gap: 5 }}>
-      <Skeleton variant="rounded" width={272} height={506} />
-    </Grid>
-  ));
 
   const handleChange = (event: SelectChangeEvent<string>, method: string) => {
     if (method === 'items') {
