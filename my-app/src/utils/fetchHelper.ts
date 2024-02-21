@@ -105,7 +105,7 @@ const submitOrder = async (orderData : OrderDataType) => {
     const response = await axios.post('https://phone-catalog-f9j4.onrender.com/orders', orderData);
     console.log('Order created successfully:', response.data);
   } catch (error) {
-    console.error('Error creating order');
+    console.error('Error creating order:', error);
 
   }
 };
