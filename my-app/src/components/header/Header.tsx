@@ -23,6 +23,7 @@ import React, { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
+import SearchDrawer from '../searchDrawer/SearchDrawer';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -224,6 +225,8 @@ const Header = (props: any) => {
           {isMobile ? (
             <Box display="flex" justifyContent="flex-end">
               <Divider orientation='vertical' flexItem/>
+              <SearchDrawer/>
+              <Divider orientation='vertical' flexItem/>
               <IconButton
                 component='div'
                 disableRipple 
@@ -252,6 +255,8 @@ const Header = (props: any) => {
             <>
               <Box flexGrow="1"/>
               <Box display="flex" flexDirection="row">
+                <Divider orientation='vertical' flexItem/>
+                <SearchDrawer/>
                 <Divider orientation='vertical' flexItem/>
                 <IconButton
                   disableRipple 
