@@ -117,5 +117,6 @@ const orderData = {
   total: 100,
   orderList: ['Item1', 'Item2', 'Item3']
 };
+
 //function call for test purposes
 submitOrder(orderData);
