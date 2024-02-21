@@ -39,7 +39,7 @@ function App() {
 
               <Route path="accessories">
                 <Route index element={<AccesoriesPage />} />
-                <Route path=":itemId" element={<AccessoryPage />} />
+                <Route path=":itemId" element={<PhonePage />} />
               </Route>
 
               <Route path="favourites" element={<FavouritesPage />} />

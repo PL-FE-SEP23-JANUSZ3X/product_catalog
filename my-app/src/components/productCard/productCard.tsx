@@ -34,8 +34,6 @@ const ProductCard = ({
     category,
   } = product;
 
-  console.log(product);
-
   const { order, addToOrder, favourites, toggleFavourites } =
     useInteractionsContext();
 
