@@ -54,7 +54,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const isTablet = useMediaQuery((theme: Theme)  => theme.breakpoints.down('md'));
   const isMobile = useMediaQuery((theme: Theme)  => theme.breakpoints.down('sm'));
 
-  let slidesToShow = 4;
+  let slidesToShow: number = 4;
 
   if (isTablet) {
     slidesToShow = 2.5;
