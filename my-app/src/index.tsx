@@ -18,14 +18,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <ThemeContextProvider>
-        <SnackbarProvider>
+    <ThemeContextProvider>
+      <SnackbarProvider>
+        <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
           <InteractionsProvider>
             <App />
           </InteractionsProvider>
-        </SnackbarProvider>
-      </ThemeContextProvider>
-    </ClerkProvider>
+        </ClerkProvider>
+      </SnackbarProvider>
+    </ThemeContextProvider>
   </React.StrictMode>,
 );

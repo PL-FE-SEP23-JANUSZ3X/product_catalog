@@ -13,7 +13,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import FavouritesPage from './components/pages/FavouritesPage';
 import CartPage from './components/pages/CartPage';
 import './style.css';
-import { SignIn, SignedOut } from '@clerk/clerk-react';
+import SignInPage from './components/pages/SignInPage';
 
 function App() {
   const { theme } = useThemeContext();
@@ -49,9 +49,7 @@ function App() {
 
               <Route path="*" element={<NotFoundPage />} />
 
-              <Route path="/sign-in" element={<SignIn />} />
-
-              <Route path="/sign-out" element={<SignedOut />} />
+              <Route path="sign-in" element={<SignInPage />} />
             </Route>
           </Routes>
         </HashRouter>

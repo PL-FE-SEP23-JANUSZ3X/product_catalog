@@ -10,7 +10,6 @@ import {
   Badge,
   Slide,
   useScrollTrigger,
-  Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -24,7 +23,7 @@ import React, { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
-import { SignInButton, UserButton, useUser } from '@clerk/clerk-react';
+import { UserButton, useUser } from '@clerk/clerk-react';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -122,10 +121,9 @@ const Header = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   
   const { order, favourites } = useInteractionsContext()
-  const { isSignedIn, user, isLoaded} = useUser();
+  const { isSignedIn } = useUser();
   
   const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
-  
   return (
     <HideOnScroll {...props}>
       <AppBar
@@ -317,11 +315,14 @@ const Header = (props: any) => {
                   )}
                 </NavLink>
                 <Divider orientation='vertical' flexItem/>
+
                 {(isSignedIn === false) ? (
-                  <SignInButton/>
+                  <Box>
+                    <NavLink to="/sign-in">Sign In</NavLink>
+                  </Box>
                 ) : (
                   <Box sx={{display:"flex", alignItems:"center", justifyContent:"center"}}>
-                    <UserButton/>
+                    <UserButton afterSignOutUrl='/#/'/>
                   </Box>
                 )}
                 <Divider orientation='vertical' flexItem/>
