@@ -36,7 +36,6 @@
 /* (sm) */
 @media (min-width: 640px) and (max-width: 1199px) {
   .image-gallery-thumbnail {
-    border: 1px solid #e2e6e9;
     width: 35px;
   }
 
@@ -44,16 +43,18 @@
     margin: 0;
     width: 35px;
   }
-
-  .image-gallery-slide-wrapper.image-gallery-thumbnails-left {
-    /* width: 100%; */
-  }
 }
 
 /* (md) */
 @media (min-width: 1200px) and (max-width: 1439px) {
+  .image-gallery-thumbnail {
+    width: 80px;
+  }
 }
 
 /* (lg) */
 @media (min-width: 1440px) {
+  .image-gallery-thumbnail {
+    width: 80px;
+  }
 }

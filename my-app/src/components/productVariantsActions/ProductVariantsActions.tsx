@@ -63,9 +63,14 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
   const isSelected = order.find((product) => product.id === phoneData?.id);
 
   return (
-    <Box className="product-variants-actions">
+    <Box
+      className="product-variants-actions"
+      display="flex"
+      gap="24px"
+      sx={{ mb: '60px' }}
+    >
       <Box className="product-variants-actions_container-1">
-        <Box className="available-colors" width="100%">
+        <Box className="available-colors" width="100%" display="flex" gap="6px">
           <Box
             display="flex"
             flexDirection="row"
@@ -121,37 +126,38 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
 
       <Divider orientation="horizontal" flexItem />
 
-      <Typography
-        variant="body2"
-        sx={{
-          color: 'secondary.main',
-        }}
-      >
-        Select capacity
-      </Typography>
-
-      <Box sx={{ display: 'flex', gap: '10px' }}>
-        {phoneData?.capacityAvailable.map((capacity) => (
-          <Link
-            key={capacity}
-            to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}
-          >
-            <Button
-              variant="contained"
-              sx={{
-                minWidth: 'auto',
-                height: 32,
-                boxShadow: 0,
-                borderRadius: 0,
-                fontSize: 14,
-                fontWeight: 500,
-                p: 1,
-              }}
+      <Box display="flex" flexDirection="column" gap="6px">
+        <Typography
+          variant="body2"
+          sx={{
+            color: 'secondary.main',
+          }}
+        >
+          Select capacity
+        </Typography>
+        <Box sx={{ display: 'flex', gap: '10px' }}>
+          {phoneData?.capacityAvailable.map((capacity) => (
+            <Link
+              key={capacity}
+              to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}
             >
-              {capacity}
-            </Button>
-          </Link>
-        ))}
+              <Button
+                variant="contained"
+                sx={{
+                  minWidth: 'auto',
+                  height: 32,
+                  boxShadow: 0,
+                  borderRadius: 0,
+                  fontSize: 14,
+                  fontWeight: 500,
+                  p: 1,
+                }}
+              >
+                {capacity}
+              </Button>
+            </Link>
+          ))}
+        </Box>
       </Box>
 
       <Divider orientation="horizontal" flexItem />
