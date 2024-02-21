@@ -13,6 +13,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import FavouritesPage from './components/pages/FavouritesPage';
 import CartPage from './components/pages/CartPage';
 import './style.css';
+import SignInPage from './components/pages/SignInPage';
 
 function App() {
   const { theme } = useThemeContext();
@@ -47,6 +48,8 @@ function App() {
               <Route path="cart" element={<CartPage />} />
 
               <Route path="*" element={<NotFoundPage />} />
+
+              <Route path="sign-in" element={<SignInPage />} />
             </Route>
           </Routes>
         </HashRouter>
