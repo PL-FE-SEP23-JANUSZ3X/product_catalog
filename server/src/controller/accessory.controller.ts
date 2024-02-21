@@ -1,5 +1,4 @@
 import accessoryService from '../service/accessory.service';
-import SortType from '../types/sortType';
 import { ControllerAction } from '../utils/types';
 
 const getAll: ControllerAction = async (req, res) => {

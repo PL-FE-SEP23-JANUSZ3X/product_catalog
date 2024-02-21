@@ -1,5 +1,7 @@
 export interface OrderProductType {
-    id: string;
-    count: number;
-    price: number;
+    id: number;
+    userName: string;
+    adress: string;
+    total: number;
+    orderList: string[];
 }
