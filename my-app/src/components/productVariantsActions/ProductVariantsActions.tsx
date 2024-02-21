@@ -11,12 +11,13 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
-import { Phone } from '../../types/Phone';
 import './ProductVariantsActionsStyle.css';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
+import { Phone } from '../../types';
 
 type Props = {
-  phoneData: Phone | null;
+  productData: Phone | null;
+  category: string;
 };
 
 const productColors: { [key: string]: string } = {
@@ -40,7 +41,7 @@ const productColors: { [key: string]: string } = {
   sierrablue: '#69abce',
 };
 
-const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
+const ProductVariantsActions: FC<Props> = ({ productData, category }) => {
   const { order, addToOrder, favourites, toggleFavourites } =
     useInteractionsContext();
 
@@ -58,9 +59,9 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
   };
 
   const isFavourites = favourites.find(
-    (product) => product.id === phoneData?.id,
+    (product) => product.id === productData?.id,
   );
-  const isSelected = order.find((product) => product.id === phoneData?.id);
+  const isSelected = order.find((product) => product.id === productData?.id);
 
   return (
     <Box
@@ -99,10 +100,10 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
             flexWrap="wrap"
             gap="6px"
           >
-            {phoneData?.colorsAvailable.map((color) => (
+            {productData?.colorsAvailable.map((color) => (
               <Link
                 key={color}
-                to={`/phones/${phoneData?.namespaceId}-${phoneData?.capacity.toLowerCase()}-${color}`}
+                to={`/${category}/${productData?.namespaceId}-${productData?.capacity.toLowerCase()}-${color}`}
               >
                 <IconButton
                   className="available-colors_icon-button"
@@ -135,10 +136,10 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
           Select capacity
         </Typography>
         <Box sx={{ display: 'flex', gap: '10px' }}>
-          {phoneData?.capacityAvailable.map((capacity) => (
+          {productData?.capacityAvailable.map((capacity) => (
             <Link
               key={capacity}
-              to={`/phones/${phoneData?.namespaceId}-${capacity.toLowerCase()}-${phoneData.color}`}
+              to={`/${category}/${productData?.namespaceId}-${capacity.toLowerCase()}-${productData.color}`}
             >
               <Button
                 variant="contained"
@@ -166,20 +167,20 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
           variant="h2"
           sx={{ color: 'primary.main', letterSpacing: '-1%' }}
         >
-          ${phoneData?.priceDiscount}
+          ${productData?.priceDiscount}
         </Typography>
         <Typography
           className="prices_regular-price"
           sx={{ fontSize: '22px', color: 'secondary.main' }}
         >
-          ${phoneData?.priceRegular}
+          ${productData?.priceRegular}
         </Typography>
       </Box>
 
       <Stack spacing={1} direction="row">
         <Button
           variant={isSelected ? 'buttonSelected' : 'buttonDefault'}
-          onClick={handleAddToOrder(phoneData?.id, phoneData?.priceRegular)}
+          onClick={handleAddToOrder(productData?.id, productData?.priceRegular)}
         >
           Add to card
         </Button>
@@ -190,7 +191,7 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
               : 'favouritesButtonDefault'
           }
           sx={{ minWidth: 48, height: 48 }}
-          onClick={handleAddToFavourites(phoneData?.id)}
+          onClick={handleAddToFavourites(productData?.id)}
         >
           {isFavourites ? (
             <FavoriteIcon sx={{ width: 20, height: 20, color: 'red.main' }} />
@@ -208,7 +209,7 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
             Screen
           </Typography>
           <Typography variant="body2" sx={{ color: 'primary.main' }}>
-            {phoneData?.screen}
+            {productData?.screen}
           </Typography>
         </Box>
 
@@ -217,7 +218,7 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
             Resolution
           </Typography>
           <Typography variant="body2" sx={{ color: 'primary.main' }}>
-            {phoneData?.resolution}
+            {productData?.resolution}
           </Typography>
         </Box>
         <Box className="product-info_row">
@@ -225,7 +226,7 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
             Processor
           </Typography>
           <Typography variant="body2" sx={{ color: 'primary.main' }}>
-            {phoneData?.processor}
+            {productData?.processor}
           </Typography>
         </Box>
         <Box className="product-info_row">
@@ -233,7 +234,7 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
             RAM
           </Typography>
           <Typography variant="body2" sx={{ color: 'primary.main' }}>
-            {phoneData?.ram}
+            {productData?.ram}
           </Typography>
         </Box>
       </Box>

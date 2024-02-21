@@ -194,7 +194,10 @@ export const PhonePage = () => {
 
           {/* SPECS */}
           <Box sx={{ flex: '0 1 40%' }}>
-            <ProductVariantsActions phoneData={productData} />
+            <ProductVariantsActions
+              productData={productData}
+              category={category}
+            />
           </Box>
         </Box>
 
