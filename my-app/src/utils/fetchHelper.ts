@@ -8,17 +8,23 @@ import axios from 'axios';
 // productRouter.get('/sort/:productCategory-:sortType-:start-:limit', productController.getSortedProducts);
 
 export const getProducts = async () => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/products/`,
+  );
   return response.data;
 };
 
 export const getProduct = async (itemId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/${itemId}`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/products/${itemId}`,
+  );
   return response.data;
 };
 
 export const getRecommended = async (productId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/${productId}/recommended`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/products/${productId}/recommended`,
+  );
   return response.data;
 };
 
@@ -28,31 +34,41 @@ export const getSortedProducts = async (
   start: number,
   limit: number,
 ) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/sort/${category}-${sortType}-${start}-${limit}`)
-  return response.data
-}
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/products/sort/${category}-${sortType}-${start}-${limit}`,
+  );
+  return response.data;
+};
 
 // accessoryRouter.get('/', accessoryController.getAll);
 // accessoryRouter.get('/:accessoryId', accessoryController.getById);
 // accessoryRouter.get('/:accessoryId/recommended', accessoryController.getRecommended);
 
 export const getAccessories = async () => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/accessories/`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/accessories/`,
+  );
   return response.data;
 };
 
 export const getCategory = async (category: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/category/${category}`);
-  return response.data;
-}
-
-export const getAccessory = async (accessoryId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/accessories/${accessoryId}`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/products/category/${category}`,
+  );
   return response.data;
 };
 
-export const getRecommendedgetAccessorys = async (accessoryId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/accessories/${accessoryId}/recommended`);
+export const getAccessory = async (accessoryId: string) => {
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/accessories/${accessoryId}`,
+  );
+  return response.data;
+};
+
+export const getRecommendedAccessories = async (accessoryId: string) => {
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/accessories/${accessoryId}/recommended`,
+  );
   return response.data;
 };
 
@@ -61,17 +77,23 @@ export const getRecommendedgetAccessorys = async (accessoryId: string) => {
 // phoneRouter.get('/:phoneId/recommended', phoneController.getRecommended);
 
 export const getPhones = async () => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/phones/`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/phones/`,
+  );
   return response.data;
 };
 
 export const getPhone = async (phoneId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/phones/${phoneId}`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/phones/${phoneId}`,
+  );
   return response.data;
 };
 
 export const getRecommendedPhones = async (phoneId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/phones/${phoneId}/recommended`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/phones/${phoneId}/recommended`,
+  );
   return response.data;
 };
 
@@ -80,16 +102,22 @@ export const getRecommendedPhones = async (phoneId: string) => {
 // tabletRouter.get('/:tabletId/recommended', tabletController.getRecommended);
 
 export const getTablets = async () => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/tablets/`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/tablets/`,
+  );
   return response.data;
 };
 
 export const getTablet = async (tabletId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/tablets/${tabletId}`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/tablets/${tabletId}`,
+  );
   return response.data;
 };
 
 export const getRecommendedTablets = async (tabletId: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/tablets/${tabletId}/recommended`);
+  const response = await axios.get(
+    `https://phone-catalog-f9j4.onrender.com/tablets/${tabletId}/recommended`,
+  );
   return response.data;
 };
