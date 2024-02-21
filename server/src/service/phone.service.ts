@@ -11,10 +11,8 @@ const getPhoneById = async (phoneId: string) => {
 };
 
 const getRecommendedById = async (phoneId: string) => {
-  // get phone by id
   const phone = await getPhoneById(phoneId);
 
-  // get recommended phones (same model and color)
   const recommended = await Phone.findAll({
     where: {
       id: { [Op.ne]: phoneId },
@@ -24,7 +22,6 @@ const getRecommendedById = async (phoneId: string) => {
     limit: 5,
   });
 
-  // if less then 5 phones found, search just by model
   if (recommended.length < 5) {
     const recommendedByColor = await Phone.findAll({
       where: {
@@ -37,7 +34,6 @@ const getRecommendedById = async (phoneId: string) => {
     recommendedByColor.forEach((phone) => recommended.push(phone));
   }
 
-  // if still less then 5 phones found, give any 5 phones
   if (recommended.length < 5) {
     const recommendedRandom = await Phone.findAll({
       where: {
