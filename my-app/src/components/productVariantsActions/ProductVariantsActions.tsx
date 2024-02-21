@@ -67,7 +67,7 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
       className="product-variants-actions"
       display="flex"
       gap="24px"
-      sx={{ mb: '60px' }}
+      sx={{ mb: '60px', maxWidth: '320px' }}
     >
       <Box className="product-variants-actions_container-1">
         <Box className="available-colors" width="100%" display="flex" gap="6px">
@@ -89,7 +89,6 @@ const ProductVariantsActions: FC<Props> = ({ phoneData }) => {
               sx={{
                 fontWeight: 700,
                 color: 'icons.main',
-                visibility: { xs: 'visible', md: 'hidden' },
               }}
             >
               ID: 802390
