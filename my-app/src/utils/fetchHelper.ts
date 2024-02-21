@@ -23,7 +23,7 @@ export const getProduct = async (itemId: string) => {
 
 export const getRecommended = async (productId: string) => {
   const response = await axios.get(
-    `https://phone-catalog-f9j4.onrender.com/products/${productId}/recommended`,
+    `https://phone-catalog-f9j4.onrender.com/products/recommended/${productId}`,
   );
   return response.data;
 };
