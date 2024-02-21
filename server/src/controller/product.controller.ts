@@ -52,6 +52,25 @@ const getByCategory: ControllerAction = async(req, res) => {
     }
 }
 
+const getRecommended: ControllerAction = async (req, res) => {
+    try {
+        const itemId = req.params.itemId.toString(); 
+        const recommended = await productService.getRecommendedById(itemId);
+  
+        if (!recommended.length) {
+            res.status(404).send('Not Found: The specified entity does not exist');
+            return;
+        }
+
+        console.log(recommended)
+  
+        res.send(recommended);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 const getById: ControllerAction = async(req, res) => {
     const { itemId } = req.params
     try {
@@ -79,6 +98,6 @@ const getSortedProducts: ControllerAction= async (req, res) => {
     }
 };
 
-const productController = {getAll, getById, getByCategory, getSortedProducts, getByQuery};
+const productController = {getAll, getById, getByCategory,getRecommended, getSortedProducts, getByQuery};
 
 export default productController;

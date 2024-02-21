@@ -12,7 +12,7 @@ const getByCategory= async(categoryType: string) => {
 };
 
 const getProductByID= async(itemId: string) => {
-    return Product.findAll({where : {itemId}});
+    return Product.findOne({ where: { itemId: itemId } });
 };
 
 const getProductsByQuery= async(query: string) => {
@@ -51,6 +51,39 @@ const sortProducts = async (categoryType: string, sortType: string, startIndex: 
     return await Product.findAll({where: {category : categoryType},  offset: startIndex, limit: limitIndex, order: orderOptions});
 };
 
-const productService = {getAllProducts, getProductByID, getByCategory, sortProducts, getProductsByQuery};
+const getRecommendedById = async (itemId: string) => {
+    const product = await Product.findOne({
+        where: {
+            itemId: itemId,
+        }
+    });
+
+    if (!product) {
+        return [];
+    }
+
+    const recommended = await Product.findAll({
+        where: {
+            itemId: { [Op.ne]: itemId },
+            color: product.color,
+        },
+        limit: 5,
+    });
+
+    if (recommended.length < 5) {
+        const additionalRecommended = await Product.findAll({
+            where: {
+                itemId: { [Op.ne]: itemId },
+            },
+            limit: 5 - recommended.length,
+        });
+
+        recommended.push(...additionalRecommended);
+    }
+
+    return recommended;
+};
+
+const productService = {getAllProducts, getProductByID, getByCategory, getRecommendedById, sortProducts, getProductsByQuery};
 
 export default productService;
