@@ -25,23 +25,6 @@ export const Footer: React.FC = () => {
     },
   };
 
-  const iconButtonStyle = {
-    "&.MuiIconButton-root": {
-      width: 32,
-      height: 32,
-      color: theme.palette.mode === 'light' ? 'primary.main' : 'white.main',
-      backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'badgeBorder.main',
-      outline: 1,
-      outlineColor: theme.palette.mode === 'light' ? 'icons.main' : 'transparent',
-      borderRadius: 0,
-      border: 0,
-      '&:hover': {
-        outlineColor: theme.palette.mode === 'light' ? 'primary.main' : 'transparent',
-        backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'icons.main',
-      },
-    },
-  }
-
   return (
     <Box
       sx={{
