@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { OrderDataType } from '../types/OrderDataType';
 
 // const BASE_URL = process.env.REACT_APP_API;
 
@@ -93,3 +94,28 @@ export const getRecommendedTablets = async (tabletId: string) => {
   const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/tablets/${tabletId}/recommended`);
   return response.data;
 };
+
+export const getOrders = async () => {
+  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/orders/all`);
+  return response.data;
+};
+
+const submitOrder = async (orderData : OrderDataType) => {
+  try {
+    const response = await axios.post('https://phone-catalog-f9j4.onrender.com/orders', orderData);
+    console.log('Order created successfully:', response.data);
+  } catch (error) {
+    console.error('Error creating order');
+
+  }
+};
+
+//example data object
+const orderData = {
+  userName: 'JohnDoe',
+  adress: '123 Main St',
+  total: 100,
+  orderList: ['Item1', 'Item2', 'Item3']
+};
+//function call for test purposes
+submitOrder(orderData);
