@@ -139,7 +139,7 @@ export const ProductPage = () => {
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs
           parrentLink={`${category}`}
-          currentPage="Favourites"
+          currentPage={`${productData?.namespaceId}`}
         />
 
         {/* BACK BUTTON */}
