@@ -135,7 +135,10 @@ export const ProductPage = () => {
     <Section>
       <Container>
         {/* BREADCRUMBS */}
-        <CustomBreadcrumbs parrentLink="phones" currentPage="Favourites" />
+        <CustomBreadcrumbs
+          parrentLink={`${category}`}
+          currentPage="Favourites"
+        />
 
         {/* BACK BUTTON */}
         <Box>
