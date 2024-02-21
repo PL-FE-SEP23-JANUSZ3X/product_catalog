@@ -54,7 +54,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const isTablet = useMediaQuery((theme: Theme)  => theme.breakpoints.down('md'));
   const isMobile = useMediaQuery((theme: Theme)  => theme.breakpoints.down('sm'));
 
-  let slidesToShow: number = 4;
+  let slidesToShow = 4;
 
   if (isTablet) {
     slidesToShow = 2.5;
@@ -88,7 +88,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
           <SampleNextArrow onClick={goToNextSlide} className={'arrow'} />
         </div>
       </div>
-        {products.length ? (
+        {products.length !== 0 ? (
           <Slider ref={sliderRef} {...settings} >
             {products.map(product => (
               <div className={isMobile ? 'mobile' : isTablet ? 'tablet' : ''}>

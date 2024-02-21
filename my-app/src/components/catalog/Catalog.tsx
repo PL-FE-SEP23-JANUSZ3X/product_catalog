@@ -36,6 +36,18 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
 
   const startIndex = (+page - 1) * +itemsPerPage;
 
+  const skeletonWidth = {
+    'small': 288,
+    'medium': 288,
+    'large': 272,
+  }
+
+  const skeletonLength = {
+    'small': 1,
+    'medium': 2,
+    'large': 4,
+  }
+
   useEffect(() => {
     const getproducts = async () => {
       try {
@@ -190,7 +202,7 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
           sx={boxStyle}
         >
           {loader
-    ? <SkeletonLoader /> // Użycie komponentu SkeletonLoader zamiast skeletonItems
+    ? <SkeletonLoader length={skeletonLength} width={skeletonWidth} />
     : products.map(product => (
       <Grid item spacing={2} sx={{gap: 5}} key={product.id}>
         <ProductCard product={product} />  
