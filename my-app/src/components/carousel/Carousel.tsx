@@ -5,7 +5,9 @@ import Slider from "react-slick";
 import { ArrowProps, CarouselProps } from "./Carousel.types";
 import { Theme, Typography, useMediaQuery } from "@mui/material";
 import './Carousel.styles.css'
-import ItemCard from "../productCard/productCard";
+import ProductCard from "../productCard/productCard";
+import SkeletonLoader from "../skeletonLoader/SkeletonLoader";
+import { genRandomKey } from "../../utils/getRandomKey";
 
 function SampleNextArrow(props: ArrowProps) {
   const { className, onClick } = props;
@@ -35,7 +37,20 @@ function SamplePrevArrow(props: ArrowProps) {
 
 const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const sliderRef = useRef<Slider>(null);
-  const carouselWidth = '212px'
+  const mobileWidth = '212px'
+  const tabletWidth = '237px'
+  
+  const skeletonWidth = {
+    'small': 288,
+    'medium': 288,
+    'large': 272,
+  }
+
+  const skeletonLength = {
+    'small': 1,
+    'medium': 2,
+    'large': 4,
+  }
 
   const isTablet = useMediaQuery((theme: Theme)  => theme.breakpoints.down('md'));
   const isMobile = useMediaQuery((theme: Theme)  => theme.breakpoints.down('sm'));
@@ -74,13 +89,20 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
           <SampleNextArrow onClick={goToNextSlide} className={'arrow'} />
         </div>
       </div>
-        <Slider ref={sliderRef} {...settings} >
-          {products.map(product => (
-            <div className={isMobile ? 'mobile' : isTablet ? 'tablet' : ''}>
-              {isMobile ? <ItemCard item={product} carouselWidth={carouselWidth} /> : <ItemCard item={product} />}
-            </div>
-          ))}
-        </Slider>
+        {products.length !== 0 ? (
+          <Slider ref={sliderRef} {...settings} >
+            {products.map(product => (
+              <div key={genRandomKey()} className={isMobile ? 'mobile' : isTablet ? 'tablet' : ''}>
+                {isMobile ? <ProductCard product={product} carouselWidth={mobileWidth} />
+                  : isTablet ? <ProductCard product={product} carouselWidth={tabletWidth} /> 
+                  : <ProductCard product={product} />
+                }
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <SkeletonLoader length={skeletonLength} width={skeletonWidth} /> 
+        )}
     </div>
   );
 }

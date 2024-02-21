@@ -1,19 +1,16 @@
+import { useMemo} from "react";
 import {
   Box,
   CardMedia,
   IconButton,
-  Skeleton,
   Typography,
 } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useInteractionsContext } from "../../context/useInteractionsContext";
-import { useEffect, useMemo, useState } from "react";
-import { Product } from "../../types/Product";
-import { ErrorMessage } from "../../types/ErrorMessages";
-import { getPhone } from "../../utils/fetchHelper";
-import ProductCartProps from './ProductCart.types'
+import { ProductCartType } from "../../types/ProductCartType";
+import { useThemeContext } from "../../theme/ThemeContext";
 
 const containerStyle = {
   backgroundColor: 'background.paper',
@@ -51,78 +48,52 @@ const countContainerStyle = {
   boxShadow: 0,
 }
 
-const iconButtonStyle = {
-  width: 32,
-  height: 32,
-  color: 'primary.main',
-  outline: 1,
-  outlineColor: 'icons.main',
-  borderRadius: 0,
-  border: 0,
-  '&:hover': {
-    outlineColor: 'primary.main',
-  }
+type OrderTypeProps = {
+  product: ProductCartType,
 }
 
-const ProductCart: React.FC<ProductCartProps> = ({ orderProductId, orderCount, orderPrice }) => {
+const ProductCart: React.FC<OrderTypeProps> = ({ product }) => {
+  const {itemId, count, price, image} = product;
   const {
     removeFromOrder,
     increaseCount,
     decreaseCount,
   } = useInteractionsContext()
 
-  const [product, setProduct] = useState<Product | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const { theme } = useThemeContext();
 
-  useEffect(() => {
-    const fetchPhoneData = async () => {
-      if (typeof orderProductId === 'string') {
-        setError(null);
-        setIsLoading(true);
-        try {
-          const data = await getPhone(orderProductId);
-          setProduct(data);
-        } catch (error) {
-          setError(ErrorMessage.LOAD);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        console.error('phoneId is undefined');
-      }
-    };
-
-    fetchPhoneData();
-  }, [orderProductId]);
+  const iconButtonStyle = {
+    "&.MuiIconButton-root": {
+      width: 32,
+      height: 32,
+      color: theme.palette.mode === 'light' ? 'primary.main' : 'white.main',
+      backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'badgeBorder.main',
+      outline: 1,
+      outlineColor: theme.palette.mode === 'light' ? 'icons.main' : 'transparent',
+      borderRadius: 0,
+      border: 0,
+      '&:hover': {
+        outlineColor: theme.palette.mode === 'light' ? 'primary.main' : 'transparent',
+        backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'icons.main',
+      },
+    },
+    "&.Mui-disabled": {
+      color: 'elements.main',
+      outline: 1,
+      outlineColor: 'element.main',
+      backgroundColor: 'transparent',
+    }
+  }
 
   const handleRemove = (id: string) => () => removeFromOrder(id);
   const handleIncr = (id: string) => () => increaseCount(id);
   const handleDecr = (id: string) => () => decreaseCount(id);
 
-  const totalPrice = useMemo(() => orderCount * orderPrice, [orderCount, orderPrice]);
-
-  if (error !== null) {
-    return (
-      <>
-        <Typography>{error}</Typography>
-      </>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <Skeleton
-        variant="rounded"
-        sx={{width: {xs: "288px", sm: "592px", md: "752px"},
-          height: {xs: "160px", sm: "128px"}}}
-      />
-    )
-  }
+  const totalPrice = useMemo(() => count * price, [count]);
 
   return (
     <>
-      {product && (
+      {product !== null && (
         <Box sx={containerStyle}>
           <Box sx={descriptionStyle}>
             <IconButton
@@ -131,14 +102,14 @@ const ProductCart: React.FC<ProductCartProps> = ({ orderProductId, orderCount, o
               height: 16,
               color: 'icons.main'
               }}
-              onClick={handleRemove(product.id)}
+              onClick={handleRemove(itemId)}
             >
               <CloseRoundedIcon sx={{ fontSize: 18}} />
             </IconButton>
             
             <CardMedia
               component="img"
-              image={product.images[0]}
+              image={image}
               style={{
                 objectFit:'contain',
                 height: "66px",
@@ -170,10 +141,10 @@ const ProductCart: React.FC<ProductCartProps> = ({ orderProductId, orderCount, o
           >
             <IconButton
               sx={iconButtonStyle}
-              disabled={orderCount === 1}
-              onClick={handleDecr(product.id)}
+              disabled={count === 1}
+              onClick={handleDecr(itemId)}
             >
-              <RemoveIcon />
+              <RemoveIcon sx={{fontSize: '16px'}}/>
             </IconButton>
             <Typography
               lineHeight="21px"
@@ -185,13 +156,13 @@ const ProductCart: React.FC<ProductCartProps> = ({ orderProductId, orderCount, o
                 color: 'primary.main',
               }}
             >
-              {orderCount}
+              {count}
             </Typography>
             <IconButton
               sx={iconButtonStyle}
-              onClick={handleIncr(product.id)}
+              onClick={handleIncr(itemId)}
             >
-              <AddIcon />
+              <AddIcon sx={{fontSize: '16px'}}/>
             </IconButton>
             <Box sx={{ flexGrow: 1}}/>
             <Typography

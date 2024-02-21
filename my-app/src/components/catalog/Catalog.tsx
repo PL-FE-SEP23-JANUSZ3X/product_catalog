@@ -1,11 +1,14 @@
-import { Box, Typography, Select, Grid, SelectChangeEvent, Pagination, Skeleton } from "@mui/material";
+import { Box, Typography, Select, Grid, SelectChangeEvent, Pagination } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ItemCard from "../productCard/productCard";
+import ProductCard from "../productCard/productCard";
 import CatalogProps from "./Catalog.types";
 import { Product } from "../../types/Product";
 import Section from "../section/Section";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
+import { useThemeContext } from "../../theme/ThemeContext";
+import { getCategory, getSortedProducts } from "../../utils/fetchHelper";
+import SkeletonLoader from "../skeletonLoader/SkeletonLoader";
 
 const boxStyle = {
   display: 'grid',
@@ -19,43 +22,38 @@ const boxStyle = {
 const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [paginationCount, setPaginationCount] = useState<number>(0)
-  const [technology, setTechnology] = useState<Product[]>([])
-  const [technologyCount, setTechnologyCount] = useState<number>(0)
+  const [products, setProducts] = useState<Product[]>([])
+  const [productsCount, setProductsCount] = useState<number>(0)
   const [loader, setLoader] = useState<boolean>(false)
+  const { theme } = useThemeContext();
+  const category = headline.toLowerCase()
 
   const sortType = searchParams.get('sort') ?? 'newest';
   const itemsPerPage = searchParams.get('items') ?? '16'; 
   const page = searchParams.get('page') ?? '1';
 
-  const numberOfSkeletons = 4
+  const startIndex = (+page - 1) * +itemsPerPage;
 
-  let PaginationApi = '';
-
-  if (headline === 'Phones') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/phones/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
+  const skeletonWidth = {
+    'small': 288,
+    'medium': 288,
+    'large': 272,
   }
 
-  if (headline === 'Accessories') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/accesories/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
-  }
-
-  if (headline === 'Tablets') {
-    PaginationApi = `https://phone-catalog-f9j4.onrender.com/tablets/pagination/${sortType}-${(+page - 1) * +itemsPerPage}-${+itemsPerPage * +page}`
+  const skeletonLength = {
+    'small': 1,
+    'medium': 2,
+    'large': 4,
   }
 
   useEffect(() => {
-    const getTechnology = async () => {
+    const getproducts = async () => {
       try {
         setLoader(true)
-        const response = await fetch(PaginationApi);
-        const responsePhones = await fetch(`https://phone-catalog-f9j4.onrender.com/phones`)
-        const phonesData = await responsePhones.json()
-        setTechnologyCount(phonesData.length)
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setTechnology(data)
+        const response = await getSortedProducts(category, sortType, +startIndex, +itemsPerPage)
+        const responseLength = await getCategory(category)
+        setProductsCount(responseLength)
+        setProducts(response)
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -63,14 +61,8 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
       }
     }
 
-  getTechnology();
+  getproducts();
 }, [searchParams]);
-
-  const skeletonItems = Array.from({ length: numberOfSkeletons }, (_, index) => (
-    <Grid key={index} item spacing={2} sx={{ gap: 5 }}>
-      <Skeleton variant="rounded" width={272} height={506} />
-    </Grid>
-  ));
 
   const handleChange = (event: SelectChangeEvent<string>, method: string) => {
     if (method === 'items') {
@@ -88,10 +80,61 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   };
 
   useEffect(() => {
-    console.log(technologyCount, +itemsPerPage)
-    setPaginationCount(Math.ceil(technologyCount / +itemsPerPage))
-  }, [technologyCount, itemsPerPage])
-  
+    setPaginationCount(Math.ceil(productsCount / +itemsPerPage))
+  }, [productsCount, itemsPerPage])
+
+  const paginationStyle = {
+    '& .MuiPaginationItem-page': {
+      backgroundColor: 'background.paper',
+      '&:hover': {
+        backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'elements.main',
+      }
+    },
+    '& .MuiPaginationItem-rounded': {
+      borderRadius: 0,
+      borderColor: theme.palette.mode === 'light' ? 'elements.main' : 'transparent',
+      '&:hover': {
+        borderColor: theme.palette.mode === 'light' ? 'primary.main' : 'transparent',
+      }
+    },
+    '& .MuiPaginationItem-root.Mui-selected': {
+      color: 'white.main',
+      backgroundColor: 'accent.main',
+      '&:hover': {
+        color: 'primary.main',
+        borderColor: theme.palette.mode === 'light' ? 'primary.main' : 'transparent',
+        backgroundColor: theme.palette.mode === 'light' ? 'background.paper' : 'elements.main',
+      }
+    },
+    '& .Mui-selected::before': {
+      content: '""',
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'primary.main',
+      borderRadius: 'inherit',
+      zIndex: -1,
+      color: 'white'
+    },
+
+    '& .MuiPaginationItem-previousNext': {
+      backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'badgeBorder.main',
+      '&:hover': {
+        backgroundColor: theme.palette.mode === 'light' ? 'transparent' : 'icons.main',
+      }
+    },
+    '& .MuiPagination-root .Mui-disabled': {
+      borderColor: 'elements.main',
+      opacity: 1,
+      '& .MuiPaginationItem-icon': {
+        color: 'icons.main',
+      }
+    },
+
+    '& .MuiPaginationItem-icon': {
+      color: 'primary.main'
+    }
+  }
 
   return (
     <Section>
@@ -101,7 +144,7 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
           {title}
         </Typography>
         <Typography variant="caption" gutterBottom sx={{mt: 1, color: 'secondary.main'}}>
-          {technologyCount} models
+          {productsCount} models
         </Typography>
         <Box sx={{ display: 'flex', mt: 4, gap: 3}}>
           <Box sx={{ display: 'grid', width: 128}}>
@@ -151,22 +194,23 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
           sx={boxStyle}
         >
           {loader
-            ? skeletonItems
-            : technology.map(tech => (
-              <Grid item spacing={2} sx={{gap: 5}} key={tech.id}>
-                <ItemCard item={tech} />  
-              </Grid>
-            ))
-          }
+    ? <SkeletonLoader length={skeletonLength} width={skeletonWidth} />
+    : products.map(product => (
+      <Grid item spacing={2} sx={{gap: 5}} key={product.id}>
+        <ProductCard product={product} />  
+      </Grid>
+    ))
+  }
         </Grid>
         <Box sx={{display: 'flex', justifyContent:"center", mt:5 }}>
           <Pagination
-            count={paginationCount}
-            variant="outlined"
-            shape="rounded"
-            page={+page}
-            onChange={handleChangePage} 
-          />
+          count={paginationCount}
+          page={+page}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChangePage}
+          sx={paginationStyle}
+        />
         </Box>
       </Box>
     </Section>

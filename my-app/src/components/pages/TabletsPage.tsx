@@ -1,8 +1,11 @@
-import { Typography } from "@mui/material";
+import Technology from "../catalog/Catalog";
 
 const TabletsPage = () => {
+  const headline = 'Tablets';
+  const title = 'Tablets';
+
   return (
-    <Typography variant="h1" color="text.primary" mb="32px" >TabletsPage</Typography>
+    <Technology headline={headline} title={title} />  
   );
 };
 

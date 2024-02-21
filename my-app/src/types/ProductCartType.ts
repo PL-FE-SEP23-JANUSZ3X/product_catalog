@@ -3,7 +3,7 @@ type DescriptionItem = {
   title: string;
 };
 
-export type Product = {
+export type ProductCartType = {
   capacity: string;
   color: string;
   colorsAvailable: string[];
@@ -18,4 +18,5 @@ export type Product = {
   fullPrice: number;
   ram: string;
   screen: string;
+  count: number;
 };

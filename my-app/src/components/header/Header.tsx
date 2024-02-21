@@ -8,6 +8,8 @@ import {
   useMediaQuery,
   SxProps,
   Badge,
+  Slide,
+  useScrollTrigger,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -17,7 +19,7 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useThemeContext } from '../../theme/ThemeContext';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
@@ -91,7 +93,27 @@ const badgeStyle = {
   }
 }
 
-const Header = () => {
+type Props = {
+  children: React.ReactElement;
+  window?: () => Window;
+}
+
+function HideOnScroll(props: Props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    disableHysteresis: false,
+    threshold: 400,
+    target: window ? window() : undefined,
+  });
+
+  return (
+    <Slide appear={true} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+const Header = (props: any) => {
   const isMobile = useMediaQuery('(max-width:640px)');
   const { theme } = useThemeContext();
   const white = theme.palette.background.paper;
@@ -102,9 +124,9 @@ const Header = () => {
   const toggleDrawer = (open: boolean) => () => setIsOpen(!open);
   
   return (
+    <HideOnScroll {...props}>
       <AppBar
         component="nav"
-        position="static"
         sx={{
           backgroundColor: white,
           boxShadow: 0,
@@ -299,6 +321,7 @@ const Header = () => {
           )}
         </Toolbar>
       </AppBar>
+      </HideOnScroll>
   )
 };
 

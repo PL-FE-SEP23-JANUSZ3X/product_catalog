@@ -5,7 +5,7 @@ enum SortType {
   ALPHABETIC_REVERSE = 'alphabeticza',
   CHEAPEST = 'cheapest',
   EXPENSIVE = 'expensive',
-  HOTPRICES = 'hotprices',
+  HOTPRICES = 'hotprices'
 }
 
 export default SortType;

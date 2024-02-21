@@ -9,11 +9,11 @@ import {
   Link,
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePage.style.css';
 import { useEffect, useState } from 'react';
-import { getPhone, getRecommended } from '../../../utils/fetchHelper';
+import { getPhone, getRecommendedPhones } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
 import { ErrorMessage } from '../../../types/ErrorMessages';
 import Section from '../../section/Section';
@@ -28,20 +28,21 @@ export const PhonePage = () => {
   const [phoneData, setPhoneData] = useState<Phone | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { phoneId } = useParams();
+  const { itemId } = useParams<Record<string, string>>();
+  console.log(itemId)
 
   useEffect(() => {
     const fetchPhoneData = async () => {
-      if (typeof phoneId === 'string') {
+      if (typeof itemId === 'string') {
         setError(null);
         setIsLoading(true);
         try {
-          const data = await getPhone(phoneId);
-          const recommendedData = await getRecommended(phoneId);
+          const data = await getPhone(itemId);
+          const recommendedData = await getRecommendedPhones(itemId);
           setPhoneData(data);
           setRecommendedModels(recommendedData);
         } catch (error) {
@@ -55,30 +56,14 @@ export const PhonePage = () => {
     };
 
     fetchPhoneData();
-  }, [phoneId]);
+  }, [itemId]);
 
-  const images = [
-    {
-      original: `${phoneData?.images[0]}`,
-      thumbnail: `${phoneData?.images[0]}`,
-    },
-    {
-      original: `${phoneData?.images[1]}`,
-      thumbnail: `${phoneData?.images[1]}`,
-    },
-    {
-      original: `${phoneData?.images[2]}`,
-      thumbnail: `${phoneData?.images[2]}`,
-    },
-    {
-      original: `${phoneData?.images[3]}`,
-      thumbnail: `${phoneData?.images[3]}`,
-    },
-    {
-      original: `${phoneData?.images[4]}`,
-      thumbnail: `${phoneData?.images[4]}`,
-    },
-  ];
+  const images = phoneData
+    ? phoneData.images.map((imgLink) => ({
+        original: imgLink,
+        thumbnail: imgLink,
+      }))
+    : [];
 
   if (error !== null) {
     return (
@@ -90,7 +75,7 @@ export const PhonePage = () => {
 
   if (isLoading) {
     return (
-      <Skeleton
+      <Skeleton 
         variant="rounded"
         sx={{
           width: { xs: '288px', sm: '592px', md: '752px' },
@@ -121,6 +106,7 @@ export const PhonePage = () => {
   return (
     <Section>
       <Container>
+
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs parrentLink="phones" currentPage="Favourites" />
 
@@ -139,12 +125,15 @@ export const PhonePage = () => {
             to={`/phones`}
             end
             style={{ textDecoration: 'none', display: 'inline-block' }}
+            onClick={() => {navigate(-1)}}
           >
-            <Link component="div" variant="body2" sx={navlinkStyle}>
+            <Link
+              component="div" variant="body2" sx={navlinkStyle}>
               Back
             </Link>
           </NavLink>
         </Box>
+
 
         {/* PRODUCT NAME */}
         <Typography

@@ -1,4 +1,6 @@
+import { FindOptions, Op } from 'sequelize';
 import Product from '../model/product.model';
+import SortType from '../types/sortType';
 
 const getAllProducts= async() => {
 
@@ -9,10 +11,46 @@ const getByCategory= async(categoryType: string) => {
     return Product.findAll({where: {category : categoryType}});
 };
 
-const getProductByID= async(id: string) => {
-    return Product.findByPk(id);
+const getProductByID= async(itemId: string) => {
+    return Product.findAll({where : {itemId}});
 };
 
-const productService = {getAllProducts, getProductByID, getByCategory};
+const getProductsByQuery= async(query: string) => {
+    return Product.findAll({where : {name : {[Op.like]: `%${query}%`}}});
+};
+
+const sortProducts = async (categoryType: string, sortType: string, startIndex: number, limitIndex: number) => {
+    let orderOptions:  FindOptions<Product>['order'] = [];
+    
+    switch(sortType) {
+        case SortType.ALPHABETIC:
+            orderOptions  = [['name', 'ASC']];
+            break;
+        case SortType.ALPHABETIC_REVERSE:
+            orderOptions  = [['name', 'DESC']];
+            break;
+        case SortType.OLDEST:
+            orderOptions  = [['year', 'ASC']];
+            break;
+        case SortType.NEWEST:
+            orderOptions  = [['year', 'DESC']];
+            break;
+        case SortType.CHEAPEST:
+            orderOptions  = [['price', 'ASC']];
+            break;
+        case SortType.EXPENSIVE:
+            orderOptions  = [['price', 'DESC']];
+            break;
+        case SortType.HOTPRICES:
+            const items = await Product.findAll();
+            return items.sort((a, b) => (b.fullPrice - b.price) - (a.fullPrice - a.price));
+        default:
+            orderOptions  = [['id', 'ASC']];
+    }
+    
+    return await Product.findAll({where: {category : categoryType},  offset: startIndex, limit: limitIndex, order: orderOptions});
+};
+
+const productService = {getAllProducts, getProductByID, getByCategory, sortProducts, getProductsByQuery};
 
 export default productService;

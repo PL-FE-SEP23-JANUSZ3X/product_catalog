@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useThemeContext } from "../../theme/ThemeContext";
 import { NavLink } from "react-router-dom";
 import { Product } from "../../types/Product";
+import { getCategory, getSortedProducts } from "../../utils/fetchHelper";
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -26,6 +27,11 @@ const MOBILE_BANNER_IMAGES = [
 const HomePage = () => {
   const [newModels, setNewModels] = useState<Product[]>([]);
   const [hotPrices, setHotPrices] = useState<Product[]>([]);
+
+  const [phonesLength, setPhonesLength] = useState<number>(0);
+  const [tabletsLength, setTabletsLength] = useState<number>(0);
+  const [accessoriesLength, setAccesoriesLength] = useState<number>(0);
+
   const { theme } = useThemeContext();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,21 +40,28 @@ const HomePage = () => {
   const newModelSectionTitle = 'Brand new models';
   const hotPricesSectionTitle = 'Hot prices';
 
+  const category = 'phones';
+  const sortHotPrices = 'hotprice';
+  const sortNewModel = 'newest';
+  const startIndex = 0;
+  const limitIndex = 20;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseHotPrices = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/hotprices-0-20`);
-        const responseNewModel = await fetch(`https://phone-catalog-f9j4.onrender.com/phones/pagination/newest-0-20`);
+        const responseHotPrices = await getSortedProducts(category, sortHotPrices, +startIndex, +limitIndex);
+        const responseNewModel = await getSortedProducts(category, sortNewModel, +startIndex, +limitIndex);
 
-        if (!responseHotPrices.ok && !responseNewModel.ok) {
-          throw new Error('Network response was not ok');
-        }
-    
-        const phonesHotPrices = await responseHotPrices.json();
-        const phonesNewModel = await responseNewModel.json();
-      
-        setHotPrices(phonesHotPrices)
-        setNewModels(phonesNewModel);
+        const pLength = await getCategory('phones')
+        const tLength = await getCategory('tablets')
+        const aLength = await getCategory('accessories')
+
+        setPhonesLength(pLength)
+        setTabletsLength(tLength)
+        setAccesoriesLength(aLength)
+
+        setHotPrices(responseHotPrices)
+        setNewModels(responseNewModel);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -92,7 +105,7 @@ const HomePage = () => {
                 />
               </Box>
               <Typography variant='h4' sx={{mt: '24px'}}>Mobile phones</Typography>
-              <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>95 models</Typography>
+              <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>{`${phonesLength} models`}</Typography>
             </NavLink>
             <NavLink to={"/tablets"} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Box 
@@ -110,7 +123,7 @@ const HomePage = () => {
                 />
               </Box>
               <Typography variant='h4' sx={{mt: '24px'}}>Tablets</Typography>
-              <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>24 models</Typography>
+              <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>{`${tabletsLength} models`}</Typography>
             </NavLink>
             <NavLink to={"/accessories"} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Box 
@@ -128,7 +141,7 @@ const HomePage = () => {
                 />  
               </Box>
               <Typography variant='h4' sx={{mt: '24px'}}>Accessories</Typography>
-              <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>100 models</Typography>
+              <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>{`${accessoriesLength} models`}</Typography>
             </NavLink>
           </Box>
         </Box>

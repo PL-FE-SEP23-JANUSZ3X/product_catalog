@@ -1,11 +1,12 @@
 import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import Section from "../section/Section";
 import { useInteractionsContext } from "../../context/useInteractionsContext";
-import ItemCard from "../productCard/productCard";
+import ProductCard from "../productCard/productCard";
 import { useEffect, useState } from "react";
-import { getPhones } from "../../utils/fetchHelper";
+import { getProducts } from "../../utils/fetchHelper";
 import { Product } from "../../types/Product";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
+import { genRandomKey } from "../../utils/getRandomKey";
 
 const boxStyle = {
   display: 'grid',
@@ -22,18 +23,17 @@ const FavouritesPage = () => {
 
   const { favourites } = useInteractionsContext()
 
-  const favouriteProducts = products.filter((el) => {
-    return favourites.some((f) => {
-      return f.id === el.id 
-    });
+  const favouriteProducts = products.filter((product) => {
+    return favourites.map(item => item.id).includes(product.itemId)
   });
+  
 
   useEffect(() => {
     const fetchPhoneData = async () => {
       setError(null);
       setIsLoading(true);
       try {
-        const data = await getPhones();
+        const data = await getProducts();
         setProducts(data);
       } catch (error) {
         setError('ErrorMessage');
@@ -44,14 +44,6 @@ const FavouritesPage = () => {
 
     fetchPhoneData();
   }, []);
-
-  if (error !== null) {
-    return (
-      <>
-        <Typography>{error}</Typography>
-      </>
-    );
-  }
 
   if (error !== null) {
     return (
@@ -80,7 +72,7 @@ const FavouritesPage = () => {
                 ? (
                   <>
                     { Array.from({ length: favourites.length }, () => (
-                      <Skeleton variant="rounded" width={272} height={506} />
+                      <Skeleton key={genRandomKey()} variant="rounded" width={272} height={506} />
                     ))
                     }
                   </>
@@ -88,14 +80,14 @@ const FavouritesPage = () => {
                 : (
                   <>
                     {favouriteProducts.map((product) => (
-                    <ItemCard
-                      key={product.id}
-                      item={product}
-                    />
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                      />
                   ))}
                   </>
-                )}
-              
+                )
+              }
             </Stack>
           )
         }

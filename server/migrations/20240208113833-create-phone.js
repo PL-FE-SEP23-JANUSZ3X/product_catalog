@@ -25,10 +25,10 @@ module.exports = {
         type: Sequelize.STRING(1024)
       },
       priceRegular: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.INTEGER
       },
       priceDiscount: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.INTEGER
       },
       colorsAvailable: {
         type: Sequelize.ARRAY(Sequelize.STRING(1024))
