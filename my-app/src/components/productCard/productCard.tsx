@@ -11,10 +11,10 @@ const ProductCard = ({ product, carouselWidth }: { product: Product, carouselWid
 
   const { order, addToOrder,  favourites, toggleFavourites } = useInteractionsContext();
 
-  const handleAddToOrder = (itemId: string, fullPrice: number) => (event: React.MouseEvent) => {
+  const handleAddToOrder = (itemId: string, price: number) => (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    addToOrder(itemId, fullPrice);
+    addToOrder(itemId, price);
   };
 
   const handleToggleToFavourites = (itemId: string) => (event: React.MouseEvent) => {
@@ -59,7 +59,9 @@ const ProductCard = ({ product, carouselWidth }: { product: Product, carouselWid
             <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '70%'}}>
               <Typography sx={{ mt: 2.5, fontSize: 14 }}>{name}</Typography>
               <Box sx={{ display: 'flex', mt: 1 }}>
-                <Typography variant='h6' sx={{ color: 'primary.main', fontWeight: 'bold' }}>{`${price !== undefined ? price : ''}$`}</Typography>
+                <Typography variant='h6' sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+                  {`${price !== undefined ? price : ''}$`}
+                </Typography>
                 <Box sx={{ width: 4 }} />
                 <Typography variant='h6' sx={{ color: 'secondary.main', textDecoration: 'line-through' }}>{`${fullPrice !== undefined ? fullPrice : ''}$`}</Typography>
               </Box>
@@ -88,7 +90,7 @@ const ProductCard = ({ product, carouselWidth }: { product: Product, carouselWid
                     fontWeight: 500,
                     textTransform: 'capitalize',
                   }}
-                  onClick={handleAddToOrder(itemId, fullPrice)}
+                  onClick={handleAddToOrder(itemId, price)}
                 >
                   Add to Cart
                 </Button>

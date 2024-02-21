@@ -1,4 +1,4 @@
-import { FindOptions } from 'sequelize';
+import { FindOptions, Op } from 'sequelize';
 import Product from '../model/product.model';
 import SortType from '../types/sortType';
 
@@ -13,6 +13,10 @@ const getByCategory= async(categoryType: string) => {
 
 const getProductByID= async(itemId: string) => {
     return Product.findAll({where : {itemId}});
+};
+
+const getProductsByQuery= async(query: string) => {
+    return Product.findAll({where : {name : {[Op.like]: `%${query}%`}}});
 };
 
 const sortProducts = async (categoryType: string, sortType: string, startIndex: number, limitIndex: number) => {
@@ -39,7 +43,7 @@ const sortProducts = async (categoryType: string, sortType: string, startIndex: 
             break;
         case SortType.HOTPRICES:
             const items = await Product.findAll();
-            return items.sort((a, b) => (a.fullPrice - a.price) - (b.fullPrice - b.price));
+            return items.sort((a, b) => (b.fullPrice - b.price) - (a.fullPrice - a.price));
         default:
             orderOptions  = [['id', 'ASC']];
     }
@@ -47,6 +51,6 @@ const sortProducts = async (categoryType: string, sortType: string, startIndex: 
     return await Product.findAll({where: {category : categoryType},  offset: startIndex, limit: limitIndex, order: orderOptions});
 };
 
-const productService = {getAllProducts, getProductByID, getByCategory, sortProducts};
+const productService = {getAllProducts, getProductByID, getByCategory, sortProducts, getProductsByQuery};
 
 export default productService;
