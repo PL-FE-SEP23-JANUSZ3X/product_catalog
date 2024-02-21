@@ -13,7 +13,12 @@ import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import './PhonePage.style.css';
 import { useEffect, useState } from 'react';
-import { getPhone, getRecommendedPhones } from '../../../utils/fetchHelper';
+import {
+  getAccessory,
+  getPhone,
+  getRecommendedPhones,
+  getTablet,
+} from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
 import { ErrorMessage } from '../../../types/ErrorMessages';
 import Section from '../../section/Section';
@@ -33,22 +38,36 @@ export const PhonePage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { itemId } = useParams<Record<string, string>>();
+
   const category = useLocation()
     .pathname.split('/')
     .filter((element) => element)[0];
 
-  console.log('kategoria', category);
-
   useEffect(() => {
-    const fetchPhoneData = async () => {
+    const fetchProductData = async () => {
       if (typeof itemId === 'string') {
         setError(null);
         setIsLoading(true);
         try {
-          const data = await getPhone(itemId);
-          const recommendedData = await getRecommendedPhones(itemId);
+          let data;
+
+          switch (category) {
+            case 'phones':
+              data = await getPhone(itemId);
+              break;
+            case 'tablets':
+              data = await getTablet(itemId);
+              break;
+            case 'accessories':
+              data = await getAccessory(itemId);
+              break;
+            default:
+              break;
+          }
+
+          // const recommendedData = await getRecommendedPhones(itemId);
           setPhoneData(data);
-          setRecommendedModels(recommendedData);
+          // setRecommendedModels(recommendedData);
         } catch (error) {
           setError(ErrorMessage.LOAD);
         } finally {
@@ -59,7 +78,7 @@ export const PhonePage = () => {
       }
     };
 
-    fetchPhoneData();
+    fetchProductData();
   }, [itemId]);
 
   const images = phoneData

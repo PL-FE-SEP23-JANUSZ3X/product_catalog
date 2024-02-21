@@ -34,12 +34,12 @@ function App() {
 
               <Route path="tablets">
                 <Route index element={<TabletsPage />} />
-                <Route path=":tabletId" element={<TabletPage />} />
+                <Route path=":itemId" element={<PhonePage />} />
               </Route>
 
               <Route path="accessories">
                 <Route index element={<AccesoriesPage />} />
-                <Route path=":accessoryId" element={<AccessoryPage />} />
+                <Route path=":itemId" element={<AccessoryPage />} />
               </Route>
 
               <Route path="favourites" element={<FavouritesPage />} />
