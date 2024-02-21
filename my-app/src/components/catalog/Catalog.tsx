@@ -1,4 +1,4 @@
-import { Box, Typography, Select, Grid, SelectChangeEvent, Pagination, Skeleton } from "@mui/material";
+import { Box, Typography, Select, Grid, SelectChangeEvent, Pagination } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProductCard from "../productCard/productCard";
@@ -8,6 +8,7 @@ import Section from "../section/Section";
 import CustomBreadcrumbs from "../navigation/CustomBreadcrumbs";
 import { useThemeContext } from "../../theme/ThemeContext";
 import { getCategory, getSortedProducts } from "../../utils/fetchHelper";
+import SkeletonLoader from "../skeletonLoader/SkeletonLoader";
 
 const boxStyle = {
   display: 'grid',
@@ -31,10 +32,19 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
   const itemsPerPage = searchParams.get('items') ?? '16'; 
   const page = searchParams.get('page') ?? '1';
 
-  const numberOfSkeletons = 4
-
   const startIndex = (+page - 1) * +itemsPerPage;
-  const limitIndex = +itemsPerPage * +page;
+
+  const skeletonWidth = {
+    'small': 288,
+    'medium': 288,
+    'large': 272,
+  }
+
+  const skeletonLength = {
+    'small': 1,
+    'medium': 2,
+    'large': 4,
+  }
 
   useEffect(() => {
     const getproducts = async () => {
@@ -53,12 +63,6 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
 
   getproducts();
 }, [searchParams]);
-
-  const skeletonItems = Array.from({ length: numberOfSkeletons }, (_, index) => (
-    <Grid key={index} item spacing={2} sx={{ gap: 5 }}>
-      <Skeleton variant="rounded" width={272} height={506} />
-    </Grid>
-  ));
 
   const handleChange = (event: SelectChangeEvent<string>, method: string) => {
     if (method === 'items') {
@@ -190,13 +194,13 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
           sx={boxStyle}
         >
           {loader
-            ? skeletonItems
-            : products.map(product => (
-              <Grid item spacing={2} sx={{gap: 5}} key={product.id}>
-                <ProductCard product={product} />  
-              </Grid>
-            ))
-          }
+    ? <SkeletonLoader length={skeletonLength} width={skeletonWidth} />
+    : products.map(product => (
+      <Grid item spacing={2} sx={{gap: 5}} key={product.id}>
+        <ProductCard product={product} />  
+      </Grid>
+    ))
+  }
         </Grid>
         <Box sx={{display: 'flex', justifyContent:"center", mt:5 }}>
           <Pagination
