@@ -9,11 +9,18 @@ import {
   Link,
 } from '@mui/material';
 import ImageGallery from 'react-image-gallery';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import './PhonePage.style.css';
+import './ProductPage.style.css';
 import { useEffect, useState } from 'react';
-import { getPhone, getRecommendedPhones } from '../../../utils/fetchHelper';
+import {
+  getAccessory,
+  getPhone,
+  getRecommendedAccessories,
+  getRecommendedPhones,
+  getRecommendedTablets,
+  getTablet,
+} from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
 import { ErrorMessage } from '../../../types/ErrorMessages';
 import Section from '../../section/Section';
@@ -23,9 +30,9 @@ import { colors } from '../../../theme/colors';
 import Carousel from '../../carousel/Carousel';
 import { Product } from '../../../types/Product';
 
-export const PhonePage = () => {
+export const ProductPage = () => {
   const [recommendedModels, setRecommendedModels] = useState<Product[]>([]);
-  const [phoneData, setPhoneData] = useState<Phone | null>(null);
+  const [productData, setProductData] = useState<Phone | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -33,17 +40,38 @@ export const PhonePage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { itemId } = useParams<Record<string, string>>();
-  console.log(itemId)
+
+  const category = useLocation()
+    .pathname.split('/')
+    .filter((element) => element)[0];
 
   useEffect(() => {
-    const fetchPhoneData = async () => {
+    const fetchProductData = async () => {
       if (typeof itemId === 'string') {
         setError(null);
         setIsLoading(true);
         try {
-          const data = await getPhone(itemId);
-          const recommendedData = await getRecommendedPhones(itemId);
-          setPhoneData(data);
+          let data;
+          let recommendedData;
+
+          switch (category) {
+            case 'phones':
+              data = await getPhone(itemId);
+              recommendedData = await getRecommendedPhones(itemId);
+              break;
+            case 'tablets':
+              data = await getTablet(itemId);
+              recommendedData = await getRecommendedTablets(itemId);
+              break;
+            case 'accessories':
+              data = await getAccessory(itemId);
+              recommendedData = await getRecommendedAccessories(itemId);
+              break;
+            default:
+              break;
+          }
+
+          setProductData(data);
           setRecommendedModels(recommendedData);
         } catch (error) {
           setError(ErrorMessage.LOAD);
@@ -55,11 +83,11 @@ export const PhonePage = () => {
       }
     };
 
-    fetchPhoneData();
+    fetchProductData();
   }, [itemId]);
 
-  const images = phoneData
-    ? phoneData.images.map((imgLink) => ({
+  const images = productData
+    ? productData.images.map((imgLink) => ({
         original: imgLink,
         thumbnail: imgLink,
       }))
@@ -75,7 +103,7 @@ export const PhonePage = () => {
 
   if (isLoading) {
     return (
-      <Skeleton 
+      <Skeleton
         variant="rounded"
         sx={{
           width: { xs: '288px', sm: '592px', md: '752px' },
@@ -106,9 +134,11 @@ export const PhonePage = () => {
   return (
     <Section>
       <Container>
-
         {/* BREADCRUMBS */}
-        <CustomBreadcrumbs parrentLink="phones" currentPage="Favourites" />
+        <CustomBreadcrumbs
+          parrentLink={`${category}`}
+          currentPage="Favourites"
+        />
 
         {/* BACK BUTTON */}
         <Box>
@@ -125,15 +155,15 @@ export const PhonePage = () => {
             to={`/phones`}
             end
             style={{ textDecoration: 'none', display: 'inline-block' }}
-            onClick={() => {navigate(-1)}}
+            onClick={() => {
+              navigate(-1);
+            }}
           >
-            <Link
-              component="div" variant="body2" sx={navlinkStyle}>
+            <Link component="div" variant="body2" sx={navlinkStyle}>
               Back
             </Link>
           </NavLink>
         </Box>
-
 
         {/* PRODUCT NAME */}
         <Typography
@@ -141,7 +171,7 @@ export const PhonePage = () => {
           color="text.primary"
           sx={{ m: '12px 0 30px 0' }}
         >
-          {phoneData?.name} (iMT9G2FS/A)
+          {productData?.name} (iMT9G2FS/A)
         </Typography>
 
         {/* IMAGE GALLERY & SPECS CONTAINER */}
@@ -167,7 +197,10 @@ export const PhonePage = () => {
 
           {/* SPECS */}
           <Box sx={{ flex: '0 1 40%' }}>
-            <ProductVariantsActions phoneData={phoneData} />
+            <ProductVariantsActions
+              productData={productData}
+              category={category}
+            />
           </Box>
         </Box>
 
@@ -196,29 +229,29 @@ export const PhonePage = () => {
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <Typography variant="h4">
-                {phoneData?.description[0].title}
+                {productData?.description[0].title}
               </Typography>
               <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {phoneData?.description[0].text[0]}
+                {productData?.description[0].text[0]}
               </Typography>
               <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {phoneData?.description[0].text[1]}
+                {productData?.description[0].text[1]}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <Typography variant="h4">
-                {phoneData?.description[1].title}
+                {productData?.description[1].title}
               </Typography>
               <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {phoneData?.description[1].text}
+                {productData?.description[1].text}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <Typography variant="h4">
-                {phoneData?.description[2].title}
+                {productData?.description[2].title}
               </Typography>
               <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {phoneData?.description[2].text}
+                {productData?.description[2].text}
               </Typography>
             </Box>
           </Box>
@@ -243,43 +276,47 @@ export const PhonePage = () => {
                 <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                   Screen
                 </Typography>
-                <Typography variant="body1">{phoneData?.screen}</Typography>
+                <Typography variant="body1">{productData?.screen}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                   Resolution
                 </Typography>
-                <Typography variant="body1">{phoneData?.resolution}</Typography>
+                <Typography variant="body1">
+                  {productData?.resolution}
+                </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                   Processor
                 </Typography>
-                <Typography variant="body1">{phoneData?.processor}</Typography>
+                <Typography variant="body1">
+                  {productData?.processor}
+                </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                   RAM
                 </Typography>
-                <Typography variant="body1">{phoneData?.ram}</Typography>
+                <Typography variant="body1">{productData?.ram}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                   Built in memory
                 </Typography>
-                <Typography variant="body1">{phoneData?.capacity}</Typography>
+                <Typography variant="body1">{productData?.capacity}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                   Camera
                 </Typography>
-                <Typography variant="body1">{phoneData?.camera}</Typography>
+                <Typography variant="body1">{productData?.camera}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="body1" sx={{ color: 'secondary.main' }}>
                   Zoom
                 </Typography>
-                <Typography variant="body1">{phoneData?.zoom}</Typography>
+                <Typography variant="body1">{productData?.zoom}</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography
@@ -289,7 +326,7 @@ export const PhonePage = () => {
                   Cell
                 </Typography>
                 <Typography variant="body1" sx={{ textAlign: 'right' }}>
-                  {phoneData?.cell.join(', ')}
+                  {productData?.cell.join(', ')}
                 </Typography>
               </Box>
             </Box>
@@ -303,5 +340,3 @@ export const PhonePage = () => {
     </Section>
   );
 };
-
-export default PhonePage;
