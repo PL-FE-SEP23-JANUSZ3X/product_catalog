@@ -11,7 +11,7 @@ import {
 import ImageGallery from 'react-image-gallery';
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import './PhonePage.style.css';
+import './ProductPage.style.css';
 import { useEffect, useState } from 'react';
 import {
   getAccessory,
@@ -30,7 +30,7 @@ import { colors } from '../../../theme/colors';
 import Carousel from '../../carousel/Carousel';
 import { Product } from '../../../types/Product';
 
-export const PhonePage = () => {
+export const ProductPage = () => {
   const [recommendedModels, setRecommendedModels] = useState<Product[]>([]);
   const [productData, setProductData] = useState<Phone | null>(null);
   const [error, setError] = useState<string | null>(null);
