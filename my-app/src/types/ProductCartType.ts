@@ -4,25 +4,19 @@ type DescriptionItem = {
 };
 
 export type ProductCartType = {
-  camera: string;
   capacity: string;
-  capacityAvailable: '{64GB,128GB,256GB}';
-  cell: string[];
   color: string;
   colorsAvailable: string[];
   createdAt: string;
   description: DescriptionItem[];
   id: string;
   itemId: string;
-  images: string[];
+  image: string;
   name: string;
   namespaceId: string;
-  priceDiscount: number;
-  priceRegular: number;
-  processor: string;
+  price: number;
+  fullPrice: number;
   ram: string;
-  resolution: string;
   screen: string;
-  updatedAt: string;
-  zoom: string;
+  count: number;
 };
