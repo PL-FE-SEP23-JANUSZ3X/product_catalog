@@ -10,6 +10,7 @@ import {
   Badge,
   Slide,
   useScrollTrigger,
+  Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -23,7 +24,7 @@ import React, { useState } from 'react';
 import BurgerMenu from '../burgerMenu/BurgerMenu';
 import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 import { useInteractionsContext } from '../../context/useInteractionsContext';
-import { SignInButton, SignOutButton, UserButton, useUser } from '@clerk/clerk-react';
+import { SignInButton, UserButton, useUser } from '@clerk/clerk-react';
 
 export type CopyrightProps = {
   sx: SxProps;
@@ -317,12 +318,11 @@ const Header = (props: any) => {
                 </NavLink>
                 <Divider orientation='vertical' flexItem/>
                 {(isSignedIn === false) ? (
-                  <SignInButton></SignInButton>
+                  <SignInButton/>
                 ) : (
-                  <>
-                    <div>Hello {user?.username}!</div>
+                  <Box sx={{display:"flex", alignItems:"center", justifyContent:"center"}}>
                     <UserButton/>
-                  </>
+                  </Box>
                 )}
                 <Divider orientation='vertical' flexItem/>
               </Box>
