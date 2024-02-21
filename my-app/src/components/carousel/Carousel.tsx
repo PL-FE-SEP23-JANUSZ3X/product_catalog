@@ -38,6 +38,18 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const sliderRef = useRef<Slider>(null);
   const mobileWidth = '212px'
   const tabletWidth = '237px'
+  
+  const skeletonWidth = {
+    'small': 288,
+    'medium': 288,
+    'large': 272,
+  }
+
+  const skeletonLength = {
+    'small': 1,
+    'medium': 2,
+    'large': 4,
+  }
 
   const isTablet = useMediaQuery((theme: Theme)  => theme.breakpoints.down('md'));
   const isMobile = useMediaQuery((theme: Theme)  => theme.breakpoints.down('sm'));
@@ -88,7 +100,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
             ))}
           </Slider>
         ) : (
-          <SkeletonLoader /> 
+          <SkeletonLoader length={skeletonLength} width={skeletonWidth} /> 
         )}
     </div>
   );
