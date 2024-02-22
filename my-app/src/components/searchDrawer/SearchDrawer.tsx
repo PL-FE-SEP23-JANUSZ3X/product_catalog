@@ -18,8 +18,14 @@ const SearchDrawer = () => {
       const getproducts = async () => {
         try {
           setLoader(true)
-          const response = await getQueryProducts(searchKeys)
-          setSearchedData(response)
+          const response: any = await getQueryProducts(searchKeys)
+
+          if (typeof response === null) {
+            setSearchedData(response)
+          } else {  
+            setSearchedData([])
+          }
+  
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -28,6 +34,7 @@ const SearchDrawer = () => {
       }
   
       getproducts();
+      console.log(searchedData)
     }, [searchKeys]);
   
     const handleSearchInput: React.ChangeEventHandler<HTMLInputElement>= (event) => {
