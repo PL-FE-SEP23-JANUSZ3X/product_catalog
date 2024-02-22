@@ -7,10 +7,19 @@ const DarkModeToggle = () => {
   const { mode, toggleColorMode } = useThemeContext();
 
   return (
-      <IconButton component="div" onClick={toggleColorMode} sx={{p: 0, color: "primary.main"}}>
+      <IconButton
+        component="div"
+        disableRipple
+        onClick={toggleColorMode}
+        sx={{
+          padding: { xs: '15px', md: '23px'},
+          color: "primary.main",
+          "&:hover": { backgroundColor: "transparent" },
+        }}
+      >
         {mode === "dark"
-          ? <DarkModeIcon sx={{fontSize: '16px'}} />
-          : <LightModeIcon sx={{fontSize: '16px'}} />}
+          ? <DarkModeIcon sx={{fontSize: '18px'}} />
+          : <LightModeIcon sx={{fontSize: '18px'}} />}
       </IconButton>
   );
 };

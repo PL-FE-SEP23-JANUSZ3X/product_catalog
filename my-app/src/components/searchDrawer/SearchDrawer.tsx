@@ -125,14 +125,9 @@ const SearchDrawer = () => {
         <IconButton 
           onClick={toggleDrawer(true)}
           disableRipple
-          sx={{
-            padding: {
-              xs: 2,
-              md: 3,
-            },
-          }}
+          sx={{ padding: {xs: '15px', md: '23px'}}}
         >
-          <SearchIcon sx={{fontSize: "16px"}}/>
+          <SearchIcon sx={{fontSize: "18px"}}/>
         </IconButton>
         <Drawer 
           anchor='top'
