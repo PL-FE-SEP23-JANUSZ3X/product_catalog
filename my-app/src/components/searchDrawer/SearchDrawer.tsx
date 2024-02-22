@@ -11,13 +11,13 @@ const SearchDrawer = () => {
     const [isDraweOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [searchKeys, setSearchKeys] = useState('');
     const [searchedData, setSearchedData] = useState<Product[]>([]);
-    const [loader, setLoader] = useState<boolean>(false);
+    //const [loader, setLoader] = useState<boolean>(false);
 
     useEffect(() => {
       const handler = setTimeout(async () => {
         if (searchKeys.length > 0) {
           try {
-            setLoader(true);
+            //setLoader(true);
             const response = await getQueryProducts(searchKeys);
             setSearchedData(response);
             if (typeof response === null) {
@@ -28,7 +28,7 @@ const SearchDrawer = () => {
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
-            setLoader(false);
+            //setLoader(false);
           }
         }
       }, 500);
