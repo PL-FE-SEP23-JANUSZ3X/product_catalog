@@ -20,7 +20,7 @@ const SearchDrawer = () => {
             //setLoader(true);
             const response = await getQueryProducts(searchKeys);
             setSearchedData(response);
-            if (typeof response === null) {
+            if (typeof response !== null) {
               setSearchedData(response)
             } else {  
               setSearchedData([])
@@ -32,7 +32,6 @@ const SearchDrawer = () => {
           }
         }
       }, 500);
-
       return () => {
         clearTimeout(handler);
       };
