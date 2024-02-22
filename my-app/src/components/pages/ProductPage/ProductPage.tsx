@@ -16,9 +16,7 @@ import { useEffect, useState } from 'react';
 import {
   getAccessory,
   getPhone,
-  getRecommendedAccessories,
-  getRecommendedPhones,
-  getRecommendedTablets,
+  getRecommended,
   getTablet,
 } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
@@ -52,24 +50,22 @@ export const ProductPage = () => {
         setIsLoading(true);
         try {
           let data;
-          let recommendedData;
 
           switch (category) {
             case 'phones':
               data = await getPhone(itemId);
-              recommendedData = await getRecommendedPhones(itemId);
               break;
             case 'tablets':
               data = await getTablet(itemId);
-              recommendedData = await getRecommendedTablets(itemId);
               break;
             case 'accessories':
               data = await getAccessory(itemId);
-              recommendedData = await getRecommendedAccessories(itemId);
               break;
             default:
               break;
           }
+
+          const recommendedData = await getRecommended(itemId);
 
           setProductData(data);
           setRecommendedModels(recommendedData);
@@ -103,13 +99,16 @@ export const ProductPage = () => {
 
   if (isLoading) {
     return (
-      <Skeleton
-        variant="rounded"
-        sx={{
-          width: { xs: '288px', sm: '592px', md: '752px' },
-          height: { xs: '160px', sm: '128px' },
-        }}
-      />
+      <Box sx={{display: 'flex', width: '100%', justifyContent: 'center'}}>
+        <Skeleton
+          variant="rounded"
+          sx={{
+            width: { xs: '95%', sm: '90%', md: '85%', lg: '80%' },
+            my: { xs: '72px', sm: '92px' },
+            height: { xs: '100vh', sm: '100vh' },
+          }}
+        />
+      </Box>
     );
   }
 
@@ -133,11 +132,11 @@ export const ProductPage = () => {
 
   return (
     <Section>
-      <Container>
+      <Container  sx={{minWidth: '1136px'}}>
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs
           parrentLink={`${category}`}
-          currentPage="Favourites"
+          currentPage={`${productData?.namespaceId}`}
         />
 
         {/* BACK BUTTON */}
@@ -333,9 +332,7 @@ export const ProductPage = () => {
           </Box>
         </Box>
 
-        <Box>
-          <Carousel title={'You may also like'} products={recommendedModels} />
-        </Box>
+        <Carousel title={'You may also like'} products={recommendedModels} />
       </Container>
     </Section>
   );

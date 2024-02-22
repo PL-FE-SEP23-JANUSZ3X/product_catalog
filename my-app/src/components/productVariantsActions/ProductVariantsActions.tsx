@@ -141,20 +141,46 @@ const ProductVariantsActions: FC<Props> = ({ productData, category }) => {
               key={capacity}
               to={`/${category}/${productData?.namespaceId}-${capacity.toLowerCase()}-${productData.color}`}
             >
-              <Button
-                variant="contained"
-                sx={{
-                  minWidth: 'auto',
-                  height: 32,
-                  boxShadow: 0,
-                  borderRadius: 0,
-                  fontSize: 14,
-                  fontWeight: 500,
-                  p: 1,
-                }}
-              >
-                {capacity}
-              </Button>
+              {productData.capacity !== capacity ? (
+                <Button
+                  variant="contained"
+                  sx={{
+                    minWidth: 'auto',
+                    height: 32,
+                    boxShadow: 0,
+                    borderRadius: 0,
+                    fontSize: 14,
+                    fontWeight: 500,
+                    p: 1,
+                    backgroundColor: 'bgHover.main',
+                    color: 'primary.main',
+                    border: '1px solid',
+                    borderColor: 'icons.main',
+                    '&:hover': {
+                      backgroundColor: 'white.main',
+                      borderColor: 'primary.main',
+                      boxShadow: '0px'
+                    }
+                  }}
+                >
+                  {capacity}
+                </Button>
+                ) : (
+                <Button
+                  variant="contained"
+                  sx={{
+                    minWidth: 'auto',
+                    height: 32,
+                    boxShadow: 0,
+                    borderRadius: 0,
+                    fontSize: 14,
+                    fontWeight: 500,
+                    p: 1,
+                  }}
+                >
+                  {capacity}
+                </Button>
+              )}
             </Link>
           ))}
         </Box>
