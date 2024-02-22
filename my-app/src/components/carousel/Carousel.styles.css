@@ -7,11 +7,34 @@
 
 .container__slider {
   margin-bottom: 24px;
+  margin-right: 0px;
+}
+.container__slider .slick-slide .slick-active .slick-current {
+  margin-right: 10px;
 }
 
 .arrows-container {
   display: flex;
   gap: 16px;
+}
+
+.MuiGrid-root {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+
+@media (max-width: 640px) {
+  .MuiGrid-root  {
+    margin-left: 0 !important;
+    margin-right: 10px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .MuiGrid-root  {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
 }
 
 .arrow {
