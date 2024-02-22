@@ -73,14 +73,17 @@ const HomePage = () => {
   return (
     <>
       <Container
-        sx={{ px:{xs: 0, sm: 0, md: 0, lg: 0}, maxWidth: { sm: '592px', md: '1136px', lg:'1136px'},
-        width: {md: '1136px'},
-          my: { sm: '32px', md: '52px' } }}
-        >
+        sx={{
+          px:{xs: 0, sm: 0, md: 0, lg: 0},
+          maxWidth: { sm: '592px', md: '1136px', lg:'1136px'},
+          width: {md: '1136px'},
+          mt: { xs: '24px', m: '32px', md: '56px' },
+          mb: { xs: '56px', sm: '64px', md: '80px' },
+        }}
+      >
         <Typography variant={isMobile ? "h1" : "h1Mob"}
           sx={{
             display: 'block',
-            mt: { xs: '32px', sm: '0' },
             mb: '32px',
             px: { xs: '16px', sm: 0},
             fontSize: 32,
@@ -96,7 +99,11 @@ const HomePage = () => {
 
       <Section>
         <Box>
-          <Typography variant={isMobile ? "h2" : "h2Mob"} sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '24px'}}>Shop by category</Typography>
+          <Typography variant={isMobile ? "h2" : "h2Mob"}
+            sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '24px'}}
+          >
+            Shop by category
+          </Typography>
           <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'], gap: '16px' }}>
             <NavLink to={"/phones"} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Box 

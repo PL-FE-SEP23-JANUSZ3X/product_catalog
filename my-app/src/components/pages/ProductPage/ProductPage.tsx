@@ -132,7 +132,7 @@ export const ProductPage = () => {
 
   return (
     <Section>
-      <Container  sx={{minWidth: '1136px'}}>
+      <Container  sx={{minWidth: '1136px', mt: 3}}>
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs
           parrentLink={`${category}`}
@@ -168,9 +168,9 @@ export const ProductPage = () => {
         <Typography
           variant="h3"
           color="text.primary"
-          sx={{ m: '12px 0 30px 0' }}
+          sx={{ m: {xs: '16px 0 32px 0', sm: '16px 0 40px 0'} }}
         >
-          {productData?.name} (iMT9G2FS/A)
+          {productData?.name}
         </Typography>
 
         {/* IMAGE GALLERY & SPECS CONTAINER */}
@@ -180,6 +180,7 @@ export const ProductPage = () => {
             flexDirection: { xs: 'column', sm: 'row' },
             justifyContent: { xs: 'flex-start', sm: 'space-between' },
             gap: { xs: '30px', sm: '12px', md: '60px' },
+            mb: {xs: 7, sm: 8, md: 10}
           }}
         >
           {/* IMAGE GALLERY */}
@@ -219,7 +220,7 @@ export const ProductPage = () => {
               display: 'flex',
               flexDirection: 'column',
               gap: '30px',
-              mb: '60px',
+              mb: {xs: 7, sm: 8, md: 10},
             }}
           >
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -262,7 +263,7 @@ export const ProductPage = () => {
               display: 'flex',
               flexDirection: 'column',
               gap: '30px',
-              mb: '60px',
+              mb: {xs: 7, sm: 8, md: 10},
             }}
           >
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

@@ -10,14 +10,14 @@ const Section = ({ children }: SectionType) => {
 
   const containerStyle = {
     px: 2,
-    my: 7,
+    mb: 7,
     [theme.breakpoints.up("sm")]: {
       px: 3,
-      my: 8,
+      mb: 8,
     },
     [theme.breakpoints.up("md")]: {
       px: 4,
-      my: 10,
+      mb: 10,
     },
     [theme.breakpoints.up("lg")]: {
       px: 19,

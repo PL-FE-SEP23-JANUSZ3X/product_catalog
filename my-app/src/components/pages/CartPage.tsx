@@ -105,7 +105,7 @@ const CartPage = () => {
 
   return (
     <Section >
-      <Box>
+      <Box sx={{mt: {xs: 3, sm: 5 }}}>
         <>
           <Box component='img' mr={0.5}
             src={theme.palette.mode === 'light'

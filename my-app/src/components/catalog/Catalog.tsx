@@ -138,15 +138,15 @@ const Catalog: React.FC<CatalogProps> = ({ headline, title }) => {
 
   return (
     <Section>
-      <Box>
+      <Box mt={3}>
         <CustomBreadcrumbs currentPage={headline}/>
-        <Typography variant="h2" gutterBottom sx={{mt: 2}}>
+        <Typography variant="h2" gutterBottom >
           {title}
         </Typography>
-        <Typography variant="caption" gutterBottom sx={{mt: 1, color: 'secondary.main'}}>
+        <Typography variant="caption" gutterBottom sx={{color: 'secondary.main'}}>
           {productsCount} models
         </Typography>
-        <Box sx={{ display: 'flex', mt: 4, gap: 3}}>
+        <Box sx={{ display: 'flex', mt: { xs: 4, sm: 5}, gap: 3}}>
           <Box sx={{ display: 'grid', width: 128}}>
             <Typography variant="caption" sx={{ color: 'secondary.main' }}>
               SortBy
