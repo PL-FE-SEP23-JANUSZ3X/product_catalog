@@ -4,10 +4,19 @@ import EastIcon from '@mui/icons-material/East';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { getQueryProducts } from "../../utils/fetchHelper";
 
 const SearchDrawer = () => {
     const [isDraweOpen, setIsDrawerOpen] = useState<boolean>(false);
+    const [searchKeys, setSearchKeys] = useState('');
 
+    const handleSearchInput: React.ChangeEventHandler<HTMLInputElement>= (event) => {
+      setSearchKeys(event.target.value)
+      setTimeout(() => {
+        getQueryProducts(searchKeys);
+      }, 1000);
+    }
+    
     const linkBoxStyle = {
       display: "block",
       padding: "5px",
@@ -85,6 +94,15 @@ const SearchDrawer = () => {
 
     return (
       <>
+        <input
+              type="text"
+              id="search-query"
+              className="input"
+              placeholder="Type search word"
+              value={searchKeys}
+              onChange={handleSearchInput}
+        />
+
         <IconButton 
           onClick={toggleDrawer(true)}
           disableRipple
