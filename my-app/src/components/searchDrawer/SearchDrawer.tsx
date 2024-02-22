@@ -11,32 +11,33 @@ const SearchDrawer = () => {
     const [isDraweOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [searchKeys, setSearchKeys] = useState('');
     const [searchedData, setSearchedData] = useState<Product[]>([]);
-    const [loader, setLoader] = useState<boolean>(false)
+    const [loader, setLoader] = useState<boolean>(false);
 
-    
     useEffect(() => {
-      const getproducts = async () => {
-        try {
-          setLoader(true)
-          const response: any = await getQueryProducts(searchKeys)
-
-          if (typeof response === null) {
-            setSearchedData(response)
-          } else {  
-            setSearchedData([])
+      const handler = setTimeout(async () => {
+        if (searchKeys.length > 0) {
+          try {
+            setLoader(true);
+            const response = await getQueryProducts(searchKeys);
+            setSearchedData(response);
+            if (typeof response === null) {
+              setSearchedData(response)
+            } else {  
+              setSearchedData([])
+            }
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            setLoader(false);
           }
-  
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        } finally {
-          setLoader(false)
         }
-      }
-  
-      getproducts();
-      console.log(searchedData)
+      }, 500);
+
+      return () => {
+        clearTimeout(handler);
+      };
     }, [searchKeys]);
-  
+    
     const handleSearchInput: React.ChangeEventHandler<HTMLInputElement>= (event) => {
       setSearchKeys(event.target.value)
     }
