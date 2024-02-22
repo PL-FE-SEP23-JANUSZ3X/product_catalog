@@ -178,7 +178,7 @@ const SearchDrawer = () => {
                   
                   <Link 
                     style={linkStyle}
-                    to={`/phones/${product.itemId}`}
+                    to={`/${product.category}/${product.itemId}`}
                     onClick={toggleDrawer(false)}
                   >
                     <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
