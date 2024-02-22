@@ -2,6 +2,9 @@ import { Box, CardMedia, Drawer, IconButton, Input, Typography } from "@mui/mate
 import SearchIcon from '@mui/icons-material/Search';
 import EastIcon from '@mui/icons-material/East';
 import CloseIcon from '@mui/icons-material/Close';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import TabletMacIcon from '@mui/icons-material/TabletMac';
+import WatchIcon from '@mui/icons-material/Watch';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getQueryProducts } from "../../utils/fetchHelper";
@@ -54,7 +57,7 @@ const SearchDrawer = () => {
     }
 
     const searchContainerStyle = {
-      minHeight: "100px",
+      minHeight: {xs: "100vh", sm: "400px"},
       display: "flex",
       alignContent: "center",
       justifyContent: "center",
@@ -137,6 +140,7 @@ const SearchDrawer = () => {
           onClose={toggleDrawer(false)}
           sx={{mt: 7}}  
         >
+          <div onMouseLeave={toggleDrawer(false)}>
           <Box sx={searchContainerStyle}>
             <Box sx={searchBoxStyle}>
               <Box display="grid" gap="20px">
@@ -204,9 +208,97 @@ const SearchDrawer = () => {
                   </Link>
                 </Box>
               )}
+              {searchedData.length === 0
+              && (
+                <>
+                <Box
+                  style={linkBoxStyle}
+                >
+                        <Typography 
+                          color="secondary.main" display="inline"
+                          sx={{backgroundColor: "none", justifyContent:"center", alignItems:"center", p: "10px"}}>
+                            Quick links
+                        </Typography>
+                </Box>
+                <Box
+                  style={linkBoxStyle}
+                  onMouseEnter={handleMouseEnter} 
+                  onMouseLeave={handleMouseLeave}
+                  onClick={toggleDrawer(false)}
+                >
+                  <Link 
+                    style={linkStyle}
+                    to={`/phones`}
+                    onClick={toggleDrawer(false)}
+                  >
+                    <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
+                      <IconButton disableRipple>
+                        <PhoneIphoneIcon sx={eastIconStyle}/>
+                      </IconButton>
+                        <Typography 
+                          color="primary.main" display="inline"
+                          sx={{backgroundColor: "none", justifyContent:"center", alignItems:"center"}}>
+                            Phones
+                        </Typography>
+                    </Box>       
+                  </Link>
+                </Box>
+                <Box
+                  style={linkBoxStyle}
+                  onMouseEnter={handleMouseEnter} 
+                  onMouseLeave={handleMouseLeave}
+                  onClick={toggleDrawer(false)}
+                  
+                >
+                  <Link 
+                    style={linkStyle}
+                    to={`/tablets`}
+                    onClick={toggleDrawer(false)}
+                  >
+                    <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
+                      <IconButton disableRipple>
+                        <TabletMacIcon sx={eastIconStyle}/>
+                      </IconButton>
+                        <Typography 
+                          color="primary.main" display="inline"
+                          sx={{backgroundColor: "none", justifyContent:"center", alignItems:"center"}}>
+                            Tablets
+                        </Typography>
+                    </Box>       
+                  </Link>
+                </Box>
+                <Box
+                  style={linkBoxStyle}
+                  onMouseEnter={handleMouseEnter} 
+                  onMouseLeave={handleMouseLeave}
+                  onClick={toggleDrawer(false)}
+                  
+                >
+                  <Link 
+                    style={linkStyle}
+                    to={`/accessories`}
+                    onClick={toggleDrawer(false)}
+                  >
+                    <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
+                      <IconButton disableRipple>
+                        <WatchIcon sx={eastIconStyle}/>
+                      </IconButton>
+                        <Typography 
+                          color="primary.main" display="inline"
+                          sx={{backgroundColor: "none", justifyContent:"center", alignItems:"center"}}>
+                            Accesories
+                        </Typography>
+                    </Box>       
+                  </Link>
+                </Box>
+                </>
+                
+              )}
               </Box>
             </Box>
           </Box>
+          </div>
+          
         </Drawer>
       </>
         
