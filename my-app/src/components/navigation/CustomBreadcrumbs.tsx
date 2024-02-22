@@ -26,7 +26,7 @@ const CustomBreadcrumbs = ({parrentLink, currentPage}: Props) => {
 
   const home = (
     <NavLink  key="1" color="inherit" to="/">
-      <Box component='img' height={18}
+      <Box component='img' height={18} sx={{position: 'relative', top: '2px'}}
         src={theme.palette.mode === 'light'
           ? 'images/icons/home.svg' 
           : 'images/icons/home-dark.svg'
@@ -48,7 +48,7 @@ const CustomBreadcrumbs = ({parrentLink, currentPage}: Props) => {
   ) : null;
 
   const current = (
-    <Typography variant="body2" key="3" color="secondary.main">
+    <Typography variant="body2" key="3" color="secondary.main" sx={{display: 'inline-block'}}>
       {currentPage}
     </Typography>
   )
@@ -60,9 +60,10 @@ const CustomBreadcrumbs = ({parrentLink, currentPage}: Props) => {
   ];
   
   return (
-      <Stack spacing={1} mb={{xs: 3, sm: 5}}>
+      <Stack spacing='13px' mb={{xs: 3, sm: 5}} flexDirection="row">
         <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" sx={{color: "secondary.main"}} />}
+            sx={{alignItems: 'center'}}
+            separator={<NavigateNextIcon fontSize="small" sx={{fontSize: '18px', color: "secondary.main"}} />}
             aria-label="breadcrumb"
         >
             {breadcrumbs}
