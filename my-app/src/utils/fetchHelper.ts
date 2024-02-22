@@ -41,11 +41,6 @@ export const getSortedProducts = async (
   return response.data;
 };
 
-export const getQueryProducts = async (query: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/search/${query}`);
-  return response.data;
-};
-
 // accessoryRouter.get('/', accessoryController.getAll);
 // accessoryRouter.get('/:accessoryId', accessoryController.getById);
 // accessoryRouter.get('/:accessoryId/recommended', accessoryController.getRecommended);
