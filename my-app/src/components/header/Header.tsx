@@ -322,7 +322,7 @@ const Header = (props: any) => {
             </>
           )}
           {isMobile && (
-            <BurgerMenu isOpen={isOpen}/>
+            <BurgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
           )}
         </Toolbar>
       </AppBar>

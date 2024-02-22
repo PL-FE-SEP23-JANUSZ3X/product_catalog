@@ -71,7 +71,7 @@ const badgeStyle = {
   }
 }
 
-const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
+const BurgerMenu = ({ isOpen, setIsOpen }: {isOpen: boolean, setIsOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
   const goodsTypes = [
     {name: 'Phones', link: './phones'},
     {name: 'Tablets', link: './tablets'},
@@ -114,7 +114,8 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                     textAlign="center"
                     underline="none"
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
-                  >
+                    onClick={() => { setIsOpen(!isOpen); console.log(isOpen); }}
+                    >
                     Home
                   </Link>
                 )}
@@ -130,6 +131,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                     textAlign="center"
                     underline="none"
                     sx={isActive ? navLinkActiveStyle : navLinkStyle}
+                    onClick={() => { setIsOpen(!isOpen); console.log(isOpen); }}
                   >
                     {good.name}
                   </Link>
@@ -160,8 +162,12 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                     sx={badgeStyle}
                   >
                     {isActive 
-                      ? <FavoriteIcon />
-                      : <FavoriteBorderIcon />
+                      ? <FavoriteIcon 
+                          onClick={() => { setIsOpen(!isOpen); console.log(isOpen); }}
+                        />
+                      : <FavoriteBorderIcon
+                          onClick={() => { setIsOpen(!isOpen); console.log(isOpen); }}
+                        />
                     }
                   </Badge>
                 </IconButton>
@@ -178,6 +184,7 @@ const BurgerMenu = ({ isOpen }: {isOpen: boolean}) => {
                     edge="end"
                     aria-label="menu"
                     sx={isActive ? iconLinkActiveStyle : iconLinkStyle}
+                    onClick={() => { setIsOpen(!isOpen); console.log(isOpen); }}
                   >
                   <Badge
                     overlap="circular"
