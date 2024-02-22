@@ -29,18 +29,21 @@ export const Footer: React.FC = () => {
     <Box
       sx={{
         width: '100%',
-        pt: 4,
-        pb: 4,
-        pl: 2,
-        pr: 2,
+        m: '0',
+        py: 4,
+        px: {xs: 2, md: 0},
         borderTop: '1px solid #89939A',
         height: { xs: '257px', sm: '96px' },
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
       }}
     >
       <Stack
         component="footer"
         direction={isMobile ? 'column' : 'row'}
         spacing={isMobile ? 4 : 0}
+        sx={{ width: {xs: '320px', sm: '592px', md: '1136px'}, px: {xs: '16px', sm: '0'} }}
         justifyContent={isMobile ? 'flex-start' : 'space-between'}
       >
         <Box
