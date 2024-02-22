@@ -99,6 +99,7 @@ const HomePage = () => {
         <Box>
           <Typography variant={isMobile ? "h2" : "h2Mob"} sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '50px'}}>Shop by category</Typography>
           <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'], gap: '16px', mt: '24px' }}>
+
             <NavLink to={"/phones"} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Box 
                 sx={{width: { xs: '288px', sm: '187px', md: '368px' },

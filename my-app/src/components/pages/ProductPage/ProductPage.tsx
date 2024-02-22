@@ -139,137 +139,137 @@ export const ProductPage = () => {
           currentPage={`${productData?.namespaceId}`}
         />
 
-        {/* BACK BUTTON */}
-        <Box>
-          <Box
-            component="img"
-            height={10}
-            src={
-              theme.palette.mode === 'light'
-                ? '/images/icons/arr-left-light.svg'
-                : '/images/icons/arr-left-dark.svg'
-            }
-          />
-          <NavLink
-            to={`/phones`}
-            end
-            style={{ textDecoration: 'none', display: 'inline-block' }}
-            onClick={() => {
-              navigate(-1);
-            }}
+          {/* BACK BUTTON */}
+          <Box>
+            <Box
+              component="img"
+              height={10}
+              src={
+                theme.palette.mode === 'light'
+                  ? '/images/icons/arr-left-light.svg'
+                  : '/images/icons/arr-left-dark.svg'
+              }
+            />
+            <NavLink
+              to={`/phones`}
+              end
+              style={{ textDecoration: 'none', display: 'inline-block' }}
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              <Link component="div" variant="body2" sx={navlinkStyle}>
+                Back
+              </Link>
+            </NavLink>
+          </Box>
+
+          {/* PRODUCT NAME */}
+          <Typography
+            variant="h3"
+            color="text.primary"
+            sx={{ m: {xs: '16px 0 32px 0', sm: '16px 0 40px 0'} }}
           >
-            <Link component="div" variant="body2" sx={navlinkStyle}>
-              Back
-            </Link>
-          </NavLink>
-        </Box>
+            {productData?.name}
+          </Typography>
 
-        {/* PRODUCT NAME */}
-        <Typography
-          variant="h3"
-          color="text.primary"
-          sx={{ m: {xs: '16px 0 32px 0', sm: '16px 0 40px 0'} }}
-        >
-          {productData?.name}
-        </Typography>
-
-        {/* IMAGE GALLERY & SPECS CONTAINER */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            justifyContent: { xs: 'flex-start', sm: 'space-between' },
-            gap: { xs: '30px', sm: '12px', md: '60px' },
-            mb: {xs: 7, sm: 8, md: 10}
-          }}
-        >
-          {/* IMAGE GALLERY */}
-          <Box sx={{ flex: '0 1 60%' }}>
-            <ImageGallery
-              items={images}
-              thumbnailPosition={isMobile ? 'bottom' : 'left'}
-              showPlayButton={false}
-              showBullets={false}
-              showNav={false}
-              showFullscreenButton={false}
-            />
-          </Box>
-
-          {/* SPECS */}
-          <Box sx={{ flex: '0 1 40%' }}>
-            <ProductVariantsActions
-              productData={productData}
-              category={category}
-            />
-          </Box>
-        </Box>
-
-        {/* ABOUT & TECH SPECS CONTAINER*/}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            justifyContent: 'space-between',
-            gap: { sm: '12px', md: '64px' },
-          }}
-        >
-          {/* ABOUT */}
+          {/* IMAGE GALLERY & SPECS CONTAINER */}
           <Box
             sx={{
-              flex: '0 1 60%',
               display: 'flex',
-              flexDirection: 'column',
-              gap: '30px',
-              mb: {xs: 7, sm: 8, md: 10},
+              flexDirection: { xs: 'column', sm: 'row' },
+              justifyContent: { xs: 'flex-start', sm: 'space-between' },
+              gap: { xs: '30px', sm: '12px', md: '60px' },
+              mb: {xs: 7, sm: 8, md: 10}
             }}
           >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Typography variant="h3">About</Typography>
-              <Divider />
+            {/* IMAGE GALLERY */}
+            <Box sx={{ flex: '0 1 60%' }}>
+              <ImageGallery
+                items={images}
+                thumbnailPosition={isMobile ? 'bottom' : 'left'}
+                showPlayButton={false}
+                showBullets={false}
+                showNav={false}
+                showFullscreenButton={false}
+              />
             </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Typography variant="h4">
-                {productData?.description[0].title}
-              </Typography>
-              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {productData?.description[0].text[0]}
-              </Typography>
-              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {productData?.description[0].text[1]}
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Typography variant="h4">
-                {productData?.description[1].title}
-              </Typography>
-              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {productData?.description[1].text}
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Typography variant="h4">
-                {productData?.description[2].title}
-              </Typography>
-              <Typography variant="body1" sx={{ color: 'secondary.main' }}>
-                {productData?.description[2].text}
-              </Typography>
+
+            {/* SPECS */}
+            <Box sx={{ flex: '0 1 40%' }}>
+              <ProductVariantsActions
+                productData={productData}
+                category={category}
+              />
             </Box>
           </Box>
 
-          {/* TECH SPECS */}
+          {/* ABOUT & TECH SPECS CONTAINER*/}
           <Box
             sx={{
-              flex: '0 1 40%',
               display: 'flex',
-              flexDirection: 'column',
-              gap: '30px',
-              mb: {xs: 7, sm: 8, md: 10},
+              flexDirection: { xs: 'column', md: 'row' },
+              justifyContent: 'space-between',
+              gap: { sm: '12px', md: '64px' },
             }}
           >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Typography variant="h3">Tech Specs</Typography>
-              <Divider />
+            {/* ABOUT */}
+            <Box
+              sx={{
+                flex: '0 1 60%',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '30px',
+                mb: {xs: 7, sm: 8, md: 10},
+              }}
+            >
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Typography variant="h3">About</Typography>
+                <Divider />
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Typography variant="h4">
+                  {productData?.description[0].title}
+                </Typography>
+                <Typography variant="body1" sx={{ color: 'secondary.main' }}>
+                  {productData?.description[0].text[0]}
+                </Typography>
+                <Typography variant="body1" sx={{ color: 'secondary.main' }}>
+                  {productData?.description[0].text[1]}
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Typography variant="h4">
+                  {productData?.description[1].title}
+                </Typography>
+                <Typography variant="body1" sx={{ color: 'secondary.main' }}>
+                  {productData?.description[1].text}
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Typography variant="h4">
+                  {productData?.description[2].title}
+                </Typography>
+                <Typography variant="body1" sx={{ color: 'secondary.main' }}>
+                  {productData?.description[2].text}
+                </Typography>
+              </Box>
             </Box>
+
+            {/* TECH SPECS */}
+            <Box
+              sx={{
+                flex: '0 1 40%',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '30px',
+                mb: {xs: 7, sm: 8, md: 10},
+              }}
+            >
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Typography variant="h3">Tech Specs</Typography>
+                <Divider />
+              </Box>
 
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
