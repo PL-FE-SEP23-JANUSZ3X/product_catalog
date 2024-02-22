@@ -132,6 +132,7 @@ export const ProductPage = () => {
 
   return (
     <Section>
+      <>
       <Container  sx={{mt: 3}}>
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs
@@ -333,8 +334,9 @@ export const ProductPage = () => {
           </Box>
         </Box>
 
-        <Carousel title={'You may also like'} products={recommendedModels} />
       </Container>
+      <Carousel title={'You may also like'} products={recommendedModels} />
+      </>
     </Section>
   );
 };
