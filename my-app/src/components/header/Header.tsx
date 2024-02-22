@@ -232,7 +232,13 @@ const Header = (props: any) => {
                 disableRipple 
                 edge="end"
                 aria-label="menu"
-                sx={iconLinkStyle}
+                sx={{
+                  boxSizing: "border-box",
+                  outline: "none",
+                  mr: 0,
+                  color: "primary.main",
+                  p: 0,
+                }}
               >
                 <DarkModeToggle />
               </IconButton>
@@ -262,7 +268,13 @@ const Header = (props: any) => {
                   disableRipple 
                   edge="end"
                   aria-label="menu"
-                  sx={iconLinkStyle}
+                  sx={{
+                    boxSizing: "border-box",
+                    outline: "none",
+                    mr: 0,
+                    color: "primary.main",
+                    p: 0,
+                  }}
                 >
                   <DarkModeToggle />
                 </IconButton>

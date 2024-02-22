@@ -55,12 +55,12 @@ const FavouritesPage = () => {
 
   return (
     <Section >
-      <Box>
+      <Box mt={3}>
         <CustomBreadcrumbs currentPage='Favourites'/>
         <Typography variant="h1" sx={{ mb: 1}} >Favourites</Typography>
         <Typography
           variant="body1"
-          sx={{ mb: 5, color: 'secondary.main'}}
+          sx={{ mb: {xs: 4, sm: 5}, color: 'secondary.main'}}
         >
           {`${favourites.length} items`}
         </Typography>

@@ -3,7 +3,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from 'swiper/modules';
 import SliderProps from './Slider.types';
 import { genRandomKey } from '../../utils/getRandomKey';
 import { useThemeContext } from '../../theme/ThemeContext';
@@ -107,7 +107,11 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
         pagination={true}
         mousewheel={true}
         keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+        modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
       >
         {images.map(image => (
           <SwiperSlide key={genRandomKey()}><img src={image} alt={image} /></SwiperSlide>

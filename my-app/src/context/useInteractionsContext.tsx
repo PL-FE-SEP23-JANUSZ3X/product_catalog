@@ -59,7 +59,7 @@ export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
         )
       );
       setSnack({
-        message: 'You added the same product',
+        message: 'You added the same product 🦖',
         severity: 'success',
         open: true,
         autoHideDuration: 2000,
@@ -74,7 +74,7 @@ export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
         },
       ]);
       setSnack({
-        message: 'You added new product to your shopping cart',
+        message: 'You added new product to your shopping cart 🛒',
         severity: 'success',
         open: true,
         autoHideDuration: 2000,
@@ -139,8 +139,8 @@ export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
       setFavourites((prevState: FavouriteType[]) => prevState.filter((item) => item.id !== id));
 
       setSnack({
-        message: "You don't like this product anymore",
-        severity: 'success',
+        message: "You don't like this product anymore 💔",
+        severity: 'warning',
         open: true,
         autoHideDuration: 2000,
       });
@@ -149,7 +149,7 @@ export const InteractionsProvider: FC<Props> = ({ children }: Props) => {
         ...favourites, { id },
       ]);
       setSnack({
-        message: 'You have added a new product to your favourites',
+        message: 'Product saved to favorites ❤️',
         severity: 'success',
         open: true,
         autoHideDuration: 2000,

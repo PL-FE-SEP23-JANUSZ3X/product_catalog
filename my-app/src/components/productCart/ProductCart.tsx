@@ -173,7 +173,7 @@ const ProductCart: React.FC<OrderTypeProps> = ({ product }) => {
                 color: 'primary.main',
             }}
             >
-              {totalPrice}
+              {'$' + totalPrice}
             </Typography>
           </Box>
         </Box>
