@@ -129,6 +129,7 @@ export const ProductPage = () => {
           : colors.breadcrumbsHoverDark,
     },
   };
+  const recommendedSectionTitle = 'You may also like';
 
   return (
     <Section>
@@ -332,9 +333,9 @@ export const ProductPage = () => {
             </Box>
           </Box>
         </Box>
-
-        <Carousel title={'You may also like'} products={recommendedModels} />
       </Container>
+      <Carousel title={recommendedSectionTitle} products={recommendedModels} />
+      </>
     </Section>
   );
 };
