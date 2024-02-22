@@ -92,11 +92,9 @@ const HomePage = () => {
         >Welcome to Nice Gadgets store!</Typography>
         <Slider images={images} />
       </Container>
-
       <Section>
         <Carousel title={newModelSectionTitle} products={newModels} />
       </Section>
-
       <Section>
         <Box>
           <Typography variant={isMobile ? "h2" : "h2Mob"}
