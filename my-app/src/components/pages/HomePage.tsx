@@ -72,12 +72,21 @@ const HomePage = () => {
 
   return (
     <>
-      <Container sx={{ padding: 0, width: { xs: '320px', sm: '635px', md: '1200px' } }}>
-        <Typography variant="h1" sx={{
-          my: { xs: '32px', md: '52px' },
-          fontSize: 32,
-          lineHeight: '41px',
-        }}>Welcome to Nice Gadgets store!</Typography>
+      <Container
+        sx={{ px:{xs: 0, sm: 0, md: 0, lg: 0}, maxWidth: { sm: '592px', md: '1136px', lg:'1136px'},
+        width: {md: '1136px'},
+          my: { sm: '32px', md: '52px' } }}
+        >
+        <Typography variant={isMobile ? "h1" : "h1Mob"}
+          sx={{
+            display: 'block',
+            mt: { xs: '32px', sm: '0' },
+            mb: '32px',
+            px: { xs: '16px', sm: 0},
+            fontSize: 32,
+            lineHeight: '41px',
+          }}
+        >Welcome to Nice Gadgets store!</Typography>
         <Slider images={images} />
       </Container>
 
@@ -87,7 +96,7 @@ const HomePage = () => {
 
       <Section>
         <Box>
-          <Typography variant="h2" sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '24px'}}>Shop by category</Typography>
+          <Typography variant={isMobile ? "h2" : "h2Mob"} sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '24px'}}>Shop by category</Typography>
           <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'], gap: '16px' }}>
             <NavLink to={"/phones"} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Box 
@@ -104,7 +113,7 @@ const HomePage = () => {
                   height: { xs: '357.65px', sm: '232.23px', md: '457px' }}}
                 />
               </Box>
-              <Typography variant='h4' sx={{mt: '24px'}}>Mobile phones</Typography>
+              <Typography variant={isMobile ? "h4" : "h4Mob"} sx={{mt: '24px'}}>Mobile phones</Typography>
               <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>{`${phonesLength} models`}</Typography>
             </NavLink>
             <NavLink to={"/tablets"} style={{ textDecoration: 'none', color: 'inherit' }}>
