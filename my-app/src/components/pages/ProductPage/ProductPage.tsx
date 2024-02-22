@@ -52,7 +52,6 @@ export const ProductPage = () => {
         setIsLoading(true);
         try {
           let data;
-          let recommendedData;
 
           switch (category) {
             case 'phones':
@@ -68,7 +67,7 @@ export const ProductPage = () => {
               break;
           }
 
-          recommendedData = await getRecommended(itemId);
+          const recommendedData = await getRecommended(itemId);
 
           setProductData(data);
           setRecommendedModels(recommendedData);
