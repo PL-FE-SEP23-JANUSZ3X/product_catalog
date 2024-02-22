@@ -97,12 +97,8 @@ const HomePage = () => {
       </Section>
       <Section>
         <Box>
-          <Typography variant={isMobile ? "h2" : "h2Mob"}
-            sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '24px'}}
-          >
-            Shop by category
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'], gap: '16px' }}>
+          <Typography variant={isMobile ? "h2" : "h2Mob"} sx={{fontSize: { xs: '24px', sm: '32px' }, mb: '50px'}}>Shop by category</Typography>
+          <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'], gap: '16px', mt: '24px' }}>
             <NavLink to={"/phones"} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Box 
                 sx={{width: { xs: '288px', sm: '187px', md: '368px' },
@@ -118,7 +114,7 @@ const HomePage = () => {
                   height: { xs: '357.65px', sm: '232.23px', md: '457px' }}}
                 />
               </Box>
-              <Typography variant={isMobile ? "h4" : "h4Mob"} sx={{mt: '24px'}}>Mobile phones</Typography>
+              <Typography variant={"h4"} sx={{mt: '24px'}}>Mobile phones</Typography>
               <Typography variant='body1' sx={{mt: '4px', color: 'secondary.main'}}>{`${phonesLength} models`}</Typography>
             </NavLink>
             <NavLink to={"/tablets"} style={{ textDecoration: 'none', color: 'inherit' }}>

@@ -132,7 +132,7 @@ export const ProductPage = () => {
 
   return (
     <Section>
-      <Container  sx={{minWidth: '1136px', mt: 3}}>
+      <Container  sx={{mt: 3}}>
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs
           parrentLink={`${category}`}
