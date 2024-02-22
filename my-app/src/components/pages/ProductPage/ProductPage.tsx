@@ -129,10 +129,12 @@ export const ProductPage = () => {
           : colors.breadcrumbsHoverDark,
     },
   };
+  const recommendedSectionTitle = 'You may also like';
 
   return (
     <Section>
-      <Container  sx={{minWidth: '1136px'}}>
+      <>
+      <Container  sx={{minWidth:{md: '1136px'}}}>
         {/* BREADCRUMBS */}
         <CustomBreadcrumbs
           parrentLink={`${category}`}
@@ -331,9 +333,9 @@ export const ProductPage = () => {
             </Box>
           </Box>
         </Box>
-
-        <Carousel title={'You may also like'} products={recommendedModels} />
       </Container>
+      <Carousel title={recommendedSectionTitle} products={recommendedModels} />
+      </>
     </Section>
   );
 };
