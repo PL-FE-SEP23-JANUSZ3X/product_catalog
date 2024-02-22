@@ -33,7 +33,7 @@ export const getSortedProducts = async (
 }
 
 export const getQueryProducts = async (query: string) => {
-  const response = await axios.get(`https://phone-catalog-f9j4.onrender.com/products/search/${query}`);
+  const response = await axios.get(`http://localhost:5001/products/search/${query}`);
   return response.data;
 };
 

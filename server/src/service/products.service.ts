@@ -1,6 +1,7 @@
-import { FindOptions, Op } from 'sequelize';
+import { FindOptions, Op, col, fn } from 'sequelize';
 import Product from '../model/product.model';
 import SortType from '../types/sortType';
+import sequelize from 'sequelize/lib/sequelize';
 
 const getAllProducts= async() => {
 
@@ -16,8 +17,13 @@ const getProductByID= async(itemId: string) => {
 };
 
 const getProductsByQuery= async(query: string) => {
-    return Product.findAll({where : {name : {[Op.like]: `%${query}%`}}});
-};
+    return Product.findAll({
+        limit: 5,
+        where: {
+            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + query.toLocaleLowerCase() + '%')
+        }
+    })
+}
 
 const sortProducts = async (categoryType: string, sortType: string, startIndex: number, limitIndex: number) => {
     let orderOptions:  FindOptions<Product>['order'] = [];
