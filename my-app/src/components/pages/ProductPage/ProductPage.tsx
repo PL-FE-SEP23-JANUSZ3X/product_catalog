@@ -17,8 +17,6 @@ import {
   getAccessory,
   getPhone,
   getRecommended,
-  getRecommendedAccessories,
-  getRecommendedTablets,
   getTablet,
 } from '../../../utils/fetchHelper';
 import { Phone } from '../../../types';
