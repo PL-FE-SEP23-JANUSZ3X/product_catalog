@@ -119,6 +119,13 @@ declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     upper: true;
     link: true;
+    button: true;
+    body1: true;
+    body2: true;
+    h1Mob: true;
+    h2Mob: true;
+    h3Mob: true;
+    h4Mob: true;
   }
 }
 
@@ -126,6 +133,13 @@ declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     upper: true;
     link: true;
+    button: true;
+    body1: true;
+    body2: true;
+    h1Mob: true;
+    h2Mob: true;
+    h3Mob: true;
+    h4Mob: true;
   }
 }
 
