@@ -1,21 +1,39 @@
-import { Box, Drawer, IconButton, Input, Typography } from "@mui/material";
+import { Box, CardMedia, Drawer, IconButton, Input, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import EastIcon from '@mui/icons-material/East';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getQueryProducts } from "../../utils/fetchHelper";
+import { Product } from '../../types/Product';
 
 const SearchDrawer = () => {
     const [isDraweOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [searchKeys, setSearchKeys] = useState('');
+    const [searchedData, setSearchedData] = useState<Product[]>([]);
+    const [loader, setLoader] = useState<boolean>(false)
 
+    
+    useEffect(() => {
+      const getproducts = async () => {
+        try {
+          setLoader(true)
+          const response = await getQueryProducts(searchKeys)
+          setSearchedData(response)
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        } finally {
+          setLoader(false)
+        }
+      }
+  
+      getproducts();
+    }, [searchKeys]);
+  
     const handleSearchInput: React.ChangeEventHandler<HTMLInputElement>= (event) => {
       setSearchKeys(event.target.value)
-      setTimeout(() => {
-        getQueryProducts(searchKeys);
-      }, 1000);
     }
+
     
     const linkBoxStyle = {
       display: "block",
@@ -29,7 +47,7 @@ const SearchDrawer = () => {
     }
 
     const searchContainerStyle = {
-      minHeight: "400px",
+      minHeight: "100px",
       display: "flex",
       alignContent: "center",
       justifyContent: "center",
@@ -94,15 +112,6 @@ const SearchDrawer = () => {
 
     return (
       <>
-        <input
-              type="text"
-              id="search-query"
-              className="input"
-              placeholder="Type search word"
-              value={searchKeys}
-              onChange={handleSearchInput}
-        />
-
         <IconButton 
           onClick={toggleDrawer(true)}
           disableRipple
@@ -138,35 +147,56 @@ const SearchDrawer = () => {
                 <Box
                   sx={inputStyle}
                   >
-                  <Input autoFocus fullWidth></Input>
+                  <Input 
+                    fullWidth
+                    id="search-query"
+                    placeholder="Search"
+                    value={searchKeys}
+                    onChange={handleSearchInput}
+                  />
                 </Box>
                 
               </Box>
               </Box>
-              
               <Box display="grid">
+              {searchedData.map(product =>
                 <Box
+                  key={product.id}
                   style={linkBoxStyle}
                   onMouseEnter={handleMouseEnter} 
                   onMouseLeave={handleMouseLeave}
                   onClick={toggleDrawer(false)}
+                  
                 >
+                  
                   <Link 
                     style={linkStyle}
-                    to={`/phones/apple-iphone-8-64gb-gold`}
+                    to={`/phones/${product.itemId}`}
                     onClick={toggleDrawer(false)}
                   >
-                    <IconButton disableRipple>
-                      <EastIcon sx={eastIconStyle}/>
-                    </IconButton>
-                      <Typography color="primary.main" display="inline"
-                      sx={{backgroundColor: "none"}}>
-                      Apple iPhone 8 64GB Gold
-                      </Typography>
+                    <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
+                      <IconButton disableRipple>
+                        <EastIcon sx={eastIconStyle}/>
+                      </IconButton>
+                      <CardMedia
+                          component="img"
+                          sx={{
+                            objectFit: 'contain',
+                            width:{sm:'50px'},
+                            justifyContent: 'center',
+                            height:{sm:'50px'},
+                          }}
+                          src={product.image}
+                        />
+                        <Typography 
+                          color="primary.main" display="inline"
+                          sx={{backgroundColor: "none", justifyContent:"center", alignItems:"center"}}>
+                              {product.name}
+                        </Typography>
+                    </Box>       
                   </Link>
                 </Box>
-
-
+              )}
               </Box>
             </Box>
           </Box>
