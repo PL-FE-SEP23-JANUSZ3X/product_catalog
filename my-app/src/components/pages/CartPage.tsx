@@ -157,7 +157,7 @@ const CartPage = () => {
               }
               </Stack>
               <Stack sx={totalStyle} flexDirection="column" alignItems="center">
-                <Typography variant="h2">{total}</Typography>
+                <Typography variant="h2">{'$' + total}</Typography>
                 <Typography variant="body1" sx={{ mb: {xs: 2, md: 3}}}>
                     {`Total for ${order.length} items`}
                 </Typography>
