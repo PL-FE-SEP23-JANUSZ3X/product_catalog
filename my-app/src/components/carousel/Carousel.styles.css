@@ -18,25 +18,6 @@
   gap: 16px;
 }
 
-.MuiGrid-root {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
-}
-
-@media (max-width: 640px) {
-  .MuiGrid-root  {
-    margin-left: 0 !important;
-    margin-right: 10px !important;
-  }
-}
-
-@media (max-width: 1200px) {
-  .MuiGrid-root  {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-  }
-}
-
 .arrow {
   display: flex;
   justify-content: center;
