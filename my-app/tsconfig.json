@@ -21,6 +21,18 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/jsx-runtime.d.ts"
+  ],
+  "ignorePatterns": [
+    "src/*/.test.ts",
+    "src/frontend/generated/",
+    "build/static/js/.js",
+    "build/env.js/.js",
+    "public/env.js/.js",
+    ".eslintrc.cjs"
   ]
 }

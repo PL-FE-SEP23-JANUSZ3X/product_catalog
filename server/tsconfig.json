@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "es6",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "**/*.ts/*.json",
+    "src/**/*.ts"
+, "main.ts"    
+, "imagesHandler.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
