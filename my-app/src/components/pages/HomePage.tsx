@@ -41,7 +41,7 @@ const HomePage = () => {
   const hotPricesSectionTitle = 'Hot prices';
 
   const category = 'phones';
-  const sortHotPrices = 'hotprice';
+  const sortHotPrices = 'hotprices';
   const sortNewModel = 'newest';
   const startIndex = 0;
   const limitIndex = 20;
