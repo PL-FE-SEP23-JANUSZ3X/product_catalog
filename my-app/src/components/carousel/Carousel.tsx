@@ -18,7 +18,7 @@ const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const skeletonWidth = {
     'small': 288,
     'medium': 288,
-    'large': 256,
+    'large': 276,
   }
 
   const skeletonLength = {
