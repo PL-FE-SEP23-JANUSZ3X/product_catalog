@@ -13,12 +13,12 @@ import { LeftIconButton, RightIconButton } from "../customIconButtons";
 const Carousel: React.FC<CarouselProps> = ({ title, products }) => {
   const sliderRef = useRef<Slider>(null);
   const mobileWidth = '212px'
-  const tabletWidth = '237px'
+  const tabletWidth = '239px'
   
   const skeletonWidth = {
     'small': 288,
     'medium': 288,
-    'large': 272,
+    'large': 256,
   }
 
   const skeletonLength = {

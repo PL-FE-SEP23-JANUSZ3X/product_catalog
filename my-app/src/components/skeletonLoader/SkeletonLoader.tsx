@@ -19,7 +19,7 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ length, width }) => {
   }
 
   return (
-    <Box sx={{ display: 'flex', gap: '20px', flexWrap: {xs: 'wrap', sm: 'nowrap' } }}>
+    <Box sx={{ display: 'flex', gap: '10px', flexWrap: {xs: 'wrap', sm: 'nowrap' } }}>
       {Array.from({ length: skeletonLength }).map((_, index) => (
         <Grid key={index} item>
           <Skeleton variant="rounded" width={skeletonWidth} height={506} />
