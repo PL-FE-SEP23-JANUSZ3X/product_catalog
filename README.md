@@ -21,7 +21,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![image](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog/assets/132001497/7b78920d-c880-49cd-a1b5-6a7a35f3966a)
 
 Project Name: Nice Gadget Store
 
