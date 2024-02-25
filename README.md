@@ -1,3 +1,6 @@
+# WELCOME
+<h1 id="top">Nice Gadget Store</h1>
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -68,5 +71,5 @@ At Nice Gadget Store, we believe in collaboration and innovation. Our developmen
 Conclusion:
 Nice Gadget Store is more than just an online marketplace – it's a community for tech enthusiasts. Join us on our journey to discover the latest gadgets and innovations, all in one convenient place. Happy shopping!
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p>
 
