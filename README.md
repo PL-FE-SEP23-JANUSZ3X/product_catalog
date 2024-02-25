@@ -1,5 +1,5 @@
 # WELCOME
-<h1 id="top">Nice Gadget Store</h1>
+<h1 id="top">Nice Gadgets Store</h1>
 
 <details>
   <summary>Table of Contents</summary>
