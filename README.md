@@ -89,5 +89,58 @@ Nice Gadget Store is more than just an online marketplace – it's a community f
 * [![Sequelize](https://img.shields.io/badge/Sequelize-%23565B60.svg?logo=sequelize&style=for-the-badge)](Sequelize-url) - A promise-based Node.js ORM for PostgreSQL, MySQL, SQLite, and MSSQL.
 * [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23336791.svg?logo=postgresql&style=for-the-badge)](PostgreSQL-url) - A powerful, open-source object-relational database system.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+(<a href="#top">back to top</a>)
 
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+
+1. Clone the repo
+   ```sh
+   git clone [https://github.com/your_username_/Project-Name.git](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog.git)
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Start
+   ```sh
+   npm start
+   ```
+3. Enter your API in `.env`
+
+(<a href="#top">back to top</a>)
+
+
+
+
+
+
+## Contact
+
+Patryk Wierzbowski - [linkedin](https://www.linkedin.com/in/patryk-wierzbowski-646791278/), [github](https://github.com/Patrykmclaren14)
+
+Wiktoria Bielec - [linkedin](https://www.linkedin.com/in/wiktoria-bielec-b996b511b/), [github](https://github.com/WiktoriaBielec)
+
+Catherine Prakofyeva - [linkedin](https://github.com/kate-prakofyeva), [github](https://github.com/kate-prakofyeva)
+
+Tymon Biegański - [linkedin](https://www.linkedin.com/in/tymon-biega%C5%84ski-993645222/), [github](https://github.com/Timi2424)
+
+Jacek Kosiba - [linkedin](https://www.linkedin.com/in/jacekkosiba/), [github](https://github.com/jacekkosiba)
+
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
