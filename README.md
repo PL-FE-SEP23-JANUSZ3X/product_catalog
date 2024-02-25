@@ -135,7 +135,7 @@ Patryk Wierzbowski - [linkedin](https://www.linkedin.com/in/patryk-wierzbowski-6
 
 Wiktoria Bielec - [linkedin](https://www.linkedin.com/in/wiktoria-bielec-b996b511b/), [github](https://github.com/WiktoriaBielec)
 
-Catherine Prakofyeva - [linkedin](https://github.com/kate-prakofyeva), [github](https://github.com/kate-prakofyeva)
+Catherine Prakofyeva - [linkedin](https://www.linkedin.com/in/catherine-prakofyeva/), [github](https://github.com/kate-prakofyeva)
 
 Tymon Biegański - [linkedin](https://www.linkedin.com/in/tymon-biega%C5%84ski-993645222/), [github](https://github.com/Timi2424)
 
