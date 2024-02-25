@@ -21,26 +21,52 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<strong>Home Page</strong>
+
 ![image](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog/assets/132001497/7b78920d-c880-49cd-a1b5-6a7a35f3966a)
 
-Project Name: Nice Gadget Store
+<strong>Catalog</strong>
 
-Description:
-Nice Gadget Store is a project developed by a team of five programmers with the aim of creating a simple and user-friendly online store for accessories, phones, tablets, and other gadgets. Our platform allows for easy browsing, shopping, and interaction with the latest technological trends.
+![image](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog/assets/132001497/cf8c2fb9-1d2b-46a5-83b5-cadeef8d46b3)
 
-Features:
+<strong>Product Card</strong>
 
-User registration and login for personalized shopping experiences.
-Diverse product offerings including phones, tablets, laptops, accessories, and more.
-Easy-to-use shopping cart and checkout process for user convenience.
-User profiles enabling management of personal data and preferences.
-Responsive design ensuring optimal usability across various devices.
+![image](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog/assets/132001497/abffcd69-f443-4bf7-92f9-d2d6044b2eb6)
+
+<strong>Favourites</strong>
+
+![image](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog/assets/132001497/9b081f7f-3ec4-4add-93f5-1701a9b2126e)
+
+<strong>Cart Page</strong>
+
+![image](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog/assets/132001497/2af8f108-8765-43de-a5f9-5f7a237dab85)
+
+<strong>Dark mode</strong>
+
+![image](https://github.com/PL-FE-SEP23-JANUSZ3X/product_catalog/assets/132001497/e174af6f-8ec1-4138-8d6c-0947ec820b5e)
+
+Nice Gadget Store - Your Ultimate Destination for Tech Enthusiasts
+
+Introduction:
+Welcome to Nice Gadget Store! Developed by a team of five passionate programmers, our platform is your go-to online store for all things tech-related. Whether you're on the hunt for the latest smartphones, tablets, or accessories, we've got you covered. Our mission is to provide a seamless and enjoyable shopping experience for every gadget enthusiast out there.
+
+Key Features:
+
+User-Friendly Interface: Dive into our user-friendly interface designed to make your shopping experience smooth and hassle-free.
+
+Extensive Product Selection: Explore our vast selection of gadgets, ranging from cutting-edge smartphones to must-have accessories.
+
+Convenient Shopping Experience: Enjoy the convenience of our easy-to-use shopping cart and streamlined checkout process.
+
+Personalized Profiles: Create your personalized profile to keep track of your orders, preferences, and more.
+
+Responsive Design: Our platform is built with a responsive design, ensuring seamless browsing across all devices.
+
 Development Process:
+At Nice Gadget Store, we believe in collaboration and innovation. Our development process was driven by the Agile methodology, allowing us to adapt and improve continuously. Each member of our team brought their unique skills to the table, from frontend and backend development to UX/UI design and quality assurance.
 
-The team followed the Agile methodology, allowing for quick adaptation to changes and regular user feedback incorporation.
-Collaboration among team members was key, with each contributing expertise in frontend, backend, UX/UI, databases, and quality assurance.
 Conclusion:
-Nice Gadget Store is the result of collaborative efforts by a team of passionate programmers. Our simple and transparent online store aims to facilitate shopping for all gadget enth
+Nice Gadget Store is more than just an online marketplace – it's a community for tech enthusiasts. Join us on our journey to discover the latest gadgets and innovations, all in one convenient place. Happy shopping!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
