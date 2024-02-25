@@ -76,18 +76,18 @@ Nice Gadget Store is more than just an online marketplace – it's a community f
 
 
 
+
+
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![React][React.js]][React-url] - A JavaScript library for building user interfaces.
+* [![Material-UI][Material-UI]][Material-UI-url] - A popular React UI framework implementing Google's Material Design.
+* [![Node.js][Node.js]][Node.js-url] - A JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [![Express][Express.js]][Express-url] - A minimalist web application framework for Node.js.
+* [![Swiper][Swiper]][Swiper-url] - A modern touch slider and swiper library.
+* [![Clerk][Clerk]][Clerk-url] - A powerful authentication and user management solution.
+* [![Sequelize][Sequelize]][Sequelize-url] - A promise-based Node.js ORM for PostgreSQL, MySQL, SQLite, and MSSQL.
+* [![PostgreSQL][PostgreSQL]][PostgreSQL-url] - A powerful, open-source object-relational database system.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
