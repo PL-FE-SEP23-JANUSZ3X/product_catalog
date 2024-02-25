@@ -141,6 +141,6 @@ Tymon Biegański - [linkedin](https://www.linkedin.com/in/tymon-biega%C5%84ski-9
 
 Jacek Kosiba - [linkedin](https://www.linkedin.com/in/jacekkosiba/), [github](https://github.com/jacekkosiba)
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+(<a href="#top">back to top</a>)
+
