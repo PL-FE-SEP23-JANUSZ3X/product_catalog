@@ -80,14 +80,14 @@ Nice Gadget Store is more than just an online marketplace – it's a community f
 
 ### Built With
 
-* [![React][React.js]][React-url] - A JavaScript library for building user interfaces.
-* [![Material-UI][Material-UI]][Material-UI-url] - A popular React UI framework implementing Google's Material Design.
-* [![Node.js][Node.js]][Node.js-url] - A JavaScript runtime built on Chrome's V8 JavaScript engine.
-* [![Express][Express.js]][Express-url] - A minimalist web application framework for Node.js.
-* [![Swiper][Swiper]][Swiper-url] - A modern touch slider and swiper library.
-* [![Clerk][Clerk]][Clerk-url] - A powerful authentication and user management solution.
-* [![Sequelize][Sequelize]][Sequelize-url] - A promise-based Node.js ORM for PostgreSQL, MySQL, SQLite, and MSSQL.
-* [![PostgreSQL][PostgreSQL]][PostgreSQL-url] - A powerful, open-source object-relational database system.
+* [![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&style=for-the-badge)](React-url) - A JavaScript library for building user interfaces.
+* [![Material-UI](https://img.shields.io/badge/Material--UI-%230081CB.svg?logo=material-ui&style=for-the-badge)](Material-UI-url) - A popular React UI framework implementing Google's Material Design.
+* [![Node.js](https://img.shields.io/badge/Node.js-%2343853D.svg?logo=node.js&style=for-the-badge)](Node.js-url) - A JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [![Express](https://img.shields.io/badge/Express-%23404d59.svg?logo=express&style=for-the-badge)](Express-url) - A minimalist web application framework for Node.js.
+* [![Swiper](https://img.shields.io/badge/Swiper-%23000.svg?logo=swiper&style=for-the-badge)](Swiper-url) - A modern touch slider and swiper library.
+* [![Clerk](https://img.shields.io/badge/Clerk-%23623CE4.svg?logo=clerk&style=for-the-badge)](Clerk-url) - A powerful authentication and user management solution.
+* [![Sequelize](https://img.shields.io/badge/Sequelize-%23565B60.svg?logo=sequelize&style=for-the-badge)](Sequelize-url) - A promise-based Node.js ORM for PostgreSQL, MySQL, SQLite, and MSSQL.
+* [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23336791.svg?logo=postgresql&style=for-the-badge)](PostgreSQL-url) - A powerful, open-source object-relational database system.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
